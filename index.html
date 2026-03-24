@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Quinten Gish | Scale Your Paid Media Profitably</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,6 +40,7 @@
       scroll-behavior: smooth;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
     }
 
     body {
@@ -49,6 +50,7 @@
       font-weight: 400;
       line-height: 1.6;
       overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
     }
 
     h1, h2, h3, h4 {
@@ -172,7 +174,8 @@
       top: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 800px;
+      width: 100%;
+      max-width: 800px;
       height: 800px;
       background: radial-gradient(circle, rgba(200,169,110,0.06) 0%, transparent 70%);
       pointer-events: none;
@@ -660,22 +663,6 @@
       font-weight: 400;
     }
 
-    .scheduler-embed {
-      max-width: 700px;
-      margin: 48px auto 0;
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .scheduler-embed iframe {
-      display: block;
-      width: 100%;
-      height: 720px;
-      border: none;
-      background: var(--bg-card);
-    }
 
     /* ── FOOTER ── */
     footer {
@@ -735,7 +722,6 @@
       .objections-grid { grid-template-columns: 1fr; gap: 16px; }
       .section { padding: 80px 0; }
       .final-cta { padding: 80px 0; }
-      .scheduler-embed iframe { height: 600px; }
     }
 
     @media (max-width: 480px) {
@@ -958,9 +944,6 @@
         <p class="final-note">No pressure. No pitch. Just a real conversation about your growth.</p>
         <a href="https://scheduler.zoom.us/quinten-gish/book-a-call" target="_blank" class="btn btn-primary btn-arrow" style="font-size: 1rem; padding: 18px 44px;">Book Your Free Strategy Call </a>
 
-        <div class="scheduler-embed" style="margin-top: 56px;">
-          <iframe src="https://scheduler.zoom.us/quinten-gish/book-a-call" title="Book a call with Quinten Gish"></iframe>
-        </div>
       </div>
     </div>
   </section>
