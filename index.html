@@ -1,1036 +1,791 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Quinten Gish | Scale Your Paid Media Profitably</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --bg: #0a0a0a;
-      --bg-elevated: #111111;
-      --bg-card: #161616;
-      --bg-card-hover: #1a1a1a;
-      --border: rgba(255,255,255,0.06);
-      --border-light: rgba(255,255,255,0.1);
-      --text: #f5f5f7;
-      --text-secondary: rgba(245,245,247,0.6);
-      --text-tertiary: rgba(245,245,247,0.4);
-      --accent: #c8a96e;
-      --accent-glow: rgba(200,169,110,0.15);
-      --accent-hover: #d4b97e;
-      --gradient-gold: linear-gradient(135deg, #c8a96e 0%, #e8d5a8 50%, #c8a96e 100%);
-      --radius: 16px;
-      --radius-sm: 10px;
-      --radius-xs: 6px;
-      --shadow-lg: 0 24px 80px rgba(0,0,0,0.5);
-      --shadow-glow: 0 0 60px rgba(200,169,110,0.08);
-      --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    html {
-      scroll-behavior: smooth;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      overflow-x: hidden;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      font-weight: 400;
-      line-height: 1.6;
-      overflow-x: hidden;
-      -webkit-text-size-adjust: 100%;
-    }
-
-    h1, h2, h3, h4 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 600;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-    }
-
-    .container {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background: rgba(10,10,10,0.8);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border-bottom: 1px solid var(--border);
-      transition: all var(--transition);
-    }
-
-    .nav-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
-    }
-
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--text);
-      text-decoration: none;
-      letter-spacing: -0.01em;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 36px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-secondary);
-      font-size: 0.85rem;
-      font-weight: 500;
-      transition: color var(--transition);
-      letter-spacing: 0.01em;
-    }
-
-    .nav-links a:hover {
-      color: var(--text);
-    }
-
-    .nav-cta {
-      display: inline-flex;
-      align-items: center;
-      padding: 8px 20px;
-      background: var(--accent);
-      color: #0a0a0a !important;
-      border-radius: 100px;
-      font-weight: 600 !important;
-      font-size: 0.82rem !important;
-      letter-spacing: 0.02em;
-      transition: all var(--transition);
-    }
-
-    .nav-cta:hover {
-      background: var(--accent-hover) !important;
-      color: #0a0a0a !important;
-      transform: scale(1.02);
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 4px;
-    }
-
-    .hamburger span {
-      display: block;
-      width: 22px;
-      height: 1.5px;
-      background: var(--text);
-      border-radius: 2px;
-      transition: transform 0.3s, opacity 0.3s;
-    }
-
-    .hamburger.active span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .hamburger.active span:nth-child(2) { opacity: 0; }
-    .hamburger.active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-    /* ── HERO ── */
-    .hero {
-      padding: 160px 0 80px;
-      text-align: center;
-      position: relative;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 800px;
-      height: 800px;
-      background: radial-gradient(circle, rgba(200,169,110,0.06) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-qualifier {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 20px;
-      background: var(--accent-glow);
-      border: 1px solid rgba(200,169,110,0.2);
-      border-radius: 100px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 32px;
-    }
-
-    .hero h1 {
-      font-size: clamp(3rem, 6.5vw, 5rem);
-      margin-bottom: 28px;
-      color: var(--text);
-    }
-
-    .hero h1 em {
-      font-style: italic;
-      background: var(--gradient-gold);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-sub {
-      font-size: 1.15rem;
-      color: var(--text-secondary);
-      max-width: 540px;
-      margin: 0 auto 44px;
-      font-weight: 300;
-      line-height: 1.75;
-    }
-
-    .hero-ctas {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    /* ── BUTTONS ── */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 16px 36px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.92rem;
-      font-weight: 600;
-      text-decoration: none;
-      border-radius: 100px;
-      transition: all var(--transition);
-      cursor: pointer;
-      border: none;
-      letter-spacing: 0.01em;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #0a0a0a;
-      box-shadow: 0 4px 24px rgba(200,169,110,0.25);
-    }
-
-    .btn-primary:hover {
-      background: var(--accent-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 40px rgba(200,169,110,0.35);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--text-secondary);
-      border: 1px solid var(--border-light);
-    }
-
-    .btn-ghost:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .btn-arrow::after {
-      content: '\2192';
-      transition: transform var(--transition);
-    }
-
-    .btn-arrow:hover::after {
-      transform: translateX(4px);
-    }
-
-    /* ── VSL ── */
-    .vsl-section {
-      padding: 0 0 100px;
-    }
-
-    .vsl-nudge {
-      text-align: center;
-      margin-bottom: 24px;
-      font-size: 0.9rem;
-      color: var(--text-tertiary);
-      font-weight: 400;
-      letter-spacing: 0.02em;
-    }
-
-    .vsl-nudge span {
-      color: var(--accent);
-    }
-
-    .vsl-wrapper {
-      max-width: 900px;
-      margin: 0 auto;
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-lg), var(--shadow-glow);
-      background: #000;
-    }
-
-    .vsl-post-cta {
-      text-align: center;
-      margin-top: 40px;
-    }
-
-    .vsl-post-cta p {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      margin-bottom: 20px;
-      font-weight: 300;
-    }
-
-    /* ── TRUST BAR ── */
-    .trust-bar {
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 56px 0;
-      background: var(--bg-elevated);
-    }
-
-    .trust-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
-      text-align: center;
-    }
-
-    .trust-item {
-      position: relative;
-    }
-
-    .trust-item:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      right: -16px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 1px;
-      height: 48px;
-      background: var(--border);
-    }
-
-    .trust-number {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      font-weight: 600;
-      background: var(--gradient-gold);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 6px;
-    }
-
-    .trust-label {
-      font-size: 0.8rem;
-      color: var(--text-tertiary);
-      font-weight: 400;
-      line-height: 1.5;
-      letter-spacing: 0.02em;
-    }
-
-    /* ── SECTIONS ── */
-    .section {
-      padding: 120px 0;
-    }
-
-    .section-dark {
-      background: var(--bg-elevated);
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 64px;
-    }
-
-    .section-label {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 16px;
-    }
-
-    .section-header h2 {
-      font-size: clamp(2.2rem, 4vw, 3rem);
-      margin-bottom: 16px;
-    }
-
-    .section-header p {
-      color: var(--text-secondary);
-      font-size: 1.05rem;
-      font-weight: 300;
-      max-width: 500px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
-
-    /* ── CASE STUDIES ── */
-    .cases-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-
-    .case-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 40px 32px;
-      transition: all var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .case-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--gradient-gold);
-      opacity: 0;
-      transition: opacity var(--transition);
-    }
-
-    .case-card:hover {
-      border-color: rgba(200,169,110,0.2);
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-glow);
-    }
-
-    .case-card:hover::before {
-      opacity: 1;
-    }
-
-    .case-tag {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 20px;
-      padding: 4px 12px;
-      background: var(--accent-glow);
-      border-radius: 100px;
-    }
-
-    .case-before {
-      font-size: 0.88rem;
-      color: var(--text-tertiary);
-      font-weight: 400;
-      margin-bottom: 16px;
-      line-height: 1.6;
-      font-style: italic;
-    }
-
-    .case-metric {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.6rem;
-      font-weight: 700;
-      background: var(--gradient-gold);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 12px;
-    }
-
-    .case-desc {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      font-weight: 300;
-      line-height: 1.7;
-      margin-bottom: 20px;
-    }
-
-    .case-link {
-      font-size: 0.82rem;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: gap var(--transition);
-    }
-
-    .case-link:hover {
-      gap: 10px;
-    }
-
-    /* ── IS THIS FOR YOU ── */
-    .fit-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      max-width: 920px;
-      margin: 0 auto;
-    }
-
-    .fit-col h3 {
-      font-size: 1.4rem;
-      margin-bottom: 28px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .fit-check { color: #34c759; }
-    .fit-x { color: #ff453a; }
-
-    .fit-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .fit-list li {
-      font-size: 0.92rem;
-      color: var(--text-secondary);
-      font-weight: 300;
-      line-height: 1.6;
-      padding-left: 28px;
-      position: relative;
-    }
-
-    .fit-list li::before {
-      position: absolute;
-      left: 0;
-      font-weight: 600;
-    }
-
-    .fit-yes li::before { content: '\2713'; color: #34c759; }
-    .fit-no li::before { content: '\2715'; color: #ff453a; }
-
-    /* ── OBJECTIONS ── */
-    .objections-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .objection-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 36px 28px;
-    }
-
-    .objection-q {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 14px;
-      font-style: italic;
-      line-height: 1.4;
-    }
-
-    .objection-a {
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-      font-weight: 300;
-      line-height: 1.7;
-    }
-
-    /* ── ABOUT / GUIDE ── */
-    .about-content {
-      max-width: 640px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .about-content p {
-      font-size: 1.05rem;
-      line-height: 1.85;
-      color: var(--text-secondary);
-      font-weight: 300;
-      margin-bottom: 24px;
-    }
-
-    .about-signature {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-style: italic;
-      color: var(--accent);
-      margin-top: 36px;
-    }
-
-    /* ── FINAL CTA ── */
-    .final-cta {
-      padding: 120px 0;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .final-cta::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 1000px;
-      height: 600px;
-      background: radial-gradient(ellipse, rgba(200,169,110,0.06) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .final-cta h2 {
-      font-size: clamp(2.4rem, 5vw, 3.4rem);
-      margin-bottom: 28px;
-    }
-
-    .final-cta h2 em {
-      font-style: italic;
-      background: var(--gradient-gold);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .value-stack {
-      max-width: 560px;
-      margin: 0 auto 20px;
-      text-align: left;
-    }
-
-    .value-stack li {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      font-weight: 300;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      list-style: none;
-    }
-
-    .value-stack li span {
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    .final-note {
-      color: var(--text-tertiary);
-      font-size: 0.82rem;
-      margin-bottom: 36px;
-      font-weight: 400;
-    }
-
-
-    /* ── FOOTER ── */
-    footer {
-      text-align: center;
-      padding: 40px 0;
-      border-top: 1px solid var(--border);
-      font-size: 0.78rem;
-      color: var(--text-tertiary);
-      font-weight: 400;
-    }
-
-    /* ── ANIMATIONS ── */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── MOBILE ── */
-    @media (max-width: 768px) {
-      .nav-links {
-        position: fixed;
-        top: 64px;
-        left: 0;
-        right: 0;
-        background: rgba(10,10,10,0.96);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        flex-direction: column;
-        align-items: center;
-        padding: 32px 0;
-        gap: 24px;
-        border-bottom: 1px solid var(--border);
-        transform: translateY(-120%);
-        opacity: 0;
-        transition: transform 0.35s ease, opacity 0.35s ease;
-        pointer-events: none;
-      }
-
-      .nav-links.open {
-        transform: translateY(0);
-        opacity: 1;
-        pointer-events: all;
-      }
-
-      .hamburger { display: flex; }
-      .hero { padding: 130px 0 60px; }
-      .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 16px; }
-      .trust-item:not(:last-child)::after { display: none; }
-      .cases-grid { grid-template-columns: 1fr; gap: 16px; }
-      .fit-grid { grid-template-columns: 1fr; gap: 40px; }
-      .objections-grid { grid-template-columns: 1fr; gap: 16px; }
-      .section { padding: 80px 0; }
-      .final-cta { padding: 80px 0; }
-    }
-
-    @media (max-width: 480px) {
-      .hero h1 { font-size: 2.4rem; }
-      .btn { padding: 14px 28px; font-size: 0.88rem; }
-      .case-metric { font-size: 2rem; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quinten Gish, Paid media for coaches, course creators and info brands</title>
+<meta name="description" content="Paid media strategist for coaches and course creators. Ads, funnels, copy, and video scripts that fill your calendar and scale revenue.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     PALETTE VARIATIONS
+     Switch with the selector in the top-right, or set
+     document.documentElement.dataset.theme = 'meta' | 'midnight' | 'ivory'
+     ============================================================ */
+
+  :root,
+  [data-theme="meta"] {
+    --bg: #FFFFFF;
+    --bg-2: #F1F4F7;
+    --bg-3: #F7F8FA;
+    --bg-dark: #1C1E21;
+    --bg-dark-2: #111214;
+    --ink: #1C2B33;
+    --ink-2: #3A4953;
+    --ink-3: #5D6C7B;
+    --ink-4: #8A95A0;
+    --line: rgba(28,43,51,0.10);
+    --line-2: rgba(28,43,51,0.18);
+    --line-dark: rgba(255,255,255,0.10);
+    --accent: #0064E0;
+    --accent-hover: #0143B5;
+    --accent-ink: #FFFFFF;
+    --accent-soft: #E8F3FF;
+    --on-dark-ink: #FFFFFF;
+    --on-dark-ink-2: rgba(255,255,255,0.72);
+    --on-dark-ink-3: rgba(255,255,255,0.48);
+  }
+
+  [data-theme="midnight"] {
+    --bg: #0C1220;
+    --bg-2: #141B2E;
+    --bg-3: #1B243B;
+    --bg-dark: #070B15;
+    --bg-dark-2: #000000;
+    --ink: #FFFFFF;
+    --ink-2: #D8DEEC;
+    --ink-3: #9AA5BD;
+    --ink-4: #6A7592;
+    --line: rgba(255,255,255,0.08);
+    --line-2: rgba(255,255,255,0.14);
+    --line-dark: rgba(255,255,255,0.10);
+    --accent: #47A5FA;
+    --accent-hover: #0064E0;
+    --accent-ink: #0C1220;
+    --accent-soft: rgba(71,165,250,0.14);
+    --on-dark-ink: #FFFFFF;
+    --on-dark-ink-2: rgba(255,255,255,0.70);
+    --on-dark-ink-3: rgba(255,255,255,0.45);
+  }
+
+  [data-theme="ivory"] {
+    --bg: #F4F1EA;
+    --bg-2: #FFFFFF;
+    --bg-3: #EBE6DA;
+    --bg-dark: #1B365D;
+    --bg-dark-2: #0F2040;
+    --ink: #1C2B33;
+    --ink-2: #3A4953;
+    --ink-3: #5D6C7B;
+    --ink-4: #8A95A0;
+    --line: rgba(28,43,51,0.12);
+    --line-2: rgba(28,43,51,0.20);
+    --line-dark: rgba(255,255,255,0.14);
+    --accent: #0064E0;
+    --accent-hover: #0143B5;
+    --accent-ink: #FFFFFF;
+    --accent-soft: #E8F3FF;
+    --on-dark-ink: #FFFFFF;
+    --on-dark-ink-2: rgba(255,255,255,0.80);
+    --on-dark-ink-3: rgba(255,255,255,0.50);
+  }
+
+  :root {
+    --radius: 14px;
+    --radius-lg: 22px;
+    --maxw: 1240px;
+    --ease: cubic-bezier(.4,0,.2,1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; transition: background 300ms var(--ease), color 300ms var(--ease); }
+  body { overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  img, video { max-width: 100%; display: block; }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+
+  /* ---------- SCROLL PROGRESS ---------- */
+  .scroll-progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 200; pointer-events: none; }
+  .scroll-progress__bar { height: 100%; width: 0%; background: var(--accent); transition: width 80ms linear; }
+
+  /* ---------- THEME TOGGLE (top-right) ---------- */
+  .theme-toggle { position: fixed; top: 14px; right: 14px; z-index: 100; width: 46px; height: 46px; border: 1px solid var(--line); background: color-mix(in srgb, var(--bg) 85%, transparent); backdrop-filter: blur(12px); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink-2); box-shadow: 0 12px 28px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.06); transition: transform 300ms var(--ease), color 200ms var(--ease), border-color 200ms var(--ease); }
+  .theme-toggle:hover { color: var(--accent); border-color: var(--line-2); transform: rotate(20deg); }
+  .theme-toggle svg { width: 20px; height: 20px; transition: opacity 240ms var(--ease), transform 320ms var(--ease); }
+  .theme-toggle .icon-moon { display: none; }
+  .theme-toggle .icon-sun { display: block; }
+  [data-theme="midnight"] .theme-toggle .icon-moon { display: block; }
+  [data-theme="midnight"] .theme-toggle .icon-sun { display: none; }
+  @media (max-width: 640px) { .theme-toggle { width: 40px; height: 40px; top: 10px; right: 10px; } }
+
+  /* ---------- NAV ---------- */
+  .nav { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 80%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+  .nav__inner { display: flex; align-items: center; justify-content: space-between; height: 70px; max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+  .nav__logo { font-weight: 800; font-size: 20px; letter-spacing: -0.5px; display: flex; align-items: center; gap: 10px; color: var(--ink); }
+  .nav__logo svg { width: 24px; height: 24px; }
+  .nav__links { display: flex; gap: 30px; font-size: 14px; font-weight: 500; color: var(--ink-2); }
+  .nav__links a:hover { color: var(--accent); }
+  .nav__cta { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: var(--accent-ink); padding: 10px 18px; border-radius: 100px; font-weight: 600; font-size: 13px; letter-spacing: -0.1px; white-space: nowrap; transition: transform 180ms var(--ease), background 200ms var(--ease); }
+  .nav__cta:hover { background: var(--accent-hover); transform: translateY(-1px); }
+  @media (max-width: 760px) { .nav__links { display: none; } }
+
+  /* ---------- BUTTONS ---------- */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-family: inherit; font-weight: 600; letter-spacing: -0.2px; border-radius: 100px; border: none; cursor: pointer; padding: 16px 28px; font-size: 16px; white-space: nowrap; transition: transform 180ms var(--ease), background 200ms var(--ease), color 200ms var(--ease); }
+  .btn--primary { background: var(--accent); color: var(--accent-ink); }
+  .btn--primary:hover { transform: translateY(-2px); background: var(--accent-hover); }
+  .btn--secondary { background: transparent; color: var(--ink); border: 1.5px solid var(--line-2); }
+  .btn--secondary:hover { border-color: var(--ink); }
+  .btn--lg { padding: 20px 36px; font-size: 17px; }
+  .btn--dark-secondary { background: transparent; color: var(--on-dark-ink); border: 1.5px solid rgba(255,255,255,0.3); }
+  .btn--dark-secondary:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+  .btn__arrow { width: 17px; height: 17px; }
+
+  /* ---------- EYEBROW ---------- */
+  .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; color: var(--ink-3); }
+  .eyebrow::before { content: ""; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+  .eyebrow--on-dark { color: var(--on-dark-ink-2); }
+
+  /* ---------- HERO ---------- */
+  .hero { padding: 70px 0 90px; position: relative; overflow: hidden; }
+  .hero::after { content: ""; position: absolute; top: -30%; left: 50%; transform: translateX(-50%); width: 1100px; height: 1100px; pointer-events: none; z-index: 0; background: radial-gradient(closest-side, var(--accent-soft), transparent 70%); }
+  .hero__inner { position: relative; z-index: 1; text-align: center; max-width: 980px; margin: 0 auto; }
+  .hero__eyebrow { margin-bottom: 26px; }
+  .hero h1 { font-size: clamp(44px, 7.2vw, 98px); font-weight: 800; letter-spacing: -3px; line-height: 1; margin: 0 0 24px; color: var(--ink); position: relative; --mx: 50%; --my: 50%; }
+  .hero h1::before { content: ""; position: absolute; inset: -20px; background: radial-gradient(circle 280px at var(--mx) var(--my), color-mix(in srgb, var(--accent) 18%, transparent), transparent 60%); opacity: 0; transition: opacity 400ms var(--ease); pointer-events: none; z-index: -1; border-radius: 40px; }
+  .hero h1.is-lit::before { opacity: 1; }
+  .hero h1 .accent { color: var(--accent); }
+  .hero h1 .italic { font-style: italic; font-weight: 700; }
+  .hero__sub { font-size: clamp(16px, 1.5vw, 19px); color: var(--ink-3); line-height: 1.55; max-width: 640px; margin: 0 auto 44px; }
+
+  /* video */
+  .hero__video { max-width: 960px; margin: 0 auto 40px; position: relative; }
+  .hero__video-frame { position: relative; aspect-ratio: 16/9; border-radius: var(--radius-lg); overflow: hidden; background: #000; border: 1px solid var(--line); box-shadow: 0 30px 80px -20px rgba(0,0,0,0.30), 0 12px 28px rgba(0,0,0,0.10); }
+  .hero__video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+  .hero__cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .hero__meta { margin-top: 22px; font-size: 13px; color: var(--ink-4); display: flex; justify-content: center; gap: 22px; flex-wrap: wrap; }
+  .hero__meta span { display: inline-flex; align-items: center; gap: 6px; }
+  .hero__meta .check { color: var(--accent); font-weight: 700; }
+
+  /* ---------- SECTION SHELL ---------- */
+  section { padding: 110px 0; position: relative; }
+  @media (max-width: 760px) { section { padding: 72px 0; } }
+  .section__head { max-width: 820px; margin: 0 auto 56px; text-align: center; }
+  .section__head .eyebrow { margin-bottom: 16px; }
+  .section__head h2 { font-size: clamp(36px, 5.2vw, 68px); font-weight: 800; letter-spacing: -2px; line-height: 1.02; margin: 0 0 16px; color: var(--ink); }
+  .section__head p { font-size: 18px; color: var(--ink-3); margin: 0; line-height: 1.55; }
+  .section__head .accent { color: var(--accent); }
+  .section--soft { background: var(--bg-2); }
+  .section--dark { background: var(--bg-dark); color: var(--on-dark-ink); }
+  .section--dark .section__head h2 { color: var(--on-dark-ink); }
+  .section--dark .section__head p { color: var(--on-dark-ink-2); }
+
+  /* ---------- MARQUEE ---------- */
+  .marquee { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 24px 0; overflow: hidden; background: var(--bg); }
+  .marquee__track { display: flex; gap: 56px; animation: scroll 34s linear infinite; width: max-content; font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 2px; font-weight: 500; white-space: nowrap; align-items: center; }
+  .marquee__track span { display: inline-flex; align-items: center; gap: 56px; }
+  .marquee__track .dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; display: inline-block; flex-shrink: 0; }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+
+  /* ---------- CASE STUDIES ---------- */
+  .cases__grid { display: grid; gap: 22px; }
+  .case { display: grid; grid-template-columns: 1.2fr 1fr; gap: 50px; align-items: center; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 52px; transition: transform 350ms var(--ease), border-color 250ms var(--ease), box-shadow 300ms var(--ease); }
+  .case:hover { border-color: var(--line-2); transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.06); }
+  .case__meta { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--ink-4); margin-bottom: 12px; }
+  .case__client { font-size: 14px; color: var(--accent); font-weight: 600; margin-bottom: 20px; }
+  .case h3 { font-size: clamp(26px, 3vw, 38px); font-weight: 800; letter-spacing: -1px; line-height: 1.08; margin: 0 0 18px; color: var(--ink); }
+  .case__problem { font-size: 16px; color: var(--ink-3); line-height: 1.6; margin: 0 0 24px; }
+  .case__link { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); display: inline-flex; align-items: center; gap: 8px; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: border-color 200ms var(--ease); }
+  .case__link:hover { border-color: var(--accent); }
+
+  .case__metric { background: var(--bg-3); border: 1px solid var(--line); border-radius: var(--radius); padding: 36px 32px; display: flex; flex-direction: column; gap: 6px; }
+  .case--hero .case__metric { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .case--hero .case__metric .case__metric-label,
+  .case--hero .case__metric .case__metric-sub { color: color-mix(in srgb, var(--accent-ink) 70%, transparent); }
+  .case__metric-value { font-size: clamp(52px, 7vw, 100px); font-weight: 800; letter-spacing: -4px; line-height: 0.9; color: currentColor; }
+  .case__metric-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-3); margin-top: 10px; }
+  .case__metric-sub { font-size: 14px; color: var(--ink-4); margin-top: 2px; }
+
+  .case--reverse { grid-template-columns: 1fr 1.2fr; }
+  .case--reverse .case__metric { order: -1; }
+
+  @media (max-width: 920px) {
+    .case, .case--reverse { grid-template-columns: 1fr; padding: 32px 24px; gap: 28px; }
+    .case--reverse .case__metric { order: 0; }
+  }
+
+  /* ---------- FIT CHECK ---------- */
+  .fit__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .fit__col { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 42px; }
+  .fit__col--yes { border-color: color-mix(in srgb, var(--accent) 35%, transparent); background: linear-gradient(180deg, var(--accent-soft), var(--bg) 60%); }
+  .fit__col h3 { font-size: 24px; font-weight: 800; letter-spacing: -0.6px; margin: 0 0 6px; display: flex; align-items: center; gap: 14px; color: var(--ink); }
+  .fit__col h3 .icon { width: 34px; height: 34px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .fit__col h3 .icon svg { width: 18px; height: 18px; }
+  .fit__col--yes h3 .icon { background: var(--accent); color: var(--accent-ink); }
+  .fit__col--no h3 .icon { background: var(--bg-2); color: var(--ink-3); border: 1px solid var(--line-2); }
+  .fit__col p.sub { color: var(--ink-4); font-size: 14px; margin: 0 0 24px; }
+  .fit__col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px; }
+  .fit__col li { font-size: 16px; line-height: 1.45; color: var(--ink-2); padding-left: 32px; position: relative; }
+  .fit__col li .bullet { position: absolute; left: 0; top: 2px; width: 20px; height: 20px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .fit__col li .bullet svg { width: 12px; height: 12px; }
+  .fit__col--yes li .bullet { background: var(--accent); color: var(--accent-ink); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 12%, transparent); }
+  .fit__col--no li .bullet { background: transparent; border: 1.5px solid var(--ink-4); color: var(--ink-3); }
+  .fit__col--no li .bullet svg { width: 10px; height: 10px; }
+  @media (max-width: 760px) { .fit__grid { grid-template-columns: 1fr; } }
+
+  /* ---------- FAQ ---------- */
+  .faq__list { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  .faq__item { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: border-color 200ms var(--ease); }
+  .faq__item:hover { border-color: var(--line-2); }
+  .faq__item[open] { border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+  .faq__item summary { padding: 24px 28px; cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; font-size: 18px; font-weight: 700; letter-spacing: -0.3px; color: var(--ink); }
+  .faq__item summary::-webkit-details-marker { display: none; }
+  .faq__icon { width: 30px; height: 30px; flex-shrink: 0; border-radius: 50%; background: var(--bg-2); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 400; color: var(--ink-2); transition: all 240ms var(--ease); }
+  .faq__item[open] .faq__icon { background: var(--accent); color: var(--accent-ink); transform: rotate(45deg); }
+  .faq__item p { padding: 0 28px 28px; margin: 0; font-size: 16px; line-height: 1.6; color: var(--ink-3); max-width: 720px; }
+
+  /* ---------- LOGO BAR ---------- */
+  .logobar { padding: 56px 0 28px; background: var(--bg); }
+  .logobar__label { text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink-4); margin-bottom: 28px; }
+  .logobar__row { display: flex; justify-content: center; align-items: center; gap: 60px; flex-wrap: wrap; }
+  .logobar__logo { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 19px; letter-spacing: -0.5px; color: var(--ink-3); transition: color 260ms var(--ease), opacity 260ms var(--ease); opacity: 0.7; white-space: nowrap; }
+  .logobar__logo:hover { color: var(--ink); opacity: 1; }
+  .logobar__logo .italic { font-style: italic; font-weight: 800; }
+  @media (max-width: 760px) { .logobar__row { gap: 28px; } .logobar__logo { font-size: 15px; } }
+
+  /* ---------- WHAT I DO ---------- */
+  .services__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .service { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 32px 28px; transition: transform 300ms var(--ease), border-color 260ms var(--ease), box-shadow 300ms var(--ease); }
+  .service:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); box-shadow: 0 20px 40px -12px rgba(0,0,0,0.10); }
+  .service__num { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--ink-4); text-transform: uppercase; margin-bottom: 14px; }
+  .service__icon { width: 44px; height: 44px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 20px; transition: transform 400ms var(--ease); }
+  .service:hover .service__icon { transform: rotate(-8deg) scale(1.08); }
+  .service__icon svg { width: 22px; height: 22px; }
+  .service h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.4px; margin: 0 0 10px; color: var(--ink); }
+  .service p { font-size: 14px; line-height: 1.55; color: var(--ink-3); margin: 0; }
+  @media (max-width: 960px) { .services__grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 540px) { .services__grid { grid-template-columns: 1fr; gap: 14px; } .service { padding: 26px 22px; } }
+
+  /* ---------- CASE TAGS + QUOTE ---------- */
+  .case__tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .case__tag { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-3); padding: 5px 10px; border: 1px solid var(--line-2); border-radius: 100px; background: var(--bg); }
+  .case__quote { margin-top: 22px; padding-top: 22px; border-top: 1px dashed var(--line-2); font-size: 15px; line-height: 1.5; color: var(--ink-2); font-style: italic; }
+  .case__quote::before { content: "\201C"; font-family: Georgia, serif; font-size: 40px; font-style: normal; color: var(--accent); line-height: 0; vertical-align: -14px; margin-right: 4px; }
+  .case__quote-attr { display: block; margin-top: 10px; font-size: 12px; font-style: normal; color: var(--ink-4); font-family: 'JetBrains Mono', monospace; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* ---------- ABOUT (dark section) ---------- */
+  .about { background: var(--bg-dark); color: var(--on-dark-ink); padding: 120px 0; position: relative; overflow: hidden; }
+  .about::before { content: ""; position: absolute; top: -40%; left: -10%; width: 700px; height: 700px; background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%); pointer-events: none; animation: driftGlow 14s ease-in-out infinite; }
+  .about__inner-centered { max-width: 820px; margin: 0 auto; padding: 0 28px; text-align: center; position: relative; z-index: 1; }
+  .about__eyebrow { color: var(--on-dark-ink-2); }
+  .about__eyebrow::before { background: var(--accent); }
+  .about h2 { font-size: clamp(34px, 5.2vw, 68px); font-weight: 800; letter-spacing: -2px; line-height: 1.02; margin: 16px 0 26px; color: var(--on-dark-ink); }
+  .about h2 .accent { color: var(--accent); font-style: italic; font-weight: 700; }
+  .about p { font-size: 18px; line-height: 1.65; color: var(--on-dark-ink-2); margin: 0 auto 18px; max-width: 680px; }
+  .about__sig { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--accent); margin-top: 26px; letter-spacing: 1px; display: inline-flex; align-items: center; gap: 10px; }
+  .about__sig::before { content: ""; width: 28px; height: 1px; background: var(--accent); }
+
+  /* ---------- CTA BAND ---------- */
+  .cta-section { background: var(--accent); color: var(--accent-ink); padding: 120px 0; position: relative; overflow: hidden; }
+  .cta-section::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 10%, rgba(255,255,255,0.18), transparent 50%), radial-gradient(ellipse at 80% 90%, rgba(0,0,0,0.08), transparent 50%); pointer-events: none; }
+  .cta-section__inner { position: relative; z-index: 1; text-align: center; max-width: 900px; margin: 0 auto; padding: 0 28px; }
+  .cta-section__eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: color-mix(in srgb, var(--accent-ink) 75%, transparent); margin-bottom: 28px; padding: 8px 16px; background: color-mix(in srgb, var(--accent-ink) 10%, transparent); border-radius: 100px; }
+  .cta-section__eyebrow::before { content: ""; width: 6px; height: 6px; background: var(--accent-ink); border-radius: 50%; animation: pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .cta-section h2 { font-size: clamp(44px, 7vw, 92px); font-weight: 800; letter-spacing: -3px; line-height: 0.98; margin: 0 0 26px; color: var(--accent-ink); }
+  .cta-section h2 .italic { font-style: italic; font-weight: 700; }
+  .cta-section p { font-size: 18px; line-height: 1.55; margin: 0 auto 40px; max-width: 620px; color: color-mix(in srgb, var(--accent-ink) 80%, transparent); }
+  .cta-section .btn--dark { background: var(--accent-ink); color: var(--accent); }
+  .cta-section .btn--dark:hover { transform: translateY(-2px); background: #000; color: #fff; }
+  .cta-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 900px; margin: 60px auto 0; text-align: left; }
+  .cta-list__item { padding-top: 20px; border-top: 1.5px solid var(--accent-ink); }
+  .cta-list__num { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; margin-bottom: 10px; color: var(--accent-ink); }
+  .cta-list__text { font-size: 15px; line-height: 1.4; color: color-mix(in srgb, var(--accent-ink) 88%, transparent); font-weight: 500; }
+  @media (max-width: 760px) { .cta-list { grid-template-columns: 1fr 1fr; gap: 18px; } }
+
+  /* ---------- FOOTER ---------- */
+  footer { padding: 46px 0 38px; border-top: 1px solid var(--line); background: var(--bg); }
+  .footer__inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 18px; font-size: 13px; color: var(--ink-4); }
+  .footer__links { display: flex; gap: 22px; }
+  .footer__links a:hover { color: var(--accent); }
+
+  /* ---------- REVEAL + ANIMATIONS ---------- */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 900ms var(--ease), transform 900ms var(--ease); }
+  .reveal.is-in { opacity: 1; transform: none; }
+  .reveal-left { opacity: 0; transform: translateX(-36px); transition: opacity 900ms var(--ease), transform 900ms var(--ease); }
+  .reveal-left.is-in { opacity: 1; transform: none; }
+  .reveal-right { opacity: 0; transform: translateX(36px); transition: opacity 900ms var(--ease), transform 900ms var(--ease); }
+  .reveal-right.is-in { opacity: 1; transform: none; }
+  .reveal-scale { opacity: 0; transform: scale(0.94); transition: opacity 900ms var(--ease), transform 900ms var(--ease); }
+  .reveal-scale.is-in { opacity: 1; transform: none; }
+
+  /* stagger children */
+  .stagger > * { opacity: 0; transform: translateY(22px); transition: opacity 800ms var(--ease), transform 800ms var(--ease); }
+  .stagger.is-in > *:nth-child(1) { transition-delay: 0ms; }
+  .stagger.is-in > *:nth-child(2) { transition-delay: 80ms; }
+  .stagger.is-in > *:nth-child(3) { transition-delay: 160ms; }
+  .stagger.is-in > *:nth-child(4) { transition-delay: 240ms; }
+  .stagger.is-in > *:nth-child(5) { transition-delay: 320ms; }
+  .stagger.is-in > *:nth-child(6) { transition-delay: 400ms; }
+  .stagger.is-in > * { opacity: 1; transform: none; }
+
+  /* hero entry loops */
+  @keyframes floatUp {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .hero__inner > .reveal.stagger-up:nth-child(1) { animation: floatUp 1100ms var(--ease) both; animation-delay: 100ms; opacity: 1; transform: none; transition: none; }
+  .hero__inner > .reveal.stagger-up:nth-child(2) { animation: floatUp 1100ms var(--ease) both; animation-delay: 250ms; opacity: 1; transform: none; transition: none; }
+  .hero__inner > .reveal.stagger-up:nth-child(3) { animation: floatUp 1100ms var(--ease) both; animation-delay: 400ms; opacity: 1; transform: none; transition: none; }
+  .hero__video.reveal { animation: floatUp 1300ms var(--ease) both; animation-delay: 550ms; opacity: 1; transform: none; transition: none; }
+  .hero__cta-row.reveal { animation: floatUp 1100ms var(--ease) both; animation-delay: 750ms; opacity: 1; transform: none; transition: none; }
+
+  /* animated gradient glow behind hero */
+  @keyframes driftGlow {
+    0%, 100% { transform: translate(-50%, 0) scale(1); opacity: 1; }
+    50% { transform: translate(-50%, -20px) scale(1.08); opacity: 0.85; }
+  }
+  .hero::after { animation: driftGlow 12s ease-in-out infinite; }
+
+  /* metric number count-up feel via keyframe */
+  @keyframes popIn {
+    0% { opacity: 0; transform: scale(0.85); }
+    60% { opacity: 1; transform: scale(1.04); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  .case.is-in .case__metric-value { animation: popIn 1000ms var(--ease) both; animation-delay: 300ms; }
+
+  /* button shimmer on hover */
+  .btn--primary { position: relative; overflow: hidden; isolation: isolate; }
+  .btn--primary::before { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.28) 50%, transparent 70%); transform: translateX(-120%); transition: transform 700ms var(--ease); z-index: -1; }
+  .btn--primary:hover::before { transform: translateX(120%); }
+
+  /* case metric hover */
+  .case__metric { transition: transform 400ms var(--ease), box-shadow 400ms var(--ease); }
+  .case:hover .case__metric { transform: translateY(-4px) rotate(-0.4deg); }
+
+  /* nav logo hover */
+  .nav__logo svg rect { transition: transform 500ms var(--ease); transform-origin: center; }
+  .nav__logo:hover svg rect { transform: rotate(90deg); }
+
+  /* marquee pause on hover */
+  .marquee:hover .marquee__track { animation-play-state: paused; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal.is-in, .reveal-left, .reveal-right, .reveal-scale, .stagger > * { opacity: 1; transform: none; transition: none; }
+    .marquee__track, .hero::after, .hero__inner > .reveal.stagger-up, .hero__video.reveal, .hero__cta-row.reveal, .case.is-in .case__metric-value { animation: none; }
+  }
+
+  /* ---------- MOBILE POLISH ---------- */
+  @media (max-width: 760px) {
+    .wrap { padding: 0 20px; }
+    .nav__inner { padding: 0 20px; height: 62px; }
+    .nav__logo { font-size: 17px; }
+    .nav__cta { padding: 9px 14px; font-size: 12px; }
+    .hero { padding: 44px 0 64px; }
+    .hero h1 { letter-spacing: -1.5px; }
+    .hero__sub { margin-bottom: 32px; }
+    .hero__video { margin-bottom: 28px; }
+    .hero__cta-row { flex-direction: column; width: 100%; }
+    .hero__cta-row .btn { width: 100%; }
+    .btn--lg { padding: 17px 26px; font-size: 15px; }
+    .section__head { margin-bottom: 40px; }
+    .section__head h2 { letter-spacing: -1px; }
+    .case { padding: 28px 20px; }
+    .case__metric { padding: 26px 22px; }
+    .case__metric-value { letter-spacing: -2.5px; }
+    .fit__col { padding: 28px 22px; }
+    .faq__item summary { padding: 20px 22px; font-size: 16px; }
+    .faq__item p { padding: 0 22px 22px; font-size: 15px; }
+    .cta-section { padding: 80px 0; }
+    .cta-list { margin-top: 44px; }
+    .about { padding: 80px 0; }
+    .about h2 { letter-spacing: -1px; }
+    .footer__inner { flex-direction: column; text-align: center; gap: 14px; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav id="nav">
-    <div class="nav-inner">
-      <a href="#" class="nav-logo">Quinten Gish</a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#results">Results</a></li>
-        <li><a href="#work">Case Studies</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="https://scheduler.zoom.us/quinten-gish/book-a-call" target="_blank" class="nav-cta">Book a Call</a></li>
-      </ul>
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </nav>
+<!-- PALETTE PICKER -->
+<div class="scroll-progress" aria-hidden="true"><div class="scroll-progress__bar" id="scrollBar"></div></div>
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle light or dark mode">
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+</button>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container">
-      <div class="fade-in">
-        <div class="hero-qualifier">For Coaches, Course Creators &amp; Info Brands</div>
-        <h1>Your Offer Deserves Ads<br><em>That Actually Convert.</em></h1>
-        <p class="hero-sub">Most coaches and course creators burn through ad spend with nothing to show for it. I build the paid media system that fills your calendar and scales your revenue.</p>
-        <div class="hero-ctas">
-          <a href="https://scheduler.zoom.us/quinten-gish/book-a-call" target="_blank" class="btn btn-primary btn-arrow">Book Your Free Strategy Call </a>
-          <a href="#work" class="btn btn-ghost">See Client Results</a>
+<!-- NAV -->
+<header class="nav">
+  <div class="nav__inner">
+    <a href="#" class="nav__logo">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="var(--accent)"/></svg>
+      Quinten Gish
+    </a>
+    <nav class="nav__links">
+      <a href="#results">Results</a>
+      <a href="#cases">Case Studies</a>
+      <a href="#about">About</a>
+    </nav>
+    <a href="https://scheduler.zoom.us/quinten-gish/book-a-call" target="_blank" rel="noopener" class="nav__cta">Book a call
+      <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero__inner">
+      <div class="eyebrow hero__eyebrow reveal">Paid media for coaches, course creators, and info brands</div>
+      <h1 class="reveal stagger-up">Your offer deserves ads that <span class="italic accent">convert.</span></h1>
+      <p class="hero__sub reveal stagger-up">Most coaches burn ad spend with nothing to show for it. I build the paid media system that fills your calendar and scales revenue. Ads, copy, video scripts, funnels. The whole thing.</p>
+
+      <div class="hero__video reveal">
+        <div class="hero__video-frame">
+          <iframe src="https://player.vimeo.com/video/1176657187?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" allowfullscreen title="Quinten VSL"></iframe>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- VSL -->
-  <section class="vsl-section">
-    <div class="container">
-      <p class="vsl-nudge fade-in"><span>&#9654;</span>&nbsp; Watch: How I help coaches and course creators scale with paid media</p>
-      <div class="vsl-wrapper fade-in">
-        <div style="padding:75% 0 0 0;position:relative;">
-          <iframe src="https://player.vimeo.com/video/1176657187?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479"
-                  frameborder="0"
-                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  style="position:absolute;top:0;left:0;width:100%;height:100%;"
-                  title="Quinten VSL"></iframe>
-        </div>
-        <script src="https://player.vimeo.com/api/player.js"></script>
-      </div>
-      <div class="vsl-post-cta fade-in">
-        <p>Ready to stop guessing and start scaling?</p>
-        <a href="https://scheduler.zoom.us/quinten-gish/book-a-call" target="_blank" class="btn btn-primary btn-arrow">Let's Map Out Your Growth Plan </a>
+      <div class="hero__cta-row reveal stagger-up">
+        <a href="https://scheduler.zoom.us/quinten-gish/book-a-call" target="_blank" rel="noopener" class="btn btn--primary btn--lg">
+          Book a call
+          <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#cases" class="btn btn--secondary btn--lg">See client results</a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- TRUST BAR -->
-  <section class="trust-bar" id="results">
-    <div class="container">
-      <div class="trust-grid">
-        <div class="trust-item fade-in">
-          <div class="trust-number" data-target="30" data-suffix="x">0x</div>
-          <div class="trust-label">ROAS on a coaching<br>launch in 30 days</div>
-        </div>
-        <div class="trust-item fade-in">
-          <div class="trust-number" data-target="8.3" data-suffix="x" data-decimal="1">0x</div>
-          <div class="trust-label">ROAS maintained<br>while scaling spend</div>
-        </div>
-        <div class="trust-item fade-in">
-          <div class="trust-number" data-prefix="$" data-target="144" data-suffix="k+">$0k+</div>
-          <div class="trust-label">Revenue generated<br>for a single client</div>
-        </div>
-        <div class="trust-item fade-in">
-          <div class="trust-number" data-target="14" data-suffix="%">0%</div>
-          <div class="trust-label">Funnel conversion<br>rate increase</div>
-        </div>
+<!-- MARQUEE -->
+<div class="marquee" id="results">
+  <div class="marquee__track">
+    <span>30x ROAS <span class="dot"></span> Coaching launches <span class="dot"></span> $144K+ revenue <span class="dot"></span> 14% funnel lift <span class="dot"></span> 2x spend, 4x ROAS <span class="dot"></span> High ticket offers <span class="dot"></span></span>
+    <span>30x ROAS <span class="dot"></span> Coaching launches <span class="dot"></span> $144K+ revenue <span class="dot"></span> 14% funnel lift <span class="dot"></span> 2x spend, 4x ROAS <span class="dot"></span> High ticket offers <span class="dot"></span></span>
+  </div>
+</div>
+
+<!-- LOGO BAR -->
+<div class="logobar">
+  <div class="wrap reveal">
+    <div class="logobar__label">Trusted by</div>
+    <div class="logobar__row">
+      <div class="logobar__logo">Justin Inman</div>
+      <div class="logobar__logo"><span class="italic">Clever</span> Investor</div>
+      <div class="logobar__logo">Austin Hauge</div>
+      <div class="logobar__logo">Selna Consulting</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT I DO -->
+<section>
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="eyebrow">What I do</div>
+      <h2>One strategist. <span class="accent">Every lever.</span></h2>
+      <p>Most agencies hand you a media buyer and call it done. I handle the whole funnel end to end.</p>
+    </div>
+    <div class="services__grid stagger reveal">
+      <div class="service">
+        <div class="service__num">01</div>
+        <div class="service__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg></div>
+        <h3>Strategy</h3>
+        <p>Funnel mapping, offer positioning, and the paid media plan that ties it all together.</p>
+      </div>
+      <div class="service">
+        <div class="service__num">02</div>
+        <div class="service__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v4H4zM4 12h10v4H4zM4 20h14"/></svg></div>
+        <h3>Ad copy</h3>
+        <p>Hooks, angles, and ad variations built for high ticket offers. No fluff, no templates.</p>
+      </div>
+      <div class="service">
+        <div class="service__num">03</div>
+        <div class="service__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+        <h3>Video scripts</h3>
+        <p>VSLs and short form scripts that turn cold traffic into booked calls.</p>
+      </div>
+      <div class="service">
+        <div class="service__num">04</div>
+        <div class="service__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-6"/></svg></div>
+        <h3>Funnels and CRO</h3>
+        <p>Landing pages, tracking, and tests that lift conversion at every step.</p>
       </div>
     </div>
-  </section>
-
-  <!-- CASE STUDIES -->
-  <section class="section" id="work">
-    <div class="container">
-      <div class="section-header fade-in">
-        <span class="section-label">Case Studies</span>
-        <h2>Real Campaigns. Real Revenue.</h2>
-        <p>Here's what happens when strategy meets execution.</p>
-      </div>
-      <div class="cases-grid">
-        <div class="case-card fade-in">
-          <span class="case-tag">Coaching Launch</span>
-          <p class="case-before">Women's fitness coach needed a full launch strategy &#8212; ads, copy, video scripts, the works.</p>
-          <div class="case-metric">30x ROAS</div>
-          <p class="case-desc">Led the entire launch for Justin Inman &#8212; wrote the ad copy, scripted the videos, built the funnel, and managed every ad dollar. Hit 30x return on ad spend within the first 30 days.</p>
-          <a href="https://scheduler.zoom.us/quinten-gish/book-a-call" target="_blank" class="case-link">Get results like this &#8594;</a>
-        </div>
-        <div class="case-card fade-in">
-          <span class="case-tag">Funnel Optimization</span>
-          <p class="case-before">Clever Investor had traffic but their funnel was leaking conversions at every step.</p>
-          <div class="case-metric">+14% CVR</div>
-          <p class="case-desc">Led conversion rate optimization across their entire marketing funnel. Implemented and tested data-driven strategies that lifted funnel conversion rates by 14% &#8212; turning the same traffic into significantly more revenue.</p>
-          <a href="https://scheduler.zoom.us/quinten-gish/book-a-call" target="_blank" class="case-link">Get results like this &#8594;</a>
-        </div>
-        <div class="case-card fade-in">
-          <span class="case-tag">Scaling Profitably</span>
-          <p class="case-before">Sports fitness instructor Austin Hauge wanted to scale but couldn't afford to tank his margins.</p>
-          <div class="case-metric">2x Spend, 4x ROAS</div>
-          <p class="case-desc">Doubled his ad spend while maintaining a 4x return on every dollar. Built a sustainable scaling strategy with continuous optimization so growth never came at the cost of profitability.</p>
-          <a href="https://scheduler.zoom.us/quinten-gish/book-a-call" target="_blank" class="case-link">Get results like this &#8594;</a>
-        </div>
-        <div class="case-card fade-in">
-          <span class="case-tag">Consulting Scale</span>
-          <p class="case-before">Selna Consulting needed to scale their campaigns without sacrificing their exceptional ROAS.</p>
-          <div class="case-metric">$144k+ Revenue</div>
-          <p class="case-desc">Generated over $144,000 in revenue while maintaining 8.3x ROAS at scale. Built comprehensive tracking and optimization systems that kept the campaign profitable as spend increased.</p>
-          <a href="https://scheduler.zoom.us/quinten-gish/book-a-call" target="_blank" class="case-link">Get results like this &#8594;</a>
-        </div>
-      </div>
+  </div>
+</section>
+<section class="section--soft" id="cases">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="eyebrow">Case studies</div>
+      <h2>Real campaigns. <span class="accent">Real revenue.</span></h2>
+      <p>Here is what happens when strategy meets execution.</p>
     </div>
-  </section>
 
-  <!-- IS THIS FOR YOU -->
-  <section class="section section-dark">
-    <div class="container">
-      <div class="section-header fade-in">
-        <span class="section-label">Fit Check</span>
-        <h2>Is This For You?</h2>
-        <p>I only work with brands I know I can help. Here's who I work best with.</p>
-      </div>
-      <div class="fit-grid fade-in">
-        <div class="fit-col">
-          <h3><span class="fit-check">&#10003;</span> This is for you if&#8230;</h3>
-          <ul class="fit-list fit-yes">
-            <li>You're a coach, course creator, or info-product brand ready to scale</li>
-            <li>You've been burned by agencies that don't understand high-ticket offers</li>
-            <li>You have a proven offer but can't figure out how to get consistent leads</li>
-            <li>You want a strategist who writes copy, scripts videos, and runs your ads</li>
-            <li>You're ready to invest in a system that fills your calendar predictably</li>
-          </ul>
+    <div class="cases__grid">
+      <article class="case case--hero reveal">
+        <div class="case__body">
+          <div class="case__tags"><span class="case__tag">Launch</span><span class="case__tag">High ticket</span><span class="case__tag">Cold traffic</span></div>
+          <div class="case__meta">01, coaching launch</div>
+          <div class="case__client">Justin Inman, women's fitness coaching</div>
+          <h3>Built the launch from scratch. Hit 30x ROAS in 30 days.</h3>
+          <p class="case__problem">Ran the launch end to end. Wrote the ad copy, scripted the videos, built the funnel, managed every ad dollar. The first 30 days brought in a 30x return on spend.</p>
+          <a class="case__link" href="https://scheduler.zoom.us/quinten-gish/book-a-call" target="_blank" rel="noopener">Get results like this →</a>
         </div>
-        <div class="fit-col">
-          <h3><span class="fit-x">&#10005;</span> This isn't for you if&#8230;</h3>
-          <ul class="fit-list fit-no">
-            <li>You're shopping for the cheapest media buyer you can find</li>
-            <li>You don't have a validated offer or program yet</li>
-            <li>You want someone to "just boost posts" without real strategy</li>
-            <li>You're not willing to invest in creative testing and iteration</li>
-          </ul>
+        <div class="case__metric">
+          <div class="case__metric-value">30x</div>
+          <div class="case__metric-label">ROAS</div>
+          <div class="case__metric-sub">First 30 days of launch</div>
         </div>
-      </div>
+      </article>
+
+      <article class="case case--reverse reveal">
+        <div class="case__body">
+          <div class="case__tags"><span class="case__tag">CRO</span><span class="case__tag">Funnel</span><span class="case__tag">Testing</span></div>
+          <div class="case__meta">02, funnel optimization</div>
+          <div class="case__client">Clever Investor</div>
+          <h3>Same traffic. A lot more revenue.</h3>
+          <p class="case__problem">Traffic was strong but the funnel leaked at every step. I led conversion rate optimization across the whole thing and ran data driven tests that lifted funnel CVR by 14%. Same eyeballs, more revenue.</p>
+          <a class="case__link" href="https://scheduler.zoom.us/quinten-gish/book-a-call" target="_blank" rel="noopener">Get results like this →</a>
+        </div>
+        <div class="case__metric">
+          <div class="case__metric-value">+14%</div>
+          <div class="case__metric-label">Funnel CVR</div>
+          <div class="case__metric-sub">Across the full funnel</div>
+        </div>
+      </article>
+
+      <article class="case reveal">
+        <div class="case__body">
+          <div class="case__tags"><span class="case__tag">Scale</span><span class="case__tag">High ticket</span><span class="case__tag">Creative</span></div>
+          <div class="case__meta">03, scaling profitably</div>
+          <div class="case__client">Austin Hauge, sports fitness instructor</div>
+          <h3>Doubled the spend. Margin held.</h3>
+          <p class="case__problem">Austin wanted to scale without tanking his margins. I built a scaling plan with ongoing creative testing and optimization. We doubled ad spend and held a 4x return on every dollar.</p>
+          <a class="case__link" href="https://scheduler.zoom.us/quinten-gish/book-a-call" target="_blank" rel="noopener">Get results like this →</a>
+        </div>
+        <div class="case__metric">
+          <div class="case__metric-value">4x</div>
+          <div class="case__metric-label">ROAS at 2x spend</div>
+          <div class="case__metric-sub">Held through the scale</div>
+        </div>
+      </article>
+
+      <article class="case case--reverse reveal">
+        <div class="case__body">
+          <div class="case__tags"><span class="case__tag">Consulting</span><span class="case__tag">Scale</span><span class="case__tag">Tracking</span></div>
+          <div class="case__meta">04, consulting scale</div>
+          <div class="case__client">Selna Consulting</div>
+          <h3>$144K+ in revenue at 8.3x ROAS.</h3>
+          <p class="case__problem">Selna needed to scale without giving up their strong ROAS. I set up tracking and optimization systems that held margin as spend went up. They pulled in $144K+ in revenue at 8.3x on every dollar.</p>
+          <a class="case__link" href="https://scheduler.zoom.us/quinten-gish/book-a-call" target="_blank" rel="noopener">Get results like this →</a>
+        </div>
+        <div class="case__metric">
+          <div class="case__metric-value">$144K+</div>
+          <div class="case__metric-label">Revenue at 8.3x ROAS</div>
+          <div class="case__metric-sub">Scaled profitably</div>
+        </div>
+      </article>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- OBJECTIONS -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header fade-in">
-        <span class="section-label">Straight Answers</span>
-        <h2>Questions You're Probably Asking</h2>
-      </div>
-      <div class="objections-grid">
-        <div class="objection-card fade-in">
-          <p class="objection-q">"I've hired ad people before and got burned."</p>
-          <p class="objection-a">Most media buyers don't understand high-ticket funnels. They optimize for clicks, not booked calls or closed deals. I handle strategy, copy, scripts, and ads &#8212; the full picture, not just the ad manager.</p>
-        </div>
-        <div class="objection-card fade-in">
-          <p class="objection-q">"I'm not sure paid ads work for coaching."</p>
-          <p class="objection-a">I've generated 30x ROAS for a coaching launch and $144k+ for a consulting firm. Paid media works when the funnel, creative, and targeting are built for high-ticket. That's exactly what I do.</p>
-        </div>
-        <div class="objection-card fade-in">
-          <p class="objection-q">"What if I don't have a massive budget?"</p>
-          <p class="objection-a">High-ticket means you don't need volume &#8212; you need the right people seeing the right message. Some of my best results came from lean budgets with sharp targeting and strong creative.</p>
-        </div>
-      </div>
+<!-- FIT CHECK -->
+<section>
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="eyebrow">Fit check</div>
+      <h2>Is this <span class="accent">for you?</span></h2>
+      <p>I take on the clients I know I can help. Here is who I work best with, and who I do not.</p>
     </div>
-  </section>
-
-  <!-- ABOUT / GUIDE -->
-  <section class="section" id="about">
-    <div class="container">
-      <div class="section-header fade-in">
-        <span class="section-label">Your Strategist</span>
-        <h2>The Person Behind the Data</h2>
-      </div>
-      <div class="about-content fade-in">
-        <p>I've spent 5+ years helping coaches, course creators, and consultants turn paid media into their most reliable growth channel. I don't just manage ads &#8212; I write the copy, script the videos, build the funnels, and optimize every step of the process.</p>
-        <p>Your offer changes lives. My job is to make sure the right people see it. I'm not the hero of your story &#8212; you are. I'm the strategist behind the scenes making sure every ad dollar drives real revenue.</p>
-        <p>I keep my client roster small on purpose. Because your launch deserves real strategic attention &#8212; not a junior media buyer and a monthly PDF report.</p>
-        <div class="about-signature">&#8212; Quinten</div>
-        <div style="margin-top: 36px;">
-          <a href="https://scheduler.zoom.us/quinten-gish/book-a-call" target="_blank" class="btn btn-primary btn-arrow">Let's Talk About Your Brand </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FINAL CTA -->
-  <section class="final-cta" id="book">
-    <div class="container">
-      <div class="fade-in">
-        <span class="section-label">Limited Availability</span>
-        <h2>Ready to Scale?<br><em>Let's Build Your Plan.</em></h2>
-        <p class="hero-sub" style="margin-bottom: 32px;">On this free strategy call, here's exactly what we'll cover:</p>
-        <ul class="value-stack">
-          <li><span>01</span> Audit your current ads and funnel to find what's leaking</li>
-          <li><span>02</span> Identify your biggest opportunity to scale profitably</li>
-          <li><span>03</span> Map out a launch or scaling strategy tailored to your offer</li>
-          <li><span>04</span> Give you a clear next step &#8212; whether we work together or not</li>
+    <div class="fit__grid">
+      <div class="fit__col fit__col--yes reveal">
+        <h3><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"/></svg></span> This is for you if</h3>
+        <p class="sub">You want a growth system, not an ad operator.</p>
+        <ul>
+          <li><span class="bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"/></svg></span>You are a coach, course creator, or info product brand ready to scale</li>
+          <li><span class="bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"/></svg></span>You have been burned by agencies that do not understand high ticket offers</li>
+          <li><span class="bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"/></svg></span>You have a proven offer but cannot get consistent leads</li>
+          <li><span class="bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"/></svg></span>You want one strategist who writes copy, scripts videos, and runs ads</li>
+          <li><span class="bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"/></svg></span>You are ready to invest in a system that fills your calendar</li>
         </ul>
-        <p class="final-note">No pressure. No pitch. Just a real conversation about your growth.</p>
-        <a href="https://scheduler.zoom.us/quinten-gish/book-a-call" target="_blank" class="btn btn-primary btn-arrow" style="font-size: 1rem; padding: 18px 44px;">Book Your Free Strategy Call </a>
-
+      </div>
+      <div class="fit__col fit__col--no reveal">
+        <h3><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></span> This is not for you if</h3>
+        <p class="sub">No hard feelings. We are just not a fit.</p>
+        <ul>
+          <li><span class="bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></span>You are shopping for the cheapest media buyer you can find</li>
+          <li><span class="bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></span>You do not have a validated offer or program yet</li>
+          <li><span class="bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></span>You want someone to boost posts without strategy</li>
+          <li><span class="bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></span>You are not willing to invest in creative testing and iteration</li>
+        </ul>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2026 Quinten Gish. All rights reserved.</p>
+<!-- FAQ -->
+<section class="section--soft">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="eyebrow">Straight answers</div>
+      <h2>Questions you are <span class="accent">probably asking.</span></h2>
     </div>
-  </footer>
+    <div class="faq__list">
+      <details class="faq__item reveal">
+        <summary>I have hired ad people before and got burned.<span class="faq__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
+        <p>Most media buyers do not understand high ticket funnels. They optimize for clicks, not booked calls or closed deals. I handle strategy, copy, scripts, and ads. The full picture, not just the ad manager.</p>
+      </details>
+      <details class="faq__item reveal">
+        <summary>I am not sure paid ads work for coaching.<span class="faq__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
+        <p>I have generated 30x ROAS for a coaching launch and $144K+ for a consulting firm. Paid media works when the funnel, creative, and targeting are built for high ticket. That is what I do.</p>
+      </details>
+      <details class="faq__item reveal">
+        <summary>What if I do not have a massive budget?<span class="faq__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
+        <p>High ticket means you do not need volume. You need the right people seeing the right message. Some of my best results came from lean budgets with sharp targeting and strong creative.</p>
+      </details>
+      <details class="faq__item reveal">
+        <summary>What does working together look like?<span class="faq__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
+        <p>We start with a call. I audit your offer, your funnel, and your ad history. If we are a fit, we map out a launch or scaling plan with clear milestones. If we are not, you leave with a real next step.</p>
+      </details>
+    </div>
+  </div>
+</section>
 
-  <script>
-    // Nav scroll
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.style.borderBottomColor = window.scrollY > 10
-        ? 'rgba(255,255,255,0.08)'
-        : 'rgba(255,255,255,0.06)';
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about__inner-centered reveal">
+    <div class="eyebrow about__eyebrow">The person behind the ads</div>
+    <h2>I am not the hero of your story. <span class="accent">You are.</span></h2>
+    <p>5+ years helping coaches, course creators, and consultants turn paid media into their most reliable growth channel. I do not manage ads. I write the copy, script the videos, build the funnels, and optimize every step.</p>
+    <p>Your offer changes lives. My job is to make sure the right people see it.</p>
+    <p>I keep my client roster small on purpose. Your launch deserves strategic attention, not a junior media buyer and a monthly PDF report.</p>
+    <div class="about__sig">Quinten</div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-section__inner">
+    <h2 class="reveal">Ready to scale? <span class="italic">Let's build your plan.</span></h2>
+    <p class="reveal">Book a call. Here is what we cover.</p>
+    <div class="reveal">
+      <a href="https://scheduler.zoom.us/quinten-gish/book-a-call" target="_blank" rel="noopener" class="btn btn--dark btn--lg">
+        Book a call
+        <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="cta-list">
+      <div class="cta-list__item reveal"><div class="cta-list__num">01</div><div class="cta-list__text">Audit your current ads and funnel to find what is leaking</div></div>
+      <div class="cta-list__item reveal"><div class="cta-list__num">02</div><div class="cta-list__text">Identify your biggest opportunity to scale</div></div>
+      <div class="cta-list__item reveal"><div class="cta-list__num">03</div><div class="cta-list__text">Map out a launch or scaling strategy for your offer</div></div>
+      <div class="cta-list__item reveal"><div class="cta-list__num">04</div><div class="cta-list__text">A clear next step whether we work together or not</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer__inner">
+      <div>© 2026 Quinten Gish. All rights reserved.</div>
+      <div class="footer__links">
+        <a href="https://scheduler.zoom.us/quinten-gish/book-a-call" target="_blank" rel="noopener">Book a call</a>
+        <a href="#cases">Case studies</a>
+        <a href="#about">About</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Theme toggle (light/midnight)
+  const themeToggle = document.getElementById('themeToggle');
+  const setTheme = (name) => {
+    document.documentElement.dataset.theme = name;
+    try { localStorage.setItem('qg-theme', name); } catch(e) {}
+  };
+  themeToggle.addEventListener('click', () => {
+    const current = document.documentElement.dataset.theme || 'meta';
+    setTheme(current === 'meta' ? 'midnight' : 'meta');
+  });
+  try {
+    const saved = localStorage.getItem('qg-theme');
+    if (saved === 'meta' || saved === 'midnight') setTheme(saved);
+  } catch(e) {}
+
+  // Scroll progress bar
+  const scrollBar = document.getElementById('scrollBar');
+  const updateScroll = () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
+    scrollBar.style.width = Math.min(100, Math.max(0, scrolled * 100)) + '%';
+  };
+  window.addEventListener('scroll', updateScroll, { passive: true });
+  updateScroll();
+
+  // Cursor follow glow on hero headline
+  const heroH1 = document.querySelector('.hero h1');
+  if (heroH1) {
+    heroH1.addEventListener('pointermove', (e) => {
+      const rect = heroH1.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      heroH1.style.setProperty('--mx', x + '%');
+      heroH1.style.setProperty('--my', y + '%');
+      heroH1.classList.add('is-lit');
     });
+    heroH1.addEventListener('pointerleave', () => heroH1.classList.remove('is-lit'));
+  }
 
-    // Mobile hamburger
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      navLinks.classList.toggle('open');
+  // Animated metric counters
+  const parseMetric = (text) => {
+    const m = text.match(/([\$]?)([0-9.,]+)([A-Za-z+%]*)/);
+    if (!m) return null;
+    const prefix = m[1];
+    const num = parseFloat(m[2].replace(/,/g, ''));
+    const suffix = m[3];
+    return { prefix, num, suffix, original: text };
+  };
+  const formatMetric = (val, meta) => {
+    let out;
+    if (meta.num >= 1000) out = Math.round(val).toLocaleString();
+    else if (meta.num % 1 === 0) out = Math.round(val).toString();
+    else out = val.toFixed(1);
+    return meta.prefix + out + meta.suffix;
+  };
+  const animateMetric = (el) => {
+    const meta = parseMetric(el.textContent);
+    if (!meta) return;
+    const duration = 1600;
+    const start = performance.now();
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = formatMetric(meta.num * eased, meta);
+      if (t < 1) requestAnimationFrame(step);
+      else el.textContent = meta.original;
+    };
+    requestAnimationFrame(step);
+  };
+  const metricObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { animateMetric(e.target); metricObserver.unobserve(e.target); } });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.case__metric-value').forEach(el => {
+    el.dataset.original = el.textContent;
+    metricObserver.observe(el);
+  });
+
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Smooth scroll for in-page anchors
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if (id.length > 1) {
+        const el = document.querySelector(id);
+        if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      }
     });
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('open');
-      });
-    });
-
-    // Fade-in on scroll
-    const fadeEls = document.querySelectorAll('.fade-in');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    fadeEls.forEach(el => observer.observe(el));
-
-    // Counter animation
-    const counters = document.querySelectorAll('.trust-number[data-target]');
-    let countersAnimated = false;
-    const statsObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !countersAnimated) {
-          countersAnimated = true;
-          animateCounters();
-          statsObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.3 });
-
-    const trustBar = document.querySelector('.trust-bar');
-    if (trustBar) statsObserver.observe(trustBar);
-
-    function animateCounters() {
-      counters.forEach(counter => {
-        const target = parseFloat(counter.dataset.target);
-        const prefix = counter.dataset.prefix || '';
-        const suffix = counter.dataset.suffix || '';
-        const decimal = parseInt(counter.dataset.decimal) || 0;
-        const duration = 1800;
-        const startTime = performance.now();
-
-        function update(currentTime) {
-          const elapsed = currentTime - startTime;
-          const progress = Math.min(elapsed / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 4);
-          const current = eased * target;
-          counter.textContent = prefix + current.toFixed(decimal) + suffix;
-          if (progress < 1) {
-            requestAnimationFrame(update);
-          } else {
-            counter.textContent = prefix + target.toFixed(decimal).replace(/\.0$/, '') + suffix;
-          }
-        }
-        requestAnimationFrame(update);
-      });
-    }
-  </script>
+  });
+</script>
 
 </body>
 </html>
