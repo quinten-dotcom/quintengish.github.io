@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>grid frame</title>
+<style>
+  body { font-family: sans-serif; margin: 0; background: #f0f2f5; }
+  .row { display: flex; gap: 20px; background: #fff; border-bottom: 1px solid #eee; padding: 14px 10px; }
+  .name { width: 260px; font-weight: 600; color: #1877f2; }
+</style></head>
+<body>
+  <div style="height:60px"></div>
+  <!-- name split across nested spans, different case, zero-width space -->
+  <div class="row"><span class="name"><span>BATCH</span><span>134.v1</span></span><span>$1,442.13</span></div>
+  <div class="row"><span class="name">Batch&#8203;108.v4</span><span>$1,197.53</span></div>
+  <div class="row"><span class="name">batch101.V3 </span><span>$710.61</span></div>
+</body>
+</html>

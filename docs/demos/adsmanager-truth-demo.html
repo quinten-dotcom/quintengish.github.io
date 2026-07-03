@@ -1,0 +1,268 @@
+<title>Ads Manager Truth Demo</title>
+<style>
+  :root { --pg: #f0f2f5; --ink2: #444950; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; background: var(--pg); color: #1c2b33; }
+  @media (prefers-color-scheme: dark) { :root { --pg: #18191a; } }
+  :root[data-theme="dark"] { --pg: #18191a; } :root[data-theme="light"] { --pg: #f0f2f5; }
+  .note { max-width: 1080px; margin: 0 auto; padding: 12px 14px 0; font-size: 13px; color: #65676b; }
+  @media (prefers-color-scheme: dark) { .note { color: #b0b3b8; } }
+  .frame { max-width: 1080px; margin: 10px auto 40px; background: #fff; border-radius: 10px; box-shadow: 0 1px 8px rgba(0,0,0,0.25); overflow: hidden; }
+
+  /* Truth bar (extension-injected) */
+  .truthbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 9px 14px; background: #eef4fd; border-bottom: 2px solid #2a78d6; font-size: 12.5px; }
+  .truthbar .um { font-weight: 800; letter-spacing: 0.06em; color: #2a78d6; font-size: 11px; }
+  .truthbar .fresh { color: #444950; }
+  .truthbar .fresh b { color: #1c2b33; }
+  .tb-pill { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: rgba(12,163,12,0.14); }
+  .tb-pill i { width: 7px; height: 7px; border-radius: 50%; background: #0ca30c; }
+  .wchips { display: flex; gap: 4px; margin-left: auto; }
+  .wchips button, .master { font: inherit; font-size: 12px; font-weight: 650; border: 1px solid #ccd0d5; background: #fff; color: #444950; border-radius: 999px; padding: 4px 11px; cursor: pointer; }
+  .wchips button[aria-pressed="true"] { background: #2a78d6; border-color: #2a78d6; color: #fff; }
+  .master { border-color: #2a78d6; color: #2a78d6; }
+
+  /* Ads Manager chrome */
+  .amtop { padding: 12px 14px 10px; border-bottom: 1px solid #dadde1; }
+  .amtop .crumbs { font-size: 12px; color: #65676b; }
+  .amtop h1 { font-size: 17px; margin: 4px 0 0; font-weight: 700; }
+  .tabs { display: flex; gap: 18px; padding: 0 14px; border-bottom: 1px solid #dadde1; font-size: 13.5px; }
+  .tabs span { padding: 10px 2px; color: #65676b; }
+  .tabs .on { color: #1877f2; border-bottom: 3px solid #1877f2; font-weight: 650; }
+
+  .tbl-scroll { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; min-width: 1040px; font-size: 12.8px; }
+  th { text-align: left; font-size: 11px; font-weight: 650; color: #65676b; padding: 9px 10px; border-bottom: 1px solid #dadde1; white-space: nowrap; background: #f7f8fa; }
+  td { padding: 10px; border-bottom: 1px solid #ebedf0; white-space: nowrap; vertical-align: middle; font-variant-numeric: tabular-nums; }
+  th.true, td.true { background: #f3f8ff; }
+  th.true { color: #2a78d6; }
+  th.true .umtag { display: inline-block; font-size: 8.5px; font-weight: 800; letter-spacing: 0.06em; background: #2a78d6; color: #fff; border-radius: 3px; padding: 1px 4px; margin-right: 4px; vertical-align: 1px; }
+  .adname { font-weight: 600; color: #1877f2; max-width: 200px; overflow: hidden; text-overflow: ellipsis; }
+  .sub { font-size: 11px; color: #65676b; font-weight: 400; }
+
+  .sw { width: 34px; height: 19px; border-radius: 10px; background: #1877f2; position: relative; cursor: pointer; border: none; flex: none; display: inline-block; }
+  .sw::after { content: ""; position: absolute; top: 2px; right: 2px; width: 15px; height: 15px; border-radius: 50%; background: #fff; }
+  .sw.off { background: #ccd0d5; } .sw.off::after { right: auto; left: 2px; }
+
+  .pill { display: inline-flex; align-items: center; gap: 5px; font-size: 10.5px; font-weight: 800; letter-spacing: 0.03em; padding: 3px 9px; border-radius: 999px; cursor: pointer; border: none; font-family: inherit; }
+  .pill i { width: 7px; height: 7px; border-radius: 50%; }
+  .p-scale { background: rgba(12,163,12,0.14); color: #106010; } .p-scale i { background: #0ca30c; }
+  .p-hold { background: rgba(250,178,25,0.2); color: #6e4e00; } .p-hold i { background: #fab219; }
+  .p-cut { background: rgba(236,131,90,0.2); color: #7c3413; } .p-cut i { background: #ec835a; }
+  .p-kill { background: rgba(208,59,59,0.14); color: #8f1d1d; } .p-kill i { background: #d03b3b; }
+  .p-test { background: #eef0f2; color: #556; } .p-test i { background: #90949c; }
+
+  .delta { display: block; font-size: 10.5px; font-weight: 700; margin-top: 2px; }
+  .d-up { color: #106010; } .d-down { color: #b02a2a; }
+  .fatigue { display: inline-block; font-size: 9.5px; font-weight: 800; background: rgba(236,131,90,0.18); color: #7c3413; border-radius: 4px; padding: 1px 5px; margin-left: 6px; vertical-align: 1px; }
+  .dim { color: #b0b3b8; }
+  .shield { font-size: 10.5px; color: #65676b; display: block; margin-top: 2px; }
+  tr.stripe-scale td:first-child { box-shadow: inset 3px 0 0 #0ca30c; }
+  tr.stripe-kill td:first-child { box-shadow: inset 3px 0 0 #d03b3b; }
+  tr.stripe-cut td:first-child { box-shadow: inset 3px 0 0 #ec835a; }
+  tr.offrow td { opacity: 0.45; }
+
+  .why { display: none; }
+  .why.open { display: table-row; }
+  .why td { background: #f3f8ff; white-space: normal; font-size: 12.5px; color: #333; }
+  .why .move { font-weight: 700; color: #1c2b33; }
+  .why .acts { margin-top: 6px; display: flex; gap: 8px; }
+  .why .acts button { font: inherit; font-size: 12px; font-weight: 650; border-radius: 6px; padding: 5px 12px; cursor: pointer; border: 1px solid #ccd0d5; background: #fff; }
+  .why .acts .go { background: #2a78d6; border-color: #2a78d6; color: #fff; }
+
+  .truth-off .true, .truth-off .pill, .truth-off .delta, .truth-off .fatigue, .truth-off .shield, .truth-off .why { display: none !important; }
+  .truth-off tr td:first-child { box-shadow: none !important; }
+  .truth-off .truthbar > :not(.master):not(.um) { visibility: hidden; }
+
+  .logstrip { padding: 10px 14px; font-size: 12px; color: #444950; background: #f7f8fa; border-top: 1px solid #dadde1; }
+  .logstrip b { color: #1c2b33; }
+  .logstrip div { padding: 2px 0; }
+
+  /* Guardrail dialog */
+  .veil { position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: none; align-items: center; justify-content: center; z-index: 50; padding: 16px; }
+  .veil.show { display: flex; }
+  .dlg { background: #fff; border-radius: 12px; max-width: 380px; padding: 18px; box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+  .dlg h2 { font-size: 15px; margin: 0 0 8px; }
+  .dlg p { font-size: 13.5px; color: #444950; margin: 0 0 14px; }
+  .dlg .row { display: flex; gap: 8px; justify-content: flex-end; }
+  .dlg button { font: inherit; font-size: 13px; font-weight: 650; border-radius: 8px; padding: 8px 14px; cursor: pointer; border: 1px solid #ccd0d5; background: #fff; }
+  .dlg .danger { background: #d03b3b; border-color: #d03b3b; color: #fff; }
+  button:focus-visible { outline: 2px solid #1877f2; outline-offset: 2px; }
+</style>
+
+<p class="note"><b>Demo.</b> This is how the UM Truth extension v2 should look inside Meta Ads Manager. The chrome and numbers are a mockup (demo data, Elysium-style offer, target CPA $800, target ROAS 3x), the rules are the real rule engine. Tap verdicts, flip ad toggles, switch windows, and hit "Truth layer" to see Ads Manager with and without it.</p>
+
+<div class="frame" id="frame">
+  <div class="truthbar">
+    <span class="um">UM TRUTH</span>
+    <span class="fresh">Data through <b>Jul 2</b>, synced 4:12am</span>
+    <span class="tb-pill"><i></i>ELYSIUM: SCALE, 4.34x true ROAS vs 3x target</span>
+    <div class="wchips" id="wchips">
+      <button type="button" data-w="3d">3D</button>
+      <button type="button" data-w="7d" aria-pressed="true">7D</button>
+      <button type="button" data-w="30d">30D</button>
+    </div>
+    <button type="button" class="master" id="master">Truth layer: ON</button>
+  </div>
+
+  <div class="amtop">
+    <div class="crumbs">Campaigns &gt; EJ | Book-a-call | Advantage+ &gt; Ad sets &gt; Ads</div>
+    <h1>Ads</h1>
+  </div>
+  <div class="tabs"><span>Account overview</span><span>Campaigns</span><span>Ad sets</span><span class="on">Ads</span></div>
+
+  <div class="tbl-scroll">
+    <table id="tbl">
+      <thead>
+        <tr>
+          <th>Off/On</th><th>Ad</th><th>Delivery</th><th>Budget</th>
+          <th>Results<div class="sub">Meta</div></th>
+          <th>Cost per result<div class="sub">Meta</div></th>
+          <th>Amount spent</th><th>CTR</th><th>Frequency</th>
+          <th class="true"><span class="umtag">UM</span>True sales</th>
+          <th class="true"><span class="umtag">UM</span>True CPA</th>
+          <th class="true"><span class="umtag">UM</span>True ROAS</th>
+          <th class="true"><span class="umtag">UM</span>Verdict</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+
+  <div class="logstrip" id="logstrip"><b>Decision log (auto-captured)</b><div>Nothing yet this session. Actions you take in this table land here with the true numbers at that moment.</div></div>
+</div>
+
+<div class="veil" id="veil" role="dialog" aria-modal="true">
+  <div class="dlg">
+    <h2 id="dlgTitle"></h2>
+    <p id="dlgBody"></p>
+    <div class="row">
+      <button type="button" id="dlgCancel">Cancel</button>
+      <button type="button" class="danger" id="dlgGo"></button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  // Demo rows. Values per window [3d, 7d, 30d]. Target CPA $800, ROAS 3x, call target $40, maturity 14 days.
+  var ADS = [
+    { id: 'a1', name: 'EJ-B7-ugc-hook1', on: true, budget: '$180/day', metaRes: [1, 1, 4], spend: [610, 1240, 4870], ctr: [4.9, 4.7, 4.4], freq: [1.6, 1.8, 2.2],
+      trueS: [1, 2, 7], roas: [5.6, 4.8, 4.1], verdict: 'SCALE',
+      why: 'Rule scale-20: 7d true CPA $620 is under the $800 target with 2 sales, 7 over 30 days. True ROAS 4.8x.', move: 'Raise budget 20 percent. Once per day, max. Big winner path: duplicate at 2x if 30d holds.' },
+    { id: 'a2', name: 'EJ-B7-ugc-hook2', on: true, budget: '$120/day', metaRes: [0, 0, 2], spend: [390, 860, 3480], ctr: [4.1, 4.0, 4.2], freq: [1.9, 2.1, 2.4],
+      trueS: [0, 1, 4], roas: [0, 2.9, 3.1], verdict: 'HOLD',
+      why: 'Rule hold-band: 7d true CPA $860 sits between target $800 and 1.5x. Only 1 sale this window.', move: 'Change nothing. Check again tomorrow.' },
+    { id: 'a3', name: 'EJ-B6-talkinghead-3', on: true, budget: '$150/day', metaRes: [0, 1, 3], spend: [580, 1375, 5230], ctr: [2.6, 2.9, 4.1], freq: [3.4, 3.1, 2.6],
+      trueS: [0, 1, 5], roas: [0, 1.9, 2.8], verdict: 'CUT', fatigue: true,
+      why: 'Rule downscale-30: 7d true CPA $1,375 is past 1.5x target while 30d is still inside. Plus fatigue: frequency 3.4 and CTR down 38% from its 7-day peak.', move: 'Cut budget 30 percent, do not kill. Queue a refresh creative from this angle.' },
+    { id: 'a4', name: 'EJ-B8-static-1', on: true, budget: '$100/day', metaRes: [0, 0, 0], spend: [240, 240, 240], ctr: [5.2, 5.2, 5.2], freq: [1.2, 1.2, 1.2],
+      trueS: [0, 0, 0], roas: [0, 0, 0], verdict: 'TESTING', young: '2 days old. Sales lag 14 days here. Judge cost per booked call: 6 calls at $40, on target.',
+      why: 'Rule young-leading-good: inside the 14-day maturity window, so purchase CPA is not judged. Leading metric is on target.', move: 'Leave it alone. Touching it resets learning.' },
+    { id: 'a5', name: 'EJ-B5-vsl-cut2', on: true, budget: '$140/day', metaRes: [0, 0, 1], spend: [520, 1610, 4990], ctr: [3.3, 3.5, 3.8], freq: [2.7, 2.5, 2.3],
+      trueS: [0, 0, 1], roas: [0, 0, 0.8], verdict: 'KILL',
+      why: 'Rule kill-no-purchases: $1,610 spent in 7 days, past 1.5x target ($1,200) with zero true sales. 30 days shows 1 sale at $4,990 CPA.', move: 'Turn it off. Reallocate to B7-ugc-hook1.' },
+    { id: 'a6', name: 'EJ-B4-ugc-old', on: false, budget: '$0/day', metaRes: [0, 0, 0], spend: [0, 95, 780], ctr: [0, 2.1, 3.0], freq: [0, 1.4, 2.0],
+      trueS: [0, 0, 1], roas: [0, 0, 1.1], verdict: 'KILLED',
+      why: 'Killed Jun 28 by rule kill-cpa. Kept visible for batch context.', move: 'Nothing. Graveyard row.' }
+  ];
+  var WNAMES = ['3d', '7d', '30d'];
+  var state = { w: 1, truth: true, open: null, log: [] };
+  var PCLS = { SCALE: 'p-scale', HOLD: 'p-hold', CUT: 'p-cut', KILL: 'p-kill', KILLED: 'p-kill', TESTING: 'p-test' };
+  var STRIPE = { SCALE: 'stripe-scale', CUT: 'stripe-cut', KILL: 'stripe-kill' };
+
+  function money(v) { return '$' + Math.round(v).toLocaleString('en-US'); }
+  function cpa(a, w) { return a.trueS[w] > 0 ? a.spend[w] / a.trueS[w] : null; }
+
+  function render() {
+    var w = state.w;
+    document.getElementById('rows').innerHTML = ADS.map(function (a) {
+      var mRes = a.metaRes[w], tS = a.trueS[w];
+      var gap = tS - mRes;
+      var deltaHtml = '';
+      if (a.verdict !== 'TESTING' && (mRes || tS)) {
+        deltaHtml = '<span class="delta ' + (gap >= 0 ? 'd-up' : 'd-down') + '">true ' + tS + (gap ? ' (' + (gap > 0 ? '+' : '') + gap + ')' : ' (match)') + '</span>';
+      }
+      var mCpa = mRes > 0 ? money(a.spend[w] / mRes) : '-';
+      var tCpa = cpa(a, w);
+      var cpaCell = a.young ? '<span class="dim">' + mCpa + '</span><span class="shield">' + a.young + '</span>' : mCpa;
+      return '<tr class="' + (STRIPE[a.verdict] || '') + (a.on ? '' : ' offrow') + '">' +
+        '<td><button type="button" class="sw ' + (a.on ? '' : 'off') + '" data-sw="' + a.id + '" aria-label="Toggle ' + a.name + '"></button></td>' +
+        '<td class="adname">' + a.name + (a.fatigue ? '<span class="fatigue">FATIGUE</span>' : '') + '</td>' +
+        '<td>' + (a.on ? 'Active' : 'Off') + '</td><td>' + a.budget + '</td>' +
+        '<td>' + mRes + deltaHtml + '</td>' +
+        '<td>' + cpaCell + '</td>' +
+        '<td>' + money(a.spend[w]) + '</td><td>' + a.ctr[w].toFixed(1) + '%</td><td>' + (a.freq[w] ? a.freq[w].toFixed(1) : '-') + '</td>' +
+        '<td class="true">' + tS + '</td>' +
+        '<td class="true">' + (tCpa ? money(tCpa) : '-') + '</td>' +
+        '<td class="true">' + (a.roas[w] ? a.roas[w].toFixed(1) + 'x' : '-') + '</td>' +
+        '<td class="true"><button type="button" class="pill ' + PCLS[a.verdict] + '" data-why="' + a.id + '"><i></i>' + a.verdict + '</button></td></tr>' +
+        '<tr class="why' + (state.open === a.id ? ' open' : '') + '" id="why-' + a.id + '"><td colspan="13"><b>Why:</b> ' + a.why +
+        '<div class="move">Suggested move: ' + a.move + '</div>' +
+        (a.verdict === 'SCALE' ? '<div class="acts"><button type="button" class="go" data-raise="' + a.id + '">Raise budget 20%</button></div>' : '') +
+        (a.verdict === 'KILL' ? '<div class="acts"><button type="button" class="go" data-killact="' + a.id + '">Turn off now</button></div>' : '') +
+        '</td></tr>';
+    }).join('');
+    document.getElementById('wchips').querySelectorAll('button').forEach(function (b, i) {
+      b.setAttribute('aria-pressed', String(i === state.w));
+    });
+    var ls = document.getElementById('logstrip');
+    ls.innerHTML = '<b>Decision log (auto-captured)</b>' + (state.log.length
+      ? state.log.map(function (l) { return '<div>' + l + '</div>'; }).join('')
+      : '<div>Nothing yet this session. Actions you take in this table land here with the true numbers at that moment.</div>');
+  }
+
+  function find(id) { for (var i = 0; i < ADS.length; i++) if (ADS[i].id === id) return ADS[i]; }
+  function logAct(a, act, override) {
+    var w = state.w, t = cpa(a, w);
+    state.log.unshift('Jul 3, ' + WNAMES[w].toUpperCase() + ' view: <b>' + act + '</b> on ' + a.name + ' at true CPA ' + (t ? money(t) : 'n/a') + ', ROAS ' + (a.roas[w] || 0).toFixed(1) + 'x, verdict ' + a.verdict + (override ? ' <b>(override)</b>' : ''));
+  }
+
+  var veil = document.getElementById('veil');
+  var pending = null;
+  function guardrail(a, actionText, bodyText, goText, fn) {
+    document.getElementById('dlgTitle').textContent = actionText;
+    document.getElementById('dlgBody').textContent = bodyText;
+    document.getElementById('dlgGo').textContent = goText;
+    pending = fn; veil.className = 'veil show';
+  }
+  document.getElementById('dlgCancel').addEventListener('click', function () { veil.className = 'veil'; pending = null; });
+  document.getElementById('dlgGo').addEventListener('click', function () { veil.className = 'veil'; if (pending) pending(); pending = null; render(); });
+
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('[data-w],[data-why],[data-sw],[data-raise],[data-killact],#master');
+    if (!t) return;
+    if (t.dataset.w) { state.w = WNAMES.indexOf(t.dataset.w); render(); return; }
+    if (t.id === 'master') {
+      state.truth = !state.truth;
+      document.getElementById('frame').className = 'frame' + (state.truth ? '' : ' truth-off');
+      t.textContent = 'Truth layer: ' + (state.truth ? 'ON' : 'OFF');
+      return;
+    }
+    if (t.dataset.why) { state.open = state.open === t.dataset.why ? null : t.dataset.why; render(); return; }
+    if (t.dataset.raise) {
+      var a = find(t.dataset.raise);
+      logAct(a, 'Raised budget 20%'); state.open = null; render(); return;
+    }
+    if (t.dataset.killact) {
+      var k = find(t.dataset.killact);
+      k.on = false; logAct(k, 'Turned off'); state.open = null; render(); return;
+    }
+    if (t.dataset.sw) {
+      var ad = find(t.dataset.sw);
+      var turningOff = ad.on;
+      var contradicts = state.truth && ((turningOff && ad.verdict === 'SCALE') || (!turningOff && (ad.verdict === 'KILL' || ad.verdict === 'KILLED')));
+      var apply = function (override) { ad.on = !ad.on; logAct(ad, ad.on ? 'Turned on' : 'Turned off', override); };
+      if (contradicts) {
+        guardrail(ad,
+          turningOff ? 'True data says SCALE' : 'True data says KILL',
+          turningOff
+            ? 'You are about to turn off ' + ad.name + '. True ROAS is ' + ad.roas[state.w].toFixed(1) + 'x against a 3x target and the rule engine says raise it 20%. Sure?'
+            : 'You are about to turn ' + ad.name + ' back on. It hit a kill rule. Sure?',
+          turningOff ? 'Turn it off anyway' : 'Turn it on anyway',
+          function () { apply(true); });
+      } else { apply(false); render(); }
+    }
+  });
+
+  render();
+})();
+</script>
