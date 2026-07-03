@@ -7,6 +7,12 @@
   if (window.__umTruthLoaded) return;
   window.__umTruthLoaded = true;
 
+  // Ads Manager sometimes renders the grid in a nested frame. The script runs
+  // in every frame; the frame that actually sees ad names shows the panel and
+  // tells the top frame to hide its copy.
+  const IS_TOP = window === window.top;
+  let childNotified = false;
+
   // Default client list. Add or remove clients from the gear menu in the
   // panel (saved in chrome.storage), no code edits needed.
   const DEFAULT_SHEETS = [
@@ -132,6 +138,18 @@
     await store.set({ umCache: { ads: [...map.entries()], fetchedAt: state.fetchedAt, error: state.error } });
   }
 
+  // Forgiving name matching: strip zero-width chars, collapse whitespace,
+  // ignore case. Meta's DOM decorates names in ways exact equality misses.
+  const norm = (s) => String(s).replace(/[\u200b-\u200f\u2060\ufeff]/g, "").replace(/\s+/g, " ").trim().toLowerCase();
+  function normIndex() {
+    if (!state._normFor || state._normFor !== state.ads) {
+      state._norm = new Map();
+      for (const k of state.ads.keys()) state._norm.set(norm(k), k);
+      state._normFor = state.ads;
+    }
+    return state._norm;
+  }
+
   // ---------- verdicts ----------
   function target(ad) {
     const cfg = state.sheets.find((s) => s.offer === ad.offer);
@@ -154,27 +172,54 @@
   // ---------- name matching against the page ----------
   function findMatches() {
     if (!state.ads || !state.ads.size) return [];
+    const idx = normIndex();
     const found = new Map(); // name -> element (leftmost visible)
+    const consider = (name, el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.height < 8 || rect.width < 8) return;
+      const prev = found.get(name);
+      if (!prev || rect.left < prev.getBoundingClientRect().left) found.set(name, el);
+    };
+    // Pass 1: single text nodes.
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
       acceptNode: (n) => {
-        const t = n.nodeValue && n.nodeValue.trim();
-        return t && t.length < 120 && state.ads.has(t) && !n.parentElement.closest("#um-truth-panel")
+        const v = n.nodeValue;
+        return v && v.length < 160 && n.parentElement && !n.parentElement.closest("#um-truth-panel")
           ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
       }
     });
     let node;
+    const visited = new WeakSet();
     while ((node = walker.nextNode())) {
-      const el = node.parentElement;
-      const rect = el.getBoundingClientRect();
-      if (rect.height < 8 || rect.width < 8) continue;
-      const name = node.nodeValue.trim();
-      const prev = found.get(name);
-      if (!prev || rect.left < prev.getBoundingClientRect().left) found.set(name, el);
+      const name = idx.get(norm(node.nodeValue));
+      if (name) { consider(name, node.parentElement); continue; }
+      // A name split across nested spans adds up at a close ancestor.
+      let el = node.parentElement;
+      for (let d = 0; d < 3 && el && el !== document.body; d++, el = el.parentElement) {
+        if (visited.has(el)) break;
+        visited.add(el);
+        const t = el.textContent;
+        if (!t || t.length > 160) break;
+        const nm = idx.get(norm(t));
+        if (nm) { consider(nm, el); break; }
+      }
+    }
+    // Pass 2 (only if pass 1 found nothing): a name split across nested
+    // elements still adds up at some ancestor's textContent.
+    if (!found.size) {
+      const els = document.querySelectorAll("span,div,a,td");
+      for (const el of els) {
+        if (el.closest("#um-truth-panel")) continue;
+        const t = el.textContent;
+        if (!t || t.length > 160) continue;
+        const name = idx.get(norm(t));
+        if (name) consider(name, el);
+      }
     }
     // One panel row per distinct vertical position, sorted top to bottom.
     return [...found.entries()]
       .map(([name, el]) => ({ name, el, top: el.getBoundingClientRect().top }))
-      .filter((m) => m.top > 80 && m.top < window.innerHeight)
+      .filter((m) => m.top > 40 && m.top < window.innerHeight)
       .sort((a, b) => a.top - b.top);
   }
 
@@ -327,15 +372,23 @@
     if (raf) return;
     raf = requestAnimationFrame(() => {
       raf = null;
-      if (state.on && !state.collapsed) {
-        state.matches = findMatches();
-        render();
+      if (!state.on || state.collapsed) return;
+      state.matches = findMatches();
+      if (!IS_TOP) {
+        // Frames without ad names stay invisible; the frame that finds them
+        // shows the panel and tells the top frame to hide its copy.
+        if (!state.matches.length && !panel) return;
+        if (state.matches.length && !childNotified) {
+          childNotified = true;
+          try { window.top.postMessage({ umChildActive: true }, "*"); } catch (e) {}
+        }
       }
+      render();
     });
   }
 
   function applyOn() {
-    if (panel) panel.style.display = state.on ? "" : "none";
+    if (panel) panel.style.display = (state.on && !(IS_TOP && state.childActive)) ? "" : "none";
   }
 
   (async function init() {
@@ -345,9 +398,14 @@
     if (saved.umTargets) state.targets = saved.umTargets;
     if (Array.isArray(saved.umSheets) && saved.umSheets.length) state.sheets = saved.umSheets;
     if (saved.umOn === false) state.on = false;
-    buildPanel();
-    render();
-    applyOn();
+    if (IS_TOP) {
+      buildPanel();
+      render();
+      applyOn();
+      window.addEventListener("message", (e) => {
+        if (e.data && e.data.umChildActive) { state.childActive = true; applyOn(); }
+      });
+    }
     // Toolbar icon toggles the whole panel on and off.
     try {
       chrome.runtime.onMessage.addListener((msg) => {
