@@ -1,0 +1,27 @@
+{
+  "_comment": "One entry per offer. Targets are dollars unless noted. null means Quinten has not set it yet; the engine returns NO_TARGET verdicts until it is set. maturity_days is how old spend must be before purchase CPA is judged; younger spend is judged on the leading metric.",
+  "channel_junkies": {
+    "display_name": "Channel Junkies",
+    "primary_metric": "purchase",
+    "target_cpa": null,
+    "leading_metric": "lead",
+    "target_leading_cost": 100.0,
+    "maturity_days": 3
+  },
+  "tsa_webinar": {
+    "display_name": "True Success Academy",
+    "primary_metric": "purchase",
+    "target_cpa": null,
+    "leading_metric": "booked_call",
+    "target_leading_cost": 400.0,
+    "maturity_days": 7
+  },
+  "elysium_jet": {
+    "display_name": "Elysium Jet Academy",
+    "primary_metric": "sale",
+    "target_cpa": 800.0,
+    "leading_metric": "booked_call",
+    "target_leading_cost": 40.0,
+    "maturity_days": 14
+  }
+}
