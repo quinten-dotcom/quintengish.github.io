@@ -1,37 +1,29 @@
 # Truth Board refresh procedure
 
-Any Claude session (scheduled or on demand) follows this to refresh the board. Target: under 5 minutes.
+Any Claude session (scheduled or on demand) follows this to refresh the board. Target: under 5 minutes. The Google Drive connector is the only external access needed.
 
-## 1. Pull fresh sheet data (Google Drive connector, read only)
+## 1. Export the workbooks (Drive connector)
 
-Read the first tab of each live report sheet:
+Use `download_file_content` with exportMimeType `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet` for each live report sheet, base64-decode to xlsx files in the scratchpad:
 
-- Channel_Junkies_-_Marketing_Report: `1wf_Ow5IFhSxOa1_EqXpeJuzT-RItA352xs9iE9gWh_s`
-- True_Success_Academy_-_Marketing_Report: `1PFwD4BjSxp2MjJBjJKdFkXJWzVjU_B273IUbED7Qss8`
-- Elysium_Jet_Training_-_Marketing_Report: `1M5WUUwzqBtCue97W4CgK7Vs2sQmQOKf59LXFJ2Wk3nY`
+- Channel_Junkies_-_Marketing_Report (tabs: Grader, Challenge, Creatives - Grader, Creatives - Challenge): `1wf_Ow5IFhSxOa1_EqXpeJuzT-RItA352xs9iE9gWh_s` -> cj.xlsx
+- True_Success_Academy_-_Marketing_Report (Webinar, Creatives - Webinar): `1PFwD4BjSxp2MjJBjJKdFkXJWzVjU_B273IUbED7Qss8` -> tsa.xlsx
+- Elysium_Jet_Training_-_Marketing_Report (Jet Academy, Creatives - Jet Academy): `1M5WUUwzqBtCue97W4CgK7Vs2sQmQOKf59LXFJ2Wk3nY` -> elysium.xlsx
 
-Each first tab has summary rows (3 Days, 7 Days, 14 Days, 30 Days, MTD, Total) then daily rows newest first.
+Do NOT use `read_file_content` for this: it only returns the first tab. The xlsx export carries every tab including the Creatives tabs with true per-ad data.
 
-## 2. Update data.json
+## 2. Run the parser
 
-Update in `tools/truth-board/data.json`:
+```
+pip install openpyxl -q   # if missing
+python3 tools/truth-board/parse_xlsx.py --cj cj.xlsx --tsa tsa.xlsx --elysium elysium.xlsx
+```
 
-- `meta.data_through`, `meta.pulled_at`, `meta.month_days`, `meta.month_day_of`
-- Every `metrics.<key>.vals` array: values for [3d, 7d, 14d, 30d, mtd] in that order
-- `daily`: last 30 days of the listed series per offer
-- `meta.alerts`: rewrite from what the fresh numbers show (CPL jumps, show-rate slides, zero-sale streaks past maturity, disabled accounts, data-feed gaps). Keep them short and name the offer.
-- Offer `read` lines: update to today's honest read.
+This rewrites the numeric parts of data.json: all window values, 30 days of dailies, per-ad rows from the Creatives tabs, and the freshness stamps. It never touches prose. If it errors on a header, the sheet layout changed: fix the OFFERS map in parse_xlsx.py.
 
-## 3. Try the Meta ad-level pull
+## 3. Update the judgment content by hand
 
-Use the Meta Ads MCP tool `ads_get_ad_entities`, level `ad`, sorted by spend descending, limit 25, `date_preset` last_7d, fields: id, name, effective_status, spend, impressions, ctr, frequency, results, cost_per_result. Accounts:
-
-- Channel Junkies: 904998112494586
-- True Success Academy (True Potential Unleashed): 1853993815415301
-- Elysium Jet Training: 25869578952695215
-- Elysium jet charter: 925821266606876
-
-Write rows into `data.json` under `ads.<offer>` as objects: name, status, spend, results, cost_per_result, ctr, frequency. Set `meta.meta_ads_status` to "ok". If the call errors with "requires approval" or auth, leave `ads` empty, set `meta.meta_ads_status` to "blocked_approval", and tell Quinten the Meta connector needs approval in claude.ai connector settings.
+In data.json: rewrite `meta.alerts` and each offer's `read` (and `flag` if changed) from what the fresh numbers show. Keep them short, name the offer, no drama. Confirm targets still match what Quinten set.
 
 ## 4. Build and publish
 
@@ -39,16 +31,20 @@ Write rows into `data.json` under `ads.<offer>` as objects: name, status, spend,
 python3 tools/truth-board/build.py -o <scratchpad>/um-truth-board.html
 ```
 
-Publish with the Artifact tool using EXACTLY the same file path as last time (`<scratchpad>/um-truth-board.html`) and favicon 📊, so the URL stays stable. The known board URL: https://claude.ai/code/artifact/c0959b28-3530-42f6-9f21-00aefe104ec5 (pass it as `url` if publishing from a fresh session).
+Publish with the Artifact tool using EXACTLY the same file path (`<scratchpad>/um-truth-board.html`) and favicon so the URL stays stable. Known board URL: https://claude.ai/code/artifact/c0959b28-3530-42f6-9f21-00aefe104ec5 (pass as `url` from a fresh session).
 
 ## 5. Send the morning brief
 
-Push notification (PushNotification tool) with: one line per offer (verdict word plus the primary number vs target), then the top alert. Under 300 characters. Example: "Elysium SCALE 4.3x ROAS. TSA STOP+FIX $1194/call, 0 sales. CJ HOLD $132 CPL rising. Alert: CJ purchase feed still empty."
+Push notification with one line per offer (verdict word plus the primary number vs target) then the top alert. Under 300 characters.
 
 ## 6. Commit
 
-Commit the updated `data.json` (and anything else changed) to the current branch and push, so history shows every day's snapshot.
+Commit the updated data.json to the branch and push, so history keeps every day's snapshot.
 
-## Scheduled trigger
+## Meta ad enrichment (optional, currently blocked)
 
-A daily trigger fires this procedure into the owning session each morning after the Mac's 4am loop. Manage it with the claude-code-remote trigger tools (list_triggers / update_trigger / delete_trigger). If connectors turn out to be unavailable in scheduled runs, the run should still send a push saying the refresh failed and why, and Quinten can message "refresh" to run it interactively.
+Status, frequency, and CTR-trend per ad can come from the Meta Ads MCP (`ads_get_ad_entities`, level ad, accounts 904998112494586 / 1853993815415301 / 25869578952695215 / 925821266606876). This connector currently returns "requires approval" from cloud sessions. The board works fully without it since all per-ad truth comes from the Creatives tabs.
+
+## Scheduling status
+
+The claude-code-remote trigger tool also returns "requires approval" from this session, so the daily auto-refresh is not armed yet. Until connector permissions are fixed in claude.ai settings, refresh on demand: Quinten messages "refresh" and the session runs steps 1-6.

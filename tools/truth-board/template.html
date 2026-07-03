@@ -169,7 +169,7 @@
       <span><i style="background:var(--serious)"></i> Up to 2x off: cut</span>
       <span><i style="background:var(--critical)"></i> Past 2x: stop and fix</span>
     </div>
-    <p>Every number is from the true sources (GHL, EverWebinar, Elysium CRM, Stripe/Whop) unless it carries a <span class="metatag">META</span> tag. Targets and logs save on this device. Verdict bands match tools/rule-engine in the repo.</p>
+    <p>Every number, including the per-ad tables, is from the true sources (GHL, EverWebinar, Elysium CRM, Stripe/Whop) unless it carries a <span class="metatag">META</span> tag. Targets and logs save on this device. Verdict bands match tools/rule-engine in the repo. Per-ad verdicts judge the offer's leading metric, so a TESTING ad is young or low-spend, not bad.</p>
   </footer>
 </div>
 
@@ -244,10 +244,12 @@ var DATA = __DATA_JSON__;
   }
 
   function sparkline(o) {
-    var days = Math.min(WDAYS[state.win], DATA.daily.dates.length);
-    var series = DATA.daily[o.id][o.spark_metric];
+    var d = DATA.daily[o.id] || {};
+    var series = d[o.spark_metric] || [];
+    if (!series.length) return '';
+    var days = Math.min(WDAYS[state.win], series.length);
     var data = series.slice(series.length - days);
-    var dates = DATA.daily.dates.slice(series.length - days);
+    var dates = (d.dates || []).slice(series.length - days);
     var W = 320, H = 56, PAD = 2, LABEL_W = 40;
     var n = data.length;
     var max = Math.max.apply(null, data) || 1;
@@ -303,18 +305,41 @@ var DATA = __DATA_JSON__;
     return html;
   }
 
+  function adVerdict(a, w, tgt) {
+    var spend = a.spend[w] || 0, kpi = a.kpi[w] || 0, cpa = a.cpa[w];
+    if (tgt === null) return { cls: 'v-warning', word: 'NO TARGET' };
+    if (cpa === null || kpi === 0) {
+      if (spend >= 1.5 * tgt) return { cls: 'v-critical', word: 'KILL' };
+      return { cls: 'v-warning', word: 'TESTING' };
+    }
+    var b = band({ lower: true }, cpa, tgt);
+    return { cls: 'v-' + b, word: b === 'critical' ? 'KILL' : WORDS[b] };
+  }
+
   function adSection(o) {
     var ads = DATA.ads[o.id] || [];
-    var head = '<div class="lh" style="margin-top:12px;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)">Ads <span class="metatag">META</span></div>';
-    if (!ads.length) {
-      var why = DATA.meta.meta_ads_status === 'ok' ? 'No ad rows in this pull.' :
-        'The Meta connector needs approval in claude.ai connector settings, so this build has no ad-level pull. These tables fill automatically on the next refresh.';
-      return head + '<div class="metabox">Per-ad spend, results, cost, and fatigue flags will sit here, tagged META because they are Meta-reported until the Mac loop ships true per-ad data. ' + why + '</div>';
-    }
-    var rows = ads.map(function (a) {
-      return '<tr><td>' + a.name + '</td><td>' + a.status + '</td><td>' + fmt({ unit: '$' }, a.spend) + '</td><td>' + (a.results === null ? '-' : a.results) + '</td><td>' + fmt({ unit: '$' }, a.cost_per_result) + '</td><td>' + (a.ctr === null ? '-' : a.ctr.toFixed(2) + '%') + '</td><td>' + (a.frequency === null ? '-' : a.frequency.toFixed(1)) + '</td></tr>';
+    var head = '<div style="margin-top:12px;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)">Per-ad truth, from the Creatives tab</div>';
+    if (!ads.length) return head + '<div class="metabox">No per-ad rows in this pull. They fill on the next refresh.</div>';
+    var w = ['3d', '7d', '30d'].indexOf(state.win) >= 0 ? state.win : '7d';
+    var tgt = target(o, o.ads_kpi.target_key);
+    var live = ads.filter(function (a) { return a.active; });
+    var off = ads.length - live.length;
+    var shown = live.slice().sort(function (x, y) { return (y.spend[w] || 0) - (x.spend[w] || 0); }).slice(0, 10);
+    var rest = live.length - shown.length;
+    var rows = shown.map(function (a) {
+      var v = adVerdict(a, w, tgt);
+      return '<tr><td>' + a.name + '</td>' +
+        '<td>' + (a.spend[w] === null ? '-' : fmt({ unit: '$' }, a.spend[w])) + '</td>' +
+        '<td>' + (a.kpi[w] === null ? '-' : (a.kpi[w] || 0).toLocaleString('en-US')) + '</td>' +
+        '<td>' + (a.cpa[w] === null ? '-' : fmt({ unit: '$' }, a.cpa[w])) + '</td>' +
+        '<td>' + (a.cpa['30d'] === null ? '-' : fmt({ unit: '$' }, a.cpa['30d'])) + '</td>' +
+        '<td><span class="pill ' + v.cls + '" style="font-size:10px;padding:2px 8px"><span class="dot"></span>' + v.word + '</span></td></tr>';
     }).join('');
-    return head + '<div class="tbl-wrap"><table><thead><tr><th>Ad</th><th>Status</th><th>Spend</th><th>Results</th><th>Cost</th><th>CTR</th><th>Freq</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+    var foot = [];
+    if (rest > 0) foot.push(rest + ' more live ads with smaller spend');
+    if (off > 0) foot.push(off + ' off ads in the graveyard');
+    return head + '<div class="tbl-wrap"><table><thead><tr><th>Ad</th><th>Spend ' + w.toUpperCase() + '</th><th>' + o.ads_kpi.label + '</th><th>True CPA</th><th>30D CPA</th><th>Verdict vs ' + (tgt === null ? 'target' : fmt({ unit: '$' }, tgt)) + '</th></tr></thead><tbody>' + rows + '</tbody></table></div>' +
+      (foot.length ? '<div style="font-size:11px;color:var(--muted);margin-top:4px">' + foot.join('. ') + '.</div>' : '');
   }
 
   function logSection(o) {
