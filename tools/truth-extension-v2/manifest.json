@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "UM Truth v2",
+  "version": "2.0.0",
+  "description": "True per-ad data from the United Motion report sheets, rendered inside Meta Ads Manager.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://adsmanager.facebook.com/*",
+    "https://business.facebook.com/*",
+    "https://docs.google.com/*"
+  ],
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://adsmanager.facebook.com/*",
+        "https://business.facebook.com/*"
+      ],
+      "js": ["content.js"],
+      "css": ["panel.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
