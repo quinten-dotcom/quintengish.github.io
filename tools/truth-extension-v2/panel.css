@@ -85,3 +85,26 @@
   border: 1px solid #2c3340; border-radius: 6px; padding: 4px 7px;
 }
 #um-truth-panel .um-x { padding: 0 6px; font-size: 13px; line-height: 1.2; color: #ff7a7a; }
+
+/* Inline strip injected under each matched ad name in Meta's grid */
+.um-inline {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin: 2px 0 0 0; padding: 2px 7px;
+  background: rgba(13, 15, 20, 0.92); border-radius: 6px;
+  font: 700 10px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #cfd5de; white-space: nowrap; max-width: 100%;
+  border-left: 2px solid #2a78d6;
+}
+.um-inline .um-i-tag { color: #5ba0f2; font-size: 8.5px; letter-spacing: 0.07em; }
+.um-inline .um-i-val { font-variant-numeric: tabular-nums; }
+.um-inline .um-i-cpa { color: #fff; }
+.um-inline .um-pill {
+  display: inline-block; font-size: 8.5px; font-weight: 800; letter-spacing: 0.04em;
+  padding: 1px 6px; border-radius: 999px;
+}
+.um-inline .um-scale { background: rgba(18,183,106,0.25); color: #3ddc97; }
+.um-inline .um-hold { background: rgba(240,178,41,0.22); color: #f0b429; }
+.um-inline .um-cut { background: rgba(236,131,90,0.25); color: #f0956c; }
+.um-inline .um-kill { background: rgba(224,62,62,0.28); color: #ff7a7a; }
+.um-inline .um-test { background: rgba(125,134,148,0.22); color: #aab2c0; }
+#um-truth-panel .um-logo em { font-style: normal; font-size: 8.5px; color: #7d8694; font-weight: 600; }

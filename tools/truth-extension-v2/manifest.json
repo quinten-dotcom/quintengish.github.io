@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "UM Truth v2",
-  "version": "2.0.0",
+  "version": "2.2.0",
   "description": "True per-ad data from the United Motion report sheets, rendered inside Meta Ads Manager.",
   "permissions": ["storage"],
   "action": { "default_title": "UM Truth: show/hide panel" },
@@ -20,7 +20,9 @@
       "js": ["content.js"],
       "css": ["panel.css"],
       "run_at": "document_idle",
-      "all_frames": true
+      "all_frames": true,
+      "match_about_blank": true,
+      "match_origin_as_fallback": true
     }
   ]
 }

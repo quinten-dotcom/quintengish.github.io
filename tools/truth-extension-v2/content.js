@@ -12,6 +12,7 @@
   // tells the top frame to hide its copy.
   const IS_TOP = window === window.top;
   let childNotified = false;
+  const VERSION = "2.2.0";
 
   // Default client list. Add or remove clients from the gear menu in the
   // panel (saved in chrome.storage), no code edits needed.
@@ -169,7 +170,79 @@
     return { cls: "kill", word: "KILL" };
   }
 
+  function kpiLabel(ad) {
+    const cfg = state.sheets.find((x) => x.offer === ad.offer);
+    return cfg ? cfg.kpi : "results";
+  }
+
+  // ---------- inline strips inside Meta's own grid (the Hyros look) ----------
+  const chips = new Set();
+  function clearChips() {
+    chips.forEach((c) => c.remove());
+    chips.clear();
+  }
+  function injectChips() {
+    const w = state.win;
+    for (const m of state.matches) {
+      const ad = state.ads.get(m.name);
+      if (!ad || !m.el.isConnected) continue;
+      let chip = m.el._umChip;
+      if (!chip || !chip.isConnected) {
+        chip = document.createElement("div");
+        chip.className = "um-inline";
+        m.el._umChip = chip;
+        (m.el.parentElement || m.el).insertBefore(chip, m.el.nextSibling);
+        chips.add(chip);
+      }
+      const v = verdict(ad, w);
+      const html =
+        '<span class="um-i-tag">TRUE ' + w.toUpperCase() + "</span>" +
+        '<span class="um-i-val">' + fmt$(ad.spend[w]) + "</span>" +
+        '<span class="um-i-val">' + (ad.kpi[w] === null ? "-" : ad.kpi[w]) + " " + esc(kpiLabel(ad)) + "</span>" +
+        '<span class="um-i-val um-i-cpa">' + fmt$(ad.cpa[w]) + " CPA</span>" +
+        '<span class="um-pill um-' + v.cls + '">' + v.word + "</span>";
+      if (chip._umHtml !== html) { chip.innerHTML = html; chip._umHtml = html; }
+    }
+  }
+
+  // ---------- self-diagnosis when nothing matches ----------
+  let lastDiag = { t: 0, msg: "" };
+  function diagnoseMsg() {
+    if (!state.ads) return "Loading sheet data...";
+    if (Date.now() - lastDiag.t < 5000) return lastDiag.msg;
+    let hit = null;
+    try {
+      const text = norm((document.body.innerText || "").slice(0, 500000));
+      for (const n of state.ads.keys()) {
+        if (text.includes(norm(n))) { hit = n; break; }
+      }
+    } catch (e) { /* ignore */ }
+    const shadows = allRoots().length - 1;
+    const msg = "Diagnostic v" + VERSION + ": " + (IS_TOP ? "top frame" : "inner frame") + ", " +
+      shadows + " shadow roots scanned, " + state.ads.size + " ads loaded. " +
+      (hit
+        ? 'The name "' + esc(hit) + '" IS in this frame\'s text but did not match an element. Screenshot this message.'
+        : "None of the sheet ad names appear in this frame's text. If ads are on screen, they render somewhere this build cannot read. Screenshot this message.");
+    lastDiag = { t: Date.now(), msg };
+    return msg;
+  }
+
   // ---------- name matching against the page ----------
+  let rootsCache = { t: 0, roots: null };
+  function allRoots() {
+    if (!rootsCache.roots || Date.now() - rootsCache.t > 5000) {
+      const roots = [document.body];
+      // Meta may render pieces inside shadow DOM; walk into open roots.
+      for (let i = 0; i < roots.length; i++) {
+        for (const e of roots[i].querySelectorAll("*")) {
+          if (e.shadowRoot) roots.push(e.shadowRoot);
+        }
+      }
+      rootsCache = { t: Date.now(), roots };
+    }
+    return rootsCache.roots;
+  }
+
   function findMatches() {
     if (!state.ads || !state.ads.size) return [];
     const idx = normIndex();
@@ -180,40 +253,42 @@
       const prev = found.get(name);
       if (!prev || rect.left < prev.getBoundingClientRect().left) found.set(name, el);
     };
-    // Pass 1: single text nodes.
-    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
-      acceptNode: (n) => {
-        const v = n.nodeValue;
-        return v && v.length < 160 && n.parentElement && !n.parentElement.closest("#um-truth-panel")
-          ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
-      }
-    });
-    let node;
+    const roots = allRoots();
     const visited = new WeakSet();
-    while ((node = walker.nextNode())) {
-      const name = idx.get(norm(node.nodeValue));
-      if (name) { consider(name, node.parentElement); continue; }
-      // A name split across nested spans adds up at a close ancestor.
-      let el = node.parentElement;
-      for (let d = 0; d < 3 && el && el !== document.body; d++, el = el.parentElement) {
-        if (visited.has(el)) break;
-        visited.add(el);
-        const t = el.textContent;
-        if (!t || t.length > 160) break;
-        const nm = idx.get(norm(t));
-        if (nm) { consider(nm, el); break; }
+    for (const root of roots) {
+      // Pass 1: single text nodes, climbing to close ancestors for split names.
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode: (n) => {
+          const v = n.nodeValue;
+          return v && v.length < 160 && n.parentElement && !n.parentElement.closest("#um-truth-panel") && !n.parentElement.closest(".um-inline")
+            ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+        }
+      });
+      let node;
+      while ((node = walker.nextNode())) {
+        const name = idx.get(norm(node.nodeValue));
+        if (name) { consider(name, node.parentElement); continue; }
+        let el = node.parentElement;
+        for (let d = 0; d < 3 && el && el !== root; d++, el = el.parentElement) {
+          if (visited.has(el)) break;
+          visited.add(el);
+          const t = el.textContent;
+          if (!t || t.length > 160) break;
+          const nm = idx.get(norm(t));
+          if (nm) { consider(nm, el); break; }
+        }
       }
     }
-    // Pass 2 (only if pass 1 found nothing): a name split across nested
-    // elements still adds up at some ancestor's textContent.
+    // Pass 2 (only if pass 1 found nothing anywhere).
     if (!found.size) {
-      const els = document.querySelectorAll("span,div,a,td");
-      for (const el of els) {
-        if (el.closest("#um-truth-panel")) continue;
-        const t = el.textContent;
-        if (!t || t.length > 160) continue;
-        const name = idx.get(norm(t));
-        if (name) consider(name, el);
+      for (const root of roots) {
+        for (const el of root.querySelectorAll("span,div,a,td")) {
+          if (el.closest("#um-truth-panel") || el.closest(".um-inline")) continue;
+          const t = el.textContent;
+          if (!t || t.length > 160) continue;
+          const name = idx.get(norm(t));
+          if (name) consider(name, el);
+        }
       }
     }
     // One panel row per distinct vertical position, sorted top to bottom.
@@ -227,7 +302,7 @@
   const fmt$ = (v) => v === null ? "-" : "$" + (v >= 1000 ? Math.round(v).toLocaleString("en-US") : v.toFixed(2));
   const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
 
-  let panel, popover;
+  let panel, popover, lastSig = null;
   function buildPanel() {
     panel = document.createElement("div");
     panel.id = "um-truth-panel";
@@ -240,7 +315,7 @@
     const age = state.fetchedAt ? Math.round((Date.now() - state.fetchedAt) / 60000) : null;
     const stale = age !== null && age > 12 * 60;
     return '<div class="um-head">' +
-      '<span class="um-logo">UM TRUTH</span>' +
+      '<span class="um-logo">UM TRUTH <em>v' + VERSION + '</em></span>' +
       WINDOWS.map((w) => '<button class="um-chip' + (w === state.win ? " on" : "") + '" data-win="' + w + '">' + w.toUpperCase() + "</button>").join("") +
       '<button class="um-btn" data-act="cols" title="Edit columns">&#9707;</button>' +
       '<button class="um-btn" data-act="targets" title="Targets">&#9881;</button>' +
@@ -263,8 +338,12 @@
     return cells.join("");
   }
 
-  function render() {
+  function render(force) {
     if (!panel) buildPanel();
+    const sig = JSON.stringify([state.win, state.collapsed, popover, state.error, state.fetchedAt,
+      Math.floor(Date.now() / 60000), state.matches.map((m) => m.name + ":" + Math.round(m.top / 4))]);
+    if (!force && sig === lastSig) return;
+    lastSig = sig;
     if (state.collapsed) {
       panel.innerHTML = '<div class="um-head"><span class="um-logo">UM</span><button class="um-btn" data-act="collapse">&#9664;</button></div>';
       panel.classList.add("collapsed");
@@ -278,8 +357,7 @@
       body = '<div class="um-msg">Cannot read the sheets: ' + esc(state.error) +
         ". Open each report sheet once in this Chrome profile, then hit refresh.</div>";
     } else if (!ms.length) {
-      body = '<div class="um-msg">No known ad names on screen. Open the ADS tab of a campaign (' +
-        (state.ads ? state.ads.size : 0) + " ads loaded from the sheets).</div>";
+      body = '<div class="um-msg">No known ad names matched on screen. Ad names only exist at the ADS level of a campaign.<br><br>' + diagnoseMsg() + "</div>";
     } else {
       const headCells = ALL_COLS.filter((c) => state.cols[c.key]).map((c) => "<th>" + c.label + "</th>").join("");
       const tot = { spend: 0, kpi: 0 };
@@ -355,14 +433,14 @@
         popover = targetsPopover();
       }
     }
-    render();
+    render(true);
   }
   async function onChange(e) {
     const t = e.target;
-    if (t.dataset.col) { state.cols[t.dataset.col] = t.checked; await store.set({ umCols: state.cols }); popover = colsPopover(); render(); }
+    if (t.dataset.col) { state.cols[t.dataset.col] = t.checked; await store.set({ umCols: state.cols }); popover = colsPopover(); render(true); }
     if (t.dataset.target) {
       const n = parseFloat(t.value);
-      if (isFinite(n) && n > 0) { state.targets[t.dataset.target] = n; await store.set({ umTargets: state.targets }); popover = targetsPopover(); render(); }
+      if (isFinite(n) && n > 0) { state.targets[t.dataset.target] = n; await store.set({ umTargets: state.targets }); popover = targetsPopover(); render(true); }
     }
   }
 
@@ -383,12 +461,14 @@
           try { window.top.postMessage({ umChildActive: true }, "*"); } catch (e) {}
         }
       }
+      injectChips();
       render();
     });
   }
 
   function applyOn() {
     if (panel) panel.style.display = (state.on && !(IS_TOP && state.childActive)) ? "" : "none";
+    if (!state.on) clearChips();
   }
 
   (async function init() {
@@ -421,7 +501,16 @@
     sync();
     window.addEventListener("scroll", sync, true);
     window.addEventListener("resize", sync);
-    new MutationObserver(() => sync()).observe(document.body, { childList: true, subtree: true });
+    new MutationObserver((muts) => {
+      for (const m of muts) {
+        const t = m.target;
+        const el = t.nodeType === 1 ? t : t.parentElement;
+        if (!el) continue;
+        if (el.closest && (el.closest("#um-truth-panel") || el.closest(".um-inline"))) continue;
+        sync();
+        return;
+      }
+    }).observe(document.body, { childList: true, subtree: true });
     // Auto-refresh: re-pull the sheets when the cache ages out, no clicks needed.
     setInterval(sync, 2000);
     setInterval(() => { if (state.on) loadData(false).then(sync); }, 5 * 60 * 1000);
