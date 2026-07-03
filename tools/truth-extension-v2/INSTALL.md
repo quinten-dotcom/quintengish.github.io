@@ -10,6 +10,27 @@ A Chrome extension that shows TRUE per-ad data (from the report sheets' Creative
 4. Make sure this Chrome profile is signed into the Google account that can view the report sheets (quinten@quintengish.com). Open one of the sheets once if you never have in this profile.
 5. Open Ads Manager and go to the ADS tab of any campaign. The dark truth panel appears on the right.
 
+## Don't see the panel?
+
+1. `chrome://extensions` must show a "UM Truth v2" card with no red Errors button. If you don't see the card, Load unpacked didn't happen; if you see Errors, click it and send the message.
+2. RELOAD the Ads Manager tab. Extensions never inject into tabs that were already open when you installed.
+3. The URL must be adsmanager.facebook.com or business.facebook.com.
+4. Click the puzzle-piece icon in Chrome's toolbar, pin "UM Truth v2", then click its icon. The icon is the on/off switch: one click hides the panel, another brings it back.
+
+## Turn it on and off
+
+Click the UM Truth icon in the Chrome toolbar (pin it via the puzzle piece first). That toggles the whole panel per tab and remembers your choice. The small arrow button inside the panel collapses it to a corner chip without turning it off.
+
+## Clients: how it works and how to add one
+
+The panel doesn't care which ad account you're in. It reads every configured client sheet, then lights up whatever ad names are on the screen. Open a Channel Junkies campaign, CJ ads light up. Open Elysium, Elysium ads light up. Nothing to switch.
+
+To add a client: gear button, "Add a client", paste the client's report sheet URL, type the Creatives tab name exactly (e.g. "Creatives - Webinar"), set the target CPA, Add. The X next to a client removes it. All saved in Chrome, no code edits. The only requirements: the client sheet has a Creatives tab in the standard layout (the 4am loop's format), and your Google account can view it.
+
+## Updates are automatic
+
+Ad data re-pulls from the sheets every 30 minutes on its own (and every time you hit the refresh arrow). The sheets themselves update when the 4am loop runs, so the panel always shows truth through the last complete day. The "synced Xm ago" stamp tells you the age; it turns yellow STALE if the pull is over 12 hours old.
+
 ## What it does
 
 - Matches the ad names on screen against every ad in the four Creatives tabs (Grader, Challenge, Webinar, Jet Academy) and shows each one's TRUE Spend, Result, CPA, and a verdict, aligned next to the Meta rows.

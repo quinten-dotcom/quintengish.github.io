@@ -4,6 +4,7 @@
   "version": "2.0.0",
   "description": "True per-ad data from the United Motion report sheets, rendered inside Meta Ads Manager.",
   "permissions": ["storage"],
+  "action": { "default_title": "UM Truth: show/hide panel" },
   "host_permissions": [
     "https://adsmanager.facebook.com/*",
     "https://business.facebook.com/*",

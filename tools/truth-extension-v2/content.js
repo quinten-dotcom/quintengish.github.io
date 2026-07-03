@@ -7,7 +7,9 @@
   if (window.__umTruthLoaded) return;
   window.__umTruthLoaded = true;
 
-  const SHEETS = [
+  // Default client list. Add or remove clients from the gear menu in the
+  // panel (saved in chrome.storage), no code edits needed.
+  const DEFAULT_SHEETS = [
     { offer: "CJ Grader", id: "1wf_Ow5IFhSxOa1_EqXpeJuzT-RItA352xs9iE9gWh_s", tab: "Creatives - Grader", kpi: "Leads", target: 100 },
     { offer: "CJ Challenge", id: "1wf_Ow5IFhSxOa1_EqXpeJuzT-RItA352xs9iE9gWh_s", tab: "Creatives - Challenge", kpi: "Purchases", target: 200 },
     { offer: "TSA Webinar", id: "1PFwD4BjSxp2MjJBjJKdFkXJWzVjU_B273IUbED7Qss8", tab: "Creatives - Webinar", kpi: "Stay-to-end", target: 80 },
@@ -26,8 +28,10 @@
   const CACHE_TTL_MS = 30 * 60 * 1000;
 
   const state = {
+    on: true,
     win: "7d",
     cols: { spend: true, kpi: true, cpa: true, vs: false, cpa30: true, verdict: true },
+    sheets: DEFAULT_SHEETS.slice(),
     targets: {},
     collapsed: false,
     ads: null,          // Map name -> {offer, spend:{}, kpi:{}, cpa:{}}
@@ -115,7 +119,7 @@
     }
     const map = new Map();
     const errors = [];
-    for (const cfg of SHEETS) {
+    for (const cfg of state.sheets) {
       const r = await bgFetch(csvUrl(cfg));
       if (!r || !r.ok) { errors.push(cfg.offer + ": " + (r ? r.error : "no response")); continue; }
       try {
@@ -130,9 +134,9 @@
 
   // ---------- verdicts ----------
   function target(ad) {
-    const cfg = SHEETS.find((s) => s.offer === ad.offer);
+    const cfg = state.sheets.find((s) => s.offer === ad.offer);
     const t = state.targets[ad.offer];
-    return (isFinite(t) && t > 0) ? t : cfg.target;
+    return (isFinite(t) && t > 0) ? t : (cfg ? cfg.target : 100);
   }
   function verdict(ad, w) {
     const t = target(ad), spend = ad.spend[w] || 0, cpa = ad.cpa[w];
@@ -262,20 +266,50 @@
       '<button class="um-btn" data-act="closepop">Done</button></div>';
   }
   function targetsPopover() {
-    return '<div class="um-pop"><b>Target true CPA per offer</b>' + SHEETS.map((s) =>
-      '<label>' + s.offer + ' $<input type="number" step="any" min="0" data-target="' + s.offer + '" value="' + (state.targets[s.offer] || s.target) + '"></label>').join("") +
+    return '<div class="um-pop"><b>Clients and targets</b>' + state.sheets.map((s) =>
+      '<label title="' + esc(s.tab) + '">' + esc(s.offer) +
+      ' <button class="um-btn um-x" data-removeclient="' + esc(s.offer) + '" title="Remove">&times;</button>' +
+      ' $<input type="number" step="any" min="0" data-target="' + esc(s.offer) + '" value="' + (state.targets[s.offer] || s.target) + '"></label>').join("") +
+      '<b>Add a client</b>' +
+      '<input type="text" id="um-add-name" placeholder="Client / offer name">' +
+      '<input type="text" id="um-add-url" placeholder="Sheet URL or ID">' +
+      '<input type="text" id="um-add-tab" placeholder="Creatives tab name">' +
+      '<label>Target true CPA $<input type="number" id="um-add-target" step="any" min="0" value="100"></label>' +
+      '<button class="um-btn" data-act="addclient">Add client</button>' +
       '<button class="um-btn" data-act="closepop">Done</button></div>';
+  }
+  async function saveSheets() {
+    await store.set({ umSheets: state.sheets });
+    await loadData(true);
+    state.matches = findMatches();
   }
 
   async function onClick(e) {
-    const t = e.target.closest("[data-win],[data-act]");
+    const t = e.target.closest("[data-win],[data-act],[data-removeclient]");
     if (!t) return;
     if (t.dataset.win) { state.win = t.dataset.win; await store.set({ umWin: state.win }); }
+    else if (t.dataset.removeclient) {
+      state.sheets = state.sheets.filter((s) => s.offer !== t.dataset.removeclient);
+      await saveSheets();
+      popover = targetsPopover();
+    }
     else if (t.dataset.act === "collapse") { state.collapsed = !state.collapsed; }
     else if (t.dataset.act === "cols") { popover = colsPopover(); }
     else if (t.dataset.act === "targets") { popover = targetsPopover(); }
     else if (t.dataset.act === "closepop") { popover = null; }
     else if (t.dataset.act === "refresh") { await loadData(true); state.matches = findMatches(); }
+    else if (t.dataset.act === "addclient") {
+      const val = (id) => (panel.querySelector("#" + id) || {}).value || "";
+      const name = val("um-add-name").trim();
+      const idMatch = val("um-add-url").match(/[-\w]{25,}/);
+      const tab = val("um-add-tab").trim();
+      const tgt = parseFloat(val("um-add-target"));
+      if (name && idMatch && tab) {
+        state.sheets.push({ offer: name, id: idMatch[0], tab, kpi: "Result", target: isFinite(tgt) && tgt > 0 ? tgt : 100 });
+        await saveSheets();
+        popover = targetsPopover();
+      }
+    }
     render();
   }
   async function onChange(e) {
@@ -293,25 +327,45 @@
     if (raf) return;
     raf = requestAnimationFrame(() => {
       raf = null;
-      if (!state.collapsed) {
+      if (state.on && !state.collapsed) {
         state.matches = findMatches();
         render();
       }
     });
   }
 
+  function applyOn() {
+    if (panel) panel.style.display = state.on ? "" : "none";
+  }
+
   (async function init() {
-    const saved = await store.get(["umWin", "umCols", "umTargets"]);
+    const saved = await store.get(["umWin", "umCols", "umTargets", "umSheets", "umOn"]);
     if (saved.umWin && WINDOWS.includes(saved.umWin)) state.win = saved.umWin;
     if (saved.umCols) state.cols = Object.assign(state.cols, saved.umCols);
     if (saved.umTargets) state.targets = saved.umTargets;
+    if (Array.isArray(saved.umSheets) && saved.umSheets.length) state.sheets = saved.umSheets;
+    if (saved.umOn === false) state.on = false;
     buildPanel();
     render();
+    applyOn();
+    // Toolbar icon toggles the whole panel on and off.
+    try {
+      chrome.runtime.onMessage.addListener((msg) => {
+        if (msg && msg.type === "umToggle") {
+          state.on = !state.on;
+          store.set({ umOn: state.on });
+          applyOn();
+          if (state.on) sync();
+        }
+      });
+    } catch (e) { /* harness shim without onMessage */ }
     await loadData(false);
     sync();
     window.addEventListener("scroll", sync, true);
     window.addEventListener("resize", sync);
     new MutationObserver(() => sync()).observe(document.body, { childList: true, subtree: true });
+    // Auto-refresh: re-pull the sheets when the cache ages out, no clicks needed.
     setInterval(sync, 2000);
+    setInterval(() => { if (state.on) loadData(false).then(sync); }, 5 * 60 * 1000);
   })();
 })();

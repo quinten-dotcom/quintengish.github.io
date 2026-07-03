@@ -80,3 +80,8 @@
   width: 80px; font: inherit; color: #e7e9ee; background: #1d222c;
   border: 1px solid #2c3340; border-radius: 6px; padding: 3px 6px; margin-left: auto;
 }
+#um-truth-panel .um-pop input[type="text"] {
+  font: inherit; color: #e7e9ee; background: #1d222c;
+  border: 1px solid #2c3340; border-radius: 6px; padding: 4px 7px;
+}
+#um-truth-panel .um-x { padding: 0 6px; font-size: 13px; line-height: 1.2; color: #ff7a7a; }

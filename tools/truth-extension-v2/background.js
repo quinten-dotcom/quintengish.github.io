@@ -3,6 +3,11 @@
 // Google session cookies. The user must have view access to the sheets in
 // this Chrome profile.
 
+// Toolbar icon = master on/off switch for the panel on the current tab.
+chrome.action.onClicked.addListener((tab) => {
+  if (tab.id) chrome.tabs.sendMessage(tab.id, { type: "umToggle" }).catch(() => {});
+});
+
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg && msg.type === "fetchCsv") {
     fetch(msg.url, { credentials: "include" })
