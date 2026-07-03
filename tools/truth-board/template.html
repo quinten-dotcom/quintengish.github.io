@@ -1,0 +1,462 @@
+<title>UM Truth Board</title>
+<style>
+  :root {
+    --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e;
+    --muted: #898781; --grid: #e1e0d9; --baseline: #c3c2b7; --ring: rgba(11,11,11,0.10);
+    --accent: #2a78d6; --accent-soft: rgba(42,120,214,0.10);
+    --good: #0ca30c; --good-text: #006300; --warning: #fab219; --serious: #ec835a; --critical: #d03b3b;
+    --good-bg: rgba(12,163,12,0.12); --warning-bg: rgba(250,178,25,0.16);
+    --serious-bg: rgba(236,131,90,0.16); --critical-bg: rgba(208,59,59,0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --page: #0d0d0d; --surface: #1a1a19; --ink: #ffffff; --ink-2: #c3c2b7;
+      --muted: #898781; --grid: #2c2c2a; --baseline: #383835; --ring: rgba(255,255,255,0.10);
+      --accent: #3987e5; --accent-soft: rgba(57,135,229,0.16); --good-text: #0ca30c;
+    }
+  }
+  :root[data-theme="light"] {
+    --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e;
+    --muted: #898781; --grid: #e1e0d9; --baseline: #c3c2b7; --ring: rgba(11,11,11,0.10);
+    --accent: #2a78d6; --accent-soft: rgba(42,120,214,0.10); --good-text: #006300;
+  }
+  :root[data-theme="dark"] {
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #ffffff; --ink-2: #c3c2b7;
+    --muted: #898781; --grid: #2c2c2a; --baseline: #383835; --ring: rgba(255,255,255,0.10);
+    --accent: #3987e5; --accent-soft: rgba(57,135,229,0.16); --good-text: #0ca30c;
+  }
+  html { background: var(--page); }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--ink); background: var(--page); margin: 0;
+    padding: 16px 12px 48px; line-height: 1.45; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+  .brand { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2); }
+  h1 { font-size: 22px; font-weight: 700; margin: 2px 0 4px; letter-spacing: -0.01em; }
+  .stamp { font-size: 13px; color: var(--ink-2); }
+  .stamp b { color: var(--ink); font-weight: 600; }
+  .banner { display: none; margin-top: 10px; padding: 10px 12px; border-radius: 8px; background: var(--warning-bg); border: 1px solid var(--ring); font-size: 13px; }
+  .banner.show { display: block; }
+
+  .alerts { background: var(--surface); border: 1px solid var(--ring); border-radius: 12px; padding: 12px 14px; }
+  .alerts h2 { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); margin: 0 0 8px; }
+  .alert { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; padding: 5px 0; color: var(--ink-2); }
+  .alert b { color: var(--ink); font-weight: 650; }
+  .alert .adot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex: none; }
+
+  .winbar { position: sticky; top: 0; z-index: 5; background: var(--page); padding: 8px 0; display: flex; gap: 6px; }
+  .chip {
+    font: inherit; font-size: 13px; font-weight: 650; color: var(--ink-2);
+    background: var(--surface); border: 1px solid var(--ring); border-radius: 999px;
+    padding: 6px 13px; cursor: pointer; flex: 1; text-align: center;
+  }
+  .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .card { background: var(--surface); border: 1px solid var(--ring); border-radius: 12px; padding: 16px 16px 14px; }
+  .card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .offer { font-size: 16px; font-weight: 700; }
+  .offer small { display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; white-space: nowrap; }
+  .pill .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+  .v-good { background: var(--good-bg); } .v-good .dot { background: var(--good); }
+  .v-warning { background: var(--warning-bg); } .v-warning .dot { background: var(--warning); }
+  .v-serious { background: var(--serious-bg); } .v-serious .dot { background: var(--serious); }
+  .v-critical { background: var(--critical-bg); } .v-critical .dot { background: var(--critical); }
+
+  .flag { margin-top: 8px; font-size: 12px; padding: 7px 10px; border-radius: 8px; background: var(--critical-bg); }
+  .lag { margin-top: 8px; font-size: 12px; color: var(--muted); }
+
+  .heroswitch { display: flex; gap: 6px; margin-top: 12px; overflow-x: auto; padding-bottom: 2px; }
+  .heroswitch .chip { flex: none; font-size: 12px; padding: 5px 11px; }
+  .hero { margin: 8px 0 4px; }
+  .hero .label { font-size: 12px; color: var(--ink-2); }
+  .hero .value { font-size: 38px; font-weight: 650; line-height: 1.1; letter-spacing: -0.02em; }
+  .hero .delta { font-size: 13px; font-weight: 600; margin-left: 6px; }
+  .delta.bad { color: var(--critical); } .delta.okay { color: var(--good-text); } .delta.flat { color: var(--muted); }
+  .verdictline { font-size: 12px; color: var(--ink-2); margin-top: 3px; }
+
+  .spark { margin: 10px 0 2px; }
+  .spark .sl { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .spark svg { display: block; width: 100%; height: 56px; }
+
+  .funnel { display: flex; gap: 8px; overflow-x: auto; margin-top: 12px; padding-bottom: 4px; }
+  .stage { flex: none; min-width: 96px; background: var(--page); border: 1px solid var(--ring); border-radius: 8px; padding: 7px 10px; }
+  .stage .fl { font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+  .stage .fv { font-size: 15px; font-weight: 650; margin-top: 1px; display: flex; align-items: center; gap: 6px; }
+  .stage .fdot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+  .f-good { background: var(--good); } .f-warning { background: var(--warning); }
+  .f-serious { background: var(--serious); } .f-critical { background: var(--critical); }
+
+  .pace { margin-top: 12px; background: var(--page); border: 1px solid var(--ring); border-radius: 8px; padding: 10px 12px; }
+  .pace .pl { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .pace .row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 6px; font-size: 13px; }
+  .meter { height: 8px; border-radius: 4px; background: var(--accent-soft); position: relative; margin-top: 8px; overflow: hidden; }
+  .meter .fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--accent); border-radius: 4px; }
+  .meter .mark { position: absolute; top: -2px; bottom: -2px; width: 2px; background: var(--ink-2); }
+  .pace .note { font-size: 12px; color: var(--ink-2); margin-top: 6px; }
+  input.num, input.dt {
+    font: inherit; font-size: 14px; font-weight: 600; color: var(--ink); background: var(--surface);
+    border: 1px solid var(--baseline); border-radius: 8px; padding: 5px 8px; width: 100px;
+  }
+  input.dt { width: 140px; }
+  input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+  details { margin-top: 10px; }
+  summary { font-size: 13px; font-weight: 600; color: var(--accent); cursor: pointer; padding: 4px 0; }
+  summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+  .trow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 6px 0; border-bottom: 1px solid var(--grid); font-size: 13px; }
+  .trow label { font-weight: 600; min-width: 150px; }
+  .trow .bench { font-size: 11px; color: var(--muted); flex-basis: 100%; }
+  .tbl-wrap { overflow-x: auto; margin-top: 6px; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; min-width: 440px; }
+  th { text-align: right; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding: 6px 8px; border-bottom: 1px solid var(--grid); }
+  th:first-child, td:first-child { text-align: left; }
+  td { text-align: right; padding: 6px 8px; border-bottom: 1px solid var(--grid); font-variant-numeric: tabular-nums; color: var(--ink-2); }
+  td:first-child { font-weight: 600; color: var(--ink); }
+
+  .metabox { margin-top: 12px; border: 1px dashed var(--baseline); border-radius: 8px; padding: 10px 12px; font-size: 13px; color: var(--ink-2); }
+  .metatag { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.08em; padding: 1px 5px; border-radius: 4px; background: var(--warning-bg); color: var(--ink); vertical-align: 2px; }
+
+  .log { margin-top: 12px; }
+  .log .lh { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .log .btns { display: flex; gap: 6px; flex-wrap: wrap; }
+  .log .btns button {
+    font: inherit; font-size: 12px; font-weight: 650; color: var(--ink);
+    background: var(--page); border: 1px solid var(--ring); border-radius: 8px; padding: 6px 12px; cursor: pointer;
+  }
+  .log .btns button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .log input.note { width: 100%; box-sizing: border-box; margin-top: 8px; font: inherit; font-size: 13px; color: var(--ink); background: var(--page); border: 1px solid var(--baseline); border-radius: 8px; padding: 7px 10px; }
+  .log .entries { margin-top: 8px; font-size: 12px; color: var(--ink-2); }
+  .log .entries div { padding: 3px 0; border-bottom: 1px solid var(--grid); }
+
+  .read { margin-top: 12px; padding: 10px 12px; border-radius: 8px; background: var(--accent-soft); font-size: 13px; }
+  .links { font-size: 13px; margin-top: 10px; }
+  a { color: var(--accent); font-weight: 600; text-decoration: none; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  .toolbar { display: flex; gap: 8px; }
+  .toolbar button { font: inherit; font-size: 13px; font-weight: 650; color: var(--ink); background: var(--surface); border: 1px solid var(--ring); border-radius: 8px; padding: 8px 14px; cursor: pointer; }
+  footer { font-size: 12px; color: var(--muted); padding: 4px 6px 0; }
+  .legend-line { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: var(--ink-2); margin: 8px 0; }
+  .legend-line span { display: inline-flex; align-items: center; gap: 5px; }
+  .legend-line i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="brand">United Motion</div>
+    <h1>Truth Board</h1>
+    <div class="stamp" id="stamp"></div>
+    <div class="banner" id="staleBanner">This snapshot is old. Message Claude "refresh" for a fresh board before making decisions.</div>
+  </header>
+
+  <section class="alerts" id="alerts"></section>
+
+  <div class="winbar" id="winbar" role="group" aria-label="Time window"></div>
+
+  <div id="cards" style="display:flex;flex-direction:column;gap:14px"></div>
+
+  <div class="toolbar">
+    <button type="button" id="copyLog">Copy decision log</button>
+  </div>
+
+  <footer>
+    <div class="legend-line">
+      <span><i style="background:var(--good)"></i> On target: scale</span>
+      <span><i style="background:var(--warning)"></i> Up to 1.5x off: hold</span>
+      <span><i style="background:var(--serious)"></i> Up to 2x off: cut</span>
+      <span><i style="background:var(--critical)"></i> Past 2x: stop and fix</span>
+    </div>
+    <p>Every number is from the true sources (GHL, EverWebinar, Elysium CRM, Stripe/Whop) unless it carries a <span class="metatag">META</span> tag. Targets and logs save on this device. Verdict bands match tools/rule-engine in the repo.</p>
+  </footer>
+</div>
+
+<script>
+var DATA = __DATA_JSON__;
+
+(function () {
+  var WINS = DATA.windows;
+  var WDAYS = DATA.window_days;
+  var LS = function (k, v) {
+    try {
+      if (v === undefined) return localStorage.getItem(k);
+      localStorage.setItem(k, v);
+    } catch (e) { return null; }
+  };
+  var state = {
+    win: LS('um2-win') || '7d',
+    logDraft: {}
+  };
+  if (WINS.indexOf(state.win) < 0) state.win = '7d';
+
+  function target(o, key) {
+    var m = o.metrics[key];
+    var raw = LS('um2-t-' + o.id + '-' + key);
+    var n = raw === null ? NaN : parseFloat(raw);
+    return (isFinite(n) && n > 0) ? n : (m.target || null);
+  }
+  function heroKey(o) {
+    var k = LS('um2-hero-' + o.id);
+    return (k && o.hero_options.indexOf(k) >= 0) ? k : o.primary;
+  }
+  function wi() { return WINS.indexOf(state.win); }
+
+  function fmt(m, v) {
+    if (v === null || v === undefined || !isFinite(v)) return '-';
+    if (m.unit === '$') {
+      if (Math.abs(v) >= 10000) return '$' + (v / 1000).toFixed(1) + 'k';
+      if (Math.abs(v) >= 1000) return '$' + Math.round(v).toLocaleString('en-US');
+      return '$' + v.toFixed(2);
+    }
+    if (m.unit === '%') return v.toFixed(1) + '%';
+    if (m.unit === 'x') return v.toFixed(2) + 'x';
+    return v.toLocaleString('en-US');
+  }
+
+  function band(m, val, tgt) {
+    if (tgt === null || val === null || !isFinite(val) || val === 0 && m.unit !== '') {
+      if (val === 0 && (m.unit === '$' || m.unit === 'x')) return null;
+    }
+    if (tgt === null) return null;
+    var lower = m.lower !== false;
+    var score = lower ? val / tgt : tgt / val;
+    if (!isFinite(score)) return null;
+    if (score <= 1) return 'good';
+    if (score <= 1.5) return 'warning';
+    if (score <= 2) return 'serious';
+    return 'critical';
+  }
+  var WORDS = { good: 'SCALE', warning: 'HOLD', serious: 'CUT', critical: 'STOP + FIX' };
+
+  function verdict(o) {
+    var key = o.primary, m = o.metrics[key];
+    var val = m.vals[wi()], tgt = target(o, key);
+    if (tgt === null) return { cls: 'v-warning', word: 'NO TARGET', line: 'Set a target for ' + m.label + ' below.' };
+    var b = band(m, val, tgt);
+    if (b === null) return { cls: 'v-warning', word: 'NO DATA', line: 'No ' + m.label + ' data in this window.' };
+    var line = m.label + ' ' + fmt(m, val) + ' vs target ' + fmt(m, tgt) + ' over ' + state.win.toUpperCase() + '.';
+    if (WDAYS[state.win] < o.maturity_days && (key.indexOf('Sale') >= 0 || key === 'roas' || key === 'costCall')) {
+      line += ' Lag guard: ' + o.lag_note;
+    }
+    return { cls: 'v-' + b, word: WORDS[b], line: line + ' Rule: ' + (b === 'good' ? 'at or under target' : b === 'warning' ? 'inside 1.5x of target' : b === 'serious' ? 'past 1.5x target' : 'past 2x target') + '.' };
+  }
+
+  function sparkline(o) {
+    var days = Math.min(WDAYS[state.win], DATA.daily.dates.length);
+    var series = DATA.daily[o.id][o.spark_metric];
+    var data = series.slice(series.length - days);
+    var dates = DATA.daily.dates.slice(series.length - days);
+    var W = 320, H = 56, PAD = 2, LABEL_W = 40;
+    var n = data.length;
+    var max = Math.max.apply(null, data) || 1;
+    var innerW = W - PAD * 2 - LABEL_W;
+    var gap = n > 20 ? 1 : 2;
+    var bw = Math.max(2, Math.floor((innerW - gap * (n - 1)) / n));
+    var base = H - 10;
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + o.spark_label + '">';
+    s += '<line x1="' + PAD + '" y1="' + base + '" x2="' + (W - PAD) + '" y2="' + base + '" stroke="var(--baseline)" stroke-width="1"/>';
+    for (var i = 0; i < n; i++) {
+      var h = Math.round((data[i] / max) * (base - 12));
+      var x = PAD + i * (bw + gap);
+      var fill = i === n - 1 ? 'var(--accent)' : 'var(--accent-soft)';
+      if (h > 0) s += '<rect x="' + x + '" y="' + (base - h) + '" width="' + bw + '" height="' + h + '" rx="1.5" fill="' + fill + '"><title>' + dates[i] + ': ' + data[i].toLocaleString('en-US') + '</title></rect>';
+      else s += '<rect x="' + x + '" y="' + (base - 1) + '" width="' + bw + '" height="1" fill="var(--grid)"><title>' + dates[i] + ': 0</title></rect>';
+    }
+    var last = data[n - 1];
+    var lx = PAD + (n - 1) * (bw + gap) + bw + 5;
+    var ly = Math.max(10, base - Math.round((last / max) * (base - 12)) + 4);
+    s += '<text x="' + lx + '" y="' + ly + '" font-size="11" font-weight="600" fill="var(--ink)">' + last.toLocaleString('en-US') + '</text></svg>';
+    return s;
+  }
+
+  function pace(o) {
+    var goalRaw = LS('um2-goal-' + o.id);
+    var goal = goalRaw === null ? NaN : parseFloat(goalRaw);
+    var mtd = o.metrics.spend.vals[WINS.indexOf('mtd')];
+    var frac = DATA.meta.month_day_of / DATA.meta.month_days;
+    var html = '<div class="pace"><div class="pl">Budget pacing, July</div><div class="row">' +
+      '<span>MTD spend <b>' + fmt(o.metrics.spend, mtd) + '</b></span>' +
+      '<label for="goal-' + o.id + '" style="font-size:12px;color:var(--ink-2)">Month goal $</label>' +
+      '<input class="num" id="goal-' + o.id + '" data-goal="' + o.id + '" type="number" inputmode="numeric" min="0" step="any" value="' + (isFinite(goal) && goal > 0 ? goal : '') + '" placeholder="set">' +
+      '</div>';
+    if (isFinite(goal) && goal > 0) {
+      var fillPct = Math.min(100, mtd / goal * 100);
+      var markPct = Math.min(100, frac * 100);
+      var pacePct = Math.round((mtd / goal) / frac * 100);
+      html += '<div class="meter"><div class="fill" style="width:' + fillPct.toFixed(1) + '%"></div><div class="mark" style="left:' + markPct.toFixed(1) + '%"></div></div>' +
+        '<div class="note">Pacing at ' + pacePct + '% of plan. The line marks where today should be.</div>';
+    }
+    var raise = LS('um2-raise-' + o.id) || '';
+    var advice = '';
+    if (raise) {
+      var next = new Date(raise); next.setDate(next.getDate() + 3);
+      var due = (new Date(DATA.meta.data_through)) >= next;
+      advice = due ? 'Next 20% raise is allowed now (3+ days since last).' : 'Next 20% raise allowed ' + next.toISOString().slice(0, 10) + '.';
+    } else {
+      advice = 'Log your last budget raise to track the 20% every 3-4 days cadence.';
+    }
+    html += '<div class="row"><label for="raise-' + o.id + '" style="font-size:12px;color:var(--ink-2)">Last budget raise</label>' +
+      '<input class="dt" id="raise-' + o.id + '" data-raise="' + o.id + '" type="date" value="' + raise + '"></div>' +
+      '<div class="note">' + advice + '</div></div>';
+    return html;
+  }
+
+  function adSection(o) {
+    var ads = DATA.ads[o.id] || [];
+    var head = '<div class="lh" style="margin-top:12px;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)">Ads <span class="metatag">META</span></div>';
+    if (!ads.length) {
+      var why = DATA.meta.meta_ads_status === 'ok' ? 'No ad rows in this pull.' :
+        'The Meta connector needs approval in claude.ai connector settings, so this build has no ad-level pull. These tables fill automatically on the next refresh.';
+      return head + '<div class="metabox">Per-ad spend, results, cost, and fatigue flags will sit here, tagged META because they are Meta-reported until the Mac loop ships true per-ad data. ' + why + '</div>';
+    }
+    var rows = ads.map(function (a) {
+      return '<tr><td>' + a.name + '</td><td>' + a.status + '</td><td>' + fmt({ unit: '$' }, a.spend) + '</td><td>' + (a.results === null ? '-' : a.results) + '</td><td>' + fmt({ unit: '$' }, a.cost_per_result) + '</td><td>' + (a.ctr === null ? '-' : a.ctr.toFixed(2) + '%') + '</td><td>' + (a.frequency === null ? '-' : a.frequency.toFixed(1)) + '</td></tr>';
+    }).join('');
+    return head + '<div class="tbl-wrap"><table><thead><tr><th>Ad</th><th>Status</th><th>Spend</th><th>Results</th><th>Cost</th><th>CTR</th><th>Freq</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+  }
+
+  function logSection(o) {
+    var log = getLog().filter(function (e) { return e.offer === o.id; });
+    var entries = log.slice(-4).reverse().map(function (e) {
+      return '<div>' + e.date + ' <b>' + e.action + '</b>' + (e.note ? ' ' + e.note : '') + '</div>';
+    }).join('');
+    return '<div class="log"><div class="lh">Decision log</div><div class="btns">' +
+      ['Scaled', 'Cut', 'Killed', 'Note'].map(function (a) {
+        return '<button type="button" data-logact="' + a + '" data-offer="' + o.id + '">' + a + '</button>';
+      }).join('') +
+      '</div><input class="note" data-lognote="' + o.id + '" placeholder="What and why, e.g. killed B3-hook2, 7d CPA 2.4x target" value="' + (state.logDraft[o.id] || '') + '">' +
+      '<div class="entries">' + entries + '</div></div>';
+  }
+
+  function card(o) {
+    var v = verdict(o);
+    var hk = heroKey(o), hm = o.metrics[hk];
+    var hv = hm.vals[wi()];
+    var baseWin = state.win === '30d' ? WINS.indexOf('14d') : WINS.indexOf('30d');
+    var bv = hm.vals[baseWin];
+    var deltaHtml = '';
+    if (isFinite(hv) && isFinite(bv) && bv !== 0) {
+      var ch = (hv - bv) / bv;
+      var improving = (hm.lower !== false) ? ch < 0 : ch > 0;
+      var cls = Math.abs(ch) < 0.02 ? 'flat' : improving ? 'okay' : 'bad';
+      deltaHtml = '<span class="delta ' + cls + '">' + (ch > 0 ? '+' : '') + Math.round(ch * 100) + '% vs ' + WINS[baseWin].toUpperCase() + '</span>';
+    }
+    var heroChips = o.hero_options.map(function (k) {
+      return '<button type="button" class="chip" data-hero="' + o.id + ':' + k + '" aria-pressed="' + (k === hk) + '">' + o.metrics[k].label + '</button>';
+    }).join('');
+    var stages = o.funnel.map(function (k) {
+      var m = o.metrics[k], val = m.vals[wi()], b = band(m, val, target(o, k));
+      return '<div class="stage"><div class="fl">' + m.label + '</div><div class="fv">' +
+        (b ? '<span class="fdot f-' + b + '"></span>' : '') + fmt(m, val) + '</div></div>';
+    }).join('');
+    var targetRows = Object.keys(o.metrics).filter(function (k) { return o.metrics[k].target; }).map(function (k) {
+      var m = o.metrics[k];
+      return '<div class="trow"><label for="t-' + o.id + '-' + k + '">' + m.label + '</label>' +
+        '<input class="num" id="t-' + o.id + '-' + k + '" data-target="' + o.id + ':' + k + '" type="number" inputmode="decimal" min="0" step="any" value="' + target(o, k) + '">' +
+        '<span style="font-size:12px;color:var(--muted)">' + (m.unit === 'x' ? 'x' : m.unit) + (m.lower === false ? ', higher is better' : '') + '</span>' +
+        (m.bench ? '<span class="bench">' + m.bench + '</span>' : '') + '</div>';
+    }).join('');
+    var tblHead = '<tr><th>Metric</th>' + WINS.map(function (w) { return '<th>' + w.toUpperCase() + '</th>'; }).join('') + '</tr>';
+    var tblRows = Object.keys(o.metrics).map(function (k) {
+      var m = o.metrics[k];
+      return '<tr><td>' + m.label + (m.metaTag ? ' <span class="metatag">META</span>' : '') + '</td>' +
+        m.vals.map(function (x) { return '<td>' + fmt(m, x) + '</td>'; }).join('') + '</tr>';
+    }).join('');
+
+    return '<section class="card">' +
+      '<div class="card-head"><div class="offer"><small>' + o.eyebrow + '</small>' + o.name + '</div>' +
+      '<span class="pill ' + v.cls + '"><span class="dot"></span>' + v.word + '</span></div>' +
+      (o.flag ? '<div class="flag">' + o.flag + '</div>' : '') +
+      '<div class="heroswitch">' + heroChips + '</div>' +
+      '<div class="hero"><div class="label">' + hm.label + ', ' + state.win.toUpperCase() + '</div>' +
+      '<div class="value">' + fmt(hm, hv) + deltaHtml + '</div>' +
+      '<div class="verdictline">' + v.line + '</div></div>' +
+      '<div class="spark"><div class="sl">' + o.spark_label + ', ' + state.win.toUpperCase() + '</div>' + sparkline(o) + '</div>' +
+      '<div class="funnel">' + stages + '</div>' +
+      pace(o) +
+      adSection(o) +
+      logSection(o) +
+      '<div class="read"><b>Jul 3 read:</b> ' + o.read + '</div>' +
+      '<details><summary>Targets and benchmarks</summary>' + targetRows + '<div class="lag">' + o.lag_note + '</div></details>' +
+      '<details><summary>All metrics, all windows</summary><div class="tbl-wrap"><table><thead>' + tblHead + '</thead><tbody>' + tblRows + '</tbody></table></div></details>' +
+      '<div class="links"><a href="' + o.sheet_url + '" target="_blank" rel="noopener">Open the ' + o.name + ' sheet</a></div>' +
+      '</section>';
+  }
+
+  function getLog() {
+    try { return JSON.parse(LS('um2-log') || '[]'); } catch (e) { return []; }
+  }
+  function setLog(l) { LS('um2-log', JSON.stringify(l)); }
+
+  var DOTC = { critical: 'var(--critical)', serious: 'var(--serious)', warning: 'var(--warning)', info: 'var(--accent)' };
+  function renderAlerts() {
+    var host = document.getElementById('alerts');
+    host.innerHTML = '<h2>Today’s alerts</h2>' + DATA.meta.alerts.map(function (a) {
+      return '<div class="alert"><span class="adot" style="background:' + (DOTC[a.level] || 'var(--muted)') + '"></span><span><b>' + a.offer + ':</b> ' + a.text + '</span></div>';
+    }).join('');
+  }
+
+  function renderAll() {
+    document.getElementById('stamp').innerHTML = '<b>Data through ' + DATA.meta.data_through + '.</b> True-source numbers from the report sheets. Windows and verdicts recompute below.';
+    document.getElementById('winbar').innerHTML = WINS.map(function (w) {
+      return '<button type="button" class="chip" data-win="' + w + '" aria-pressed="' + (w === state.win) + '">' + w.toUpperCase() + '</button>';
+    }).join('');
+    document.getElementById('cards').innerHTML = DATA.offers.map(card).join('');
+  }
+
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('[data-win],[data-hero],[data-logact],#copyLog');
+    if (!t) return;
+    if (t.dataset.win) { state.win = t.dataset.win; LS('um2-win', state.win); renderAll(); return; }
+    if (t.dataset.hero) {
+      var p = t.dataset.hero.split(':');
+      LS('um2-hero-' + p[0], p[1]); renderAll(); return;
+    }
+    if (t.dataset.logact) {
+      var oid = t.dataset.offer;
+      var input = document.querySelector('input[data-lognote="' + oid + '"]');
+      var note = input ? input.value.trim() : '';
+      var l = getLog();
+      l.push({ date: new Date().toISOString().slice(0, 10), offer: oid, action: t.dataset.logact, note: note });
+      setLog(l); state.logDraft[oid] = ''; renderAll(); return;
+    }
+    if (t.id === 'copyLog') {
+      var lines = getLog().map(function (x) { return x.date + ' | ' + x.offer + ' | ' + x.action + (x.note ? ' | ' + x.note : ''); }).join('\n') || 'No entries yet.';
+      var done = function () { t.textContent = 'Copied'; setTimeout(function () { t.textContent = 'Copy decision log'; }, 1500); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(lines).then(done, function () { window.prompt('Copy this:', lines); });
+      else window.prompt('Copy this:', lines);
+    }
+  });
+
+  document.addEventListener('change', function (e) {
+    var t = e.target;
+    if (t.dataset && t.dataset.target) {
+      var p = t.dataset.target.split(':');
+      var n = parseFloat(t.value);
+      if (isFinite(n) && n > 0) { LS('um2-t-' + p[0] + '-' + p[1], String(n)); renderAll(); }
+      return;
+    }
+    if (t.dataset && t.dataset.goal) {
+      var g = parseFloat(t.value);
+      if (isFinite(g) && g > 0) { LS('um2-goal-' + t.dataset.goal, String(g)); renderAll(); }
+      return;
+    }
+    if (t.dataset && t.dataset.raise) {
+      LS('um2-raise-' + t.dataset.raise, t.value); renderAll();
+    }
+  });
+  document.addEventListener('input', function (e) {
+    var t = e.target;
+    if (t.dataset && t.dataset.lognote !== undefined && t.dataset.lognote) state.logDraft[t.dataset.lognote] = t.value;
+  });
+
+  renderAlerts();
+  renderAll();
+
+  if (Date.now() - new Date(DATA.meta.pulled_at).getTime() > 36 * 3600 * 1000) {
+    document.getElementById('staleBanner').className = 'banner show';
+  }
+})();
+</script>

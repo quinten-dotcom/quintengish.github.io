@@ -1,0 +1,121 @@
+{
+  "meta": {
+    "data_through": "2026-07-02",
+    "pulled_at": "2026-07-03T21:30:00Z",
+    "month_days": 31,
+    "month_day_of": 3,
+    "meta_ads_status": "blocked_approval",
+    "alerts": [
+      { "level": "critical", "offer": "Channel Junkies", "text": "CPL is rising: $132 over 7 days vs $82 over 30. Lead flow fell to about 1 per day since Jun 28." },
+      { "level": "critical", "offer": "Channel Junkies", "text": "No true purchase data. The sales pipeline columns in the sheet are empty, so this offer can only be judged on leads." },
+      { "level": "serious", "offer": "True Success Academy", "text": "0 sales on $6,289 lifetime spend, 4 booked calls total. The leak is after the webinar, not in the ads." },
+      { "level": "warning", "offer": "Elysium Jet", "text": "Show rate slipped to 37% over 7 days vs 45% over 30. Booked calls are not showing up." },
+      { "level": "warning", "offer": "Accounts", "text": "Meta disabled 5 ad accounts for unusual activity, including the old ELYSIUM JET account." },
+      { "level": "info", "offer": "Board", "text": "Ad-level Meta tables are empty this build: the Meta connector needs approval in claude.ai settings. They fill on the next refresh." }
+    ]
+  },
+  "windows": ["3d", "7d", "14d", "30d", "mtd"],
+  "window_days": { "3d": 3, "7d": 7, "14d": 14, "30d": 30, "mtd": 2 },
+  "offers": [
+    {
+      "id": "cj",
+      "name": "Channel Junkies",
+      "eyebrow": "Lead gen, GHL truth",
+      "sheet_url": "https://docs.google.com/spreadsheets/d/1wf_Ow5IFhSxOa1_EqXpeJuzT-RItA352xs9iE9gWh_s",
+      "maturity_days": 3,
+      "lag_note": "Purchases lag leads by about 3 days. Short windows are judged on cost per lead.",
+      "flag": "True purchase feed missing. Sales pipeline columns are empty in the sheet.",
+      "primary": "cpl",
+      "hero_options": ["cpl", "spend", "leads"],
+      "spark_metric": "leads",
+      "spark_label": "Leads per day",
+      "metrics": {
+        "spend":  { "label": "Spend", "unit": "$", "sum": true, "vals": [609.75, 1454.92, 2452.31, 5257.92, 407.05] },
+        "cpm":    { "label": "CPM", "unit": "$", "vals": [77.26, 73.96, 75.42, 68.57, 76.17] },
+        "ctr":    { "label": "CTR", "unit": "%", "lower": false, "vals": [2.39, 2.23, 2.19, 2.37, 2.51] },
+        "cpc":    { "label": "CPC", "unit": "$", "vals": [3.23, 3.31, 3.45, 2.89, 3.04] },
+        "leads":  { "label": "Leads", "unit": "", "sum": true, "lower": false, "vals": [4, 11, 22, 64, 3] },
+        "cpl":    { "label": "Cost per lead", "unit": "$", "target": 100, "bench": "Industry lead-form CPL runs $27-38. High-ticket runs higher.", "vals": [152.44, 132.27, 111.47, 82.16, 135.68] },
+        "revMeta": { "label": "Revenue (Meta says)", "unit": "$", "sum": true, "lower": false, "metaTag": true, "vals": [0, 0, 691, 691, 0] }
+      },
+      "funnel": ["cpm", "ctr", "cpc", "cpl"],
+      "read": "CPL roughly doubled in the last week and lead volume collapsed to about 1 a day since Jun 28. Likely creative fatigue or a losing new batch. And with the purchase feed empty, nobody can prove any of this spend makes money. Fix the GHL feed, refresh creative."
+    },
+    {
+      "id": "tsa",
+      "name": "True Success Academy",
+      "eyebrow": "Webinar, EverWebinar + GHL truth",
+      "sheet_url": "https://docs.google.com/spreadsheets/d/1PFwD4BjSxp2MjJBjJKdFkXJWzVjU_B273IUbED7Qss8",
+      "maturity_days": 7,
+      "lag_note": "Sales lag registrations by about 7 days. Short windows are judged on leads, stay-to-end, and booked calls.",
+      "flag": null,
+      "primary": "costCall",
+      "hero_options": ["costCall", "cpl", "costStay", "spend"],
+      "spark_metric": "leads",
+      "spark_label": "Webinar leads per day",
+      "metrics": {
+        "spend":    { "label": "Spend", "unit": "$", "sum": true, "vals": [1242.92, 2387.39, 3637.52, 5948.29, 788.37] },
+        "cpm":      { "label": "CPM", "unit": "$", "vals": [121.39, 121.75, 130.30, 128.31, 117.72] },
+        "ctr":      { "label": "CTR", "unit": "%", "lower": false, "vals": [4.41, 4.39, 4.84, 4.90, 4.35] },
+        "leads":    { "label": "Leads", "unit": "", "sum": true, "lower": false, "vals": [58, 93, 131, 198, 38] },
+        "cpl":      { "label": "Cost per lead", "unit": "$", "target": 25, "bench": "Webinar registrants average around $72. Under $30 is strong.", "vals": [21.43, 25.67, 27.77, 30.04, 20.75] },
+        "showRate": { "label": "Webinar show rate", "unit": "%", "lower": false, "target": 50, "bench": "35-45% typical, 50%+ is top tier.", "vals": [53, 55, 53, 56, 45] },
+        "costStay": { "label": "Cost per stay-to-end", "unit": "$", "target": 80, "bench": "House target until sales data exists.", "vals": [59.19, 82.32, 101.04, 118.97, 78.84] },
+        "costCall": { "label": "Cost per booked call", "unit": "$", "target": 400, "bench": "$40-60 per qualified call is the industry target. High-ticket webinar funnels run higher.", "vals": [621.46, 1193.70, 1212.51, 1487.07, 788.37] },
+        "calls":    { "label": "Calls booked", "unit": "", "sum": true, "lower": false, "vals": [2, 2, 3, 4, 1] },
+        "sales":    { "label": "Sales", "unit": "", "sum": true, "lower": false, "vals": [0, 0, 0, 0, 0] }
+      },
+      "funnel": ["cpm", "ctr", "cpl", "showRate", "costStay", "costCall", "sales"],
+      "read": "Front of funnel improved a lot this week: CPL near $20 and stay-to-end 68% over 3 days. But lifetime it is $6,289 spent, 4 calls, 0 sales. The webinar-to-call step is the bottleneck. Do not scale spend until that converts, better ads just burn faster."
+    },
+    {
+      "id": "elysium",
+      "name": "Elysium Jet Academy",
+      "eyebrow": "Call funnel, CRM + Stripe/Whop truth",
+      "sheet_url": "https://docs.google.com/spreadsheets/d/1M5WUUwzqBtCue97W4CgK7Vs2sQmQOKf59LXFJ2Wk3nY",
+      "maturity_days": 14,
+      "lag_note": "Sales lag booked calls by up to 14 days. Short windows are judged on cost per booked call and show rate.",
+      "flag": null,
+      "primary": "roas",
+      "hero_options": ["roas", "costSale", "costAppt", "revenue", "spend"],
+      "spark_metric": "revenue",
+      "spark_label": "True revenue per day",
+      "metrics": {
+        "spend":    { "label": "Spend", "unit": "$", "sum": true, "vals": [2319.74, 5591.25, 10014.55, 21566.78, 1463.12] },
+        "cpm":      { "label": "CPM", "unit": "$", "vals": [35.34, 34.61, 32.91, 29.21, 34.43] },
+        "ctr":      { "label": "CTR", "unit": "%", "lower": false, "vals": [4.20, 4.23, 4.58, 4.86, 4.32] },
+        "costApp":  { "label": "Cost per application", "unit": "$", "target": 20, "bench": "House target. 30d average is $13.62.", "vals": [16.57, 15.15, 14.92, 13.62, 15.08] },
+        "costAppt": { "label": "Cost per booked call", "unit": "$", "target": 40, "bench": "$33 average appointment, $40-60 per qualified call is the industry target.", "vals": [32.67, 30.22, 30.81, 30.50, 27.09] },
+        "showRate": { "label": "Call show rate", "unit": "%", "lower": false, "target": 50, "bench": "70% is strong, 40-50% is industry default.", "vals": [43.7, 37.3, 45.5, 45.4, 31.5] },
+        "sales":    { "label": "Sales", "unit": "", "sum": true, "lower": false, "vals": [4, 9, 15, 22, 4] },
+        "costSale": { "label": "Cost per sale", "unit": "$", "target": 800, "bench": "Close rate 10-25% of calls taken is the healthy band.", "vals": [579.94, 621.25, 667.64, 980.31, 365.78] },
+        "revenue":  { "label": "True revenue", "unit": "$", "sum": true, "lower": false, "vals": [14970, 24290, 48195, 82780, 12970] },
+        "roas":     { "label": "True ROAS", "unit": "x", "lower": false, "target": 3, "bench": "House floor for scaling.", "vals": [6.45, 4.34, 4.81, 3.84, 8.86] }
+      },
+      "funnel": ["cpm", "ctr", "costApp", "costAppt", "showRate", "costSale", "roas"],
+      "read": "The winner. 6.45x true ROAS over 3 days, 3.84x over 30 on $21.6k spend. The scale rule allows about a 20% raise every 3-4 days while 7d ROAS holds above target. Fix the show-rate slide in parallel, every point of show rate is free revenue at this volume."
+    }
+  ],
+  "daily": {
+    "dates": ["6/3","6/4","6/5","6/6","6/7","6/8","6/9","6/10","6/11","6/12","6/13","6/14","6/15","6/16","6/17","6/18","6/19","6/20","6/21","6/22","6/23","6/24","6/25","6/26","6/27","6/28","6/29","6/30","7/1","7/2"],
+    "cj": {
+      "spend": [183.29,62.09,70.43,161.08,219.46,185.67,268.83,223.35,146.05,155.30,141.75,208.31,170.87,183.68,168.86,256.59,182.64,161.83,155.53,110.57,98.22,115.76,172.84,168.79,251.71,218.10,206.57,202.70,200.38,206.67],
+      "leads": [0,2,0,2,5,4,5,5,2,2,4,6,2,3,0,0,1,3,1,0,0,2,4,1,5,0,1,1,1,2]
+    },
+    "tsa": {
+      "spend": [97.06,108.64,87.13,78.72,126.73,135.02,152.26,173.47,138.59,130.32,105.47,206.15,209.53,171.79,165.17,224.72,191.05,143.08,272.24,266.42,251.31,80.80,45.23,339.95,232.97,325.15,246.40,454.55,453.44,334.93],
+      "leads": [1,4,4,0,2,1,4,3,3,6,5,8,6,7,4,9,9,7,8,5,6,2,1,7,10,13,5,20,21,17],
+      "calls": [0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0]
+    },
+    "elysium": {
+      "spend": [318.86,467.79,422.47,549.82,620.40,621.78,794.82,944.84,895.56,888.90,749.51,732.05,640.19,681.92,1317.31,906.01,393.64,192.85,874.38,853.71,660.88,705.09,742.75,763.67,753.04,946.44,808.36,856.62,768.68,694.44],
+      "revenue": [3990,0,7315,0,0,3990,0,0,0,12970,1000,0,1330,0,3990,0,0,2000,0,4445,7980,8980,500,1000,2000,1330,4990,2000,7980,4990],
+      "sales": [0,1,1,0,0,1,1,0,0,2,0,0,0,0,1,0,0,1,0,2,1,2,0,1,1,0,3,0,4,0]
+    }
+  },
+  "ads": {
+    "cj": [],
+    "tsa": [],
+    "elysium": []
+  }
+}
