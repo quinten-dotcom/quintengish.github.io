@@ -448,6 +448,167 @@ img, video, svg { display: block; max-width: 100%; }
 .acsa-unmute__bot { font: 800 clamp(19px, 2vw, 24px)/1.1 var(--emph, var(--sans)); font-stretch: 125%; letter-spacing: -0.01em; }
 .acsa-unmute svg { width: clamp(40px, 4.4vw, 56px); height: auto; }
 @media (max-width: 640px) { .acsa-unmute__box { padding: 12px 18px 14px; gap: 6px; } .acsa-unmute__top { font-size: 13px; } }   /* an emphasis phrase never splits across lines */
+
+/* ==== THREE MOTION SECTIONS (09.23): the difference (UMP), the new job, the system (UMS tease) ====
+   Every device plays ONCE when it scrolls in, then holds still. Start states only apply when the White Flow
+   engine is running and motion is allowed (html.wf-js without .wf-reduce), so ?static / reduced motion / no JS
+   all show the finished picture. One accent (cobalt), greys for everything else. */
+.acsa-head { max-width: 1000px; margin: 0 auto clamp(24px, 3.4vw, 40px); }
+.acsa-head .wf-h2 { margin-top: 16px; text-wrap: balance; }
+.acsa-head .wf-lede { margin-top: 16px; }
+.acsa-kicker { text-align: center; margin: clamp(22px, 3vw, 34px) auto 0; max-width: 30em; font: 600 clamp(20px, 2vw, 26px)/1.3 var(--sans); letter-spacing: -0.02em; color: var(--ink); }
+.acsa-emph { font-family: var(--emph); font-weight: 800; font-stretch: 125%; letter-spacing: -0.01em; }
+.wf-js:not(.wf-reduce) [data-acsa-in] { opacity: 0; }
+@media (max-width: 759px) { .acsa-br { display: none; } }
+
+/* -- 1. the difference: two panels -- */
+.acsa-vs { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2.2vw, 26px); max-width: 1000px; margin: 0 auto; align-items: stretch; }
+.acsa-pan { display: flex; flex-direction: column; border-radius: var(--r); padding: clamp(20px, 2.4vw, 30px); }
+.acsa-pan__head { display: flex; align-items: center; gap: 10px; font: 700 12.5px/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; }
+.acsa-dot { width: 8px; height: 8px; border-radius: 50%; background: #5d5a55; }
+.acsa-dot--on { background: var(--accent); box-shadow: 0 0 0 4px rgba(47,91,255,0.18); }
+.acsa-pan__body { flex: 1; margin-top: 18px; }
+.acsa-pan__foot { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; padding-top: 18px; }
+.acsa-pan__foot--one { grid-template-columns: 1fr; }
+.acsa-pan__k { font: 700 11px/1.2 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; }
+.acsa-pan__v { margin-top: 8px; font: 800 clamp(30px, 3.1vw, 40px)/1 var(--emph); font-stretch: 125%; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.acsa-pan__v small { font-size: 0.5em; letter-spacing: 0; }
+.acsa-pan--them { background: #17191E; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06); color: #8E8A83; }
+.acsa-pan--them .acsa-pan__foot { border-top: 1px solid rgba(255,255,255,0.07); }
+.acsa-pan--them .acsa-pan__k { color: #6F6B65; }
+.acsa-pan--them .acsa-pan__v { color: #7C7872; }
+.acsa-feed { list-style: none; padding: 0; display: grid; gap: 10px; align-content: start; }
+.acsa-feed li { display: flex; align-items: center; gap: 12px; padding: 11px 14px 11px 11px; border-radius: 14px; background: rgba(255,255,255,0.035); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05); font: 600 clamp(15px, 1.4vw, 17px)/1.2 var(--sans); color: #B3AFA8; }
+.acsa-ic { flex: none; width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: rgba(255,255,255,0.06); }
+.acsa-ic svg { width: 18px; height: 18px; stroke: #8E8A83; }
+.acsa-feed em { margin-left: auto; font: 700 11px/1 var(--sans); font-style: normal; letter-spacing: 0.1em; text-transform: uppercase; color: #6F6B65; }
+.acsa-pan--me { padding: clamp(20px, 2.4vw, 30px); }
+.acsa-pan--me .acsa-pan__head { color: var(--accent); }
+.acsa-pan--me .acsa-pan__foot { border-top: 1px solid rgba(20,22,27,0.09); }
+.acsa-pan--me .acsa-pan__k { color: #8B877F; }
+.acsa-pathw { position: relative; }
+.acsa-pathw::before, .acsa-path__fill { content: ""; position: absolute; left: 17px; top: 18px; bottom: 18px; width: 2px; border-radius: 2px; background: #DDD8CF; }
+.acsa-path__fill { background: var(--accent); transform-origin: top; }
+.wf-js:not(.wf-reduce) .acsa-path__fill { transform: scaleY(0); }
+.acsa-pathw { display: flex; flex-direction: column; }
+.acsa-path { flex: 1; list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(12px, 1.5vw, 16px); align-content: space-between; position: relative; }
+.acsa-path li { display: flex; align-items: center; gap: 16px; font: 700 clamp(17px, 1.7vw, 21px)/1.2 var(--sans); letter-spacing: -0.02em; color: #14161B; transition: color .45s ease; }
+.acsa-path__n { flex: none; width: 36px; height: 36px; border-radius: 12px; display: grid; place-items: center; background: var(--accent); color: #fff; font: 800 16px/1 var(--emph); font-stretch: 125%; transition: background-color .45s ease, color .45s ease, transform .6s cubic-bezier(.34,1.45,.64,1); }
+.wf-js:not(.wf-reduce) .acsa-path li:not(.is-lit) { color: #B8B3AB; }
+.wf-js:not(.wf-reduce) .acsa-path li:not(.is-lit) .acsa-path__n { background: #E6E2DA; color: #A29D95; transform: scale(0.86); }
+
+/* -- 2. the new job: two role cards merge into one -- */
+.acsa-merge { max-width: 840px; margin: 0 auto; }
+.acsa-roles { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(12px, 2vw, 24px); }
+.acsa-role { position: relative; border-radius: var(--r); padding: clamp(16px, 2vw, 24px); border: 1.5px dashed transparent; transition: border-color .7s ease; }
+.acsa-role::before { content: ""; position: absolute; inset: -1.5px; border-radius: inherit; background: linear-gradient(160deg, #2A2E37 0%, #1F2229 50%, #181A20 100%); box-shadow: var(--shadow-sm), inset 0 0 0 1px rgba(255,255,255,0.06); transition: opacity .7s ease; }
+.acsa-role > * { position: relative; }
+.acsa-role__k, .acsa-new__k { font: 700 11.5px/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); transition: color .7s ease; }
+.acsa-role__t { margin-top: 8px; font: 700 clamp(19px, 2vw, 24px)/1.1 var(--sans); letter-spacing: -0.02em; color: #F2EFE8; transition: color .7s ease; }
+.acsa-role.is-spent { border-color: rgba(255,255,255,0.16); }
+.acsa-role.is-spent::before { opacity: 0; }
+.acsa-role.is-spent .acsa-role__t { color: #67635D; }
+.acsa-role.is-spent .acsa-role__k { color: #55524D; }
+.acsa-slots { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.acsa-tk { display: inline-flex; align-items: center; padding: 8px 13px; border-radius: 999px; border: 1.5px solid transparent; background: rgba(255,255,255,0.09); color: #E4E0D9; font: 600 clamp(13.5px, 1.3vw, 15px)/1.25 var(--sans); transition: color .35s ease, background-color .35s ease, border-color .35s ease; }
+.acsa-tk.is-gone { transition: border-color .35s ease; color: transparent; background: transparent; border-color: rgba(255,255,255,0.14); border-style: dashed; }
+.acsa-join { display: block; width: 100%; height: 56px; overflow: visible; }
+.acsa-join path { fill: none; stroke: rgba(255,255,255,0.2); stroke-width: 2; vector-effect: non-scaling-stroke; stroke-dasharray: 1; }
+.wf-js:not(.wf-reduce) .acsa-join path { stroke-dashoffset: 1; }
+.acsa-new { position: relative; max-width: 580px; margin: 0 auto; border-radius: var(--r); padding: clamp(20px, 2.6vw, 30px); text-align: center; border: 1.5px dashed rgba(255,255,255,0.18); }
+.acsa-new::before { content: ""; position: absolute; inset: -1.5px; border-radius: inherit; background: linear-gradient(160deg, #FFFFFF 0%, #F3F0EA 60%, #E6E2DA 100%); box-shadow: var(--shadow), 0 0 0 2px var(--accent); transition: opacity .7s ease; }
+.acsa-new > * { position: relative; }
+.acsa-new__k { color: #8B877F; }
+.acsa-new__t { margin-top: 8px; font: 800 clamp(24px, 2.8vw, 34px)/1.05 var(--emph); font-stretch: 125%; letter-spacing: -0.01em; color: #14161B; transition: color .7s ease; }
+.acsa-slots--new { justify-content: center; margin-top: 16px; }
+.acsa-slots--new .acsa-tk { background: #E3E8FB; color: var(--accent); }
+.acsa-new__res { margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(20,22,27,0.1); font: 600 clamp(16px, 1.5vw, 18px)/1.35 var(--sans); color: #44464D; }
+.acsa-new__res b { display: block; font: 800 clamp(30px, 3.4vw, 42px)/1 var(--emph); font-stretch: 125%; letter-spacing: -0.01em; color: var(--accent); margin-bottom: 6px; }
+.wf-js:not(.wf-reduce) .acsa-new:not(.is-lit)::before { opacity: 0; }
+.wf-js:not(.wf-reduce) .acsa-new:not(.is-lit) .acsa-new__t { color: #67635D; }
+.wf-js:not(.wf-reduce) .acsa-slots--new .acsa-tk:not(.is-in) { opacity: 0; }
+.wf-js:not(.wf-reduce) .acsa-new__res { opacity: 0; }
+
+/* -- 3. the system: four live-looking step screens + the graduate card -- */
+.acsa-sys { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 2vw, 22px); max-width: 1000px; margin: 0 auto; }
+.acsa-step { padding: clamp(18px, 2.2vw, 26px); }
+.acsa-step__h { display: flex; align-items: flex-start; gap: 14px; }
+.acsa-step__n { flex: none; width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: var(--accent); color: #fff; font: 800 15px/1 var(--emph); font-stretch: 125%; }
+.acsa-step__t { font: 700 clamp(17px, 1.6vw, 20px)/1.3 var(--sans); letter-spacing: -0.015em; color: #F2EFE8; padding-top: 4px; text-wrap: balance; }
+.acsa-scr { position: relative; margin-top: 18px; height: 214px; border-radius: 16px; background: #111317; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06); padding: 14px 16px; overflow: hidden; }
+.acsa-scr__bar { display: flex; justify-content: space-between; gap: 10px; font: 700 11px/1 var(--sans); letter-spacing: 0.1em; text-transform: uppercase; color: #7C7872; }
+/* 3.1 business list */
+.acsa-biz { list-style: none; margin: 10px 0 0; padding: 0; -webkit-mask-image: linear-gradient(#000 72%, transparent); mask-image: linear-gradient(#000 72%, transparent); }
+.acsa-biz li { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.05); font: 600 15px/1.2 var(--sans); color: #E4E0D9; }
+.acsa-biz__a { flex: none; width: 24px; height: 24px; border-radius: 7px; display: grid; place-items: center; background: rgba(255,255,255,0.08); font: 700 11px/1 var(--sans); color: #A29D95; }
+.acsa-live { margin-left: auto; display: inline-flex; align-items: center; gap: 7px; font: 600 12.5px/1 var(--sans); color: #A29D95; white-space: nowrap; }
+.acsa-live i { width: 8px; height: 8px; border-radius: 50%; background: var(--good); }
+/* 3.2 message typing */
+.acsa-msg { margin-top: 12px; position: relative; max-width: 92%; padding: 13px 16px; border-radius: 18px; border-bottom-left-radius: 6px; background: var(--accent); color: #fff; font: 500 clamp(14.5px, 1.3vw, 15.5px)/1.45 var(--sans); }
+.acsa-msg__live { position: absolute; left: 16px; right: 16px; top: 13px; }
+.acsa-queue { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 6px; }
+.acsa-queue li { display: flex; align-items: center; gap: 10px; font: 600 14px/1.2 var(--sans); color: #C9C5BE; }
+.acsa-queue em { margin-left: auto; font: 700 10.5px/1 var(--sans); font-style: normal; letter-spacing: 0.1em; text-transform: uppercase; color: #7C7872; white-space: nowrap; }
+.acsa-msg__caret { display: inline-block; width: 2px; height: 1.05em; margin-left: 1px; vertical-align: -0.15em; background: #fff; }
+.wf-js:not(.wf-reduce) .acsa-msg__ghost { visibility: hidden; }
+.wf-reduce .acsa-msg__live { display: none; }
+/* 3.3 ad grid */
+.acsa-ads { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 320px; margin: 12px auto 0; }
+.acsa-ad { display: flex; flex-direction: column; gap: 5px; height: 76px; padding: 5px; border-radius: 8px; background: #1D2026; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.07); }
+.acsa-ad__img { position: relative; flex: 1; border-radius: 5px; background: linear-gradient(160deg, #3A3E49, #272A31); overflow: hidden; }
+.acsa-ad__img::after { content: ""; position: absolute; left: 50%; top: 55%; width: 44%; aspect-ratio: 1; border-radius: 50%; background: rgba(255,255,255,0.14); transform: translate(-50%, -50%); }
+.acsa-ad:nth-child(3n+2) .acsa-ad__img::after { border-radius: 4px; width: 56%; aspect-ratio: 1.4; }
+.acsa-ad:nth-child(3n) .acsa-ad__img::after { width: 70%; height: 18%; aspect-ratio: auto; border-radius: 3px; top: 40%; }
+.acsa-ad__l { height: 4px; border-radius: 2px; background: rgba(255,255,255,0.16); width: 80%; }
+.acsa-ad__cta { height: 7px; border-radius: 3px; background: var(--accent); width: 52%; }
+/* 3.4 campaign tree + money */
+.acsa-tree { display: block; width: 100%; height: 108px; margin-top: 8px; }
+.acsa-tree .ln { fill: none; stroke: rgba(255,255,255,0.2); stroke-width: 1.5; stroke-dasharray: 1; }
+.wf-js:not(.wf-reduce) .acsa-tree .ln { stroke-dashoffset: 1; }
+.acsa-tree rect { fill: #1D2026; stroke: rgba(255,255,255,0.14); stroke-width: 1; }
+.acsa-tree .top { stroke: var(--accent); stroke-width: 1.5; }
+.acsa-tree .ad { fill: #2A2E37; }
+.acsa-tree text { fill: #E4E0D9; font: 600 10.5px var(--sans); text-anchor: middle; }
+.acsa-money { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 8px; }
+.acsa-money__v { font: 800 26px/1 var(--emph); font-stretch: 125%; color: #F2EFE8; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.acsa-money__v.wf-a { color: var(--accent-soft); }
+.acsa-money__k { display: block; margin-top: 5px; font: 700 10.5px/1 var(--sans); letter-spacing: 0.1em; text-transform: uppercase; color: #7C7872; text-align: center; }
+.acsa-money svg { width: 22px; height: 22px; stroke: #7C7872; flex: none; }
+/* the graduate card: the strongest thing in the section */
+.acsa-grad { max-width: 1000px; margin: clamp(22px, 3vw, 34px) auto 0; display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(22px, 3.4vw, 44px); align-items: center; padding: clamp(24px, 3.4vw, 44px); }
+.wf-negative .acsa-grad { box-shadow: var(--shadow), 0 0 0 2px var(--accent), 0 24px 70px rgba(47,91,255,0.28); }
+.acsa-grad__h { margin: 16px 0 0; font: 600 clamp(28px, 3.3vw, 44px)/1.06 var(--sans); letter-spacing: -0.035em; color: #14161B; }
+.acsa-grad__h em { font-family: var(--emph); font-style: normal; font-weight: 800; font-stretch: 125%; letter-spacing: -0.01em; color: var(--accent); }
+.acsa-grad p { margin: 14px 0 0; font-size: clamp(16px, 1.4vw, 18px); color: #44464D; }
+.acsa-grad p.acsa-grad__big { font-weight: 700; color: #14161B; }
+.acsa-grad .wf-btn { margin-top: 22px; }
+.acsa-acct { border-radius: 18px; padding: 16px; background: linear-gradient(160deg, #2A2E37 0%, #1F2229 50%, #181A20 100%); box-shadow: var(--shadow-sm); color: #F2EFE8; }
+.acsa-acct__bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; font: 700 11px/1 var(--sans); letter-spacing: 0.1em; text-transform: uppercase; color: #8E8A83; }
+.acsa-acct__bar b { font-weight: 700; color: #F2EFE8; letter-spacing: 0.1em; }
+.acsa-acct__spend { margin-top: 12px; font: 800 30px/1 var(--emph); font-stretch: 125%; }
+.acsa-acct__spend span { display: block; margin-top: 6px; font: 600 12.5px/1 var(--sans); color: #8E8A83; letter-spacing: 0; }
+.acsa-acct ul { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; }
+.acsa-acct li { display: flex; align-items: center; gap: 12px; padding: 9px 10px; border-radius: 12px; background: rgba(255,255,255,0.05); font: 600 14.5px/1.2 var(--sans); color: #C9C5BE; }
+.acsa-acct li .acsa-ad { flex: none; width: 34px; height: 42px; padding: 3px; gap: 3px; }
+.acsa-acct li .acsa-ad__l { height: 3px; }
+.acsa-acct li .acsa-ad__cta { height: 4px; }
+.acsa-acct li em { margin-left: auto; font: 700 11px/1 var(--sans); font-style: normal; letter-spacing: 0.08em; text-transform: uppercase; color: #8E8A83; white-space: nowrap; }
+.acsa-acct li.is-you { background: rgba(47,91,255,0.16); box-shadow: inset 0 0 0 1.5px var(--accent); color: #fff; }
+.acsa-acct li.is-you em { color: var(--accent-soft); }
+.acsa-value { text-align: center; margin: clamp(34px, 4.4vw, 56px) auto 0; max-width: 24em; font: 600 clamp(24px, 2.8vw, 36px)/1.15 var(--sans); letter-spacing: -0.03em; color: var(--ink); }
+.acsa-value em { font-family: var(--emph); font-style: normal; font-weight: 800; font-stretch: 125%; letter-spacing: -0.01em; color: var(--accent-page); white-space: nowrap; }
+
+@media (max-width: 759px) {
+  .acsa-vs, .acsa-sys, .acsa-grad { grid-template-columns: 1fr; }
+  .acsa-grad .wf-btn { width: 100%; }
+}
+@media (max-width: 480px) {
+  .acsa-roles { gap: 10px; }
+  .acsa-role { padding: 14px 12px; }
+  .acsa-tk { padding: 7px 10px; font-size: 13px; }
+  .acsa-join { height: 40px; }
+  .acsa-scr { padding: 12px 13px; height: 228px; }
+}
 </style>
 </head>
 <body class="wf-negative"><!-- remove wf-negative to go back to the light paper version -->
@@ -509,6 +670,179 @@ img, video, svg { display: block; max-width: 100%; }
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <p class="acsa-note" data-pop>Takes 2 minutes. If it's a fit, you'll book a call with me directly.</p>
     </div>
+  </div>
+</section>
+
+<!-- 2. THE DIFFERENCE (UMP). Device: two panels. Everyone else = a pile of AI output with the money stuck at zero (grey).
+     What I teach = the five steps to the money, lighting up in order (the one accent). -->
+<section class="wf-section" id="difference">
+  <div class="wf-wrap">
+    <div class="acsa-head wf-center">
+      <span class="wf-chip wf-chip--paper" data-pop>The difference</span>
+      <h2 class="wf-h2" data-kinetic>They show you the tool.<br class="acsa-br"> They never show you the <em class="wf-a">money.</em></h2>
+      <p class="wf-lede" data-pop="0.9" data-delay="0.5">You make money by knowing how to find clients, convince clients you can make them money, actually make them money, and do it at scale.</p>
+    </div>
+    <div class="acsa-vs">
+      <div class="acsa-pan acsa-pan--them" data-acsa="feed">
+        <div class="acsa-pan__head"><span class="acsa-dot"></span>What everyone teaches</div>
+        <ul class="acsa-feed acsa-pan__body">
+          <li data-acsa-in><span class="acsa-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="m20.5 16-5-5-8.5 8.5"/></svg></span>AI image<em>Done</em></li>
+          <li data-acsa-in><span class="acsa-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="M10 9.5v5l4.5-2.5z"/></svg></span>AI video<em>Done</em></li>
+          <li data-acsa-in><span class="acsa-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3.5" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v2.5"/></svg></span>AI voice clone<em>Done</em></li>
+          <li data-acsa-in><span class="acsa-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5h11v17l-5.5-4-5.5 4z"/></svg></span>50 prompts<em>Saved</em></li>
+          <li data-acsa-in><span class="acsa-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M10.5 9v6l4.5-3z"/></svg></span>New tool tutorial<em>Watched</em></li>
+        </ul>
+        <div class="acsa-pan__foot">
+          <div><div class="acsa-pan__k">Clients</div><div class="acsa-pan__v">0</div></div>
+          <div><div class="acsa-pan__k">Revenue</div><div class="acsa-pan__v">$0</div></div>
+        </div>
+      </div>
+      <div class="wf-card acsa-pan acsa-pan--me" data-acsa="path">
+        <div class="acsa-pan__head"><span class="acsa-dot acsa-dot--on"></span>What I teach</div>
+        <div class="acsa-pathw acsa-pan__body">
+          <i class="acsa-path__fill"></i>
+          <ol class="acsa-path">
+            <li><span class="acsa-path__n">1</span>Find the client</li>
+            <li><span class="acsa-path__n">2</span>Win the client</li>
+            <li><span class="acsa-path__n">3</span>Make them money</li>
+            <li><span class="acsa-path__n">4</span>Keep them</li>
+            <li><span class="acsa-path__n">5</span>Do it again</li>
+          </ol>
+        </div>
+        <div class="acsa-pan__foot acsa-pan__foot--one">
+          <div><div class="acsa-pan__k">Retainer, per client</div><div class="acsa-pan__v wf-a"><span data-acsa-to="2">$2k</span> to <span data-acsa-to="10">$10k</span><small>/mo</small></div></div>
+        </div>
+      </div>
+    </div>
+    <p class="acsa-kicker" data-pop="0.9">That's the part everyone skips.</p>
+  </div>
+</section>
+
+<!-- 3. THE NEW JOB. Device: the task chips leave the two old role cards and settle into ONE card. -->
+<section class="wf-section" id="new-job">
+  <div class="wf-wrap">
+    <div class="acsa-head wf-center">
+      <span class="wf-chip wf-chip--paper" data-pop>The new job</span>
+      <h2 class="wf-h2" data-kinetic>AI didn't kill the job. It killed the <em>separation</em> between the jobs.</h2>
+      <p class="wf-lede" data-pop="0.9" data-delay="0.6">Copywriting and media buying used to be two people. Now it's one person who can do both, powered by AI.</p>
+    </div>
+    <div class="acsa-merge" data-acsa="merge">
+      <div class="acsa-roles">
+        <div class="acsa-role">
+          <div class="acsa-role__k">Person 1</div>
+          <div class="acsa-role__t">Copywriter</div>
+          <div class="acsa-slots"><span class="acsa-tk">Research the angle</span><span class="acsa-tk">Write the copy</span></div>
+        </div>
+        <div class="acsa-role">
+          <div class="acsa-role__k">Person 2</div>
+          <div class="acsa-role__t">Media buyer</div>
+          <div class="acsa-slots"><span class="acsa-tk">Build the creative</span><span class="acsa-tk">Structure the campaign</span><span class="acsa-tk">Run it</span></div>
+        </div>
+      </div>
+      <svg class="acsa-join" viewBox="0 0 800 56" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M200 0 C200 34 400 22 400 56"/><path pathLength="1" d="M600 0 C600 34 400 22 400 56"/></svg>
+      <div class="acsa-new">
+        <div class="acsa-new__k">One person</div>
+        <div class="acsa-new__t">AI Creative Strategist</div>
+        <div class="acsa-slots acsa-slots--new"><span class="acsa-tk">Research the angle</span><span class="acsa-tk">Write the copy</span><span class="acsa-tk">Build the creative</span><span class="acsa-tk">Structure the campaign</span><span class="acsa-tk">Run it</span></div>
+        <div class="acsa-new__res"><b>$2k to $10k</b>a month, per client.</div>
+      </div>
+    </div>
+    <p class="acsa-kicker" data-pop="0.9">Businesses <span class="wf-a">cannot find</span> this person.</p>
+  </div>
+</section>
+
+<!-- 4. THE SYSTEM (UMS tease). Four live-looking screens that SHOW each step, never HOW. Then the no-brainer card. -->
+<section class="wf-section" id="system">
+  <div class="wf-wrap">
+    <div class="acsa-head wf-center">
+      <span class="wf-chip wf-chip--paper" data-pop>The system</span>
+      <h2 class="wf-h2" data-kinetic>Four steps. <em class="wf-a">One person</em> runs all of them.</h2>
+      <p class="wf-lede" data-pop="0.9" data-delay="0.5">This is what each step looks like. How to run each one is what I teach inside the program.</p>
+    </div>
+    <div class="acsa-sys">
+      <div class="wf-card wf-card--light acsa-step" data-acsa="find">
+        <div class="acsa-step__h"><span class="acsa-step__n">1</span><div class="acsa-step__t">AI finds every business in your niche already running ads.</div></div>
+        <div class="acsa-scr">
+          <div class="acsa-scr__bar"><span>Niche: med spas</span><span>Ads</span></div>
+          <ul class="acsa-biz">
+            <li data-acsa-in><span class="acsa-biz__a">G</span>Glow Med Spa<span class="acsa-live" data-acsa-in><i></i>Running ads</span></li>
+            <li data-acsa-in><span class="acsa-biz__a">L</span>Luxe Aesthetics<span class="acsa-live" data-acsa-in><i></i>Running ads</span></li>
+            <li data-acsa-in><span class="acsa-biz__a">R</span>Radiance Skin Studio<span class="acsa-live" data-acsa-in><i></i>Running ads</span></li>
+            <li data-acsa-in><span class="acsa-biz__a">F</span>The Facial Bar<span class="acsa-live" data-acsa-in><i></i>Running ads</span></li>
+            <li data-acsa-in><span class="acsa-biz__a">P</span>Pure Laser Clinic<span class="acsa-live" data-acsa-in><i></i>Running ads</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="wf-card wf-card--light acsa-step" data-acsa="write">
+        <div class="acsa-step__h"><span class="acsa-step__n">2</span><div class="acsa-step__t">AI writes a custom message for each one.</div></div>
+        <div class="acsa-scr">
+          <div class="acsa-scr__bar"><span>To: Glow Med Spa</span><span>New message</span></div>
+          <div class="acsa-msg"><span class="acsa-msg__ghost">Hey Sarah, saw your med spa ads for the fall facial special. I made two new versions of your best one. Want me to send them over?</span><span class="acsa-msg__live" aria-hidden="true"></span></div>
+          <ul class="acsa-queue">
+            <li data-acsa-in><span class="acsa-biz__a">L</span>Luxe Aesthetics<em>Message ready</em></li>
+            <li data-acsa-in><span class="acsa-biz__a">R</span>Radiance Skin Studio<em>Message ready</em></li>
+          </ul>
+        </div>
+      </div>
+      <div class="wf-card wf-card--light acsa-step" data-acsa="build">
+        <div class="acsa-step__h"><span class="acsa-step__n">3</span><div class="acsa-step__t">AI builds the creatives.</div></div>
+        <div class="acsa-scr">
+          <div class="acsa-scr__bar"><span>Glow Med Spa: new ads</span><span>8</span></div>
+          <div class="acsa-ads">
+            <div class="acsa-ad" data-acsa-in><div class="acsa-ad__img"></div><div class="acsa-ad__l"></div><div class="acsa-ad__cta"></div></div>
+            <div class="acsa-ad" data-acsa-in><div class="acsa-ad__img"></div><div class="acsa-ad__l"></div><div class="acsa-ad__cta"></div></div>
+            <div class="acsa-ad" data-acsa-in><div class="acsa-ad__img"></div><div class="acsa-ad__l"></div><div class="acsa-ad__cta"></div></div>
+            <div class="acsa-ad" data-acsa-in><div class="acsa-ad__img"></div><div class="acsa-ad__l"></div><div class="acsa-ad__cta"></div></div>
+            <div class="acsa-ad" data-acsa-in><div class="acsa-ad__img"></div><div class="acsa-ad__l"></div><div class="acsa-ad__cta"></div></div>
+            <div class="acsa-ad" data-acsa-in><div class="acsa-ad__img"></div><div class="acsa-ad__l"></div><div class="acsa-ad__cta"></div></div>
+            <div class="acsa-ad" data-acsa-in><div class="acsa-ad__img"></div><div class="acsa-ad__l"></div><div class="acsa-ad__cta"></div></div>
+            <div class="acsa-ad" data-acsa-in><div class="acsa-ad__img"></div><div class="acsa-ad__l"></div><div class="acsa-ad__cta"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="wf-card wf-card--light acsa-step" data-acsa="run">
+        <div class="acsa-step__h"><span class="acsa-step__n">4</span><div class="acsa-step__t">A proven structure runs the ads.</div></div>
+        <div class="acsa-scr">
+          <svg class="acsa-tree" viewBox="0 0 300 108" aria-hidden="true">
+            <path class="ln" pathLength="1" d="M150 26V36H50V46"/><path class="ln" pathLength="1" d="M150 26V46"/><path class="ln" pathLength="1" d="M150 26V36H250V46"/>
+            <path class="ln" pathLength="1" d="M50 68V76H31V84M50 76H69V84"/><path class="ln" pathLength="1" d="M150 68V76H131V84M150 76H169V84"/><path class="ln" pathLength="1" d="M250 68V76H231V84M250 76H269V84"/>
+            <g data-acsa-in><rect class="top" x="100" y="2" width="100" height="24" rx="7"/><text x="150" y="18">Campaign</text></g>
+            <g data-acsa-in><rect x="14" y="46" width="72" height="22" rx="6"/><text x="50" y="61">Ad set</text></g>
+            <g data-acsa-in><rect x="114" y="46" width="72" height="22" rx="6"/><text x="150" y="61">Ad set</text></g>
+            <g data-acsa-in><rect x="214" y="46" width="72" height="22" rx="6"/><text x="250" y="61">Ad set</text></g>
+            <g data-acsa-in><rect class="ad" x="19" y="84" width="24" height="20" rx="4"/><rect class="ad" x="57" y="84" width="24" height="20" rx="4"/><rect class="ad" x="119" y="84" width="24" height="20" rx="4"/><rect class="ad" x="157" y="84" width="24" height="20" rx="4"/><rect class="ad" x="219" y="84" width="24" height="20" rx="4"/><rect class="ad" x="257" y="84" width="24" height="20" rx="4"/></g>
+          </svg>
+          <div class="acsa-money">
+            <div><span class="acsa-money__v" data-acsa-to="50">$50k</span><span class="acsa-money__k">In ads</span></div>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            <div><span class="acsa-money__v wf-a" data-acsa-to="150">$150k</span><span class="acsa-money__k">Back in one week</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- the no-brainer -->
+    <div class="wf-card acsa-grad" data-acsa="grad">
+      <div>
+        <span class="wf-chip wf-chip--accent">When you graduate</span>
+        <h3 class="acsa-grad__h">Test your creatives on my <em>real client accounts.</em></h3>
+        <p>If you need it, you can submit creatives to be tested on my real client accounts. That's the proof you need to show prospective clients that you know what you're talking about.</p>
+        <p class="acsa-grad__big">Nobody else offers this because nobody else has real accounts to let you work on.</p>
+        <a class="wf-btn" data-apply href="apply/">Apply now
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="acsa-acct" aria-hidden="true">
+        <div class="acsa-acct__bar"><span>Client ad account</span><b>Live</b></div>
+        <ul>
+          <li><span class="acsa-ad"><span class="acsa-ad__img"></span><span class="acsa-ad__l"></span><span class="acsa-ad__cta"></span></span>Current ad<em>Active</em></li>
+          <li><span class="acsa-ad"><span class="acsa-ad__img"></span><span class="acsa-ad__l"></span><span class="acsa-ad__cta"></span></span>Current ad<em>Active</em></li>
+          <li><span class="acsa-ad"><span class="acsa-ad__img"></span><span class="acsa-ad__l"></span><span class="acsa-ad__cta"></span></span>Current ad<em>Active</em></li>
+          <li class="is-you" data-acsa-in><span class="acsa-ad"><span class="acsa-ad__img"></span><span class="acsa-ad__l"></span><span class="acsa-ad__cta"></span></span>Your creative<em>In test</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="acsa-value">People pay you for your value. <em>So become valuable.</em></p>
   </div>
 </section>
 
@@ -861,6 +1195,103 @@ img, video, svg { display: block; max-width: 100%; }
   });
 })();
 
+</script>
+<script>
+/* Motion for the three sections under the hero (the difference, the new job, the system).
+   Every device plays ONCE when it scrolls into view, then holds still. Nothing loops. Reduced motion, ?static,
+   or an old browser: the finished picture with no motion. Nothing in here may break the page. */
+(() => {
+  try {
+    const R = document.documentElement.classList.contains('wf-reduce') || !('IntersectionObserver' in window) || !Element.prototype.animate;
+    if (R) document.documentElement.classList.add('wf-reduce');
+    const EASE = 'cubic-bezier(.22,1,.36,1)', GLIDE = 'cubic-bezier(.62,0,.24,1)';
+    const $$ = (s, r) => [...(r || document).querySelectorAll(s)];
+    const $ = (k) => document.querySelector(`[data-acsa="${k}"]`);
+    const later = (ms, fn) => setTimeout(fn, ms);
+    const once = (el, fn, th) => {
+      if (!el) return;
+      if (R) { try { fn(true); } catch (e) {} return; }
+      const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { io.disconnect(); fn(false); } }),
+        {threshold: th || 0.35, rootMargin: '0px 0px -8% 0px'});
+      io.observe(el);
+    };
+    const rise = (el, delay, from) => {
+      el.animate([{opacity: 0, transform: from || 'translateY(10px) scale(0.96)', filter: 'blur(8px)'}, {opacity: 1, transform: 'none', filter: 'blur(0px)'}],
+        {duration: 620, delay: delay || 0, easing: EASE, fill: 'both'});
+    };
+    const outExpo = (p) => (p >= 1 ? 1 : 1 - Math.pow(2, -10 * p));
+    const count = (el, suffix, dur) => {   // $0k up to data-acsa-to, ease-out-expo, then holds
+      const to = parseFloat(el.dataset.acsaTo), t0 = performance.now();
+      const tick = (now) => { const p = Math.min(1, (now - t0) / dur); el.textContent = '$' + Math.round(to * outExpo(p)) + suffix; if (p < 1) requestAnimationFrame(tick); };
+      el.textContent = '$0' + suffix; requestAnimationFrame(tick);
+    };
+
+    /* 1. the difference: the grey feed piles up (money stays at zero), the path lights up step by step */
+    once($('feed'), (now) => { if (!now) $$('[data-acsa-in]', $('feed')).forEach((li, i) => rise(li, 150 + i * 360)); });
+    once($('path'), (now) => {
+      const box = $('path'), steps = $$('.acsa-path li', box), fill = box.querySelector('.acsa-path__fill'), money = $$('[data-acsa-to]', box);
+      if (now) { steps.forEach((s) => s.classList.add('is-lit')); return; }
+      const gap = 480, start = 350;
+      steps.forEach((s, i) => later(start + i * gap, () => s.classList.add('is-lit')));
+      fill.animate([{transform: 'scaleY(0)'}, {transform: 'scaleY(1)'}], {duration: (steps.length - 1) * gap, delay: start, easing: 'linear', fill: 'both'});
+      money.forEach((m) => { m.textContent = '$0k'; });
+      later(start + (steps.length - 1) * gap + 200, () => money.forEach((m) => count(m, 'k', 1300)));
+    });
+
+    /* 2. the new job: the chips leave the two old cards and settle into one card, the old cards fade to outlines */
+    once($('merge'), (now) => {
+      const box = $('merge'), olds = $$('.acsa-role .acsa-tk', box), news = $$('.acsa-new .acsa-tk', box), roles = $$('.acsa-role', box);
+      const card = box.querySelector('.acsa-new'), res = box.querySelector('.acsa-new__res');
+      if (now) { olds.forEach((o) => o.classList.add('is-gone')); roles.forEach((r) => r.classList.add('is-spent')); card.classList.add('is-lit'); news.forEach((n) => n.classList.add('is-in')); return; }
+      $$('.acsa-join path', box).forEach((p, i) => p.animate([{strokeDashoffset: 1}, {strokeDashoffset: 0}], {duration: 700, delay: 250 + i * 80, easing: EASE, fill: 'both'}));
+      const t0 = 700, gap = 150, fly = 1050;
+      news.forEach((n, i) => later(t0 + i * gap, () => {
+        const o = olds[i], a = o.getBoundingClientRect(), b = n.getBoundingClientRect();
+        o.classList.add('is-gone'); n.classList.add('is-in');
+        n.animate([{transform: `translate(${a.left - b.left}px, ${a.top - b.top}px)`, backgroundColor: '#2B2E36', color: '#E4E0D9'},
+          {transform: 'none', backgroundColor: '#E3E8FB', color: '#2F5BFF'}], {duration: fly, easing: GLIDE, fill: 'both'});
+      }));
+      later(t0 + 250, () => roles.forEach((r) => r.classList.add('is-spent')));
+      later(t0 + fly * 0.7, () => card.classList.add('is-lit'));
+      later(t0 + (news.length - 1) * gap + fly + 150, () => rise(res, 0, 'translateY(8px)'));
+    }, 0.4);
+
+    /* 3. the system: four screens, each shows its step */
+    once($('find'), (now) => {
+      if (now) return;
+      $$('.acsa-biz li', $('find')).forEach((li, i) => { rise(li, 200 + i * 260, 'translateY(8px)'); rise(li.querySelector('.acsa-live'), 200 + i * 260 + 380, 'scale(0.8)'); });
+    });
+    once($('write'), (now) => {
+      const box = $('write'), ghost = box.querySelector('.acsa-msg__ghost'), live = box.querySelector('.acsa-msg__live'), msg = box.querySelector('.acsa-msg');
+      if (now) return;
+      const text = ghost.textContent, caret = document.createElement('span'); caret.className = 'acsa-msg__caret';
+      const node = document.createTextNode(''); live.append(node, caret);
+      rise(msg, 150, 'translateY(8px) scale(0.97)');
+      const per = 24, t0 = performance.now() + 600;
+      const tick = (t) => {
+        const n = Math.max(0, Math.min(text.length, Math.floor((t - t0) / per)));
+        node.textContent = text.slice(0, n);
+        if (n < text.length) requestAnimationFrame(tick);
+        else { later(250, () => caret.remove()); $$('.acsa-queue li', box).forEach((li, i) => rise(li, 350 + i * 300, 'translateY(8px)')); }
+      };
+      requestAnimationFrame(tick);
+    });
+    once($('build'), (now) => { if (!now) $$('.acsa-ad', $('build')).forEach((ad, i) => rise(ad, 200 + i * 140, 'translateY(10px) scale(0.85)')); });
+    once($('run'), (now) => {
+      if (now) return;
+      const box = $('run');
+      $$('g[data-acsa-in]', box).forEach((g, i) => { g.style.transformBox = 'fill-box'; g.style.transformOrigin = 'center'; rise(g, 150 + i * 170, 'scale(0.85)'); });
+      $$('.acsa-tree .ln', box).forEach((p, i) => p.animate([{strokeDashoffset: 1}, {strokeDashoffset: 0}], {duration: 600, delay: (i < 3 ? 300 : 800) + (i % 3) * 90, easing: EASE, fill: 'both'}));
+      const money = $$('[data-acsa-to]', box);
+      money.forEach((m) => { m.textContent = '$0k'; });
+      later(1400, () => count(money[0], 'k', 1100));
+      later(1900, () => count(money[1], 'k', 1400));
+    });
+    once($('grad'), (now) => { if (!now) $$('[data-acsa-in]', $('grad')).forEach((li) => rise(li, 700, 'translateX(-22px)')); }, 0.3);
+  } catch (e) {   // never leave anything hidden if something above throws
+    document.documentElement.classList.add('wf-reduce');
+  }
+})();
 </script>
 <script>
 /* Tracking for this page. site.js (in <head>) owns the pixel, the visitor id and the first-touch ad data.
