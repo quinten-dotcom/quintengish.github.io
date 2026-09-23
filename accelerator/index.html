@@ -434,6 +434,9 @@ img, video, svg { display: block; max-width: 100%; }
 /* the wide heavy emphasis face */
 .wf-h1 em, .wf-h2 em, .wf-stat__num { font-stretch: 125%; }
 .wf-h1 em, .wf-h2 em { white-space: nowrap; }
+/* Section heads read as SUBHEADLINES (Quinten 09.23): plain sentences, smaller than the hero, balanced lines. */
+main .acsa-grad__h { font-size: clamp(26px, 2.6vw, 36px) !important; line-height: 1.12; text-wrap: balance; }
+main .wf-h2 { font-size: clamp(27px, 3.3vw, 44px); line-height: 1.12; letter-spacing: -0.025em; max-width: 21em; margin-left: auto; margin-right: auto; text-wrap: balance; }
 /* "Your video is playing / Click to unmute" (modelled on the Vidalytics smart-autoplay box). The whole video is the
    click target; the blue box sits in the middle. Shown only while the muted preview plays. */
 .wf-player__screen { position: relative; }
@@ -679,8 +682,8 @@ img, video, svg { display: block; max-width: 100%; }
   <div class="wf-wrap">
     <div class="acsa-head wf-center">
       <span class="wf-chip wf-chip--paper" data-pop>The difference</span>
-      <h2 class="wf-h2" data-kinetic>They show you the tool.<br class="acsa-br"> They never show you the <em class="wf-a">money.</em></h2>
-      <p class="wf-lede" data-pop="0.9" data-delay="0.5">You make money by knowing how to find clients, convince clients you can make them money, actually make them money, and do it at scale.</p>
+      <h2 class="wf-h2" data-kinetic>Most people teach you how to use AI. I teach you how to <em class="wf-a">make money</em> with it.</h2>
+      <p class="wf-lede" data-pop="0.9" data-delay="0.5">Making cool stuff with AI does not pay you. Finding clients, winning them, and actually making them money does.</p>
     </div>
     <div class="acsa-vs">
       <div class="acsa-pan acsa-pan--them" data-acsa="feed">
@@ -723,8 +726,8 @@ img, video, svg { display: block; max-width: 100%; }
   <div class="wf-wrap">
     <div class="acsa-head wf-center">
       <span class="wf-chip wf-chip--paper" data-pop>The new job</span>
-      <h2 class="wf-h2" data-kinetic>AI didn't kill the job. It killed the <em>separation</em> between the jobs.</h2>
-      <p class="wf-lede" data-pop="0.9" data-delay="0.6">Copywriting and media buying used to be two people. Now it's one person who can do both, powered by AI.</p>
+      <h2 class="wf-h2" data-kinetic>Businesses don't want to hire two people anymore. They want <em class="wf-a">one person</em> who does both.</h2>
+      <p class="wf-lede" data-pop="0.9" data-delay="0.6">Copywriting and media buying used to be two jobs. With AI, one person can do both.</p>
     </div>
     <div class="acsa-merge" data-acsa="merge">
       <div class="acsa-roles">
@@ -756,8 +759,8 @@ img, video, svg { display: block; max-width: 100%; }
   <div class="wf-wrap">
     <div class="acsa-head wf-center">
       <span class="wf-chip wf-chip--paper" data-pop>The system</span>
-      <h2 class="wf-h2" data-kinetic>Four steps. <em class="wf-a">One person</em> runs all of them.</h2>
-      <p class="wf-lede" data-pop="0.9" data-delay="0.5">This is what each step looks like. How to run each one is what I teach inside the program.</p>
+      <h2 class="wf-h2" data-kinetic>Here's the system you'll use to <em class="wf-a">get clients</em> and keep them.</h2>
+      <p class="wf-lede" data-pop="0.9" data-delay="0.5">Here is what each step does. How to run each one is what I teach inside the program.</p>
     </div>
     <div class="acsa-sys">
       <div class="wf-card wf-card--light acsa-step" data-acsa="find">
@@ -825,7 +828,7 @@ img, video, svg { display: block; max-width: 100%; }
     <div class="wf-card acsa-grad" data-acsa="grad">
       <div>
         <span class="wf-chip wf-chip--accent">When you graduate</span>
-        <h3 class="acsa-grad__h">Test your creatives on my <em>real client accounts.</em></h3>
+        <h3 class="acsa-grad__h">When you finish, you can test your ads on my <em>real client accounts.</em></h3>
         <p>If you need it, you can submit creatives to be tested on my real client accounts. That's the proof you need to show prospective clients that you know what you're talking about.</p>
         <p class="acsa-grad__big">Nobody else offers this because nobody else has real accounts to let you work on.</p>
         <a class="wf-btn" data-apply href="apply/">Apply now
@@ -851,7 +854,7 @@ img, video, svg { display: block; max-width: 100%; }
   <div class="wf-wrap">
     <div class="wf-center" style="margin-bottom: clamp(20px, 3vw, 32px);">
       <span class="wf-chip wf-chip--paper" data-pop>The results</span>
-      <h2 class="wf-h2" data-kinetic style="margin-top: 16px;">Not something I read about. <em>What I do.</em></h2>
+      <h2 class="wf-h2" data-kinetic style="margin-top: 16px;">I'm not teaching something I read about. <em class="wf-a">I do this every day.</em></h2>
     </div>
     <div class="acsa-stats" data-stagger="0.09">
       <div class="wf-card" data-pop>
