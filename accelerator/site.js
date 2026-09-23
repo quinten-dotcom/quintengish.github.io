@@ -80,8 +80,19 @@ const ACSA = {
     setCookie('_fbp', `fb.1.${Date.now()}.${rand}`, 90, true);
   }
 
+  /* ---- TEST MODE: open any page once with ?acsa_test=TEST12345 (the code from Events Manager > Test events).
+     For the rest of that browser tab: the browser pixel stays OFF and every server event goes to Test events only,
+     so a full test run (apply, book, thank-you) never touches the real numbers. ---- */
+  const TEST = (() => {
+    try {
+      const t = new URLSearchParams(location.search).get('acsa_test');
+      if (t && /^TEST\w{1,40}$/.test(t)) sessionStorage.setItem('acsa_test', t);
+      return sessionStorage.getItem('acsa_test') || '';
+    } catch (e) { return ''; }
+  })();
+
   /* ---- Meta pixel base code ---- */
-  try {
+  if (!TEST) try {
     /* eslint-disable */
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -89,7 +100,15 @@ const ACSA = {
     t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
     document,'script','https://connect.facebook.net/en_US/fbevents.js');
     /* eslint-enable */
-    window.fbq('init', ACSA.PIXEL, { external_id: vid });
+    /* A page can set window.acsaUser = { em, fn, ln, ph } BEFORE loading this file (the thank-you page does, from
+       Calendly's redirect). The pixel hashes these itself; the server copy hashes them on our side. */
+    const u = window.acsaUser || {};
+    const am = { external_id: vid };
+    if (u.em) am.em = String(u.em).trim().toLowerCase();
+    if (u.fn) am.fn = String(u.fn).trim().toLowerCase();
+    if (u.ln) am.ln = String(u.ln).trim().toLowerCase();
+    if (u.ph) am.ph = String(u.ph).replace(/\D/g, '');
+    window.fbq('init', ACSA.PIXEL, am);
   } catch (e) {}
 
   const ids = () => ({ vid, fbp: getCookie('_fbp'), fbc: getCookie('_fbc'), first_touch: { ...firstTouch } });
@@ -120,6 +139,8 @@ const ACSA = {
         custom_data: params,
         first_touch: id.first_touch,
       };
+      if (window.acsaUser) body.user = window.acsaUser;
+      if (TEST) body.test_code = TEST;
       const url = ACSA.ENDPOINT.replace(/\/+$/, '') + '/collect';
       const json = JSON.stringify(body);
       let sent = false;
