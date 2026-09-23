@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script src="track.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#ECE8E1">
+<meta name="theme-color" content="#111317">
 <title>How Copywriters &amp; Media Buyers Are Hitting $10k/Mo With AI in 2026</title>
 <meta name="description" content="The exact system that took me from $0 to $30k/mo in 90 days and my brother from zero experience to $3,500/mo in 30 days.">
 <link rel="canonical" href="https://www.quintengish.com/accelerator/">
@@ -333,29 +334,86 @@ img, video, svg { display: block; max-width: 100%; }
 .wf-player.is-muted .i-muted { display: block; }
 @media (max-width: 520px) { .wf-player__time { display: none; } .wf-player__bar { gap: 10px; } .wf-player__play { width: 46px; height: 46px; } }
 
+/* ==========================================================================
+   WHITE FLOW NEGATIVE - <body class="wf-negative">
+   The same world printed in negative: near-black warm ground, faint light grid, the dark UI cards become paper
+   cards and the paper cards become dark ones, the SAME single cobalt accent. Use it when the footage is itself
+   White Flow (a bright paper film) so the page frames the video instead of blending into it. (Quinten, 09.23)
+   ========================================================================== */
+.wf-negative {
+  --paper: #111317;
+  --ink: #F2EFE8;
+  --muted: #8E8A83;
+  --accent-page: #5A7DFF;   /* cobalt, lifted a touch so it reads on the dark ground */
+  --line: rgba(20,22,27,0.08);
+  --shadow: 17px 23px 38px rgba(0,0,0,0.55), 5px 7px 12px rgba(0,0,0,0.40);
+  --shadow-sm: 8px 11px 20px rgba(0,0,0,0.50), 3px 4px 7px rgba(0,0,0,0.35);
+  --shadow-tight: 3px 5px 12px rgba(0,0,0,0.45);
+  background: var(--paper);
+}
+.wf-negative .wf-paper { background: var(--paper); }
+.wf-negative .wf-paper__grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.045) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(255,255,255,0.045) 1.5px, transparent 1.5px);
+}
+.wf-negative .wf-paper__light {
+  background:
+    radial-gradient(ellipse at 45% 30%, rgba(90,125,255,0.10) 0%, rgba(90,125,255,0) 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.45) 100%);
+}
+.wf-negative .wf-paper__grain { mix-blend-mode: screen; opacity: 0.06; }
+.wf-negative .wf-a { color: var(--accent-page); }
+.wf-negative .wf-lede { color: rgba(242,239,232,0.72); }
+/* chips flip */
+.wf-negative .wf-chip { background: #F2EFE8; color: #14161B; }
+.wf-negative .wf-chip--paper { background: #1D2027; color: #F2EFE8; box-shadow: var(--shadow-tight), inset 0 0 0 1px rgba(255,255,255,0.07); }
+.wf-negative .wf-chip--accent { background: var(--accent); color: #fff; }
+/* dark card -> paper card */
+.wf-negative .wf-card {
+  background: linear-gradient(160deg, #FFFFFF 0%, #F3F0EA 60%, #E6E2DA 100%);
+  color: #14161B; box-shadow: var(--shadow), inset 0 1.5px 0 rgba(255,255,255,0.6);
+}
+.wf-negative .wf-card .wf-card__label, .wf-negative .wf-card .wf-stat__cap { color: #8B877F; }
+.wf-negative .wf-card .wf-a { color: var(--accent); }
+/* paper card -> dark card (a step lighter than the ground so it still lifts off it) */
+.wf-negative .wf-card--light {
+  background: linear-gradient(160deg, #2A2E37 0%, #1F2229 50%, #181A20 100%);
+  color: #fff; box-shadow: var(--shadow), inset 0 1.5px 0 rgba(255,255,255,0.08), inset 0 0 0 1px rgba(255,255,255,0.05);
+}
+.wf-negative .wf-card--light .wf-card__label { color: rgba(255,255,255,0.5); }
+.wf-negative .wf-card--light .wf-stat__cap { color: rgba(255,255,255,0.62); }
+.wf-negative .wf-card--light .wf-a { color: var(--accent-soft); }
+/* the player bar goes dark */
+.wf-negative .wf-player__bar { background: linear-gradient(160deg, #262A32 0%, #1C1F25 100%); box-shadow: var(--shadow-sm), inset 0 1.5px 0 rgba(255,255,255,0.07), inset 0 0 0 1px rgba(255,255,255,0.05); }
+.wf-negative .wf-player__title { color: #F2EFE8; }
+.wf-negative .wf-player__track::before { background: rgba(255,255,255,0.14); }
+.wf-negative .wf-player__buf { background: rgba(255,255,255,0.16); }
+.wf-negative .wf-player__knob { background: #F2EFE8; box-shadow: 0 0 0 3px var(--accent), 2px 3px 6px rgba(0,0,0,0.5); }
+.wf-negative .wf-player__icon { background: rgba(255,255,255,0.07); color: #F2EFE8; }
+.wf-negative .wf-player__icon:hover { background: rgba(255,255,255,0.12); }
+.wf-negative .wf-player__screen, .wf-negative .wf-player__screen video { background: #0b0c0f; }
+.wf-negative .wf-panel, .wf-negative .wf-facecard { background: #1b1d22; }
+.wf-negative .wf-btn { box-shadow: 0 10px 30px rgba(47,91,255,0.35), inset 0 1.5px 0 rgba(255,255,255,0.22); }
+
 </style>
 <style>
 /* ---- page-only pieces (everything else is the White Flow template) ---- */
 /* tighter rhythm than the template: three short sections, no big gaps */
-.wf-section { padding: clamp(44px, 6.5vw, 88px) 0; }
+.wf-section { padding: clamp(36px, 5.2vw, 72px) 0; }
 .wf-section.wf-hero-sec { padding-top: clamp(20px, 3vw, 40px); }
 .acsa-top { display: flex; justify-content: center; padding: 22px var(--gutter) 0; }
 .acsa-mark { font: 700 13px/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 .acsa-mark b { color: var(--accent); font-weight: 700; }
 .acsa-h1 { margin: 24px auto 0; max-width: 15em; font-size: clamp(31px, 5.4vw, 72px); }
 .acsa-hero-player { width: 100%; max-width: 900px; margin: clamp(28px, 4vw, 44px) auto 0; }
-.acsa-cta { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 26px; }
+.acsa-cta { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 22px; }
 .acsa-cta .wf-btn { min-width: min(100%, 320px); }
 .acsa-note { font-size: 15px; color: var(--muted); margin: 0; }
 .acsa-stats { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; max-width: 980px; margin: 0 auto; }
 .acsa-stats .wf-stat__num { font-size: clamp(30px, 4.6vw, 62px); white-space: nowrap; }
-.acsa-close { display: grid; gap: clamp(24px, 4vw, 48px); align-items: center; max-width: 980px; margin: 0 auto; }
-.acsa-close .wf-facecard--round { margin: 0 auto; width: 100%; max-width: 220px; }
-@media (min-width: 900px) {
-  .acsa-close { grid-template-columns: 240px 1fr; text-align: left; }
-  .acsa-close .wf-lede { margin-left: 0; }
-  .acsa-close .acsa-cta { align-items: flex-start; }
-}
+.acsa-close { max-width: 720px; margin: 0 auto; }
+.acsa-close .acsa-cta { margin-top: 22px; }
 @media (max-width: 699px) {
   .acsa-top { display: none; }
   .wf-player [data-mute] { display: none; }       /* phones have volume buttons; gives the title room */
@@ -378,7 +436,7 @@ img, video, svg { display: block; max-width: 100%; }
 .wf-h1 em, .wf-h2 em { white-space: nowrap; }   /* an emphasis phrase never splits across lines */
 </style>
 </head>
-<body>
+<body class="wf-negative"><!-- remove wf-negative to go back to the light paper version -->
 <div class="wf-paper" aria-hidden="true"><div class="wf-paper__grid"></div><div class="wf-paper__light"></div><div class="wf-paper__grain"></div></div>
 
 <div class="acsa-top"><span class="acsa-mark">AI Creative <b>Strategist</b> Accelerator</span></div>
@@ -426,7 +484,7 @@ img, video, svg { display: block; max-width: 100%; }
 
     <div class="acsa-cta" data-stagger="0.08" data-delay="0.2">
       <p class="acsa-note" data-pop style="font-weight: 600; color: var(--ink); font-size: 17px;">Watch the full training above, then apply.</p>
-      <a class="wf-btn" data-apply href="#" data-pop>Apply now
+      <a class="wf-btn" data-apply href="apply/" data-pop>Apply now
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <p class="acsa-note" data-pop>Takes 2 minutes. If it's a fit, you'll book a call with me directly.</p>
     </div>
@@ -436,7 +494,7 @@ img, video, svg { display: block; max-width: 100%; }
 <!-- 2. PROOF = FACELESS. Device: four counters. -->
 <section class="wf-section">
   <div class="wf-wrap">
-    <div class="wf-center" style="margin-bottom: clamp(24px, 3.5vw, 40px);">
+    <div class="wf-center" style="margin-bottom: clamp(20px, 3vw, 32px);">
       <span class="wf-chip wf-chip--paper" data-pop>The results</span>
       <h2 class="wf-h2" data-kinetic style="margin-top: 16px;">Not something I read about. <em>What I do.</em></h2>
     </div>
@@ -465,17 +523,16 @@ img, video, svg { display: block; max-width: 100%; }
   </div>
 </section>
 
-<!-- 3. APPLY = back on his face. One button to the Typeform. -->
-<section class="wf-section" id="apply" style="padding-bottom: clamp(56px, 8vw, 96px);">
+<!-- 3. APPLY = back on his face. One button to the apply page (/accelerator/apply/), which holds the application form. -->
+<section class="wf-section" id="apply" style="padding-bottom: clamp(48px, 6.5vw, 80px);">
   <div class="wf-wrap">
     <div class="acsa-close wf-center">
-      <div class="wf-facecard wf-facecard--round" data-pop><img src="assets/face-round.jpg" alt="Quinten Gish" width="440" height="440" loading="lazy"></div>
       <div>
         <h2 class="wf-h2" data-kinetic>Apply for the <em class="wf-a">program</em></h2>
         <p class="wf-lede" data-pop="0.9" data-delay="0.4" style="margin-top: 14px;">Fill out the short application. I just want to know where you're at and whether this is a fit.</p>
         <div class="acsa-cta">
           <div data-click style="position: relative; display: inline-block; width: 100%; text-align: inherit;">
-            <a class="wf-btn" data-apply href="#" data-pop data-delay="0.2">Apply now
+            <a class="wf-btn" data-apply href="apply/" data-pop data-delay="0.2">Apply now
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             <svg class="wf-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 2.5 19 13l-6.2.8 3.4 6.6-2.7 1.3-3.3-6.7L5 19.5z" fill="#fff" stroke="#14161B" stroke-width="1.4" stroke-linejoin="round"/></svg>
           </div>
@@ -785,22 +842,63 @@ img, video, svg { display: block; max-width: 100%; }
 
 </script>
 <script>
-/* THE APPLICATION LINK. Every "Apply now" button goes here. */
-const TYPEFORM_URL = 'https://form.typeform.com/to/flFSQBWR';
-/* Ad tracking passthrough: the ad's UTMs + Meta click/ad IDs ride along to the Typeform as hidden fields
-   (Typeform only stores the ones declared as hidden fields in the form; the rest are ignored).
-   First touch is remembered in this browser, so a visitor who comes back later still carries the ad that brought them. */
+/* Tracking for this page. track.js (in <head>) owns the pixel, the visitor id and the first-touch ad data.
+   Here: the apply links, the ApplyClick event, and the VSL events. Nothing in here may break the page. */
 (() => {
-  const KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', 'ad_id', 'adset_id', 'campaign_id'];
-  const now = new URLSearchParams(location.search), got = {};
-  KEYS.forEach((k) => { const v = now.get(k); if (v) got[k] = v; });
-  let saved = {};
-  try { saved = JSON.parse(localStorage.getItem('acsa-first-touch') || '{}'); } catch (e) {}
-  if (Object.keys(got).length && !Object.keys(saved).length) { try { localStorage.setItem('acsa-first-touch', JSON.stringify(got)); } catch (e) {} }
-  const use = Object.keys(got).length ? got : saved;
-  const hash = new URLSearchParams(use).toString();
-  const url = TYPEFORM_URL + (hash ? '#' + hash : '');
-  document.querySelectorAll('[data-apply]').forEach((a) => { a.href = url; });
+  const track = (n, p) => { try { if (window.acsaTrack) window.acsaTrack(n, p); } catch (e) {} };
+
+  /* Apply buttons go to apply/ and carry the first-touch ad data along as a query string. */
+  let q = '';
+  try { q = new URLSearchParams((window.acsaIds && window.acsaIds().first_touch) || {}).toString(); } catch (e) {}
+  if (!q && !window.acsaIds) q = location.search.replace(/^\?/, '');   // track.js blocked: pass the raw params on
+  document.querySelectorAll('[data-apply]').forEach((a) => {
+    a.href = 'apply/' + (q ? '?' + q : '');
+    a.addEventListener('click', () => track('ApplyClick', { content_name: 'ACSA Application' }));   // beacon survives the navigation
+  });
+
+  /* VSL events. ViewContent on the first play of this page load.
+     VSL25/50/75/100 count seconds ACTUALLY WATCHED (not where the playhead sits), so skipping ahead or the
+     player resuming a returning viewer mid-video never counts. Credit is kept in this browser. */
+  const v = document.querySelector('[data-player] video');
+  if (!v) return;
+  const W = 'acsa-vsl-watched', F = 'acsa-vsl-fired', NAME = 'ACSA VSL';
+  let watched = 0, fired = [];
+  try { watched = parseFloat(localStorage.getItem(W)) || 0; } catch (e) {}
+  try { fired = JSON.parse(localStorage.getItem(F) || '[]'); if (!Array.isArray(fired)) fired = []; } catch (e) { fired = []; }
+  let viewed = false, last = null;
+  const check = () => {
+    const d = v.duration;
+    if (!d || !isFinite(d)) return;
+    if (watched > d) watched = d;
+    const p = watched / d;
+    [25, 50, 75, 100].forEach((n) => {
+      const hit = n === 100 ? p >= 0.97 : p >= n / 100;
+      if (hit && fired.indexOf(n) === -1) {
+        fired.push(n);
+        try { localStorage.setItem(F, JSON.stringify(fired)); } catch (e) {}
+        track('VSL' + n, { percent: n, content_name: NAME });
+      }
+    });
+  };
+  v.addEventListener('play', () => {
+    last = v.currentTime;
+    if (!viewed) { viewed = true; track('ViewContent', { content_name: NAME }); }
+  });
+  v.addEventListener('seeking', () => { last = null; });
+  v.addEventListener('seeked', () => { last = v.currentTime; });
+  v.addEventListener('timeupdate', () => {
+    const t = v.currentTime;
+    if (!v.paused && !v.seeking && last !== null) {
+      const delta = t - last;
+      if (delta > 0 && delta < 1.5) {
+        watched += delta;
+        try { localStorage.setItem(W, watched.toFixed(1)); } catch (e) {}
+        check();
+      }
+    }
+    last = t;
+  });
+  v.addEventListener('ended', check);
 })();
 </script>
 </body>
