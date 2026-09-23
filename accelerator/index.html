@@ -785,12 +785,23 @@ img, video, svg { display: block; max-width: 100%; }
 
 </script>
 <script>
-/* THE APPLICATION LINK: paste the Typeform share link here, then rebuild. Every "Apply now" button uses it. */
-const TYPEFORM_URL = '';
-document.querySelectorAll('[data-apply]').forEach((a) => {
-  if (TYPEFORM_URL) { a.href = TYPEFORM_URL; }
-  else a.addEventListener('click', (e) => e.preventDefault());
-});
+/* THE APPLICATION LINK. Every "Apply now" button goes here. */
+const TYPEFORM_URL = 'https://form.typeform.com/to/flFSQBWR';
+/* Ad tracking passthrough: the ad's UTMs + Meta click/ad IDs ride along to the Typeform as hidden fields
+   (Typeform only stores the ones declared as hidden fields in the form; the rest are ignored).
+   First touch is remembered in this browser, so a visitor who comes back later still carries the ad that brought them. */
+(() => {
+  const KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', 'ad_id', 'adset_id', 'campaign_id'];
+  const now = new URLSearchParams(location.search), got = {};
+  KEYS.forEach((k) => { const v = now.get(k); if (v) got[k] = v; });
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem('acsa-first-touch') || '{}'); } catch (e) {}
+  if (Object.keys(got).length && !Object.keys(saved).length) { try { localStorage.setItem('acsa-first-touch', JSON.stringify(got)); } catch (e) {} }
+  const use = Object.keys(got).length ? got : saved;
+  const hash = new URLSearchParams(use).toString();
+  const url = TYPEFORM_URL + (hash ? '#' + hash : '');
+  document.querySelectorAll('[data-apply]').forEach((a) => { a.href = url; });
+})();
 </script>
 </body>
 </html>
