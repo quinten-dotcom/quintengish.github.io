@@ -906,6 +906,13 @@ main .wf-h2 { font-size: clamp(27px, 3.3vw, 44px); line-height: 1.12; letter-spa
 <footer class="wf-foot"><div class="wf-wrap">&copy; 2026 AI Creative Strategist Accelerator. All rights reserved.</div></footer>
 
 <script>
+/* Every load starts fresh (Quinten 09.23): forget where the viewer stopped BEFORE the player reads it, so a refresh
+   always shows the muted preview with "Click to unmute" instead of "Pick up where you left off".
+   Coming back with the Back button also reloads, for the same fresh start. */
+try { Object.keys(localStorage).filter((k) => k.indexOf('wf-vsl:') === 0).forEach((k) => localStorage.removeItem(k)); } catch (e) {}
+window.addEventListener('pageshow', (e) => { if (e.persisted) location.reload(); });
+</script>
+<script>
 /* ==========================================================================
    White Flow - landing page motion engine (no dependencies)
    The web port of kit.tsx: Pop, Kinetic, Count, strike, Drift, depth of field.
@@ -1311,17 +1318,14 @@ main .wf-h2 { font-size: clamp(27px, 3.3vw, 44px); line-height: 1.12; letter-spa
     a.addEventListener('click', () => track('ApplyClick', { content_name: 'ACSA Application' }));   // beacon survives the navigation
   });
 
-  /* MUTED AUTOPLAY. First-time visitors: the VSL starts playing muted with the "Click to unmute" box on top.
-     Clicking anywhere on the video (or the mute button) restarts it from 0:00 with sound. Returning viewers who
-     stopped part way skip this and get the normal "Pick up where you left off" player. If the browser blocks
+  /* MUTED AUTOPLAY. Every page load: the VSL starts playing muted with the "Click to unmute" box on top.
+     Clicking anywhere on the video (or the mute button) restarts it from 0:00 with sound. If the browser blocks
      autoplay (phone low power mode), the page simply shows the normal play button. */
   const vid = document.querySelector('[data-player] video');
   const un = document.querySelector('.acsa-unmute');
   let preview = false;
   if (vid && un) {
     const key = 'wf-vsl:' + (vid.getAttribute('src') ? vid.src.split('?')[0] : '');
-    let resumeAt = 0;
-    try { resumeAt = parseFloat(localStorage.getItem(key)) || 0; } catch (e) {}
     const stopPreview = () => { preview = false; un.hidden = true; };
     const unmute = (e) => {
       if (e) { e.preventDefault(); e.stopPropagation(); }
@@ -1337,7 +1341,7 @@ main .wf-h2 { font-size: clamp(27px, 3.3vw, 44px); line-height: 1.12; letter-spa
       const p = vid.play();
       if (p && p.then) p.then(() => { if (vid.muted && !touched) { preview = true; un.hidden = false; } }).catch(() => { vid.muted = false; });
     };
-    if (resumeAt <= 5) {
+    {
       startPreview();
       // opened in a background tab: browsers hold autoplay until the tab is shown, so try again then
       document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') startPreview(); });
