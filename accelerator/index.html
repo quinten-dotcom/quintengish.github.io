@@ -433,7 +433,21 @@ img, video, svg { display: block; max-width: 100%; }
 }
 /* the wide heavy emphasis face */
 .wf-h1 em, .wf-h2 em, .wf-stat__num { font-stretch: 125%; }
-.wf-h1 em, .wf-h2 em { white-space: nowrap; }   /* an emphasis phrase never splits across lines */
+.wf-h1 em, .wf-h2 em { white-space: nowrap; }
+/* "Your video is playing / Click to unmute" (modelled on the Vidalytics smart-autoplay box). The whole video is the
+   click target; the blue box sits in the middle. Shown only while the muted preview plays. */
+.wf-player__screen { position: relative; }
+.acsa-unmute { position: absolute; inset: 0; z-index: 3; display: flex; align-items: center; justify-content: center;
+  padding: 0; border: 0; background: rgba(0, 0, 0, 0.12); cursor: pointer; font: inherit; color: #fff; -webkit-tap-highlight-color: transparent; }
+.acsa-unmute[hidden] { display: none; }
+.acsa-unmute__box { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 18px 26px 20px;
+  background: rgba(47, 91, 255, 0.92); border-radius: 14px; box-shadow: 0 18px 44px rgba(0, 0, 0, 0.35); text-align: center;
+  transition: transform 0.18s ease, background 0.18s ease; }
+.acsa-unmute:hover .acsa-unmute__box, .acsa-unmute:focus-visible .acsa-unmute__box { transform: scale(1.04); background: rgba(47, 91, 255, 1); }
+.acsa-unmute__top { font: 600 15px/1.2 var(--sans); letter-spacing: 0.01em; opacity: 0.95; }
+.acsa-unmute__bot { font: 800 clamp(19px, 2vw, 24px)/1.1 var(--emph, var(--sans)); font-stretch: 125%; letter-spacing: -0.01em; }
+.acsa-unmute svg { width: clamp(40px, 4.4vw, 56px); height: auto; }
+@media (max-width: 640px) { .acsa-unmute__box { padding: 12px 18px 14px; gap: 6px; } .acsa-unmute__top { font-size: 13px; } }   /* an emphasis phrase never splits across lines */
 </style>
 </head>
 <body class="wf-negative"><!-- remove wf-negative to go back to the light paper version -->
@@ -458,6 +472,13 @@ img, video, svg { display: block; max-width: 100%; }
         <div class="wf-panel wf-player__screen">
           <video preload="metadata" poster="assets/poster.jpg" playsinline disablepictureinpicture controlslist="nodownload noplaybackrate"
                  data-src-hd="assets/vsl-1080.mp4" data-src-sd="assets/vsl-720.mp4"></video>
+          <button class="acsa-unmute" type="button" hidden aria-label="Your video is playing. Click to unmute and start from the beginning.">
+            <span class="acsa-unmute__box">
+              <span class="acsa-unmute__top">Your video is playing</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="#fff"/><path d="m16 9.5 5 5M21 9.5l-5 5"/></svg>
+              <span class="acsa-unmute__bot">Click to unmute</span>
+            </span>
+          </button>
         </div>
         <div class="wf-player__bar">
           <button class="wf-player__play" aria-label="Play">
@@ -856,7 +877,45 @@ img, video, svg { display: block; max-width: 100%; }
     a.addEventListener('click', () => track('ApplyClick', { content_name: 'ACSA Application' }));   // beacon survives the navigation
   });
 
-  /* VSL events. ViewContent on the first play of this page load.
+  /* MUTED AUTOPLAY. First-time visitors: the VSL starts playing muted with the "Click to unmute" box on top.
+     Clicking anywhere on the video (or the mute button) restarts it from 0:00 with sound. Returning viewers who
+     stopped part way skip this and get the normal "Pick up where you left off" player. If the browser blocks
+     autoplay (phone low power mode), the page simply shows the normal play button. */
+  const vid = document.querySelector('[data-player] video');
+  const un = document.querySelector('.acsa-unmute');
+  let preview = false;
+  if (vid && un) {
+    const key = 'wf-vsl:' + (vid.getAttribute('src') ? vid.src.split('?')[0] : '');
+    let resumeAt = 0;
+    try { resumeAt = parseFloat(localStorage.getItem(key)) || 0; } catch (e) {}
+    const stopPreview = () => { preview = false; un.hidden = true; };
+    const unmute = (e) => {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      stopPreview();
+      vid.currentTime = 0;
+      vid.muted = false;
+      const p = vid.play(); if (p && p.catch) p.catch(() => {});
+    };
+    let touched = false;   // the visitor pressed play/unmute themselves: never start a preview after that
+    const startPreview = () => {
+      if (touched || preview || !vid.paused || vid.currentTime > 0.5) return;
+      vid.muted = true;
+      const p = vid.play();
+      if (p && p.then) p.then(() => { if (vid.muted && !touched) { preview = true; un.hidden = false; } }).catch(() => { vid.muted = false; });
+    };
+    if (resumeAt <= 5) {
+      startPreview();
+      // opened in a background tab: browsers hold autoplay until the tab is shown, so try again then
+      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') startPreview(); });
+    }
+    document.querySelectorAll('.wf-player__play, [data-mute]').forEach((b) => b.addEventListener('pointerdown', () => { if (!preview) touched = true; }));
+    un.addEventListener('click', unmute);
+    vid.addEventListener('volumechange', () => { if (preview && !vid.muted) unmute(); });   // the bar's mute button
+    vid.addEventListener('pause', () => { if (preview) { stopPreview(); vid.muted = false; vid.currentTime = 0; } });   // paused the preview: back to a normal player at 0:00
+    vid.addEventListener('timeupdate', () => { if (preview) { try { localStorage.removeItem(key); } catch (e) {} } });   // the silent preview never becomes a "resume" point
+  }
+
+  /* VSL events. ViewContent on the first play WITH SOUND of this page load (the muted preview does not count).
      VSL25/50/75/100 count seconds ACTUALLY WATCHED (not where the playhead sits), so skipping ahead or the
      player resuming a returning viewer mid-video never counts. Credit is kept in this browser. */
   const v = document.querySelector('[data-player] video');
@@ -880,15 +939,19 @@ img, video, svg { display: block; max-width: 100%; }
       }
     });
   };
+  const heard = () => !v.muted && !preview;
   v.addEventListener('play', () => {
     last = v.currentTime;
-    if (!viewed) { viewed = true; track('ViewContent', { content_name: NAME }); }
+    if (!viewed && heard()) { viewed = true; track('ViewContent', { content_name: NAME }); }
+  });
+  v.addEventListener('volumechange', () => {   // unmuting after the preview counts as the real start
+    if (!viewed && heard() && !v.paused) { viewed = true; track('ViewContent', { content_name: NAME }); }
   });
   v.addEventListener('seeking', () => { last = null; });
   v.addEventListener('seeked', () => { last = v.currentTime; });
   v.addEventListener('timeupdate', () => {
     const t = v.currentTime;
-    if (!v.paused && !v.seeking && last !== null) {
+    if (!v.paused && !v.seeking && last !== null && heard()) {
       const delta = t - last;
       if (delta > 0 && delta < 1.5) {
         watched += delta;
