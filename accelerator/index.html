@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ECE8E1">
+<title>How Copywriters &amp; Media Buyers Are Hitting $10k/Mo With AI in 2026</title>
+<meta name="description" content="The exact system that took me from $0 to $30k/mo in 90 days and my brother from zero experience to $3,500/mo in 30 days.">
+<link rel="canonical" href="https://www.quintengish.com/accelerator/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.quintengish.com/accelerator/">
+<meta property="og:title" content="How Copywriters &amp; Media Buyers Are Hitting $10k/Mo With AI in 2026">
+<meta property="og:description" content="Watch the free training, then apply. 6 weeks of live coaching.">
+<meta property="og:image" content="https://www.quintengish.com/accelerator/assets/poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" as="image" href="assets/poster.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,800&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   White Flow - landing page system
+   The web version of the White Flow video kit (templates/white-flow/src/kit.tsx).
+   Every value below is taken from kit.tsx and halved from its 1080px frame to
+   web scale. Spec + rules: styles/web/white-flow.md. Do not add a second accent.
+   ========================================================================== */
+
+/* Shapiro is a COMMERCIAL font. Ship a public page only with a webfont licence (styles/web/white-flow.md). */
+
+:root {
+  /* kit.tsx C{} */
+  --paper: #ECE8E1;
+  --ink: #14161B;
+  --card: #181B22;
+  --card2: #0E1015;
+  --card-top: #20242D;
+  --accent: #2F5BFF;       /* the ONE accent. Swap it per brand, never add a second */
+  --accent-soft: #8FA8FF;  /* accent on dark cards */
+  --warn: #E4572E;         /* only for "bad" states */
+  --good: #1FB877;         /* sparingly */
+  --muted: #8B877F;
+  --line: rgba(255,255,255,0.09);
+
+  --sans: "WF Inter", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --emph: "Archivo", "WF Shapiro", "WF Inter", "Inter", system-ui, sans-serif;
+
+  /* kit SHADOW / SHADOW_SM at web scale: long, soft, diagonal, warm-brown (never grey) */
+  --shadow: 17px 23px 35px rgba(40,30,15,0.30), 5px 7px 11px rgba(40,30,15,0.22);
+  --shadow-sm: 8px 11px 17px rgba(40,30,15,0.26), 3px 4px 6px rgba(40,30,15,0.20);
+  --shadow-tight: 3px 5px 10px rgba(40,30,15,0.22);   /* next to a face: no long spill (kit rule 6) */
+  --hairline: inset 0 1.5px 0 rgba(255,255,255,0.10), inset 0 0 0 1px rgba(255,255,255,0.04);
+
+  --r: 24px;      /* kit radius 34 on a 760px card, scaled */
+  --r-sm: 16px;
+  --gutter: clamp(16px, 4vw, 48px);
+  --maxw: 1180px;
+
+  /* type scale: headline = kit Kinetic sizes halved, fluid */
+  --h1: clamp(40px, 6.2vw, 84px);
+  --h2: clamp(32px, 4.4vw, 58px);
+  --h3: clamp(22px, 2.2vw, 28px);
+  --body: clamp(17px, 1.35vw, 19px);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: var(--body);
+  line-height: 1.5;
+  font-weight: 500;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img, video, svg { display: block; max-width: 100%; }
+
+/* ---------- Paper: warm stock + faint 60px grid + vignette + grain (kit <Paper>) ---------- */
+.wf-paper { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: var(--paper); overflow: hidden; }
+.wf-paper__grid {
+  position: absolute; inset: -60px;
+  background-image:
+    linear-gradient(rgba(60,50,35,0.055) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(60,50,35,0.055) 1.5px, transparent 1.5px);
+  background-size: 60px 60px;
+  will-change: transform;
+}
+.wf-paper__light {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 45% 38%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 55%),
+    radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 55%, rgba(60,45,25,0.20) 100%);
+}
+.wf-paper__grain {
+  position: absolute; inset: 0; opacity: 0.16; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='7'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+}
+
+/* ---------- Layout ---------- */
+.wf-wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+.wf-section { position: relative; padding: clamp(72px, 11vw, 150px) 0; }
+.wf-center { text-align: center; }
+.wf-stack > * + * { margin-top: 20px; }
+.wf-split { display: grid; gap: clamp(28px, 5vw, 72px); align-items: center; }
+@media (min-width: 900px) {
+  .wf-split { grid-template-columns: 1fr 1fr; }
+  .wf-split--face-right > .wf-facecard-col { order: 2; }
+}
+
+/* ---------- Type ---------- */
+.wf-h1, .wf-h2, .wf-h3 { margin: 0; color: var(--ink); font-weight: 600; letter-spacing: -0.035em; line-height: 1.02; }
+.wf-h1 { font-size: var(--h1); }
+.wf-h2 { font-size: var(--h2); }
+.wf-h3 { font-size: var(--h3); letter-spacing: -0.02em; line-height: 1.15; }
+/* emphasis = Shapiro Heavy, 1-2 words per phrase (kit st 'i' / 'ai') */
+.wf-h1 em, .wf-h2 em, .wf-h3 em, .wf-emph {
+  font-family: var(--emph); font-style: normal; font-weight: 800; letter-spacing: -0.01em;
+  font-size: 1.046em;  /* kit normalises Shapiro 0.90 vs Inter 0.86 */
+}
+.wf-a { color: var(--accent); }
+.wf-m { color: var(--muted); }
+.wf-lede { font-size: clamp(18px, 1.6vw, 22px); color: #3b3d44; max-width: 34em; margin: 0; font-weight: 500; }
+.wf-center .wf-lede { margin-left: auto; margin-right: auto; }
+.wf-small { font-size: 14px; color: var(--muted); }
+
+/* ---------- Chip / call-out tag (kit hook tag: readable on the very first frame) ---------- */
+.wf-chip {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 18px 10px 14px; border-radius: 999px;
+  background: var(--ink); color: #fff;
+  font: 700 13px/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase;
+  box-shadow: var(--shadow-sm);
+}
+.wf-chip__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px rgba(47,91,255,0.22); }
+.wf-chip--paper { background: #fff; color: var(--ink); box-shadow: var(--shadow-tight); }
+.wf-chip--accent { background: var(--accent); }
+
+/* ---------- Cards (kit <Card>) ---------- */
+.wf-card {
+  position: relative; overflow: hidden; border-radius: var(--r);
+  background: linear-gradient(160deg, var(--card-top) 0%, var(--card) 45%, var(--card2) 100%);
+  box-shadow: var(--shadow), var(--hairline);
+  color: #fff; padding: clamp(22px, 2.6vw, 34px);
+}
+.wf-card--sm { border-radius: var(--r-sm); box-shadow: var(--shadow-sm), var(--hairline); padding: 18px 20px; }
+.wf-card--light {
+  background: linear-gradient(160deg, #FFFFFF 0%, #F3F0EA 60%, #E6E2DA 100%);
+  color: var(--ink);
+}
+.wf-card__label { font: 700 12px/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+.wf-card--light .wf-card__label { color: var(--muted); }
+.wf-card .wf-a { color: var(--accent-soft); }
+.wf-card--light .wf-a { color: var(--accent); }
+.wf-rule { height: 1px; background: var(--line); margin: 18px 0; border: 0; }
+.wf-card--light .wf-rule { background: rgba(20,22,27,0.08); }
+
+/* ---------- Face panel (kit rule 19) + face card ---------- */
+/* Full face: a panel on the paper, footage untouched, NOTHING drawn over the face. */
+.wf-panel {
+  position: relative; overflow: hidden; border-radius: var(--r);
+  aspect-ratio: 16 / 9; background: #cfc9bf;
+  box-shadow: var(--shadow);
+}
+.wf-panel video, .wf-panel img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 699px) {
+  /* 9:16 logic: full-width panel flush to the top, rounded BOTTOM corners only */
+  .wf-panel--flush { margin: 0 calc(-1 * var(--gutter)); border-radius: 0 0 var(--r) var(--r); aspect-ratio: 1080 / 980; }
+}
+/* Face card: smaller, white ring, graphics on the other side. Never over it. */
+.wf-facecard {
+  position: relative; overflow: hidden; border-radius: var(--r);
+  aspect-ratio: 16 / 9; background: #cfc9bf;
+  box-shadow: var(--shadow), 0 0 0 6px #fff;
+}
+.wf-facecard--round { aspect-ratio: 1; border-radius: 50%; max-width: 260px; }
+.wf-facecard video, .wf-facecard img { width: 100%; height: 100%; object-fit: cover; }
+/* Under-panel band: every full-face graphic lives here, in ink, on paper */
+.wf-band { display: flex; flex-wrap: wrap; gap: 14px 18px; align-items: center; justify-content: center; margin-top: 28px; }
+/* The VSL play control sits on the paper below the face, never over it */
+.wf-play { display: inline-flex; align-items: center; gap: 10px; font: 600 15px/1 var(--sans); color: var(--ink); background: none; border: 0; cursor: pointer; padding: 6px 0; }
+.wf-play__btn { width: 38px; height: 38px; border-radius: 50%; background: var(--ink); display: grid; place-items: center; box-shadow: var(--shadow-tight); }
+
+/* ---------- Buttons ---------- */
+.wf-btn {
+  position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+  padding: 20px 30px; border-radius: 16px; border: 0; cursor: pointer; text-decoration: none;
+  background: var(--accent); color: #fff; font: 700 18px/1 var(--sans); letter-spacing: -0.01em;
+  box-shadow: var(--shadow-sm), inset 0 1.5px 0 rgba(255,255,255,0.22);
+  transition: transform .18s cubic-bezier(.22,1,.36,1), box-shadow .18s;
+}
+.wf-btn:hover { transform: translateY(-2px); }
+.wf-btn:active, .wf-btn.is-pressed { transform: scale(0.96); box-shadow: 3px 4px 8px rgba(40,30,15,0.22); }
+.wf-btn--ink { background: var(--ink); }
+.wf-btn:focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 4px; }
+
+/* ---------- Devices ---------- */
+/* stat */
+.wf-stat__num { font: 800 clamp(44px, 5vw, 68px)/1 var(--emph); letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+.wf-stat__cap { margin-top: 10px; font-size: 15px; color: rgba(255,255,255,0.62); }
+.wf-card--light .wf-stat__cap { color: var(--muted); }
+
+/* struck "without" list */
+.wf-list { list-style: none; margin: 0; padding: 0; }
+.wf-list li { display: flex; align-items: center; gap: 14px; padding: 14px 0; border-top: 1px solid var(--line); font-weight: 600; font-size: clamp(17px, 1.5vw, 20px); }
+.wf-list li:first-child { border-top: 0; }
+.wf-card--light .wf-list li { border-color: rgba(20,22,27,0.08); }
+.wf-strike { position: relative; display: inline-block; }
+.wf-strike::after {
+  content: ""; position: absolute; left: -3%; top: 52%; height: max(3px, 0.12em); width: 0;
+  background: var(--warn); border-radius: 4px; transition: width .3s cubic-bezier(.22,1,.36,1);
+}
+.wf-strike.is-struck::after { width: 106%; }
+.wf-ico { flex: none; width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: rgba(255,255,255,0.06); }
+.wf-ico--warn { background: rgba(228,87,46,0.14); }
+.wf-ico--good { background: rgba(31,184,119,0.14); }
+.wf-ico--accent { background: rgba(47,91,255,0.16); }
+
+/* steps with depth of field: the one in focus is sharp, the rest blur + dim (never vanish) */
+.wf-steps { display: grid; gap: 16px; }
+.wf-step { display: flex; gap: 18px; align-items: flex-start; transition: filter .5s cubic-bezier(.22,1,.36,1), opacity .5s, transform .5s cubic-bezier(.22,1,.36,1); }
+.wf-steps.is-dof .wf-step { filter: blur(2.5px); opacity: 0.42; transform: scale(0.97); transform-origin: left center; }
+.wf-steps.is-dof .wf-step.is-focus { filter: none; opacity: 1; transform: none; }
+.wf-step__n { flex: none; width: 44px; height: 44px; border-radius: 14px; background: var(--accent); color: #fff; display: grid; place-items: center; font: 800 20px/1 var(--emph); }
+.wf-step__t { font-weight: 700; font-size: 19px; letter-spacing: -0.02em; }
+.wf-step__d { color: rgba(255,255,255,0.62); font-size: 16px; margin-top: 4px; }
+
+/* line graph */
+.wf-graph { width: 100%; height: auto; overflow: visible; }
+.wf-graph .grid { stroke: rgba(255,255,255,0.07); stroke-width: 1; }
+.wf-graph .line { fill: none; stroke: var(--accent-soft); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.wf-graph .area { fill: url(#wfArea); opacity: 0; transition: opacity .8s .6s; }
+.wf-graph.is-drawn .area { opacity: 1; }
+
+/* chat */
+.wf-chat { display: grid; gap: 12px; }
+.wf-bubble { max-width: 88%; padding: 14px 18px; border-radius: 20px; font-size: 16px; line-height: 1.45; font-weight: 500; }
+.wf-bubble--in { background: rgba(255,255,255,0.08); border-bottom-left-radius: 6px; }
+.wf-bubble--out { background: var(--accent); justify-self: end; border-bottom-right-radius: 6px; }
+.wf-typing { display: inline-flex; gap: 5px; padding: 16px 18px; border-radius: 20px; border-bottom-left-radius: 6px; background: rgba(255,255,255,0.08); width: max-content; }
+.wf-typing i { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.55); animation: wfDot 1s infinite ease-in-out; }
+.wf-typing i:nth-child(2) { animation-delay: .15s; } .wf-typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes wfDot { 0%, 60%, 100% { transform: translateY(0); opacity: .45; } 30% { transform: translateY(-4px); opacity: 1; } }
+
+/* seats */
+.wf-seats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.wf-seat { aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.07); display: grid; place-items: center; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05); }
+.wf-seat.is-taken { background: var(--accent); box-shadow: 3px 5px 10px rgba(0,0,0,0.3); }
+.wf-seat svg { opacity: .9; }
+
+/* notification (hero lane card) */
+.wf-note { display: flex; gap: 12px; align-items: center; width: 280px; }
+.wf-note__icon { flex: none; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--accent); }
+.wf-note__t { font-weight: 700; font-size: 15px; letter-spacing: -0.01em; }
+.wf-note__d { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+.wf-card--light .wf-note__d { color: var(--muted); }
+
+/* hero lanes: cards sit BESIDE the face panel on wide screens (1300px+); below that they are left out */
+.wf-hero-stage { position: relative; width: 100%; max-width: 880px; margin: clamp(36px, 5vw, 56px) auto 0; }
+.wf-lane { display: none; }
+@media (min-width: 1300px) {
+  /* the panel gives up width so both lane cards fit on the paper beside it, never over it */
+  .wf-hero-stage { max-width: min(880px, calc(100vw - 700px)); }
+  .wf-lane { display: block; position: absolute; z-index: 2; }
+  .wf-lane--l { right: calc(100% + 28px); top: 18%; }
+  .wf-lane--r { left: calc(100% + 28px); top: 46%; }
+}
+
+/* cursor (kit ICursor) for the CTA click device */
+.wf-cursor { position: absolute; width: 44px; height: 44px; pointer-events: none; z-index: 3; opacity: 0; filter: drop-shadow(4px 6px 5px rgba(0,0,0,.35)); }
+
+/* ---------- Motion start states (only when JS is running and motion is allowed) ---------- */
+.wf-js [data-pop] { opacity: 0; }
+.wf-js [data-kinetic] .wf-w { display: inline-block; opacity: 0; }
+.wf-js .wf-seat { opacity: 0; }
+/* reduced motion, or ?static: everything in its final state (the JS adds .wf-reduce in both cases) */
+.wf-reduce [data-pop], .wf-reduce [data-kinetic] .wf-w, .wf-reduce .wf-seat { opacity: 1 !important; }
+.wf-reduce .wf-strike::after, .wf-reduce .wf-step, .wf-reduce .wf-graph .area { transition: none !important; }
+.wf-reduce .wf-typing i { animation: none; }
+
+/* ---------- Footer ---------- */
+.wf-foot { padding: 40px 0 56px; font-size: 13px; color: var(--muted); text-align: center; }
+
+/* ---------- Stepper chips (state colour logic: green = done, blue = active, grey = to come) ---------- */
+.wf-stepper { display: flex; flex-wrap: wrap; gap: 10px; }
+.wf-stepper span { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px; font: 700 13px/1 var(--sans); letter-spacing: 0.02em; background: rgba(20,22,27,0.08); color: #5f5b54; }
+.wf-stepper .is-done { background: rgba(31,184,119,0.14); color: #127a4f; }
+.wf-stepper .is-active { background: var(--accent); color: #fff; box-shadow: var(--shadow-tight); }
+.wf-graph [data-pop] { transform-box: fill-box; transform-origin: center; }
+
+/* ---------- Hero order: desktop = headline over the panel (16:9 logic); phone = the face panel flush to the top,
+   everything else under it on the paper (kit rule 19, 9:16 logic) ---------- */
+.wf-hero-sec { padding-top: clamp(28px, 5vw, 64px); }
+.wf-hero { display: flex; flex-direction: column; align-items: center; }
+.wf-hero > .wf-chip { align-self: center; }
+@media (max-width: 699px) {
+  .wf-hero-sec { padding-top: 0; }
+  .wf-hero .wf-hero-stage { order: -1; margin: 0 0 28px !important; width: 100%; }
+  .wf-hero .wf-h1 { margin-top: 20px !important; }
+}
+
+/* ---------- Custom VSL player (data-player). The screen is the untouched footage; every control lives on the
+   paper UNDER it (kit rule 6: nothing over the face). Click the footage to play or pause. ---------- */
+@media (max-width: 699px) { .wf-panel--flush.wf-panel--169 { aspect-ratio: 16 / 9; } }  /* a 16:9 film stays 16:9 on a phone */
+.wf-player { width: 100%; }
+.wf-player__screen { cursor: pointer; background: #1b1d22; }
+.wf-player__screen video { background: #1b1d22; }
+.wf-player__bar {
+  display: flex; align-items: center; gap: 14px; margin-top: 18px; padding: 12px 16px 12px 12px; border-radius: 20px;
+  background: linear-gradient(160deg, #FFFFFF 0%, #F3F0EA 60%, #E6E2DA 100%); box-shadow: var(--shadow-sm); text-align: left;
+}
+.wf-player__play {
+  flex: none; width: 52px; height: 52px; border-radius: 50%; border: 0; cursor: pointer; display: grid; place-items: center;
+  background: var(--accent); box-shadow: 3px 5px 10px rgba(40,30,15,0.25), inset 0 1.5px 0 rgba(255,255,255,0.22);
+  transition: transform .18s cubic-bezier(.22,1,.36,1);
+}
+.wf-player__play:active { transform: scale(0.94); }
+.wf-player__play .i-pause, .wf-player.is-playing .wf-player__play .i-play { display: none; }
+.wf-player.is-playing .wf-player__play .i-pause { display: block; }
+.wf-player__mid { flex: 1; min-width: 0; }
+.wf-player__title { font-weight: 700; font-size: 15px; letter-spacing: -0.01em; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wf-player__track { position: relative; height: 22px; margin-top: 2px; cursor: pointer; touch-action: none; }
+.wf-player__track::before { content: ""; position: absolute; left: 0; right: 0; top: 9px; height: 4px; border-radius: 4px; background: rgba(20,22,27,0.12); }
+.wf-player__buf, .wf-player__fill { position: absolute; left: 0; top: 9px; height: 4px; border-radius: 4px; width: 0; }
+.wf-player__buf { background: rgba(20,22,27,0.14); }
+.wf-player__fill { background: var(--accent); }
+.wf-player__knob { position: absolute; top: 4px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 3px var(--accent), 2px 3px 6px rgba(40,30,15,0.3); left: 0; }
+.wf-player__track:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 6px; }
+.wf-player__time { flex: none; font: 600 14px/1 var(--sans); font-variant-numeric: tabular-nums; color: var(--muted); }
+.wf-player__icon { flex: none; width: 38px; height: 38px; border-radius: 12px; border: 0; cursor: pointer; display: grid; place-items: center; background: rgba(20,22,27,0.06); color: var(--ink); }
+.wf-player__icon:hover { background: rgba(20,22,27,0.1); }
+.wf-player .i-muted, .wf-player.is-muted .i-sound { display: none; }
+.wf-player.is-muted .i-muted { display: block; }
+@media (max-width: 520px) { .wf-player__time { display: none; } .wf-player__bar { gap: 10px; } .wf-player__play { width: 46px; height: 46px; } }
+
+</style>
+<style>
+/* ---- page-only pieces (everything else is the White Flow template) ---- */
+/* tighter rhythm than the template: three short sections, no big gaps */
+.wf-section { padding: clamp(44px, 6.5vw, 88px) 0; }
+.wf-section.wf-hero-sec { padding-top: clamp(20px, 3vw, 40px); }
+.acsa-top { display: flex; justify-content: center; padding: 22px var(--gutter) 0; }
+.acsa-mark { font: 700 13px/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.acsa-mark b { color: var(--accent); font-weight: 700; }
+.acsa-h1 { margin: 24px auto 0; max-width: 15em; font-size: clamp(31px, 5.4vw, 72px); }
+.acsa-hero-player { width: 100%; max-width: 900px; margin: clamp(28px, 4vw, 44px) auto 0; }
+.acsa-cta { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 26px; }
+.acsa-cta .wf-btn { min-width: min(100%, 320px); }
+.acsa-note { font-size: 15px; color: var(--muted); margin: 0; }
+.acsa-stats { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; max-width: 980px; margin: 0 auto; }
+.acsa-stats .wf-stat__num { font-size: clamp(30px, 4.6vw, 62px); white-space: nowrap; }
+.acsa-close { display: grid; gap: clamp(24px, 4vw, 48px); align-items: center; max-width: 980px; margin: 0 auto; }
+.acsa-close .wf-facecard--round { margin: 0 auto; width: 100%; max-width: 220px; }
+@media (min-width: 900px) {
+  .acsa-close { grid-template-columns: 240px 1fr; text-align: left; }
+  .acsa-close .wf-lede { margin-left: 0; }
+  .acsa-close .acsa-cta { align-items: flex-start; }
+}
+@media (max-width: 699px) {
+  .acsa-top { display: none; }
+  .wf-hero .acsa-hero-player { order: -1; margin: 0 0 4px; }
+  .wf-section.wf-hero-sec { padding-top: 0; }
+  .wf-hero > .wf-chip { display: none; }          /* the video's own first frame carries this tag on a phone */
+  .acsa-h1 { margin-top: 22px; }
+  .wf-player [data-mute] { display: none; }       /* phones have volume buttons; gives the title room */
+  .acsa-stats .wf-card { padding: 18px 16px; }
+  .acsa-stats .wf-card__label { font-size: 10.5px; letter-spacing: 0.08em; line-height: 1.3; }
+  .acsa-stats .wf-stat__cap { font-size: 13px; margin-top: 6px; }
+  .acsa-cta .wf-btn { width: 100%; }
+  .wf-lede { font-size: 17px; }
+}
+/* phone: one card per row, number on the left, label + caption on the right (the wide face will not fit two across) */
+@media (max-width: 559px) {
+  .acsa-stats { grid-template-columns: 1fr; gap: 12px; }
+  .acsa-stats .wf-card { display: grid; grid-template-columns: auto 1fr; column-gap: 18px; align-items: center; padding: 18px 20px; }
+  .acsa-stats .wf-stat__num { grid-column: 1; grid-row: 1 / 3; margin-top: 0 !important; font-size: 34px; }
+  .acsa-stats .wf-card__label { grid-column: 2; grid-row: 1; align-self: end; }
+  .acsa-stats .wf-stat__cap { grid-column: 2; grid-row: 2; align-self: start; margin-top: 5px; }
+}
+/* the wide heavy emphasis face */
+.wf-h1 em, .wf-h2 em, .wf-stat__num { font-stretch: 125%; }
+.wf-h1 em, .wf-h2 em { white-space: nowrap; }   /* an emphasis phrase never splits across lines */
+</style>
+</head>
+<body>
+<div class="wf-paper" aria-hidden="true"><div class="wf-paper__grid"></div><div class="wf-paper__light"></div><div class="wf-paper__grain"></div></div>
+
+<div class="acsa-top"><span class="acsa-mark">AI Creative <b>Strategist</b> Accelerator</span></div>
+
+<main>
+
+<!-- 1. HERO = FULL FACE. The chip matches the tag on the video's first frame and shows with no animation. -->
+<section class="wf-section wf-hero-sec">
+  <div class="wf-wrap wf-center wf-hero">
+    <span class="wf-chip"><span class="wf-chip__dot"></span>Copywriters &amp; media buyers</span>
+    <h1 class="wf-h1 acsa-h1" data-kinetic="0.06" data-delay="0.1">
+      How Copywriters &amp; Media Buyers Are Hitting <em class="wf-a">$10k/Mo</em> With AI in 2026
+    </h1>
+    <p class="wf-lede" data-pop="0.9" data-delay="0.8" style="margin-top: 18px;">The exact system that took me from $0 to $30k/mo in 90 days and my brother from zero experience to $3,500/mo in 30 days.</p>
+
+    <!-- the VSL: custom player, footage untouched, every control on the paper under it -->
+    <div class="acsa-hero-player">
+      <div class="wf-player" data-player>
+        <div class="wf-panel wf-panel--flush wf-panel--169 wf-player__screen">
+          <video preload="metadata" poster="assets/poster.jpg" playsinline disablepictureinpicture controlslist="nodownload noplaybackrate"
+                 data-src-hd="assets/vsl-1080.mp4" data-src-sd="assets/vsl-720.mp4"></video>
+        </div>
+        <div class="wf-player__bar">
+          <button class="wf-player__play" aria-label="Play">
+            <svg class="i-play" width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13l11-6.5z"/></svg>
+            <svg class="i-pause" width="20" height="20" viewBox="0 0 24 24" fill="#fff"><rect x="6.5" y="5" width="4" height="14" rx="1.2"/><rect x="13.5" y="5" width="4" height="14" rx="1.2"/></svg>
+          </button>
+          <div class="wf-player__mid">
+            <div class="wf-player__title" data-resume="Pick up where you left off">Watch the free training</div>
+            <div class="wf-player__track" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div class="wf-player__buf"></div><div class="wf-player__fill"></div><div class="wf-player__knob"></div>
+            </div>
+          </div>
+          <span class="wf-player__time">0:00 / 4:55</span>
+          <button class="wf-player__icon" data-mute aria-label="Mute">
+            <svg class="i-sound" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>
+            <svg class="i-muted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="m16 9.5 5 5M21 9.5l-5 5"/></svg>
+          </button>
+          <button class="wf-player__icon" data-fullscreen aria-label="Full screen">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="acsa-cta" data-stagger="0.08" data-delay="0.2">
+      <p class="acsa-note" data-pop style="font-weight: 600; color: var(--ink); font-size: 17px;">Watch the full training above, then apply.</p>
+      <a class="wf-btn" data-apply href="#" data-pop>Apply now
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <p class="acsa-note" data-pop>Takes 2 minutes. If it's a fit, you'll book a call with me directly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 2. PROOF = FACELESS. Device: four counters. -->
+<section class="wf-section">
+  <div class="wf-wrap">
+    <div class="wf-center" style="margin-bottom: clamp(24px, 3.5vw, 40px);">
+      <span class="wf-chip wf-chip--paper" data-pop>The results</span>
+      <h2 class="wf-h2" data-kinetic style="margin-top: 16px;">Not something I read about. <em>What I do.</em></h2>
+    </div>
+    <div class="acsa-stats" data-stagger="0.09">
+      <div class="wf-card" data-pop>
+        <div class="wf-card__label">My income in 90 days</div>
+        <div class="wf-stat__num wf-a" style="margin-top: 12px;" data-count="30" data-prefix="$" data-suffix="k/mo" data-delay="0.2">$30k/mo</div>
+        <div class="wf-stat__cap">from $0</div>
+      </div>
+      <div class="wf-card" data-pop>
+        <div class="wf-card__label">My brother in 30 days</div>
+        <div class="wf-stat__num" style="margin-top: 12px;" data-count="3500" data-prefix="$" data-suffix="/mo" data-delay="0.3">$3,500/mo</div>
+        <div class="wf-stat__cap">from zero experience</div>
+      </div>
+      <div class="wf-card wf-card--light" data-pop>
+        <div class="wf-card__label">Ad spend managed</div>
+        <div class="wf-stat__num" style="margin-top: 12px;">$1M+/mo</div>
+        <div class="wf-stat__cap">for clients</div>
+      </div>
+      <div class="wf-card wf-card--light" data-pop>
+        <div class="wf-card__label">A client's best day</div>
+        <div class="wf-stat__num" style="margin-top: 12px;" data-count="70" data-prefix="$" data-suffix="k" data-delay="0.5">$70k</div>
+        <div class="wf-stat__cap">in a single day</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. APPLY = back on his face. One button to the Typeform. -->
+<section class="wf-section" id="apply" style="padding-bottom: clamp(56px, 8vw, 96px);">
+  <div class="wf-wrap">
+    <div class="acsa-close wf-center">
+      <div class="wf-facecard wf-facecard--round" data-pop><img src="assets/face-round.jpg" alt="Quinten Gish" width="440" height="440" loading="lazy"></div>
+      <div>
+        <h2 class="wf-h2" data-kinetic>Apply for the <em class="wf-a">program</em></h2>
+        <p class="wf-lede" data-pop="0.9" data-delay="0.4" style="margin-top: 14px;">Fill out the short application. I just want to know where you're at and whether this is a fit.</p>
+        <div class="acsa-cta">
+          <div data-click style="position: relative; display: inline-block; width: 100%; text-align: inherit;">
+            <a class="wf-btn" data-apply href="#" data-pop data-delay="0.2">Apply now
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <svg class="wf-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 2.5 19 13l-6.2.8 3.4 6.6-2.7 1.3-3.3-6.7L5 19.5z" fill="#fff" stroke="#14161B" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          </div>
+          <p class="acsa-note">Takes 2 minutes. If it's a fit, you'll book a call with me directly.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="wf-foot"><div class="wf-wrap">&copy; 2026 AI Creative Strategist Accelerator. All rights reserved.</div></footer>
+
+<script>
+/* ==========================================================================
+   White Flow - landing page motion engine (no dependencies)
+   The web port of kit.tsx: Pop, Kinetic, Count, strike, Drift, depth of field.
+   Every element enters ONCE when it scrolls into view. Nothing loops, pulses
+   or breathes. prefers-reduced-motion shows the final state with no motion.
+   Hooks (HTML attributes):
+     data-pop[="0.6"]           pop in: scale from->1 on the kit spring, blur 14px clears, opacity 0.16s
+       data-delay="0.2"         extra delay in seconds
+       data-rot="-4"            starting rotation that settles to 0
+     data-stagger="0.06"        container: its [data-pop] children enter one after another
+     data-kinetic[="0.08"]      headline: every word pops in on its own beat (seconds per word)
+     data-count="61"            count up, ease-out-expo. data-from, data-dur, data-prefix, data-suffix, data-delay
+     data-strike-group          container: every .wf-strike inside is struck through in turn
+     data-draw                  svg: every path.line draws on
+     data-dof                   .wf-steps: the step nearest the middle of the screen is in focus
+     data-chat                  container: typing dots, then each bubble, in order
+     data-seats="7"             container of .wf-seat: seats appear, then N fill with the accent
+     data-click                 container with .wf-btn + .wf-cursor: cursor glides in and clicks once
+     data-drift[="0.035"]       slow one-way camera push while the element scrolls through
+     data-player                custom VSL player (see the player block below and styles/web/white-flow.md)
+   Add ?static to the URL to see every section in its final state (QC, thumbnails).
+   ========================================================================== */
+(() => {
+  const root = document.documentElement;
+  // ?static = the final state with no motion (QC screenshots, thumbnails). Same path as reduced motion.
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || /[?&]static\b/.test(location.search);
+  root.classList.add('wf-js');
+  if (reduce) root.classList.add('wf-reduce');
+
+  /* ---- the kit spring (Remotion spring physics), turned into a CSS linear() easing ---- */
+  function spring({damping = 13, stiffness = 150, mass = 0.7} = {}) {
+    const dt = 1 / 240; let x = 0, v = 0, t = 0; const pts = [];
+    while (t < 3) {
+      const a = (-stiffness * (x - 1) - damping * v) / mass;
+      v += a * dt; x += v * dt; t += dt; pts.push([t, x]);
+      if (t > 0.2 && Math.abs(1 - x) < 0.0015 && Math.abs(v) < 0.02) break;
+    }
+    const dur = t, step = Math.max(1, Math.floor(pts.length / 48));
+    const stops = ['0'];
+    for (let i = step; i < pts.length - 1; i += step) stops.push(`${pts[i][1].toFixed(4)} ${((pts[i][0] / dur) * 100).toFixed(2)}%`);
+    stops.push('1');
+    return {dur: dur * 1000, easing: `linear(${stops.join(', ')})`};
+  }
+  const hasLinear = CSS.supports('animation-timing-function', 'linear(0, 1)');
+  const POP = spring();                                     // kit usePop: damping 13, stiffness 150, mass 0.7
+  const WORD = spring({damping: 16, stiffness: 190});       // kit Kinetic words
+  const ez = (s) => (hasLinear ? s.easing : 'cubic-bezier(.34,1.45,.64,1)');
+  const EASE = 'cubic-bezier(.22,1,.36,1)';                 // kit ease
+  const outExpo = (p) => (p >= 1 ? 1 : 1 - Math.pow(2, -10 * p));
+
+  /* ---- once-only in-view trigger ---- */
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) if (e.isIntersecting) { io.unobserve(e.target); (e.target.__wfRun || []).forEach((fn) => fn()); }
+  }, {threshold: 0.22, rootMargin: '0px 0px -6% 0px'});
+  // one element can carry several behaviours (e.g. a card that pops AND strikes its list): run them all
+  const onView = (el, fn) => { if (reduce) return; (el.__wfRun = el.__wfRun || []).push(fn); io.observe(el); };
+  const num = (v, d) => (v === undefined || v === '' ? d : parseFloat(v));
+
+  /* ---- Pop ---- */
+  function pop(el, delay = 0) {
+    const from = num(el.dataset.pop, 0.6), rot = num(el.dataset.rot, 0);
+    delay = (delay + num(el.dataset.delay, 0)) * 1000;
+    el.animate([{scale: from, rotate: `${rot}deg`}, {scale: 1, rotate: '0deg'}], {duration: POP.dur, easing: ez(POP), delay, fill: 'both'});
+    el.animate([{opacity: 0}, {opacity: 1}], {duration: 160, delay, fill: 'both'});
+    el.animate([{filter: 'blur(14px)'}, {filter: 'blur(0px)'}], {duration: 240, easing: EASE, delay, fill: 'both'});
+  }
+  const groups = new Map();
+  document.querySelectorAll('[data-pop]').forEach((el) => {
+    const g = el.parentElement.closest('[data-stagger]') || el;
+    if (!groups.has(g)) groups.set(g, []);
+    groups.get(g).push(el);
+  });
+  groups.forEach((els, g) => {
+    const gap = g.dataset.stagger !== undefined ? num(g.dataset.stagger, 0.06) : 0;
+    const base = g.dataset.stagger !== undefined ? num(g.dataset.delay, 0) : 0;
+    onView(g, () => els.forEach((el, i) => pop(el, base + i * gap)));
+  });
+
+  /* ---- Kinetic headline: wrap every word, keep <em>/<span> styling ---- */
+  document.querySelectorAll('[data-kinetic]').forEach((el) => {
+    const wrap = (node) => {
+      [...node.childNodes].forEach((n) => {
+        if (n.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach((part) => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.append(part); return; }
+            const s = document.createElement('span'); s.className = 'wf-w'; s.textContent = part; frag.append(s);
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1 && !n.classList.contains('wf-w')) wrap(n);
+      });
+    };
+    wrap(el);
+    const per = num(el.dataset.kinetic, 0.08), base = num(el.dataset.delay, 0);
+    onView(el, () => el.querySelectorAll('.wf-w').forEach((w, i) => {
+      const delay = (base + i * per) * 1000;
+      w.style.transformOrigin = 'left bottom';
+      w.animate([{translate: '0 0.45em', scale: 0.82}, {translate: '0 0', scale: 1}], {duration: WORD.dur, easing: ez(WORD), delay, fill: 'both'});
+      w.animate([{opacity: 0}, {opacity: 1}], {duration: 140, delay, fill: 'both'});
+      w.animate([{filter: 'blur(10px)'}, {filter: 'blur(0px)'}], {duration: 220, easing: EASE, delay, fill: 'both'});
+    }));
+  });
+
+  /* ---- Count ---- */
+  const fmt = (el, v) => `${el.dataset.prefix || ''}${Math.round(v).toLocaleString('en-US')}${el.dataset.suffix || ''}`;
+  document.querySelectorAll('[data-count]').forEach((el) => {
+    const to = num(el.dataset.count, 0), from = num(el.dataset.from, 0), dur = num(el.dataset.dur, 1.4) * 1000;
+    if (reduce) { el.textContent = fmt(el, to); return; }
+    el.textContent = fmt(el, from);
+    onView(el, () => setTimeout(() => {
+      const t0 = performance.now();
+      const tick = (now) => {
+        const p = Math.min(1, (now - t0) / dur);
+        el.textContent = fmt(el, from + (to - from) * outExpo(p));
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }, num(el.dataset.delay, 0) * 1000));
+  });
+
+  /* ---- Strike-through list ---- */
+  document.querySelectorAll('[data-strike-group]').forEach((g) => {
+    const items = g.querySelectorAll('.wf-strike');
+    if (reduce) { items.forEach((s) => s.classList.add('is-struck')); return; }
+    const base = num(g.dataset.delay, 0.7), gap = num(g.dataset.strikeGroup, 0.35);
+    onView(g, () => items.forEach((s, i) => setTimeout(() => s.classList.add('is-struck'), (base + i * gap) * 1000)));
+  });
+
+  /* ---- Line graph draw-on ---- */
+  document.querySelectorAll('svg[data-draw]').forEach((svg) => {
+    const lines = svg.querySelectorAll('path.line');
+    if (reduce) { svg.classList.add('is-drawn'); return; }
+    lines.forEach((p) => { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; });
+    onView(svg, () => {
+      svg.classList.add('is-drawn');
+      lines.forEach((p) => p.animate([{strokeDashoffset: p.getTotalLength()}, {strokeDashoffset: 0}], {duration: 1400, easing: EASE, delay: num(svg.dataset.delay, 0.2) * 1000, fill: 'forwards'}));
+    });
+  });
+
+  /* ---- Depth of field on steps ---- */
+  document.querySelectorAll('[data-dof]').forEach((box) => {
+    const steps = [...box.querySelectorAll('.wf-step')];
+    if (reduce || steps.length < 2) return;
+    let live = false;
+    const update = () => {
+      const r = box.getBoundingClientRect(), vh = innerHeight;
+      const inView = r.top < vh * 0.75 && r.bottom > vh * 0.25;
+      box.classList.toggle('is-dof', live && inView);
+      if (!live || !inView) return;
+      const mid = vh * 0.5; let best = steps[0], d = Infinity;
+      steps.forEach((s) => { const b = s.getBoundingClientRect(); const dd = Math.abs(b.top + b.height / 2 - mid); if (dd < d) { d = dd; best = s; } });
+      steps.forEach((s) => s.classList.toggle('is-focus', s === best));
+    };
+    onView(box, () => setTimeout(() => { live = true; update(); }, 900));
+    addEventListener('scroll', update, {passive: true});
+  });
+
+  /* ---- Chat: typing dots, then each bubble ---- */
+  document.querySelectorAll('[data-chat]').forEach((chat) => {
+    const bubbles = [...chat.querySelectorAll('.wf-bubble')];
+    const typing = chat.querySelector('.wf-typing');
+    if (reduce) { typing && typing.remove(); return; }
+    bubbles.forEach((b) => (b.style.display = 'none'));
+    if (typing) typing.style.display = 'none';
+    onView(chat, async () => {
+      const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+      await wait(300);
+      for (const b of bubbles) {
+        if (b.classList.contains('wf-bubble--in') && typing) {
+          chat.append(typing); typing.style.display = ''; typing.dataset.pop = '0.7'; pop(typing); await wait(1000); typing.style.display = 'none';
+        } else await wait(450);
+        chat.append(b); b.style.display = ''; b.dataset.pop = b.dataset.pop || '0.7'; pop(b); await wait(500);
+      }
+    });
+  });
+
+  /* ---- Seats ---- */
+  document.querySelectorAll('[data-seats]').forEach((box) => {
+    const seats = [...box.querySelectorAll('.wf-seat')], taken = num(box.dataset.seats, 0);
+    if (reduce) { seats.slice(0, taken).forEach((s) => s.classList.add('is-taken')); return; }
+    onView(box, () => {
+      seats.forEach((s, i) => { s.dataset.pop = '0.5'; pop(s, 0.1 + i * 0.05); });
+      seats.slice(0, taken).forEach((s, i) => setTimeout(() => s.classList.add('is-taken'), (0.8 + i * 0.12) * 1000));
+    });
+  });
+
+  /* ---- Cursor click on the CTA (kit "CTA button with cursor click") ---- */
+  document.querySelectorAll('[data-click]').forEach((box) => {
+    const btn = box.querySelector('.wf-btn'), cur = box.querySelector('.wf-cursor');
+    if (!btn || !cur || reduce) return;
+    onView(box, () => {
+      const b = btn.getBoundingClientRect(), o = box.getBoundingClientRect();
+      const x = b.left - o.left + b.width * 0.62, y = b.top - o.top + b.height * 0.55;
+      cur.style.left = `${x}px`; cur.style.top = `${y}px`;
+      cur.animate([{translate: '170px 120px', opacity: 0}, {translate: '0 0', opacity: 1}], {duration: 900, easing: EASE, delay: 500, fill: 'forwards'});
+      setTimeout(() => {
+        cur.animate([{scale: 1}, {scale: 0.82}, {scale: 1}], {duration: 260, easing: EASE, transformOrigin: 'top left'});
+        btn.classList.add('is-pressed');
+        setTimeout(() => btn.classList.remove('is-pressed'), 160);
+        const ring = document.createElement('span');
+        Object.assign(ring.style, {position: 'absolute', left: `${x}px`, top: `${y}px`, width: '14px', height: '14px', margin: '-7px 0 0 -7px', borderRadius: '50%', border: '2px solid var(--accent)', pointerEvents: 'none'});
+        box.append(ring);
+        ring.animate([{scale: 1, opacity: 0.9}, {scale: 6, opacity: 0}], {duration: 600, easing: EASE, fill: 'forwards'}).onfinish = () => ring.remove();
+        cur.animate([{opacity: 1}, {opacity: 0}], {duration: 400, delay: 900, fill: 'forwards'});
+      }, 1500);
+    });
+  });
+
+  /* ---- Paper grid + drift: tied to scroll, one way, never idle wobble ---- */
+  const grid = document.querySelector('.wf-paper__grid');
+  const drifts = [...document.querySelectorAll('[data-drift]')];
+  if (!reduce) {
+    let queued = false;
+    const frame = () => {
+      queued = false;
+      const y = scrollY;
+      if (grid) grid.style.transform = `translate(${(y * 0.02) % 60}px, ${-(y * 0.08) % 60}px)`;
+      drifts.forEach((el) => {
+        const r = el.getBoundingClientRect(), vh = innerHeight;
+        const p = Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height)));
+        el.style.scale = 1 + p * num(el.dataset.drift, 0.035);
+      });
+    };
+    addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(frame); } }, {passive: true});
+    frame();
+  }
+
+  /* ---- Custom VSL player ([data-player]): controls on the paper under the footage, never over the face ----
+     <video data-src-hd="hd.mp4" data-src-sd="sd.mp4" poster="poster.jpg"> ; phones and data-saver get the SD file.
+     Remembers where each viewer stopped (per video, this browser only). */
+  document.querySelectorAll('[data-player]').forEach((pl) => {
+    const v = pl.querySelector('video'), screen = pl.querySelector('.wf-player__screen');
+    const play = pl.querySelector('.wf-player__play'), track = pl.querySelector('.wf-player__track');
+    const fill = pl.querySelector('.wf-player__fill'), buf = pl.querySelector('.wf-player__buf'), knob = pl.querySelector('.wf-player__knob');
+    const time = pl.querySelector('.wf-player__time'), mute = pl.querySelector('[data-mute]'), fs = pl.querySelector('[data-fullscreen]');
+    const title = pl.querySelector('.wf-player__title');
+    const sd = innerWidth < 700 || (navigator.connection && navigator.connection.saveData);
+    v.src = (sd && v.dataset.srcSd) || v.dataset.srcHd || v.dataset.srcSd || v.src;
+    v.playsInline = true; v.controls = false;
+    const key = 'wf-vsl:' + v.src.split('?')[0];
+    const mmss = (s) => { s = Math.max(0, Math.floor(s || 0)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
+    const paint = () => {
+      const d = v.duration || 0, p = d ? v.currentTime / d : 0;
+      fill.style.width = `${p * 100}%`; knob.style.left = `${p * 100}%`;
+      if (time) time.textContent = `${mmss(v.currentTime)} / ${mmss(d)}`;
+      track.setAttribute('aria-valuenow', Math.round(p * 100));
+      try { if (v.buffered.length && d) buf.style.width = `${(v.buffered.end(v.buffered.length - 1) / d) * 100}%`; } catch (e) {}
+    };
+    const toggle = () => (v.paused ? v.play() : v.pause());
+    let saved = 0;
+    try { saved = parseFloat(localStorage.getItem(key)) || 0; } catch (e) {}
+    v.addEventListener('loadedmetadata', () => { if (saved > 5 && saved < v.duration - 10) { v.currentTime = saved; if (title && title.dataset.resume) title.textContent = title.dataset.resume; } paint(); });
+    v.addEventListener('play', () => { pl.classList.add('is-playing'); play.setAttribute('aria-label', 'Pause'); tick(); });
+    v.addEventListener('pause', () => { pl.classList.remove('is-playing'); play.setAttribute('aria-label', 'Play'); });
+    v.addEventListener('ended', () => { try { localStorage.removeItem(key); } catch (e) {} });
+    v.addEventListener('timeupdate', () => { try { if (v.currentTime > 5) localStorage.setItem(key, v.currentTime.toFixed(1)); } catch (e) {} });
+    v.addEventListener('progress', paint);
+    v.addEventListener('volumechange', () => pl.classList.toggle('is-muted', v.muted));
+    v.addEventListener('contextmenu', (e) => e.preventDefault());
+    const tick = () => { paint(); if (!v.paused) requestAnimationFrame(tick); };
+    play.addEventListener('click', toggle);
+    screen.addEventListener('click', toggle);
+    if (mute) mute.addEventListener('click', () => { v.muted = !v.muted; });
+    if (fs) fs.addEventListener('click', () => {
+      if (document.fullscreenElement) return document.exitFullscreen();
+      if (v.requestFullscreen) v.requestFullscreen(); else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+    });
+    document.addEventListener('fullscreenchange', () => { v.controls = document.fullscreenElement === v; });
+    const seekTo = (x) => { const r = track.getBoundingClientRect(); const p = Math.min(1, Math.max(0, (x - r.left) / r.width)); if (v.duration) { v.currentTime = p * v.duration; paint(); } };
+    track.addEventListener('pointerdown', (e) => {
+      try { track.setPointerCapture(e.pointerId); } catch (err) {} seekTo(e.clientX);
+      const move = (ev) => seekTo(ev.clientX);
+      const up = () => { track.removeEventListener('pointermove', move); track.removeEventListener('pointerup', up); };
+      track.addEventListener('pointermove', move); track.addEventListener('pointerup', up);
+    });
+    track.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') v.currentTime = Math.min(v.duration || 0, v.currentTime + 5);
+      else if (e.key === 'ArrowLeft') v.currentTime = Math.max(0, v.currentTime - 5);
+      else if (e.key === ' ' || e.key === 'Enter') toggle(); else return;
+      e.preventDefault(); paint();
+    });
+  });
+
+  /* ---- VSL play control (sits on the paper, never over the face) ---- */
+  document.querySelectorAll('[data-play]').forEach((btn) => {
+    const v = document.querySelector(btn.dataset.play);
+    if (!v || v.tagName !== 'VIDEO') return;
+    btn.addEventListener('click', () => { v.controls = true; v.muted = false; v.play(); });
+  });
+})();
+
+</script>
+<script>
+/* THE APPLICATION LINK: paste the Typeform share link here, then rebuild. Every "Apply now" button uses it. */
+const TYPEFORM_URL = '';
+document.querySelectorAll('[data-apply]').forEach((a) => {
+  if (TYPEFORM_URL) { a.href = TYPEFORM_URL; }
+  else a.addEventListener('click', (e) => e.preventDefault());
+});
+</script>
+</body>
+</html>
