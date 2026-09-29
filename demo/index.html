@@ -372,15 +372,7 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
 .gpath em { flex: none; margin-left: auto; padding: 6px 10px; border-radius: 999px; background: rgba(143,168,255,0.16); color: var(--accent-soft); font: 700 12px/1 var(--sans); font-style: normal; letter-spacing: 0.08em; text-transform: uppercase; }
 
 /* ---------- offer, price, ready ---------- */
-.wk { padding: 7px 11px; border-radius: 999px; background: var(--ink); color: #fff; font: 700 12.5px/1 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; }
-.gets { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 4px; }
-.gets li { display: flex; align-items: center; gap: 16px; padding: 12px 4px; border-bottom: 1px solid var(--line-l); }
-.gets li:last-child { border-bottom: 0; }
-.gets i { flex: none; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--good); color: #fff; }
-.gets i svg { width: 18px; height: 18px; }
-.gets b { display: block; font: 700 clamp(18px, 1.7vw, 22px)/1.2 var(--sans); letter-spacing: -0.015em; }
-.gets span { display: block; margin-top: 4px; font-size: 16px; color: var(--muted); }
-.gets--maybe i { background: transparent; border: 2px dashed var(--accent); color: var(--accent); }
+.wk-unused { padding: 7px 11px; border-radius: 999px; background: var(--ink); color: #fff; font: 700 12.5px/1 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; }
 .pr-row { display: grid; grid-template-columns: auto auto minmax(0, 1fr); align-items: center; gap: clamp(14px, 2vw, 26px); }
 .lbl--a { color: var(--accent-soft) !important; }
 .pr-old { position: relative; display: inline-block; margin-top: 10px; font: 800 clamp(28px, 3vw, 40px)/1 var(--emph); font-stretch: 125%; color: rgba(255,255,255,0.45); }
@@ -394,6 +386,63 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
 .btn--pay { height: 60px; padding: 0 30px; border-radius: 16px; background: var(--accent); font-size: 19px; text-decoration: none; }
 .btn--pay[hidden] { display: none; }
 .pay-note { margin: 0; font: 600 clamp(18px, 1.6vw, 22px)/1.3 var(--sans); color: var(--ink2); }
+
+/* ---------- the stack ---------- */
+.stack-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.stack-head .h2 { margin-top: 8px; }
+.stack-count { display: flex; align-items: baseline; gap: 10px; font: 600 16px/1.2 var(--sans); color: var(--ink2); }
+.sc-n { font: 800 clamp(44px, 4.6vw, 64px)/1 var(--emph); font-stretch: 125%; color: var(--accent); font-variant-numeric: tabular-nums; }
+.stackgrid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px 18px; margin-top: clamp(14px, 2.2vh, 24px); align-items: start; }
+.sg { display: grid; gap: 8px; }
+.sg-k { margin-top: 4px; font: 700 12.5px/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.sg-k--a { margin-top: 10px; color: var(--accent); }
+.st { display: flex; align-items: center; gap: 14px; padding: 11px 16px 11px 12px; border-radius: 16px; color: #fff;
+  background: linear-gradient(160deg, var(--card-top) 0%, var(--card) 45%, var(--card2) 100%); box-shadow: var(--shadow-sm), var(--hairline); }
+.st i { flex: none; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: rgba(143,168,255,0.16); color: var(--accent-soft); font: 800 14px/1 var(--emph); font-stretch: 125%; font-style: normal; }
+.st b { display: block; font: 700 clamp(16px, 1.45vw, 19px)/1.2 var(--sans); letter-spacing: -0.01em; }
+.st span { display: block; margin-top: 3px; font-size: 14.5px; line-height: 1.3; color: rgba(255,255,255,0.6); }
+.st--a { background: var(--accent); }
+.st--a i { background: rgba(255,255,255,0.2); color: #fff; }
+.st--a span { color: rgba(255,255,255,0.8); }
+.st--maybe { background: transparent; box-shadow: none; border: 1.5px dashed var(--accent); color: var(--ink); }
+.st--maybe i { background: transparent; border: 2px dashed var(--accent); color: var(--accent); }
+.st--maybe span { color: var(--muted); }
+
+/* ---------- value math ---------- */
+.valuewrap { max-width: 1060px; margin-inline: auto; text-align: center; }
+.eq { margin-top: clamp(18px, 3vh, 32px); display: grid; gap: 12px; }
+.eq-row { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: stretch; gap: 14px; }
+.eq-op { align-self: center; font: 800 34px/1 var(--emph); color: var(--muted); }
+.eq-line { height: 5px; border-radius: 5px; background: var(--ink); transform-origin: center; }
+.vbox { padding: 16px 20px; border-radius: 18px; text-align: left; box-shadow: var(--shadow-sm); }
+.vbox--up { background: var(--ink); color: #fff; }
+.vbox--down { background: #fff; color: var(--ink); box-shadow: var(--shadow-sm), inset 0 0 0 1px var(--line-l); }
+.vk { display: flex; align-items: center; gap: 10px; font: 700 12.5px/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; }
+.vk b { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; font-size: 15px; letter-spacing: 0; }
+.vbox--up .vk b { background: var(--good); color: #fff; }
+.vbox--down .vk b { background: var(--accent); color: #fff; }
+.vbox p { margin: 10px 0 0; font: 700 clamp(19px, 1.9vw, 25px)/1.2 var(--sans); letter-spacing: -0.02em; }
+.eq-foot { margin: clamp(16px, 2.6vh, 28px) auto 0; max-width: 34em; font-size: clamp(18px, 1.7vw, 22px); color: var(--ink2); }
+.eq-foot b { color: var(--ink); }
+
+/* ---------- two paths ---------- */
+.paths { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 18px; margin-top: clamp(18px, 3vh, 32px); text-align: left; align-items: stretch; }
+.path { padding: clamp(20px, 2.2vw, 30px); }
+.path-t { display: block; margin-top: 10px; font: 800 clamp(24px, 2.4vw, 34px)/1.05 var(--emph); font-stretch: 125%; }
+.path ul { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 10px; }
+.path li { display: flex; gap: 12px; align-items: flex-start; font: 600 clamp(17px, 1.6vw, 21px)/1.3 var(--sans); }
+.path li::before { content: ""; flex: none; width: 10px; height: 10px; margin-top: 0.45em; border-radius: 50%; }
+.path--no li { color: var(--ink2); }
+.path--no li::before { background: #C9C3B9; }
+.path--no .path-t { color: #8B877F; }
+.path--yes { background: linear-gradient(160deg, #3A63FF 0%, #2F5BFF 50%, #2448D8 100%); }
+.path--yes .lbl { color: rgba(255,255,255,0.75); }
+.path--yes li::before { background: #fff; }
+
+/* ---------- payback line ---------- */
+.payback { margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.09); }
+.payback b { display: block; font: 700 clamp(18px, 1.7vw, 22px)/1.3 var(--sans); color: #fff; }
+.payback span { display: block; margin-top: 6px; font-size: 14px; color: rgba(255,255,255,0.5); }
 
 /* ---------- responsive ---------- */
 @media (max-width: 1360px) {
@@ -424,6 +473,9 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
   .callout { white-space: normal; max-width: 74%; top: 14%; }
   .pr-row { grid-template-columns: minmax(0, 1fr); }
   .pr-arrow { display: none; }
+  .stackgrid, .paths { grid-template-columns: minmax(0, 1fr); }
+  .eq-row { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .eq-op { justify-self: center; }
   .intro .h1 em { display: block; }
   .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .row { grid-template-columns: minmax(0, 1fr) 104px; row-gap: 4px; }
@@ -453,9 +505,11 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
     <button class="sc" type="button" data-go="5"><i>5</i><span>Repeat</span></button>
     <button class="sc" type="button" data-go="6"><i>+</i><span>After</span></button>
     <button class="sc" type="button" data-go="7"><i>$</i><span>Your numbers</span></button>
-    <button class="sc" type="button" data-go="8"><i>P</i><span>Program</span></button>
-    <button class="sc" type="button" data-go="9"><i>&#10003;</i><span>Price</span></button>
-    <button class="sc" type="button" data-go="10"><i>&rarr;</i><span>Start</span></button>
+    <button class="sc" type="button" data-go="8"><i>+</i><span>Everything</span></button>
+    <button class="sc" type="button" data-go="9"><i>=</i><span>Value</span></button>
+    <button class="sc" type="button" data-go="10"><i>?</i><span>Choice</span></button>
+    <button class="sc" type="button" data-go="11"><i>&#10003;</i><span>Price</span></button>
+    <button class="sc" type="button" data-go="12"><i>&rarr;</i><span>Start</span></button>
   </nav>
   <div class="nav">
     <button class="btn btn--ghost btn--icon" id="prev" type="button" aria-label="Previous step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
@@ -711,23 +765,72 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
       </div>
     </div>
   </section>
-  <!-- 8. the offer -->
-  <section class="slide" id="offer" aria-label="The program">
-    <div class="inner step">
-      <div>
-        <div class="eyebrow a-in">The program</div>
-        <h2 class="h2 a-in">AI Creative Strategist <em>Accelerator.</em></h2>
-        <p class="say a-in">6 weeks. Everything you just saw, and I do it with you.</p>
+  <!-- 8. everything you get (the stack) -->
+  <section class="slide" id="stack" aria-label="Everything you get">
+    <div class="inner">
+      <div class="stack-head">
+        <div><div class="eyebrow a-in">AI Creative Strategist Accelerator</div><h2 class="h2 a-in">Everything <em>you get.</em></h2></div>
+        <div class="stack-count a-in"><span class="sc-n">10</span><span>things, one program</span></div>
       </div>
-      <div class="card card--light dev a-dev" id="d-offer">
-        <div class="dev-head"><span class="lbl">What you get</span><span class="wk">6 weeks</span></div>
-        <ul class="gets">
-          <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><div><b>The full system</b><span>Every step, prompt and script.</span></div></li>
-          <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><div><b>Live calls with me, every week</b><span>We work on your clients together.</span></div></li>
-          <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><div><b>Private community</b><span>I review your work on video.</span></div></li>
-          <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><div><b>Your ads tested on my client accounts</b><span>When you graduate. Real results to show.</span></div></li>
-          <li class="gets--maybe"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></i><div><b>A path to work on my clients</b><span>Earned, not promised. If your work is good enough.</span></div></li>
-        </ul>
+      <div class="stackgrid">
+        <div class="sg">
+          <div class="sg-k a-in">The system</div>
+          <div class="st"><i>1</i><div><b>The 6-week Accelerator</b><span>Every step, from first message to paid client.</span></div></div>
+          <div class="st"><i>2</i><div><b>Client finder prompts</b><span>Build your list of businesses already running ads.</span></div></div>
+          <div class="st"><i>3</i><div><b>My outreach scripts</b><span>The exact messages I send to win clients.</span></div></div>
+          <div class="st"><i>4</i><div><b>Ad builder prompts</b><span>Make a batch of new ads fast.</span></div></div>
+          <div class="st"><i>5</i><div><b>My campaign setup</b><span>The one I run on real client accounts.</span></div></div>
+          <div class="st"><i>6</i><div><b>Retainer playbook</b><span>How to price, pitch and keep clients.</span></div></div>
+        </div>
+        <div class="sg">
+          <div class="sg-k a-in">Live help from me</div>
+          <div class="st"><i>7</i><div><b>Weekly live calls with me</b><span>Bring your real clients. We work on them together.</span></div></div>
+          <div class="st"><i>8</i><div><b>Private community</b><span>I review your work on video.</span></div></div>
+          <div class="sg-k sg-k--a a-in">When you graduate</div>
+          <div class="st st--a"><i>9</i><div><b>Your ads tested on my client accounts</b><span>Real results you can show.</span></div></div>
+          <div class="st st--maybe"><i>10</i><div><b>A path to work on my clients</b><span>Earned, not promised.</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. the value math (Hormozi value equation) -->
+  <section class="slide" id="value" aria-label="Why this is worth it">
+    <div class="inner valuewrap">
+      <div class="eyebrow a-in">The value math</div>
+      <h2 class="h2 a-in">Why this is <em>worth it.</em></h2>
+      <div class="eq">
+        <div class="eq-row">
+          <div class="vbox vbox--up"><div class="vk"><b>&uarr;</b>What you get</div><p>Clients who pay you every month</p></div>
+          <div class="eq-op">&times;</div>
+          <div class="vbox vbox--up"><div class="vk"><b>&uarr;</b>Chance it works</div><p>My system, my live help, real client accounts</p></div>
+        </div>
+        <div class="eq-line"></div>
+        <div class="eq-row">
+          <div class="vbox vbox--down"><div class="vk"><b>&darr;</b>How long it takes</div><p>6 weeks</p></div>
+          <div class="eq-op">&times;</div>
+          <div class="vbox vbox--down"><div class="vk"><b>&darr;</b>How hard it is</div><p>AI does the heavy work. You get my prompts and scripts.</p></div>
+        </div>
+      </div>
+      <p class="eq-foot a-in">Big result, high chance, short time, less work. That is what makes something <b>worth it.</b></p>
+    </div>
+  </section>
+
+  <!-- 10. two paths -->
+  <section class="slide" id="paths" aria-label="Two paths">
+    <div class="inner valuewrap">
+      <h2 class="h2 a-in">Six weeks from now, <em>which one is you?</em></h2>
+      <div class="paths">
+        <div class="card card--light path path--no">
+          <div class="lbl">Keep going alone</div>
+          <b class="path-t">Same as today</b>
+          <ul><li>Doing one job, not both.</li><li>Chasing one-off gigs.</li><li>Guessing what to do next.</li></ul>
+        </div>
+        <div class="card path path--yes">
+          <div class="lbl">Start this week</div>
+          <b class="path-t">Six weeks in</b>
+          <ul><li>You know every step.</li><li>Your messages are going out every day.</li><li>You're building clients who pay every month.</li><li>And I'm with you on a call every week.</li></ul>
+        </div>
       </div>
     </div>
   </section>
@@ -746,6 +849,7 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
           <div class="pr-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
           <div><div class="lbl lbl--a">Founding price, first 10</div><div class="pr-new"><span class="pr-n">$2,990</span></div><div class="pr-sub">Paid in full</div></div>
         </div>
+        <div class="payback a-part"><b id="pbLine">At $2,000 a month, one client pays this back in about 6 weeks.</b><span>Your number from the calculator. Not a promise.</span></div>
       </div>
     </div>
   </section>
@@ -912,10 +1016,26 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
     function (s) { // calculator: count up from zero on entry
       recalc(true);
     },
-    function (s) { // offer: what you get, one line at a time
+    function (s) { // the stack: every piece lands, one on top of the last
       textIn(s);
-      var d = $("#d-offer"); pop(d, 180, "translateX(24px) scale(0.96)");
-      $$(".gets li", d).forEach(function (li, i) { pop(li, 600 + i * 420, "translateX(14px)"); pop($("i", li), 750 + i * 420, "scale(0.4)"); });
+      var tiles = $$(".st", s), n = $(".sc-n", s);
+      tiles.forEach(function (t, i) { pop(t, 500 + i * 260, "translateY(-22px) scale(0.94)"); later(500 + i * 260, function () { n.textContent = String(i + 1); }); });
+      if (!RM) n.textContent = "0";
+    },
+    function (s) { // the value math: top goes up, bottom goes down
+      textIn(s);
+      var boxes = $$(".vbox", s);
+      pop($(".eq-line", s), 300, "scaleX(0)");
+      boxes.forEach(function (b, i) { pop(b, 500 + i * 450, i < 2 ? "translateY(18px) scale(0.94)" : "translateY(-18px) scale(0.94)"); });
+      $$(".eq-op", s).forEach(function (o, i) { pop(o, 800 + i * 900, "scale(0.5)"); });
+    },
+    function (s) { // two paths: the old way shows first, then the new one wins the frame
+      textIn(s);
+      var no = $(".path--no", s), yes = $(".path--yes", s);
+      pop(no, 400, "translateY(16px)");
+      pop(yes, 1300, "translateY(16px) scale(0.94)");
+      $$(".path--yes li", s).forEach(function (li, i) { pop(li, 1700 + i * 380, "translateX(12px)"); });
+      if (!RM && no.animate) no.animate([{ opacity: 1 }, { opacity: 0.62 }], { duration: 600, delay: 1500, fill: "forwards", easing: OUT });
     },
     function (s) { // price: regular price gets struck, founding price lands
       textIn(s);
@@ -924,6 +1044,9 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
       if (!RM && st.animate) st.animate([{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }], { duration: 450, delay: 900, easing: OUT, fill: "backwards" });
       var n = $(".pr-n", d); n._v = 0; n.textContent = "$0";
       later(1400, function () { tween(n, 2990, fmtMoney, 900, 0); });
+      var ret = S.ret > 0 ? S.ret : 2000, wks = Math.max(1, Math.round(2990 / ret * WEEKS));
+      $("#pbLine").textContent = "At " + fmtMoney(ret) + " a month, one client pays this back in about " + wks + (wks === 1 ? " week." : " weeks.");
+      pop($(".payback", d), 2400, "translateY(12px)");
     },
     function (s) { // ready
       textIn(s);
