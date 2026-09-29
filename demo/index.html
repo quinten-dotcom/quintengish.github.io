@@ -388,13 +388,6 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
 .pr-arrow svg { width: 30px; height: 30px; color: rgba(255,255,255,0.35); }
 .pr-new { margin-top: 8px; font: 800 clamp(48px, 5.4vw, 76px)/1 var(--emph); font-stretch: 125%; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .pr-sub { margin-top: 8px; font: 600 16px/1.2 var(--sans); color: rgba(255,255,255,0.62); }
-.seats-k { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-top: 26px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.09); }
-.seat-txt { font: 700 17px/1.2 var(--sans); color: #fff; }
-.seats { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
-.seat { aspect-ratio: 1; border: 2px solid var(--accent-soft); border-radius: 12px; background: rgba(47,91,255,0.14); color: var(--accent-soft); display: grid; place-items: center; font: 800 14px/1 var(--emph); font-stretch: 125%; cursor: pointer; padding: 0; transition: background-color .3s ease, border-color .3s ease, color .3s ease; }
-.seat.is-taken { border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.35); }
-.seat-hint { margin: 12px 0 0; font-size: 13px; color: rgba(255,255,255,0.4); }
-body.presenting .seat-hint { display: none; }
 .ready .h1 { margin-top: 20px; }
 .ready .say { margin-top: 16px; }
 .pay { margin-top: 28px; display: grid; justify-items: center; gap: 12px; }
@@ -431,7 +424,6 @@ body.presenting .seat-hint { display: none; }
   .callout { white-space: normal; max-width: 74%; top: 14%; }
   .pr-row { grid-template-columns: minmax(0, 1fr); }
   .pr-arrow { display: none; }
-  .seats { grid-template-columns: repeat(5, minmax(0, 1fr)); }
   .intro .h1 em { display: block; }
   .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .row { grid-template-columns: minmax(0, 1fr) 104px; row-gap: 4px; }
@@ -754,9 +746,6 @@ body.presenting .seat-hint { display: none; }
           <div class="pr-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
           <div><div class="lbl lbl--a">Founding price, first 10</div><div class="pr-new"><span class="pr-n">$2,990</span></div><div class="pr-sub">Paid in full</div></div>
         </div>
-        <div class="seats-k"><span class="lbl">Founding seats</span><span class="seat-txt" id="seatTxt">0 of 10 taken. 10 left.</span></div>
-        <div class="seats" id="seats" role="group" aria-label="Founding seats. Click a seat to mark it taken."></div>
-        <p class="seat-hint">Click a seat to mark it taken. Or add ?taken=3 to the link.</p>
       </div>
     </div>
   </section>
@@ -935,8 +924,6 @@ body.presenting .seat-hint { display: none; }
       if (!RM && st.animate) st.animate([{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }], { duration: 450, delay: 900, easing: OUT, fill: "backwards" });
       var n = $(".pr-n", d); n._v = 0; n.textContent = "$0";
       later(1400, function () { tween(n, 2990, fmtMoney, 900, 0); });
-      pop($(".seats-k", d), 2300);
-      $$(".seat", d).forEach(function (b, i) { pop(b, 2400 + i * 70, "scale(0.6)"); });
     },
     function (s) { // ready
       textIn(s);
@@ -1166,31 +1153,6 @@ body.presenting .seat-hint { display: none; }
   var PAY_LINK = "";
   if (PAY_LINK) { var pb = $("#payBtn"); pb.href = PAY_LINK; pb.hidden = false; $("#payNote").textContent = "Or open the link in the Zoom chat."; }
 
-  // Founding seats: the count is REAL. Click a seat on the Price screen, or add ?taken=N to the link.
-  var SEATS = 10, taken = 0, seatsEl = $("#seats");
-  try {
-    var qs = new URLSearchParams(location.search).get("taken");
-    if (qs != null && qs !== "") taken = parseInt(qs, 10) || 0;
-    else taken = parseInt(localStorage.getItem("acsa-demo-seats-taken") || "0", 10) || 0;
-  } catch (e) {}
-  for (var si = 0; si < SEATS; si++) {
-    var sb = document.createElement("button");
-    sb.type = "button"; sb.className = "seat"; sb.textContent = String(si + 1);
-    (function (i) { sb.addEventListener("click", function () { taken = (taken === i + 1) ? i : i + 1; saveSeats(); drawSeats(); }); })(si);
-    seatsEl.appendChild(sb);
-  }
-  function saveSeats() { try { localStorage.setItem("acsa-demo-seats-taken", String(taken)); } catch (e) {} }
-  function drawSeats() {
-    taken = Math.max(0, Math.min(SEATS, taken));
-    $$(".seat", seatsEl).forEach(function (b, i) {
-      var t = i < taken;
-      b.classList.toggle("is-taken", t);
-      b.setAttribute("aria-pressed", t ? "true" : "false");
-      b.setAttribute("aria-label", "Seat " + (i + 1) + (t ? ", taken" : ", open"));
-    });
-    $("#seatTxt").textContent = taken + " of " + SEATS + " taken. " + (SEATS - taken) + " left.";
-  }
-  drawSeats();
 
   syncAll();
   $('.pbtn[data-preset="conservative"]').classList.add("is-on");
