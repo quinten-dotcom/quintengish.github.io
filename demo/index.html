@@ -444,6 +444,31 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
 .payback b { display: block; font: 700 clamp(18px, 1.7vw, 22px)/1.3 var(--sans); color: #fff; }
 .payback span { display: block; margin-top: 6px; font-size: 14px; color: rgba(255,255,255,0.5); }
 
+/* ---------- real work ---------- */
+.work-head .h2 { margin-top: 8px; }
+.workgrid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.55fr); gap: 20px; align-items: center; margin-top: clamp(14px, 2.4vh, 26px); }
+.sheet img { aspect-ratio: auto; object-fit: contain; }
+.clips { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.clip { margin: 0; }
+.clip-v { position: relative; aspect-ratio: 9 / 16; overflow: hidden; border-radius: 14px; background: var(--ink); box-shadow: var(--shadow-sm); }
+.clip-v video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.clip figcaption { margin-top: 8px; }
+.clip b { display: block; font: 700 14px/1.2 var(--sans); }
+.clip span { display: block; margin-top: 2px; font-size: 12.5px; color: var(--muted); }
+
+/* ---------- my goal ---------- */
+.chain { list-style: none; margin: clamp(22px, 3.6vh, 38px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; counter-reset: none; }
+.chain li { position: relative; display: grid; justify-items: center; gap: 12px; padding: 20px 14px; border-radius: 18px; background: #fff; box-shadow: var(--shadow-sm), inset 0 0 0 1px var(--line-l); transition: background-color .45s ease, color .45s ease; }
+.chain li:not(:last-child)::after { content: ""; position: absolute; right: -11px; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-top: 3px solid var(--muted); border-right: 3px solid var(--muted); transform: rotate(45deg); z-index: 1; }
+.chain i { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: #E6E2DA; color: #8B877F; font: 800 14px/1 var(--emph); font-stretch: 125%; font-style: normal; transition: background-color .45s ease, color .45s ease; }
+.chain b { font: 700 clamp(17px, 1.6vw, 21px)/1.25 var(--sans); letter-spacing: -0.01em; text-wrap: balance; }
+.chain li.is-lit { background: var(--ink); color: #fff; }
+.chain li.is-lit i { background: var(--accent); color: #fff; }
+.chain li.is-lit:last-child { background: var(--accent); }
+.chain li.is-lit:last-child i { background: #fff; color: var(--accent); }
+.proofline { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px 26px; margin-top: clamp(20px, 3.2vh, 34px); font-size: clamp(16px, 1.5vw, 19px); color: var(--ink2); }
+.proofline b { color: var(--ink); }
+
 /* ---------- responsive ---------- */
 @media (max-width: 1360px) {
   .sc span { display: none; }
@@ -451,6 +476,7 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
 }
 @media (max-width: 899px) {
   .step { grid-template-columns: minmax(0, 1fr); }
+  .workgrid { grid-template-columns: minmax(0, 1fr); }
   .calc { grid-template-columns: minmax(0, 1fr); }
   .loop { grid-template-columns: minmax(0, 1fr); }
   .ring { max-width: 380px; margin-inline: auto; }
@@ -476,6 +502,10 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
   .stackgrid, .paths { grid-template-columns: minmax(0, 1fr); }
   .eq-row { grid-template-columns: minmax(0, 1fr); gap: 8px; }
   .eq-op { justify-self: center; }
+  .workgrid { grid-template-columns: minmax(0, 1fr); }
+  .clips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .chain { grid-template-columns: minmax(0, 1fr); }
+  .chain li:not(:last-child)::after { display: none; }
   .intro .h1 em { display: block; }
   .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .row { grid-template-columns: minmax(0, 1fr) 104px; row-gap: 4px; }
@@ -506,10 +536,12 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
     <button class="sc" type="button" data-go="6"><i>+</i><span>After</span></button>
     <button class="sc" type="button" data-go="7"><i>$</i><span>Your numbers</span></button>
     <button class="sc" type="button" data-go="8"><i>+</i><span>Everything</span></button>
-    <button class="sc" type="button" data-go="9"><i>=</i><span>Value</span></button>
-    <button class="sc" type="button" data-go="10"><i>?</i><span>Choice</span></button>
-    <button class="sc" type="button" data-go="11"><i>&#10003;</i><span>Price</span></button>
-    <button class="sc" type="button" data-go="12"><i>&rarr;</i><span>Start</span></button>
+    <button class="sc" type="button" data-go="9"><i>&#9654;</i><span>Real work</span></button>
+    <button class="sc" type="button" data-go="10"><i>&#9733;</i><span>Goal</span></button>
+    <button class="sc" type="button" data-go="11"><i>=</i><span>Value</span></button>
+    <button class="sc" type="button" data-go="12"><i>?</i><span>Choice</span></button>
+    <button class="sc" type="button" data-go="13"><i>&#10003;</i><span>Price</span></button>
+    <button class="sc" type="button" data-go="14"><i>&rarr;</i><span>Start</span></button>
   </nav>
   <div class="nav">
     <button class="btn btn--ghost btn--icon" id="prev" type="button" aria-label="Previous step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
@@ -794,6 +826,48 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
     </div>
   </section>
 
+  <!-- 9. real work -->
+  <section class="slide" id="work" aria-label="Real work made with this system">
+    <div class="inner">
+      <div class="work-head">
+        <div class="eyebrow a-in">Real work, made with AI</div>
+        <h2 class="h2 a-in">This is what you'll <em>learn to make.</em></h2>
+      </div>
+      <div class="workgrid">
+        <figure class="shot sheet a-dev">
+          <div class="shot-bar"><i></i><i></i><i></i><span>Signal Hunt: my real lead list</span><b>Real screenshot</b></div>
+          <img src="assets/work/ig-sheet.png" alt="Real lead list: Instagram businesses running ads, how many ads each runs, a score, and an AI-written message for each">
+          <figcaption class="shot-note">Hundreds of businesses already running ads. Each one gets its own message.</figcaption>
+        </figure>
+        <div class="clips">
+          <figure class="clip"><div class="clip-v"><video src="assets/work/thread.mp4" poster="assets/work/thread.jpg" muted loop playsinline preload="none" aria-label="Texting ad"></video></div><figcaption><b>Texting ad</b><span>My own offer</span></figcaption></figure>
+          <figure class="clip"><div class="clip-v"><video src="assets/work/napkin.mp4" poster="assets/work/napkin.jpg" muted loop playsinline preload="none" aria-label="Napkin"></video></div><figcaption><b>Napkin</b><span>Channel Junkies</span></figcaption></figure>
+          <figure class="clip"><div class="clip-v"><video src="assets/work/napkin-flow.mp4" poster="assets/work/napkin-flow.jpg" muted loop playsinline preload="none" aria-label="Napkin Flow"></video></div><figcaption><b>Napkin Flow</b><span>Spec ad for a prospect</span></figcaption></figure>
+          <figure class="clip"><div class="clip-v"><video src="assets/work/jesse.mp4" poster="assets/work/jesse.jpg" muted loop playsinline preload="none" aria-label="AI edit, real footage"></video></div><figcaption><b>AI edit, real footage</b><span>Channel Junkies</span></figcaption></figure>
+          <figure class="clip"><div class="clip-v"><video src="assets/work/optional.mp4" poster="assets/work/optional.jpg" muted loop playsinline preload="none" aria-label="Hyper Flow"></video></div><figcaption><b>Hyper Flow</b><span>InsureMatch</span></figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. my goal -->
+  <section class="slide" id="goal" aria-label="My goal for you">
+    <div class="inner valuewrap">
+      <div class="eyebrow a-in">My goal for you</div>
+      <h2 class="h2 a-in">People pay you for your value. <em>So become valuable.</em></h2>
+      <ol class="chain">
+        <li><i>1</i><b>Learn a skill businesses need</b></li>
+        <li><i>2</i><b>Make them money</b></li>
+        <li><i>3</i><b>They pay you more</b></li>
+        <li><i>4</i><b>The freedom and income you want</b></li>
+      </ol>
+      <div class="proofline a-in">
+        <span><b>Me:</b> $0 to $30k a month in 90 days</span>
+        <span><b>My brother:</b> $0 to $3,500 a month in 30 days</span>
+      </div>
+    </div>
+  </section>
+
   <!-- 9. the value math (Hormozi value equation) -->
   <section class="slide" id="value" aria-label="Why this is worth it">
     <div class="inner valuewrap">
@@ -1022,6 +1096,16 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
       tiles.forEach(function (t, i) { pop(t, 500 + i * 260, "translateY(-22px) scale(0.94)"); later(500 + i * 260, function () { n.textContent = String(i + 1); }); });
       if (!RM) n.textContent = "0";
     },
+    function (s) { // real work: the list, then the ads start playing one by one
+      textIn(s);
+      pop($(".sheet", s), 250, "translateX(-24px) scale(0.97)");
+      $$(".clip", s).forEach(function (c, i) { pop(c, 700 + i * 220, "translateY(24px) scale(0.94)"); });
+    },
+    function (s) { // my goal: the chain lights up link by link
+      textIn(s);
+      var li = $$(".chain li", s);
+      li.forEach(function (l, i) { l.classList.toggle("is-lit", RM); pop(l, 600 + i * 550, "translateY(14px) scale(0.95)"); later(900 + i * 550, function () { l.classList.add("is-lit"); }); });
+    },
     function (s) { // the value math: top goes up, bottom goes down
       textIn(s);
       var boxes = $$(".vbox", s);
@@ -1074,6 +1158,11 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
     });
     $("#prev").disabled = i === 0;
     $("#next").disabled = i === slides.length - 1;
+    $$("video").forEach(function (v) { if (!s.contains(v)) v.pause(); });
+    $$("video", s).forEach(function (v) {
+      function tryPlay() { if (!s.classList.contains("is-on")) return; try { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); } catch (e) {} }
+      tryPlay(); later(600, tryPlay); later(2000, tryPlay);
+    });
     play[i](s);
   }
   function next() { if (cur < slides.length - 1) go(cur + 1, 1); }
