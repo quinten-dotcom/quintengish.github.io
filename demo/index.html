@@ -101,9 +101,9 @@ body.presenting .hint { visibility: hidden; }
 .eyebrow { font: 700 14px/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
 .h1, .h2 { margin: 0; font-weight: 600; letter-spacing: -0.035em; line-height: 1.02; text-wrap: balance; }
 .h1 { font-size: clamp(36px, 4.6vw, 62px); }
-.h2 { font-size: clamp(30px, 3.3vw, 46px); margin-top: 14px; }
+.h2 { font-size: clamp(34px, 4vw, 56px); margin-top: 14px; }
 .h1 em, .h2 em, .emph { font-family: var(--emph); font-style: normal; font-weight: 800; font-stretch: 125%; letter-spacing: -0.01em; }
-.say { margin: 18px 0 0; max-width: 30em; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.45; color: var(--ink2); }
+.say { margin: 20px 0 0; max-width: 22em; font-size: clamp(19px, 1.8vw, 24px); line-height: 1.4; color: var(--ink2); }
 .why { margin-top: 22px; max-width: 30em; padding: 16px 18px; border-radius: var(--r-sm); background: rgba(255,255,255,0.62); box-shadow: inset 0 0 0 1px var(--line-l); }
 .why b, .hold b { display: block; margin-bottom: 8px; font: 700 12px/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 .why p { margin: 0; font: 600 clamp(18px, 1.6vw, 21px)/1.35 var(--sans); letter-spacing: -0.01em; color: var(--ink); }
@@ -129,7 +129,7 @@ body.presenting .hint { visibility: hidden; }
   font: 700 13px/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; box-shadow: var(--shadow-sm); }
 .chip::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-soft); }
 .intro .h1 { margin-top: 22px; }
-.intro .say { margin: 18px auto 0; max-width: 40em; font-size: clamp(18px, 1.6vw, 22px); }
+.intro .say { margin: 18px auto 0; max-width: 26em; font-size: clamp(19px, 1.8vw, 24px); }
 .proof-k { margin-top: clamp(24px, 4vh, 40px); font: 700 12.5px/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 .proof { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 14px; text-align: left; }
 .proof .card { padding: 20px 22px; }
@@ -256,7 +256,7 @@ body.presenting .hint { visibility: hidden; }
 .pbtn.is-on { background: var(--ink); color: #fff; box-shadow: none; }
 .calc { display: grid; grid-template-columns: minmax(0, 43fr) minmax(0, 57fr); gap: 16px; align-items: start; }
 .inputs { padding: 16px 20px; }
-.rows { display: grid; gap: 5px; margin-top: 10px; }
+.rows { display: grid; gap: 5px; }
 .row { display: grid; grid-template-columns: 192px minmax(0, 1fr) 108px; align-items: center; gap: 12px; min-height: 36px; }
 .row label { font: 600 15px/1.2 var(--sans); color: var(--ink2); }
 .nbox { display: flex; align-items: center; justify-content: flex-end; gap: 3px; height: 35px; padding: 0 10px; border-radius: 10px; background: #fff; box-shadow: inset 0 0 0 1.5px rgba(20,22,27,0.14); }
@@ -284,9 +284,9 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
 
 .outputs { display: grid; gap: 12px; }
 .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
-.kpi { padding: 12px 14px; border-radius: 16px; }
+.kpi { padding: 12px 14px; border-radius: 16px; container-type: inline-size; min-width: 0; }
 .kpi .lbl { font-size: 11px; letter-spacing: 0.1em; line-height: 1.2; }
-.kpi__n { margin-top: 8px; font: 800 clamp(22px, 2.3vw, 31px)/1 var(--emph); font-stretch: 125%; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.kpi__n { margin-top: 8px; font: 800 clamp(16px, 18cqi, 34px)/1 var(--emph); overflow: hidden; font-stretch: 125%; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .kpi__n small { font-size: 0.5em; letter-spacing: 0; }
 .kpi__c { margin-top: 6px; font-size: 13px; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: rgba(255,255,255,0.6); }
 .kpi--key { background: var(--accent); box-shadow: var(--shadow-sm); }
@@ -443,7 +443,7 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
     <div class="inner intro">
       <span class="chip a-in">How the system works</span>
       <h1 class="h1 a-in">Here is how the <em>whole thing</em> works.</h1>
-      <p class="say a-in">Businesses pay one person to make their ads and another person to run them. That used to take two people. Now, with AI, one person can do both jobs. You find businesses that already spend money on ads, you show them better ads before they pay you anything, and they pay you every month to keep going. Let me show you each step.</p>
+      <p class="say a-in">With AI, one person can make ads and run them. Businesses pay that person every month.</p>
       <div class="proof-k a-in">What this has done for us</div>
       <div class="proof">
         <div class="card a-card"><div class="lbl">Me</div><div class="proof__n">$30k<small>/mo</small></div><div class="proof__c">I went from $0 to $30k a month in 90 days.</div></div>
@@ -459,9 +459,8 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
     <div class="inner step">
       <div>
         <div class="eyebrow a-in">Step 1 of 5 &middot; Find</div>
-        <h2 class="h2 a-in">First, you find businesses that <em>already pay</em> for ads.</h2>
-        <p class="say a-in">Meta keeps a free list of every ad running on Facebook and Instagram. It's called the Ad Library, and anyone can look at it. AI goes through it for you and pulls out every business in one kind of work, like med spas, that has ads running right now.</p>
-        <p class="say a-in">Why only those? If a business already pays for ads, it already has money set aside for them. You're not asking them to start spending. You're helping them get more back.</p>
+        <h2 class="h2 a-in">First, find businesses that <em>already pay</em> for ads.</h2>
+        <p class="say a-in">Meta shows every ad that is running, for free. If a business runs ads, it already has money for them.</p>
       </div>
       <div class="shotstack">
         <figure class="shot a-dev">
@@ -486,9 +485,8 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
     <div class="inner step">
       <div>
         <div class="eyebrow a-in">Step 2 of 5 &middot; Win</div>
-        <h2 class="h2 a-in">Next, you win them over by <em>doing the work first.</em></h2>
-        <p class="say a-in">Every business has one ad it keeps running longer than the rest. That's its best ad, and you can see it right in the Ad Library. AI helps you make two new versions of that ad.</p>
-        <p class="say a-in">Then you send the owner a short message: "I made two new versions of your best ad. Want me to send them?" Most people send a sales pitch. You show up with something already made for them, which makes it easy to say yes.</p>
+        <h2 class="h2 a-in">Next, do the work <em>before they pay.</em></h2>
+        <p class="say a-in">Find the ad they have run the longest. That is their best ad. Make two new versions and ask if they want them.</p>
       </div>
       <div class="wingrid">
         <figure class="shot shot--ad a-dev">
@@ -521,9 +519,8 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
     <div class="inner step">
       <div>
         <div class="eyebrow a-in">Step 3 of 5 &middot; Make them money</div>
-        <h2 class="h2 a-in">Then you use the ads to <em>make them money.</em></h2>
-        <p class="say a-in">Once they say yes, AI helps you build a batch of new ads fast. Each ad tries a different idea, like showing the price, a before and after, or a normal day at the spa.</p>
-        <p class="say a-in">You run them all with a small budget to see which one people like most. The winner gets more of the money, and the rest get turned off. It's a setup we already use on real client accounts, so you're not guessing.</p>
+        <h2 class="h2 a-in">Then make them <em>money.</em></h2>
+        <p class="say a-in">AI builds a batch of new ads. You test them all, and the winner gets the budget.</p>
       </div>
       <div class="card dev a-dev" id="d-make">
         <div class="dev-head"><span class="lbl">New ads, built with AI</span><span class="tag">Example</span></div>
@@ -551,9 +548,8 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
     <div class="inner step">
       <div>
         <div class="eyebrow a-in">Step 4 of 5 &middot; Keep</div>
-        <h2 class="h2 a-in">They keep you, and they <em>pay every month.</em></h2>
-        <p class="say a-in">Most businesses hire one person to make ads and another person to run them. You do both, so they only need you. That's worth a lot to them.</p>
-        <p class="say a-in">Clients like this pay somewhere around $2,000 to $10,000 a month. It's called a retainer. That just means they pay you the same amount every month to keep doing the work, kind of like a subscription.</p>
+        <h2 class="h2 a-in">They keep you and <em>pay every month.</em></h2>
+        <p class="say a-in">You do both jobs, so they only need you. Clients pay about $2,000 to $10,000 a month.</p>
       </div>
       <div class="card card--light dev a-dev" id="d-keep">
         <div class="dev-head"><span class="lbl">Invoice 0007</span><span class="tag">Example</span></div>
@@ -585,9 +581,9 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
     <div class="inner step">
       <div>
         <div class="eyebrow a-in">Step 5 of 5 &middot; Repeat</div>
-        <h2 class="h2 a-in">Then you do it <em>all again.</em></h2>
-        <p class="say a-in">When one client is set, you go back to step one and find the next one. Same steps, same tools, a new business. Every client you keep adds to what comes in each month. Some clients stay a long time and some leave, and that's normal. The steps don't change either way.</p>
-        <div class="hold a-in"><b>What I keep for the program</b><p>The exact steps, AI prompts and message scripts for each part. You get those inside the accelerator.</p></div>
+        <h2 class="h2 a-in">Then do it <em>all again.</em></h2>
+        <p class="say a-in">Same steps, next business. Every client you keep adds to your month.</p>
+        <div class="hold a-in"><b>Inside the program</b><p>The exact steps, prompts and message scripts.</p></div>
       </div>
       <div class="card dev a-dev" id="d-repeat">
         <div class="dev-head"><span class="lbl">The loop</span><span class="tag">Example</span></div>
@@ -624,16 +620,15 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
     <div class="inner step">
       <div>
         <div class="eyebrow a-in">After you graduate</div>
-        <h2 class="h2 a-in">When you finish, you might get to <em>work with me.</em></h2>
-        <p class="say a-in">When you graduate, you can send me ads you made, and I can test them on my real client accounts. That gives you real results to show your own clients.</p>
-        <p class="say a-in">And if I like your work, there's a chance you could work with me on my clients too. I can't promise that to everyone. It depends on your work. But the door is open.</p>
+        <h2 class="h2 a-in">When you finish, you might <em>work with me.</em></h2>
+        <p class="say a-in">I test your ads on my real client accounts. If I like your work, you might work with me on my clients.</p>
       </div>
       <div class="card dev a-dev" id="d-grad">
         <div class="dev-head"><span class="lbl">Your path after the 6 weeks</span></div>
         <ol class="gpath">
-          <li class="g-done"><i>1</i><div><b>You finish the 6 weeks</b><span>You know every step and you've used them.</span></div></li>
-          <li class="g-on"><i>2</i><div><b>I test your ads on my real client accounts</b><span>You get real results you can show your own clients.</span></div></li>
-          <li class="g-maybe"><i>3</i><div><b>If I like your work, you might work with me on my clients</b><span>Not promised. It depends on your work.</span></div><em>Maybe</em></li>
+          <li class="g-done"><i>1</i><div><b>You finish the 6 weeks</b></div></li>
+          <li class="g-on"><i>2</i><div><b>I test your ads on my client accounts</b><span>Real results to show your clients.</span></div></li>
+          <li class="g-maybe"><i>3</i><div><b>If I like your work, you might work with me</b><span>Not promised. It depends on your work.</span></div><em>Maybe</em></li>
         </ol>
       </div>
     </div>
@@ -643,7 +638,7 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
   <section class="slide" id="numbers" aria-label="Your numbers">
     <div class="inner">
       <div class="calc-head">
-        <div><div class="eyebrow">Move the sliders. The page does the math.</div><h2 class="h2">Let's run <em>your numbers.</em></h2></div>
+        <div><h2 class="h2">Your <em>numbers.</em></h2></div>
         <div class="presets" role="group" aria-label="Presets">
           <button class="pbtn" type="button" data-preset="conservative">Reset to conservative</button>
           <button class="pbtn" type="button" data-preset="part">Part-time, 10 hrs a week</button>
@@ -652,9 +647,8 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
       </div>
       <div class="calc">
         <div class="card card--light inputs">
-          <div class="lbl">Your inputs</div>
-          <div class="rows" id="rows"></div>
-          <div class="lbl funnel-k">What happens to your messages each month</div>
+                    <div class="rows" id="rows"></div>
+          <div class="lbl funnel-k">Each month</div>
           <div class="funnel" id="funnel">
             <div class="fr"><span>Messages</span><div class="ft"><div class="fb"></div></div><span class="fv" id="fv0">0</span></div>
             <div class="fr"><span>Replies</span><div class="ft"><div class="fb"></div></div><span class="fv" id="fv1">0</span></div>
@@ -670,7 +664,7 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
             <div class="card kpi kpi--key"><div class="lbl">Month 12 income</div><div class="kpi__n" id="k3">$0</div><div class="kpi__c" id="k3c"></div></div>
           </div>
           <div class="card card--light chart-card">
-            <div class="chart-head"><span class="lbl">Clients paying you each month, months 1 to 12</span><span class="legend"><i></i><span id="legend">One block is one client</span></span></div>
+            <div class="chart-head"><span class="lbl">Your first 12 months</span><span class="legend"><i></i><span id="legend">One block is one client</span></span></div>
             <div class="plot" id="plot"><div class="yax" id="yax"></div><div class="cols" id="cols"></div></div>
             <div class="xrow" id="xrow"></div>
             <div class="xwrap xwrap--won"><b>New</b><div class="xrow xrow--won" id="xwon"></div></div>
@@ -678,7 +672,7 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
           </div>
           <div class="card card--light hours">
             <div class="hours-top">
-              <p class="hours-txt" id="htxt">Sending messages: <b id="hNeed">0</b> of your <b id="hHave">0</b> hrs a week, at <span class="nbox mins"><input id="mins" type="text" inputmode="decimal" value="4" aria-label="Minutes per message"></span> min a message</p>
+              <p class="hours-txt" id="htxt">Messages take <b id="hNeed">0</b> of your <b id="hHave">0</b> hrs a week at <span class="nbox mins"><input id="mins" type="text" inputmode="decimal" value="1" aria-label="Minutes per message"></span> min each</p>
               <span class="fit ok" id="fit">Fits your week</span>
             </div>
             <div class="meter" id="meter"><i class="meter-fill" id="mfill"></i><i class="meter-mark" id="mmark"></i></div>
@@ -894,19 +888,19 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
 
   // ---------- calculator ----------
   var FIELDS = [
-    { k: "mpd", label: "Messages you send a day", min: 5, max: 150, step: 1, lo: 0, hi: 1000 },
-    { k: "dpw", label: "Days a week you send", min: 1, max: 7, step: 1, lo: 1, hi: 7 },
+    { k: "mpd", label: "Messages a day", min: 5, max: 150, step: 1, lo: 0, hi: 1000 },
+    { k: "dpw", label: "Days a week", min: 1, max: 7, step: 1, lo: 1, hi: 7 },
     { k: "reply", label: "Replies per 100 messages", min: 0.5, max: 20, step: 0.5, lo: 0, hi: 100 },
     { k: "call", label: "Calls per 100 replies", min: 5, max: 80, step: 1, lo: 0, hi: 100 },
     { k: "close", label: "New clients per 100 calls", min: 5, max: 80, step: 1, lo: 0, hi: 100 },
-    { k: "ret", label: "Each client pays a month", min: 500, max: 10000, step: 250, lo: 0, hi: 100000, pre: "$" },
+    { k: "ret", label: "Client pays a month", min: 500, max: 10000, step: 250, lo: 0, hi: 100000, pre: "$" },
     { k: "stay", label: "Months a client stays", min: 1, max: 24, step: 1, lo: 1, hi: 60, int: true },
-    { k: "hrs", label: "Hours a week you can work", min: 0, max: 60, step: 1, lo: 0, hi: 100, unit: "hrs" }
+    { k: "hrs", label: "Hours a week", min: 0, max: 60, step: 1, lo: 0, hi: 100, unit: "hrs" }
   ];
   var PRESETS = {
-    conservative: { mpd: 20, dpw: 5, reply: 3, call: 30, close: 20, ret: 2000, stay: 4, hrs: 15, mins: 4 },
-    part: { mpd: 15, dpw: 5, reply: 3, call: 30, close: 20, ret: 2000, stay: 4, hrs: 10, mins: 4 },
-    full: { mpd: 40, dpw: 5, reply: 3, call: 30, close: 20, ret: 2000, stay: 4, hrs: 40, mins: 4 }
+    conservative: { mpd: 20, dpw: 5, reply: 3, call: 30, close: 20, ret: 2000, stay: 4, hrs: 15, mins: 1 },
+    part: { mpd: 15, dpw: 5, reply: 3, call: 30, close: 20, ret: 2000, stay: 4, hrs: 10, mins: 1 },
+    full: { mpd: 40, dpw: 5, reply: 3, call: 30, close: 20, ret: 2000, stay: 4, hrs: 40, mins: 1 }
   };
   var S = Object.assign({}, PRESETS.conservative);
   var WEEKS = 52 / 12;
@@ -1021,7 +1015,7 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
       xwon.children[i].textContent = M.won[mo] ? "+" + M.won[mo] : "";
       xend.children[i].textContent = M.ended[mo] ? "−" + M.ended[mo] : "";
     });
-    $("#legend").textContent = "Each block is one client paying " + fmtMoney(S.ret) + " a month";
+    $("#legend").textContent = "1 block = 1 client";
   }
 
   function recalc(fromZero) {
@@ -1036,9 +1030,9 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rg
     fv.forEach(function (v, i) { tween($("#fv" + i), v, fmtSmart, D, z); });
     tween($("#k0"), M.rate, fmtDec1, D, z);
     var r = M.rate;
-    $("#k0c").textContent = r <= 0 ? "Raise a number" : r < 1 ? "1 every " + Math.round(WEEKS / r) + " weeks" : "Every month";
+    $("#k0c").textContent = r <= 0 ? "Raise a number" : r < 1 ? "1 every " + Math.round(WEEKS / r) + " weeks" : "";
     [3, 6, 12].forEach(function (mo, i) {
-      tween($("#k" + (i + 1)), M.income[mo], fmtMoney, D, z);
+      tween($("#k" + (i + 1)), M.income[mo], function (v) { return v >= 1e6 ? "$" + (v / 1e6).toFixed(1) + "M" : v >= 100000 ? "$" + Math.round(v / 1000) + "k" : fmtMoney(v); }, D, z);
       $("#k" + (i + 1) + "c").textContent = M.active[mo] + (M.active[mo] === 1 ? " client" : " clients");
     });
     drawChart(M, fromZero);
