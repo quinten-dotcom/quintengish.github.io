@@ -128,7 +128,9 @@ section h2.h { font-size: clamp(34px, 5vw, 64px); max-width: 14ch; }
 .cta::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(14,15,17,0.96) 0%, rgba(14,15,17,0.7) 55%, rgba(14,15,17,0.2) 100%); z-index: 1; }
 .cta .in { position: relative; z-index: 2; padding: clamp(28px, 5vw, 56px); max-width: 640px; }
 .cta h2.h { font-size: clamp(34px, 5vw, 60px); }
-.cta p { color: #C9CCD2; font-size: 18px; margin: 16px 0 28px; }
+.cta p { color: #C9CCD2; font-size: 18px; margin: 16px 0 20px; }
+.mcp { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 22px; }
+.mcp code { font-size: 15px; padding: 11px 14px; border-radius: 10px; background: rgba(0,0,0,0.5); border: 1px solid var(--line); color: var(--text); word-break: break-all; }
 
 footer { padding: 40px 0 56px; color: var(--dim2); font-size: 14px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 
@@ -150,7 +152,7 @@ footer { padding: 40px 0 56px; color: var(--dim2); font-size: 14px; display: fle
 </head>
 <body>
 
-<div class="strip">Private beta now open. The first 20 members lock in founding pricing.</div>
+<div class="strip">UM Studio is free while in beta. Get access in one minute.</div>
 
 <header class="nav">
   <div class="wrap">
@@ -160,7 +162,7 @@ footer { padding: 40px 0 56px; color: var(--dim2); font-size: 14px; display: fle
       <a href="#how">How it works</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a class="btn main sm" href="#beta">Join the beta</a>
+    <a class="btn main sm" href="https://whop.com/quinten-gish/um-studio/">Get free access</a>
   </div>
 </header>
 
@@ -171,7 +173,7 @@ footer { padding: 40px 0 56px; color: var(--dim2); font-size: 14px; display: fle
       <h1 class="h">Edit videos <span class="acc">inside your AI</span></h1>
       <p>Hand Claude or ChatGPT your clip or your script and name a look. A finished, ad-ready video comes back in the chat. No editor. No timeline. No new app.</p>
       <div class="ctas">
-        <a class="btn main" href="#beta">Join the beta</a>
+        <a class="btn main" href="https://whop.com/quinten-gish/um-studio/">Get free access</a>
         <a class="btn soft" href="#looks">Watch the looks</a>
       </div>
     </div>
@@ -207,7 +209,7 @@ footer { padding: 40px 0 56px; color: var(--dim2); font-size: 14px; display: fle
       <h2 class="h">Three steps. All in the chat.</h2>
       <p class="sub">You talk to your AI like you always do. We do the editing on our side and send the finished video back.</p>
       <div class="steps">
-        <div class="step"><div class="n">01</div><h3>Connect once</h3><p>Add UM Studio to Claude or ChatGPT as a connector and sign in. About a minute.</p></div>
+        <div class="step"><div class="n">01</div><h3>Connect once</h3><p>Get free access on Whop. Then in Claude go to Settings, Connectors, Add custom connector, and paste the link below. Sign in with Whop.</p></div>
         <div class="step"><div class="n">02</div><h3>Say what you want</h3><p>Upload your clip or paste your script. Name the look, the size and your brand colour.</p></div>
         <div class="step"><div class="n">03</div><h3>Get your video</h3><p>A link to the finished MP4 lands in the chat. Want a change? Ask, and it re-renders.</p></div>
       </div>
@@ -249,7 +251,7 @@ footer { padding: 40px 0 56px; color: var(--dim2); font-size: 14px; display: fle
         <details><summary>Which AI plan do I need?</summary><p>A Claude plan that supports connectors, or a ChatGPT plan that supports apps and connectors.</p></details>
         <details><summary>How long does a video take?</summary><p>Most videos take a few minutes. Your AI tells you when yours is ready.</p></details>
         <details><summary>Do I get the templates?</summary><p>No. The looks run on our side and you get the finished video. You own the videos you make.</p></details>
-        <details><summary>What does it cost?</summary><p>Beta pricing is being set now. The first 20 members get a founding price.</p></details>
+        <details><summary>What does it cost?</summary><p>It is free while UM Studio is in beta. Each account gets a set number of videos per month.</p></details>
       </div>
     </div>
   </section>
@@ -259,10 +261,11 @@ footer { padding: 40px 0 56px; color: var(--dim2); font-size: 14px; display: fle
       <div class="cta">
         <video src="assets/lumen-loop.mp4" poster="assets/lumen-poster.jpg" muted playsinline loop autoplay preload="metadata" aria-hidden="true"></video>
         <div class="in">
-          <div class="eyebrow">Private beta</div>
-          <h2 class="h">Get in before it opens up.</h2>
-          <p>The first 20 members get founding pricing and a say in which looks launch next.</p>
-          <a class="btn main" href="mailto:quinten@quintengish.com?subject=UM%20Studio%20beta">Join the beta</a>
+          <div class="eyebrow">Free beta</div>
+          <h2 class="h">Start making videos today.</h2>
+          <p>Get free access, paste this link into Claude or ChatGPT, and sign in with Whop.</p>
+          <div class="mcp"><code id="mcpurl">https://software.quintengish.com/mcp</code><button class="btn soft sm" id="copy" type="button">Copy link</button></div>
+          <a class="btn main" href="https://whop.com/quinten-gish/um-studio/">Get free access</a>
         </div>
       </div>
     </div>
@@ -291,6 +294,11 @@ footer { padding: 40px 0 56px; color: var(--dim2); font-size: 14px; display: fle
   document.getElementById("close").addEventListener("click", close);
   player.addEventListener("click", function (e) { if (e.target === player) close(); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+  var copy = document.getElementById("copy");
+  if (copy) copy.addEventListener("click", function () {
+    var t = document.getElementById("mcpurl").textContent;
+    try { navigator.clipboard.writeText(t).then(function () { copy.textContent = "Copied"; }); } catch (e) {}
+  });
 })();
 </script>
 </body>
