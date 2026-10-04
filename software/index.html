@@ -147,6 +147,14 @@ footer { padding: 40px 0 56px; color: var(--dim2); font-size: 14px; display: fle
   .tile.wide .media { aspect-ratio: 16 / 9; height: auto; }
   .steps, .demo { grid-template-columns: 1fr; }
 }
+.reel-grid { grid-template-columns: repeat(5, 1fr); gap: 20px 16px; padding-bottom: 0; }
+.reel-grid .tile .cap .d { font-size: 13px; }
+.tile .meta { display: flex; align-items: center; gap: 8px; margin-top: 8px; flex-wrap: wrap; font-size: 12px; color: var(--dim2); }
+.tile .meta .badge { padding: 3px 9px; font-size: 12px; gap: 6px; }
+.tile .meta .badge.soon { color: var(--dim2); }
+@media (max-width: 1100px) { .reel.reel-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 900px) { .reel.reel-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 640px) { .reel.reel-grid { grid-template-columns: repeat(2, 1fr); gap: 20px 12px; } }
 @media (prefers-reduced-motion: reduce) { .tile video { transition: none; } }
 </style>
 </head>
@@ -178,32 +186,319 @@ footer { padding: 40px 0 56px; color: var(--dim2); font-size: 14px; display: fle
         <a class="btn soft" href="#looks">Watch the looks</a>
       </div>
     </div>
+  </div>
 
-    <div class="reel" id="looks">
-      <button class="tile wide" data-full="assets/napkin-full.mp4" aria-label="Play the Napkin example">
+  <section id="looks">
+    <div class="wrap">
+      <div class="eyebrow">The looks</div>
+      <h2 class="h">Every look we make</h2>
+      <p class="sub">6 are live now. New looks land most weeks.</p>
+      <div class="reel reel-grid">
+      <button class="tile" data-full="assets/looks/hyper-flow.mp4" aria-label="Play the Hyper Flow example">
         <span class="media">
-        <video src="assets/napkin-loop.mp4" poster="assets/napkin-poster.jpg" muted playsinline loop autoplay preload="metadata"></video>
+        <video data-lazy src="assets/looks/hyper-flow.mp4" poster="assets/looks/hyper-flow.jpg" muted playsinline loop preload="none"></video>
         <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
         </span>
-        <span class="cap"><span class="h">Napkin</span><span class="d" style="display:block">A hand-drawn explainer on grid paper. Stick figures act out every point.</span></span>
-      </button>
-      <button class="tile" data-full="assets/napkin-flow-full.mp4" aria-label="Play the Napkin Flow example">
-        <span class="media">
-        <video src="assets/napkin-flow-loop.mp4" poster="assets/napkin-flow-poster.jpg" muted playsinline loop autoplay preload="metadata"></video>
-        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
-        </span>
-        <span class="cap"><span class="h">Napkin Flow</span><span class="d" style="display:block">Clean cards on warm paper, marked up live by a strategist's pen.</span></span>
+        <span class="cap"><span class="h">Hyper Flow</span><span class="d" style="display:block">Dark cards build on a bright grid above your own clip.</span><span class="meta"><span class="badge"><b></b>Live now</span><span class="need">Your clip</span></span></span>
       </button>
       <button class="tile" data-full="assets/lumen-full.mp4" aria-label="Play the Lumen example">
         <span class="media">
-        <video src="assets/lumen-loop.mp4" poster="assets/lumen-poster.jpg" muted playsinline loop autoplay preload="metadata"></video>
+        <video data-lazy src="assets/looks/lumen.mp4" poster="assets/looks/lumen.jpg" muted playsinline loop preload="none"></video>
         <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
         </span>
-        <span class="cap"><span class="h">Lumen</span><span class="d" style="display:block">A pen of light draws glowing figures in the dark. One take, no cuts.</span></span>
+        <span class="cap"><span class="h">Lumen</span><span class="d" style="display:block">A pen of light draws glowing figures in one take, no cuts.</span><span class="meta"><span class="badge"><b></b>Live now</span><span class="need">Your script</span></span></span>
       </button>
+      <button class="tile" data-full="assets/napkin-flow-full.mp4" aria-label="Play the Napkin Flow example">
+        <span class="media">
+        <video data-lazy src="assets/looks/napkin-flow.mp4" poster="assets/looks/napkin-flow.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Napkin Flow</span><span class="d" style="display:block">Clean cards on warm paper, marked up live by a marker pen.</span><span class="meta"><span class="badge"><b></b>Live now</span><span class="need">Your script</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/relay.mp4" aria-label="Play the Relay example">
+        <span class="media">
+        <video data-lazy src="assets/looks/relay.mp4" poster="assets/looks/relay.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Relay</span><span class="d" style="display:block">One app screen that never cuts and keeps changing.</span><span class="meta"><span class="badge"><b></b>Live now</span><span class="need">Your script</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/thread.mp4" aria-label="Play the Thread example">
+        <span class="media">
+        <video data-lazy src="assets/looks/thread.mp4" poster="assets/looks/thread.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Thread</span><span class="d" style="display:block">The whole ad is one phone text chat.</span><span class="meta"><span class="badge"><b></b>Live now</span><span class="need">Your script</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/napkin-full.mp4" aria-label="Play the Napkin example">
+        <span class="media">
+        <video data-lazy src="assets/looks/napkin.mp4" poster="assets/looks/napkin.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Napkin</span><span class="d" style="display:block">A hand-drawn explainer. Stick figures act out every point.</span><span class="meta"><span class="badge"><b></b>Live now</span><span class="need">Your script</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/vouch.mp4" aria-label="Play the Vouch example">
+        <span class="media">
+        <video data-lazy src="assets/looks/vouch.mp4" poster="assets/looks/vouch.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Vouch</span><span class="d" style="display:block">One real customer to camera, dressed as a review of your offer.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/schematic.mp4" aria-label="Play the Schematic example">
+        <span class="media">
+        <video data-lazy src="assets/looks/schematic.mp4" poster="assets/looks/schematic.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Schematic</span><span class="d" style="display:block">Every line you say becomes a live chart of itself.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your script</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/brawl.mp4" aria-label="Play the Brawl example">
+        <span class="media">
+        <video data-lazy src="assets/looks/brawl.mp4" poster="assets/looks/brawl.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Brawl</span><span class="d" style="display:block">Sticker characters fight over a gold prize. Your offer wins.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your script</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/halo.mp4" aria-label="Play the Halo example">
+        <span class="media">
+        <video data-lazy src="assets/looks/halo.mp4" poster="assets/looks/halo.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Halo</span><span class="d" style="display:block">You in a bright room, with a glass world that pictures each sentence.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/lattice.mp4" aria-label="Play the Lattice example">
+        <span class="media">
+        <video data-lazy src="assets/looks/lattice.mp4" poster="assets/looks/lattice.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Lattice</span><span class="d" style="display:block">A talking head that cuts to dark plates with teal diagrams.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/geometry.mp4" aria-label="Play the Geometry example">
+        <span class="media">
+        <video data-lazy src="assets/looks/geometry.mp4" poster="assets/looks/geometry.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Geometry</span><span class="d" style="display:block">Thin white lines and one small orange figure who walks the idea.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your script</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/hyper.mp4" aria-label="Play the Hyper example">
+        <span class="media">
+        <video data-lazy src="assets/looks/hyper.mp4" poster="assets/looks/hyper.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Hyper</span><span class="d" style="display:block">Animated HUD lines, climbing counters and pills in your brand colour.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/nova.mp4" aria-label="Play the Nova example">
+        <span class="media">
+        <video data-lazy src="assets/looks/nova.mp4" poster="assets/looks/nova.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Nova</span><span class="d" style="display:block">The thing you describe answers you as clean phone software.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/floating-app.mp4" aria-label="Play the Floating App example">
+        <span class="media">
+        <video data-lazy src="assets/looks/floating-app.mp4" poster="assets/looks/floating-app.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Floating App</span><span class="d" style="display:block">A selfie talking head with working software floating over your chest.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/invert-studio.mp4" aria-label="Play the Invert Studio example">
+        <span class="media">
+        <video data-lazy src="assets/looks/invert-studio.mp4" poster="assets/looks/invert-studio.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Invert Studio</span><span class="d" style="display:block">A caption block on your chest, with bright worlds that flip to black.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/quiet-notes.mp4" aria-label="Play the Quiet Notes example">
+        <span class="media">
+        <video data-lazy src="assets/looks/quiet-notes.mp4" poster="assets/looks/quiet-notes.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Quiet Notes</span><span class="d" style="display:block">One calm take with gold numbers and soft marker notes.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/sketchboard.mp4" aria-label="Play the Sketchboard example">
+        <span class="media">
+        <video data-lazy src="assets/looks/sketchboard.mp4" poster="assets/looks/sketchboard.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Sketchboard</span><span class="d" style="display:block">An unseen hand draws your argument in white marker on a dark board.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/tactic.mp4" aria-label="Play the Tactic example">
+        <span class="media">
+        <video data-lazy src="assets/looks/tactic.mp4" poster="assets/looks/tactic.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Tactic</span><span class="d" style="display:block">One rig hung off your chest, plus full-screen takeover cards.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/funk.mp4" aria-label="Play the Funk example">
+        <span class="media">
+        <video data-lazy src="assets/looks/funk.mp4" poster="assets/looks/funk.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Funk</span><span class="d" style="display:block">You are dropped into a brand new world every second and a half.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/green.mp4" aria-label="Play the Green example">
+        <span class="media">
+        <video data-lazy src="assets/looks/green.mp4" poster="assets/looks/green.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Green</span><span class="d" style="display:block">Split screen. A dark data dashboard on top, you below.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/blue-proof.mp4" aria-label="Play the Blue Proof example">
+        <span class="media">
+        <video data-lazy src="assets/looks/blue-proof.mp4" poster="assets/looks/blue-proof.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Blue Proof</span><span class="d" style="display:block">A podcast-mic proof ad. Every claim slams onto a blue card.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/matte-glow.mp4" aria-label="Play the Matte Glow example">
+        <span class="media">
+        <video data-lazy src="assets/looks/matte-glow.mp4" poster="assets/looks/matte-glow.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Matte Glow</span><span class="d" style="display:block">You are cut out, graphics live behind you, with a green or red glow.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/typography.mp4" aria-label="Play the Typography example">
+        <span class="media">
+        <video data-lazy src="assets/looks/typography.mp4" poster="assets/looks/typography.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Typography</span><span class="d" style="display:block">Type is the only graphic. Bold word cards, one per word.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/ui.mp4" aria-label="Play the UI example">
+        <span class="media">
+        <video data-lazy src="assets/looks/ui.mp4" poster="assets/looks/ui.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">UI</span><span class="d" style="display:block">Chat bubbles, pill stacks and checklists cut in beside you.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/saas.mp4" aria-label="Play the SaaS example">
+        <span class="media">
+        <video data-lazy src="assets/looks/saas.mp4" poster="assets/looks/saas.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">SaaS</span><span class="d" style="display:block">A near-black dashboard where rounded cards land one at a time.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/violet.mp4" aria-label="Play the Violet example">
+        <span class="media">
+        <video data-lazy src="assets/looks/violet.mp4" poster="assets/looks/violet.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Violet</span><span class="d" style="display:block">A flash-cut ad. Bright footage slams into a dark purple world.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/white.mp4" aria-label="Play the White example">
+        <span class="media">
+        <video data-lazy src="assets/looks/white.mp4" poster="assets/looks/white.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">White</span><span class="d" style="display:block">A calm expert that cuts to a white wall of glossy app tiles.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/fearful.mp4" aria-label="Play the Fearful example">
+        <span class="media">
+        <video data-lazy src="assets/looks/fearful.mp4" poster="assets/looks/fearful.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Fearful</span><span class="d" style="display:block">A documentary edit that walks fear into relief.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/neon-glass.mp4" aria-label="Play the Neon Glass example">
+        <span class="media">
+        <video data-lazy src="assets/looks/neon-glass.mp4" poster="assets/looks/neon-glass.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Neon Glass</span><span class="d" style="display:block">A dark product reveal with smooth glass and glow.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your script</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/paper-page.mp4" aria-label="Play the Paper Page example">
+        <span class="media">
+        <video data-lazy src="assets/looks/paper-page.mp4" poster="assets/looks/paper-page.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Paper Page</span><span class="d" style="display:block">A printed page that moves, with one hot orange accent.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your script</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/slate.mp4" aria-label="Play the Slate example">
+        <span class="media">
+        <video data-lazy src="assets/looks/slate.mp4" poster="assets/looks/slate.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Slate</span><span class="d" style="display:block">A dark product trailer. Words blur in one at a time.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your script</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/corkboard.mp4" aria-label="Play the Corkboard example">
+        <span class="media">
+        <video data-lazy src="assets/looks/corkboard.mp4" poster="assets/looks/corkboard.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Corkboard</span><span class="d" style="display:block">Real-looking props on a table. Every noun you say becomes a prop.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your script</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/deadpan.mp4" aria-label="Play the Deadpan example">
+        <span class="media">
+        <video data-lazy src="assets/looks/deadpan.mp4" poster="assets/looks/deadpan.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Deadpan</span><span class="d" style="display:block">One round-head line character says your script.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your script</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/map.mp4" aria-label="Play the Map example">
+        <span class="media">
+        <video data-lazy src="assets/looks/map.mp4" poster="assets/looks/map.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Map</span><span class="d" style="display:block">A dark data map. Regions light up and lines connect places.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your script</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/receipt.mp4" aria-label="Play the Receipt example">
+        <span class="media">
+        <video data-lazy src="assets/looks/receipt.mp4" poster="assets/looks/receipt.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Receipt</span><span class="d" style="display:block">Your story prints on a thermal receipt, line by line.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your script</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/terminal.mp4" aria-label="Play the Terminal example">
+        <span class="media">
+        <video data-lazy src="assets/looks/terminal.mp4" poster="assets/looks/terminal.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Terminal</span><span class="d" style="display:block">A command line explainer. Your script types itself out.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your script</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/receipts.mp4" aria-label="Play the Receipts example">
+        <span class="media">
+        <video data-lazy src="assets/looks/receipts.mp4" poster="assets/looks/receipts.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Receipts</span><span class="d" style="display:block">A white page of real numbers marked up in red marker.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/blueprint.mp4" aria-label="Play the Blueprint example">
+        <span class="media">
+        <video data-lazy src="assets/looks/blueprint.mp4" poster="assets/looks/blueprint.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Blueprint</span><span class="d" style="display:block">Navy and electric blue on a grid, with a typed cursor.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/dossier.mp4" aria-label="Play the Dossier example">
+        <span class="media">
+        <video data-lazy src="assets/looks/dossier.mp4" poster="assets/looks/dossier.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Dossier</span><span class="d" style="display:block">A document investigation with a spotlight and a green marker.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/telemetry.mp4" aria-label="Play the Telemetry example">
+        <span class="media">
+        <video data-lazy src="assets/looks/telemetry.mp4" poster="assets/looks/telemetry.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Telemetry</span><span class="d" style="display:block">A live instrument panel of lines that plot themselves.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/ember.mp4" aria-label="Play the Ember example">
+        <span class="media">
+        <video data-lazy src="assets/looks/ember.mp4" poster="assets/looks/ember.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Ember</span><span class="d" style="display:block">A warm dark room with one ember glow and a cream serif.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      <button class="tile" data-full="assets/looks/arcade.mp4" aria-label="Play the Arcade example">
+        <span class="media">
+        <video data-lazy src="assets/looks/arcade.mp4" poster="assets/looks/arcade.jpg" muted playsinline loop preload="none"></video>
+        <span class="play"><svg viewBox="0 0 10 10"><path d="M1 0l9 5-9 5z"/></svg>Watch</span>
+        </span>
+        <span class="cap"><span class="h">Arcade</span><span class="d" style="display:block">A playful video game look with pixel font and locked tiles.</span><span class="meta"><span class="badge soon">Coming soon</span><span class="need">Your clip</span></span></span>
+      </button>
+      </div>
+      <p style="margin:28px 0 0;text-align:center"><a class="btn soft" href="https://software.quintengish.com/library">See the full library</a></p>
     </div>
-    <p style="margin:28px 0 0;text-align:center"><a class="btn soft" href="https://software.quintengish.com/library">See the full library of looks</a></p>
-  </div>
+  </section>
 
   <section id="how">
     <div class="wrap">
@@ -297,6 +592,18 @@ footer { padding: 40px 0 56px; color: var(--dim2); font-size: 14px; display: fle
   document.getElementById("close").addEventListener("click", close);
   player.addEventListener("click", function (e) { if (e.target === player) close(); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+  var lazy = document.querySelectorAll("video[data-lazy]");
+  var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!still && "IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        var v = e.target;
+        if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+        else v.pause();
+      });
+    }, { rootMargin: "100px 0px", threshold: 0.2 });
+    lazy.forEach(function (v) { io.observe(v); });
+  }
   var copy = document.getElementById("copy");
   if (copy) copy.addEventListener("click", function () {
     var t = document.getElementById("mcpurl").textContent;
