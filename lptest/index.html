@@ -1,0 +1,1427 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<script>
+/* A/B SPLIT (10.05.2026). Runs before first paint, before site.js.
+   a = the full page. b = "VSL only": the hero (chip, headline, subhead, VSL, Apply) and nothing under it.
+   First visit picks a or b 50/50 and keeps it in this browser (localStorage "acsa-variant").
+   ?v=a or ?v=b forces one for this tab only (preview), without touching the saved pick.
+   Sets <html data-variant>; the CSS below hides the sections for b; site.js tags every event with it. */
+(function () {
+  var d = document.documentElement, V = 'b'; /* /lptest/ preview: always the VSL-only version */
+  d.setAttribute('data-variant', V);
+  window.acsaVariant = V;
+})();
+</script>
+<script src="site.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111317">
+<title>How I Went From $0 to $30k/mo in 90 Days By Becoming an AI Creative Strategist</title>
+<meta name="description" content="The exact system, built for copywriters and media buyers.">
+<link rel="canonical" href="https://www.quintengish.com/accelerator/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.quintengish.com/accelerator/">
+<meta property="og:title" content="How I Went From $0 to $30k/mo in 90 Days By Becoming an AI Creative Strategist">
+<meta property="og:description" content="Watch the free training, then apply. 6 weeks of live coaching.">
+<meta property="og:image" content="https://www.quintengish.com/accelerator/assets/poster-v3.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" as="image" href="/accelerator/assets/poster-v3.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,800&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   White Flow - landing page system
+   The web version of the White Flow video kit (templates/white-flow/src/kit.tsx).
+   Every value below is taken from kit.tsx and halved from its 1080px frame to
+   web scale. Spec + rules: styles/web/white-flow.md. Do not add a second accent.
+   ========================================================================== */
+
+/* Shapiro is a COMMERCIAL font. Ship a public page only with a webfont licence (styles/web/white-flow.md). */
+
+:root {
+  /* kit.tsx C{} */
+  --paper: #ECE8E1;
+  --ink: #14161B;
+  --card: #181B22;
+  --card2: #0E1015;
+  --card-top: #20242D;
+  --accent: #2F5BFF;       /* the ONE accent. Swap it per brand, never add a second */
+  --accent-soft: #8FA8FF;  /* accent on dark cards */
+  --warn: #E4572E;         /* only for "bad" states */
+  --good: #1FB877;         /* sparingly */
+  --muted: #8B877F;
+  --line: rgba(255,255,255,0.09);
+
+  --sans: "WF Inter", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --emph: "Archivo", "WF Shapiro", "WF Inter", "Inter", system-ui, sans-serif;
+
+  /* kit SHADOW / SHADOW_SM at web scale: long, soft, diagonal, warm-brown (never grey) */
+  --shadow: 17px 23px 35px rgba(40,30,15,0.30), 5px 7px 11px rgba(40,30,15,0.22);
+  --shadow-sm: 8px 11px 17px rgba(40,30,15,0.26), 3px 4px 6px rgba(40,30,15,0.20);
+  --shadow-tight: 3px 5px 10px rgba(40,30,15,0.22);   /* next to a face: no long spill (kit rule 6) */
+  --hairline: inset 0 1.5px 0 rgba(255,255,255,0.10), inset 0 0 0 1px rgba(255,255,255,0.04);
+
+  --r: 24px;      /* kit radius 34 on a 760px card, scaled */
+  --r-sm: 16px;
+  --gutter: clamp(16px, 4vw, 48px);
+  --maxw: 1180px;
+
+  /* type scale: headline = kit Kinetic sizes halved, fluid */
+  --h1: clamp(40px, 6.2vw, 84px);
+  --h2: clamp(32px, 4.4vw, 58px);
+  --h3: clamp(22px, 2.2vw, 28px);
+  --body: clamp(17px, 1.35vw, 19px);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: var(--body);
+  line-height: 1.5;
+  font-weight: 500;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img, video, svg { display: block; max-width: 100%; }
+
+/* ---------- Paper: warm stock + faint 60px grid + vignette + grain (kit <Paper>) ---------- */
+.wf-paper { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: var(--paper); overflow: hidden; }
+.wf-paper__grid {
+  position: absolute; inset: -60px;
+  background-image:
+    linear-gradient(rgba(60,50,35,0.055) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(60,50,35,0.055) 1.5px, transparent 1.5px);
+  background-size: 60px 60px;
+  will-change: transform;
+}
+.wf-paper__light {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 45% 38%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 55%),
+    radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 55%, rgba(60,45,25,0.20) 100%);
+}
+.wf-paper__grain {
+  position: absolute; inset: 0; opacity: 0.16; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='7'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+}
+
+/* ---------- Layout ---------- */
+.wf-wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+.wf-section { position: relative; padding: clamp(72px, 11vw, 150px) 0; }
+.wf-center { text-align: center; }
+.wf-stack > * + * { margin-top: 20px; }
+.wf-split { display: grid; gap: clamp(28px, 5vw, 72px); align-items: center; }
+@media (min-width: 900px) {
+  .wf-split { grid-template-columns: 1fr 1fr; }
+  .wf-split--face-right > .wf-facecard-col { order: 2; }
+}
+
+/* ---------- Type ---------- */
+.wf-h1, .wf-h2, .wf-h3 { margin: 0; color: var(--ink); font-weight: 600; letter-spacing: -0.035em; line-height: 1.02; }
+.wf-h1 { font-size: var(--h1); }
+.wf-h2 { font-size: var(--h2); }
+.wf-h3 { font-size: var(--h3); letter-spacing: -0.02em; line-height: 1.15; }
+/* emphasis = Shapiro Heavy, 1-2 words per phrase (kit st 'i' / 'ai') */
+.wf-h1 em, .wf-h2 em, .wf-h3 em, .wf-emph {
+  font-family: var(--emph); font-style: normal; font-weight: 800; letter-spacing: -0.01em;
+  font-size: 1.046em;  /* kit normalises Shapiro 0.90 vs Inter 0.86 */
+}
+.wf-a { color: var(--accent); }
+.wf-m { color: var(--muted); }
+.wf-lede { font-size: clamp(18px, 1.6vw, 22px); color: #3b3d44; max-width: 34em; margin: 0; font-weight: 500; }
+.wf-center .wf-lede { margin-left: auto; margin-right: auto; }
+.wf-small { font-size: 14px; color: var(--muted); }
+
+/* ---------- Chip / call-out tag (kit hook tag: readable on the very first frame) ---------- */
+.wf-chip {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 18px 10px 14px; border-radius: 999px;
+  background: var(--ink); color: #fff;
+  font: 700 13px/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase;
+  box-shadow: var(--shadow-sm);
+}
+.wf-chip__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px rgba(47,91,255,0.22); }
+.wf-chip--paper { background: #fff; color: var(--ink); box-shadow: var(--shadow-tight); }
+.wf-chip--accent { background: var(--accent); }
+
+/* ---------- Cards (kit <Card>) ---------- */
+.wf-card {
+  position: relative; overflow: hidden; border-radius: var(--r);
+  background: linear-gradient(160deg, var(--card-top) 0%, var(--card) 45%, var(--card2) 100%);
+  box-shadow: var(--shadow), var(--hairline);
+  color: #fff; padding: clamp(22px, 2.6vw, 34px);
+}
+.wf-card--sm { border-radius: var(--r-sm); box-shadow: var(--shadow-sm), var(--hairline); padding: 18px 20px; }
+.wf-card--light {
+  background: linear-gradient(160deg, #FFFFFF 0%, #F3F0EA 60%, #E6E2DA 100%);
+  color: var(--ink);
+}
+.wf-card__label { font: 700 12px/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+.wf-card--light .wf-card__label { color: var(--muted); }
+.wf-card .wf-a { color: var(--accent-soft); }
+.wf-card--light .wf-a { color: var(--accent); }
+.wf-rule { height: 1px; background: var(--line); margin: 18px 0; border: 0; }
+.wf-card--light .wf-rule { background: rgba(20,22,27,0.08); }
+
+/* ---------- Face panel (kit rule 19) + face card ---------- */
+/* Full face: a panel on the paper, footage untouched, NOTHING drawn over the face. */
+.wf-panel {
+  position: relative; overflow: hidden; border-radius: var(--r);
+  aspect-ratio: 16 / 9; background: #cfc9bf;
+  box-shadow: var(--shadow);
+}
+.wf-panel video, .wf-panel img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 699px) {
+  /* 9:16 logic: full-width panel flush to the top, rounded BOTTOM corners only */
+  .wf-panel--flush { margin: 0 calc(-1 * var(--gutter)); border-radius: 0 0 var(--r) var(--r); aspect-ratio: 1080 / 980; }
+}
+/* Face card: smaller, white ring, graphics on the other side. Never over it. */
+.wf-facecard {
+  position: relative; overflow: hidden; border-radius: var(--r);
+  aspect-ratio: 16 / 9; background: #cfc9bf;
+  box-shadow: var(--shadow), 0 0 0 6px #fff;
+}
+.wf-facecard--round { aspect-ratio: 1; border-radius: 50%; max-width: 260px; }
+.wf-facecard video, .wf-facecard img { width: 100%; height: 100%; object-fit: cover; }
+/* Under-panel band: every full-face graphic lives here, in ink, on paper */
+.wf-band { display: flex; flex-wrap: wrap; gap: 14px 18px; align-items: center; justify-content: center; margin-top: 28px; }
+/* The VSL play control sits on the paper below the face, never over it */
+.wf-play { display: inline-flex; align-items: center; gap: 10px; font: 600 15px/1 var(--sans); color: var(--ink); background: none; border: 0; cursor: pointer; padding: 6px 0; }
+.wf-play__btn { width: 38px; height: 38px; border-radius: 50%; background: var(--ink); display: grid; place-items: center; box-shadow: var(--shadow-tight); }
+
+/* ---------- Buttons ---------- */
+.wf-btn {
+  position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+  padding: 20px 30px; border-radius: 16px; border: 0; cursor: pointer; text-decoration: none;
+  background: var(--accent); color: #fff; font: 700 18px/1 var(--sans); letter-spacing: -0.01em;
+  box-shadow: var(--shadow-sm), inset 0 1.5px 0 rgba(255,255,255,0.22);
+  transition: transform .18s cubic-bezier(.22,1,.36,1), box-shadow .18s;
+}
+.wf-btn:hover { transform: translateY(-2px); }
+.wf-btn:active, .wf-btn.is-pressed { transform: scale(0.96); box-shadow: 3px 4px 8px rgba(40,30,15,0.22); }
+.wf-btn--ink { background: var(--ink); }
+.wf-btn:focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 4px; }
+
+/* ---------- Devices ---------- */
+/* stat */
+.wf-stat__num { font: 800 clamp(44px, 5vw, 68px)/1 var(--emph); letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+.wf-stat__cap { margin-top: 10px; font-size: 15px; color: rgba(255,255,255,0.62); }
+.wf-card--light .wf-stat__cap { color: var(--muted); }
+
+/* struck "without" list */
+.wf-list { list-style: none; margin: 0; padding: 0; }
+.wf-list li { display: flex; align-items: center; gap: 14px; padding: 14px 0; border-top: 1px solid var(--line); font-weight: 600; font-size: clamp(17px, 1.5vw, 20px); }
+.wf-list li:first-child { border-top: 0; }
+.wf-card--light .wf-list li { border-color: rgba(20,22,27,0.08); }
+.wf-strike { position: relative; display: inline-block; }
+.wf-strike::after {
+  content: ""; position: absolute; left: -3%; top: 52%; height: max(3px, 0.12em); width: 0;
+  background: var(--warn); border-radius: 4px; transition: width .3s cubic-bezier(.22,1,.36,1);
+}
+.wf-strike.is-struck::after { width: 106%; }
+.wf-ico { flex: none; width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: rgba(255,255,255,0.06); }
+.wf-ico--warn { background: rgba(228,87,46,0.14); }
+.wf-ico--good { background: rgba(31,184,119,0.14); }
+.wf-ico--accent { background: rgba(47,91,255,0.16); }
+
+/* steps with depth of field: the one in focus is sharp, the rest blur + dim (never vanish) */
+.wf-steps { display: grid; gap: 16px; }
+.wf-step { display: flex; gap: 18px; align-items: flex-start; transition: filter .5s cubic-bezier(.22,1,.36,1), opacity .5s, transform .5s cubic-bezier(.22,1,.36,1); }
+.wf-steps.is-dof .wf-step { filter: blur(2.5px); opacity: 0.42; transform: scale(0.97); transform-origin: left center; }
+.wf-steps.is-dof .wf-step.is-focus { filter: none; opacity: 1; transform: none; }
+.wf-step__n { flex: none; width: 44px; height: 44px; border-radius: 14px; background: var(--accent); color: #fff; display: grid; place-items: center; font: 800 20px/1 var(--emph); }
+.wf-step__t { font-weight: 700; font-size: 19px; letter-spacing: -0.02em; }
+.wf-step__d { color: rgba(255,255,255,0.62); font-size: 16px; margin-top: 4px; }
+
+/* line graph */
+.wf-graph { width: 100%; height: auto; overflow: visible; }
+.wf-graph .grid { stroke: rgba(255,255,255,0.07); stroke-width: 1; }
+.wf-graph .line { fill: none; stroke: var(--accent-soft); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.wf-graph .area { fill: url(#wfArea); opacity: 0; transition: opacity .8s .6s; }
+.wf-graph.is-drawn .area { opacity: 1; }
+
+/* chat */
+.wf-chat { display: grid; gap: 12px; }
+.wf-bubble { max-width: 88%; padding: 14px 18px; border-radius: 20px; font-size: 16px; line-height: 1.45; font-weight: 500; }
+.wf-bubble--in { background: rgba(255,255,255,0.08); border-bottom-left-radius: 6px; }
+.wf-bubble--out { background: var(--accent); justify-self: end; border-bottom-right-radius: 6px; }
+.wf-typing { display: inline-flex; gap: 5px; padding: 16px 18px; border-radius: 20px; border-bottom-left-radius: 6px; background: rgba(255,255,255,0.08); width: max-content; }
+.wf-typing i { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.55); animation: wfDot 1s infinite ease-in-out; }
+.wf-typing i:nth-child(2) { animation-delay: .15s; } .wf-typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes wfDot { 0%, 60%, 100% { transform: translateY(0); opacity: .45; } 30% { transform: translateY(-4px); opacity: 1; } }
+
+/* seats */
+.wf-seats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.wf-seat { aspect-ratio: 1; border-radius: 12px; background: rgba(255,255,255,0.07); display: grid; place-items: center; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05); }
+.wf-seat.is-taken { background: var(--accent); box-shadow: 3px 5px 10px rgba(0,0,0,0.3); }
+.wf-seat svg { opacity: .9; }
+
+/* notification (hero lane card) */
+.wf-note { display: flex; gap: 12px; align-items: center; width: 280px; }
+.wf-note__icon { flex: none; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--accent); }
+.wf-note__t { font-weight: 700; font-size: 15px; letter-spacing: -0.01em; }
+.wf-note__d { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+.wf-card--light .wf-note__d { color: var(--muted); }
+
+/* hero lanes: cards sit BESIDE the face panel on wide screens (1300px+); below that they are left out */
+.wf-hero-stage { position: relative; width: 100%; max-width: 880px; margin: clamp(36px, 5vw, 56px) auto 0; }
+.wf-lane { display: none; }
+@media (min-width: 1300px) {
+  /* the panel gives up width so both lane cards fit on the paper beside it, never over it */
+  .wf-hero-stage { max-width: min(880px, calc(100vw - 700px)); }
+  .wf-lane { display: block; position: absolute; z-index: 2; }
+  .wf-lane--l { right: calc(100% + 28px); top: 18%; }
+  .wf-lane--r { left: calc(100% + 28px); top: 46%; }
+}
+
+/* cursor (kit ICursor) for the CTA click device */
+.wf-cursor { position: absolute; width: 44px; height: 44px; pointer-events: none; z-index: 3; opacity: 0; filter: drop-shadow(4px 6px 5px rgba(0,0,0,.35)); }
+
+/* ---------- Motion start states (only when JS is running and motion is allowed) ---------- */
+.wf-js [data-pop] { opacity: 0; }
+.wf-js [data-kinetic] .wf-w { display: inline-block; opacity: 0; }
+.wf-js .wf-seat { opacity: 0; }
+/* reduced motion, or ?static: everything in its final state (the JS adds .wf-reduce in both cases) */
+.wf-reduce [data-pop], .wf-reduce [data-kinetic] .wf-w, .wf-reduce .wf-seat { opacity: 1 !important; }
+.wf-reduce .wf-strike::after, .wf-reduce .wf-step, .wf-reduce .wf-graph .area { transition: none !important; }
+.wf-reduce .wf-typing i { animation: none; }
+
+/* ---------- Footer ---------- */
+.wf-foot { padding: 40px 0 56px; font-size: 13px; color: var(--muted); text-align: center; }
+
+/* ---------- Stepper chips (state colour logic: green = done, blue = active, grey = to come) ---------- */
+.wf-stepper { display: flex; flex-wrap: wrap; gap: 10px; }
+.wf-stepper span { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px; font: 700 13px/1 var(--sans); letter-spacing: 0.02em; background: rgba(20,22,27,0.08); color: #5f5b54; }
+.wf-stepper .is-done { background: rgba(31,184,119,0.14); color: #127a4f; }
+.wf-stepper .is-active { background: var(--accent); color: #fff; box-shadow: var(--shadow-tight); }
+.wf-graph [data-pop] { transform-box: fill-box; transform-origin: center; }
+
+/* ---------- Hero order: desktop = headline over the panel (16:9 logic); phone = the face panel flush to the top,
+   everything else under it on the paper (kit rule 19, 9:16 logic) ---------- */
+.wf-hero-sec { padding-top: clamp(28px, 5vw, 64px); }
+.wf-hero { display: flex; flex-direction: column; align-items: center; }
+.wf-hero > .wf-chip { align-self: center; }
+@media (max-width: 699px) {
+  .wf-hero-sec { padding-top: 0; }
+  .wf-hero .wf-hero-stage { order: -1; margin: 0 0 28px !important; width: 100%; }
+  .wf-hero .wf-h1 { margin-top: 20px !important; }
+}
+
+/* ---------- Custom VSL player (data-player). The screen is the untouched footage; every control lives on the
+   paper UNDER it (kit rule 6: nothing over the face). Click the footage to play or pause. ---------- */
+@media (max-width: 699px) { .wf-panel--flush.wf-panel--169 { aspect-ratio: 16 / 9; } }  /* a 16:9 film stays 16:9 on a phone */
+.wf-player { width: 100%; }
+.wf-player__screen { cursor: pointer; background: #1b1d22; }
+.wf-player__screen video { background: #1b1d22; }
+.wf-player__bar {
+  display: flex; align-items: center; gap: 14px; margin-top: 18px; padding: 12px 16px 12px 12px; border-radius: 20px;
+  background: linear-gradient(160deg, #FFFFFF 0%, #F3F0EA 60%, #E6E2DA 100%); box-shadow: var(--shadow-sm); text-align: left;
+}
+.wf-player__play {
+  flex: none; width: 52px; height: 52px; border-radius: 50%; border: 0; cursor: pointer; display: grid; place-items: center;
+  background: var(--accent); box-shadow: 3px 5px 10px rgba(40,30,15,0.25), inset 0 1.5px 0 rgba(255,255,255,0.22);
+  transition: transform .18s cubic-bezier(.22,1,.36,1);
+}
+.wf-player__play:active { transform: scale(0.94); }
+.wf-player__play .i-pause, .wf-player.is-playing .wf-player__play .i-play { display: none; }
+.wf-player.is-playing .wf-player__play .i-pause { display: block; }
+.wf-player__mid { flex: 1; min-width: 0; }
+.wf-player__title { font-weight: 700; font-size: 15px; letter-spacing: -0.01em; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wf-player__track { position: relative; height: 22px; margin-top: 2px; cursor: pointer; touch-action: none; }
+.wf-player__track::before { content: ""; position: absolute; left: 0; right: 0; top: 9px; height: 4px; border-radius: 4px; background: rgba(20,22,27,0.12); }
+.wf-player__buf, .wf-player__fill { position: absolute; left: 0; top: 9px; height: 4px; border-radius: 4px; width: 0; }
+.wf-player__buf { background: rgba(20,22,27,0.14); }
+.wf-player__fill { background: var(--accent); }
+.wf-player__knob { position: absolute; top: 4px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 3px var(--accent), 2px 3px 6px rgba(40,30,15,0.3); left: 0; }
+.wf-player__track:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 6px; }
+.wf-player__time { flex: none; font: 600 14px/1 var(--sans); font-variant-numeric: tabular-nums; color: var(--muted); }
+.wf-player__icon { flex: none; width: 38px; height: 38px; border-radius: 12px; border: 0; cursor: pointer; display: grid; place-items: center; background: rgba(20,22,27,0.06); color: var(--ink); }
+.wf-player__icon:hover { background: rgba(20,22,27,0.1); }
+.wf-player .i-muted, .wf-player.is-muted .i-sound { display: none; }
+.wf-player.is-muted .i-muted { display: block; }
+@media (max-width: 520px) { .wf-player__time { display: none; } .wf-player__bar { gap: 10px; } .wf-player__play { width: 46px; height: 46px; } }
+
+/* ==========================================================================
+   WHITE FLOW NEGATIVE - <body class="wf-negative">
+   The same world printed in negative: near-black warm ground, faint light grid, the dark UI cards become paper
+   cards and the paper cards become dark ones, the SAME single cobalt accent. Use it when the footage is itself
+   White Flow (a bright paper film) so the page frames the video instead of blending into it. (Quinten, 09.23)
+   ========================================================================== */
+.wf-negative {
+  --paper: #111317;
+  --ink: #F2EFE8;
+  --muted: #8E8A83;
+  --accent-page: #5A7DFF;   /* cobalt, lifted a touch so it reads on the dark ground */
+  --line: rgba(20,22,27,0.08);
+  --shadow: 17px 23px 38px rgba(0,0,0,0.55), 5px 7px 12px rgba(0,0,0,0.40);
+  --shadow-sm: 8px 11px 20px rgba(0,0,0,0.50), 3px 4px 7px rgba(0,0,0,0.35);
+  --shadow-tight: 3px 5px 12px rgba(0,0,0,0.45);
+  background: var(--paper);
+}
+.wf-negative .wf-paper { background: var(--paper); }
+.wf-negative .wf-paper__grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.045) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(255,255,255,0.045) 1.5px, transparent 1.5px);
+}
+.wf-negative .wf-paper__light {
+  background:
+    radial-gradient(ellipse at 45% 30%, rgba(90,125,255,0.10) 0%, rgba(90,125,255,0) 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.45) 100%);
+}
+.wf-negative .wf-paper__grain { mix-blend-mode: screen; opacity: 0.06; }
+.wf-negative .wf-a { color: var(--accent-page); }
+.wf-negative .wf-lede { color: rgba(242,239,232,0.72); }
+/* chips flip */
+.wf-negative .wf-chip { background: #F2EFE8; color: #14161B; }
+.wf-negative .wf-chip--paper { background: #1D2027; color: #F2EFE8; box-shadow: var(--shadow-tight), inset 0 0 0 1px rgba(255,255,255,0.07); }
+.wf-negative .wf-chip--accent { background: var(--accent); color: #fff; }
+/* dark card -> paper card */
+.wf-negative .wf-card {
+  background: linear-gradient(160deg, #FFFFFF 0%, #F3F0EA 60%, #E6E2DA 100%);
+  color: #14161B; box-shadow: var(--shadow), inset 0 1.5px 0 rgba(255,255,255,0.6);
+}
+.wf-negative .wf-card .wf-card__label, .wf-negative .wf-card .wf-stat__cap { color: #8B877F; }
+.wf-negative .wf-card .wf-a { color: var(--accent); }
+/* paper card -> dark card (a step lighter than the ground so it still lifts off it) */
+.wf-negative .wf-card--light {
+  background: linear-gradient(160deg, #2A2E37 0%, #1F2229 50%, #181A20 100%);
+  color: #fff; box-shadow: var(--shadow), inset 0 1.5px 0 rgba(255,255,255,0.08), inset 0 0 0 1px rgba(255,255,255,0.05);
+}
+.wf-negative .wf-card--light .wf-card__label { color: rgba(255,255,255,0.5); }
+.wf-negative .wf-card--light .wf-stat__cap { color: rgba(255,255,255,0.62); }
+.wf-negative .wf-card--light .wf-a { color: var(--accent-soft); }
+/* the player bar goes dark */
+.wf-negative .wf-player__bar { background: linear-gradient(160deg, #262A32 0%, #1C1F25 100%); box-shadow: var(--shadow-sm), inset 0 1.5px 0 rgba(255,255,255,0.07), inset 0 0 0 1px rgba(255,255,255,0.05); }
+.wf-negative .wf-player__title { color: #F2EFE8; }
+.wf-negative .wf-player__track::before { background: rgba(255,255,255,0.14); }
+.wf-negative .wf-player__buf { background: rgba(255,255,255,0.16); }
+.wf-negative .wf-player__knob { background: #F2EFE8; box-shadow: 0 0 0 3px var(--accent), 2px 3px 6px rgba(0,0,0,0.5); }
+.wf-negative .wf-player__icon { background: rgba(255,255,255,0.07); color: #F2EFE8; }
+.wf-negative .wf-player__icon:hover { background: rgba(255,255,255,0.12); }
+.wf-negative .wf-player__screen, .wf-negative .wf-player__screen video { background: #0b0c0f; }
+.wf-negative .wf-panel, .wf-negative .wf-facecard { background: #1b1d22; }
+.wf-negative .wf-btn { box-shadow: 0 10px 30px rgba(47,91,255,0.35), inset 0 1.5px 0 rgba(255,255,255,0.22); }
+
+</style>
+<style>
+/* ---- page-only pieces (everything else is the White Flow template) ---- */
+/* tighter rhythm than the template: three short sections, no big gaps */
+.wf-section { padding: clamp(36px, 5.2vw, 72px) 0; }
+.wf-section.wf-hero-sec { padding-top: clamp(20px, 3vw, 40px); }
+.acsa-top { display: flex; justify-content: center; padding: 22px var(--gutter) 0; }
+.acsa-mark { font: 700 13px/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.acsa-mark b { color: var(--accent); font-weight: 700; }
+.acsa-h1 { margin: 24px auto 0; max-width: 15em; font-size: clamp(31px, 5.4vw, 72px); }
+.acsa-hero-player { width: 100%; max-width: 900px; margin: clamp(28px, 4vw, 44px) auto 0; }
+.acsa-cta { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 22px; }
+.acsa-cta .wf-btn { min-width: min(100%, 320px); }
+.acsa-note { font-size: 15px; color: var(--muted); margin: 0; }
+.acsa-stats { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; max-width: 980px; margin: 0 auto; }
+.acsa-stats .wf-stat__num { font-size: clamp(30px, 4.6vw, 62px); white-space: nowrap; }
+.acsa-close { max-width: 720px; margin: 0 auto; }
+.acsa-close .acsa-cta { margin-top: 22px; }
+@media (max-width: 699px) {
+  .acsa-top { display: none; }
+  .wf-player [data-mute] { display: none; }       /* phones have volume buttons; gives the title room */
+  .acsa-stats .wf-card { padding: 18px 16px; }
+  .acsa-stats .wf-card__label { font-size: 10.5px; letter-spacing: 0.08em; line-height: 1.3; }
+  .acsa-stats .wf-stat__cap { font-size: 13px; margin-top: 6px; }
+  .acsa-cta .wf-btn { width: 100%; }
+  .wf-lede { font-size: 17px; }
+}
+/* phone: one card per row, number on the left, label + caption on the right (the wide face will not fit two across) */
+@media (max-width: 559px) {
+  .acsa-stats { grid-template-columns: 1fr; gap: 12px; }
+  .acsa-stats .wf-card { display: grid; grid-template-columns: auto 1fr; column-gap: 18px; align-items: center; padding: 18px 20px; }
+  .acsa-stats .wf-stat__num { grid-column: 1; grid-row: 1 / 3; margin-top: 0 !important; font-size: 34px; }
+  .acsa-stats .wf-card__label { grid-column: 2; grid-row: 1; align-self: end; }
+  .acsa-stats .wf-stat__cap { grid-column: 2; grid-row: 2; align-self: start; margin-top: 5px; }
+}
+/* A/B SPLIT, version b = VSL only: everything under the hero is gone (sections, footer). Nothing else changes. */
+html[data-variant="b"] main > section:not(.wf-hero-sec),
+html[data-variant="b"] .wf-foot { display: none !important; }
+/* the wide heavy emphasis face */
+.wf-h1 em, .wf-h2 em, .wf-stat__num { font-stretch: 125%; }
+.wf-h1 em, .wf-h2 em { white-space: nowrap; }
+/* Section heads read as SUBHEADLINES (Quinten 09.23): plain sentences, smaller than the hero, balanced lines. */
+main .acsa-grad__h { font-size: clamp(26px, 2.6vw, 36px) !important; line-height: 1.12; text-wrap: balance; }
+main .wf-h2 { font-size: clamp(27px, 3.3vw, 44px); line-height: 1.12; letter-spacing: -0.025em; max-width: 21em; margin-left: auto; margin-right: auto; text-wrap: balance; }
+/* "Your video is playing / Click to unmute" (modelled on the Vidalytics smart-autoplay box). The whole video is the
+   click target; the blue box sits in the middle. Shown only while the muted preview plays. */
+.wf-player__screen { position: relative; }
+.acsa-unmute { position: absolute; inset: 0; z-index: 3; display: flex; align-items: center; justify-content: center;
+  padding: 0; border: 0; background: rgba(0, 0, 0, 0.12); cursor: pointer; font: inherit; color: #fff; -webkit-tap-highlight-color: transparent; }
+.acsa-unmute[hidden] { display: none; }
+.acsa-unmute__box { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 18px 26px 20px;
+  background: rgba(47, 91, 255, 0.92); border-radius: 14px; box-shadow: 0 18px 44px rgba(0, 0, 0, 0.35); text-align: center;
+  transition: transform 0.18s ease, background 0.18s ease; }
+.acsa-unmute:hover .acsa-unmute__box, .acsa-unmute:focus-visible .acsa-unmute__box { transform: scale(1.04); background: rgba(47, 91, 255, 1); }
+.acsa-unmute__top { font: 600 15px/1.2 var(--sans); letter-spacing: 0.01em; opacity: 0.95; }
+.acsa-unmute__bot { font: 800 clamp(19px, 2vw, 24px)/1.1 var(--emph, var(--sans)); font-stretch: 125%; letter-spacing: -0.01em; }
+.acsa-unmute svg { width: clamp(40px, 4.4vw, 56px); height: auto; }
+@media (max-width: 640px) { .acsa-unmute__box { padding: 12px 18px 14px; gap: 6px; } .acsa-unmute__top { font-size: 13px; } }   /* an emphasis phrase never splits across lines */
+
+/* ==== THREE MOTION SECTIONS (09.23): the difference (UMP), the new job, the system (UMS tease) ====
+   Every device plays ONCE when it scrolls in, then holds still. Start states only apply when the White Flow
+   engine is running and motion is allowed (html.wf-js without .wf-reduce), so ?static / reduced motion / no JS
+   all show the finished picture. One accent (cobalt), greys for everything else. */
+.acsa-head { max-width: 1000px; margin: 0 auto clamp(24px, 3.4vw, 40px); }
+.acsa-head .wf-h2 { margin-top: 16px; text-wrap: balance; }
+.acsa-head .wf-lede { margin-top: 16px; }
+.acsa-kicker { text-align: center; margin: clamp(22px, 3vw, 34px) auto 0; max-width: 30em; font: 600 clamp(20px, 2vw, 26px)/1.3 var(--sans); letter-spacing: -0.02em; color: var(--ink); }
+.acsa-emph { font-family: var(--emph); font-weight: 800; font-stretch: 125%; letter-spacing: -0.01em; }
+.wf-js:not(.wf-reduce) [data-acsa-in] { opacity: 0; }
+@media (max-width: 759px) { .acsa-br { display: none; } }
+
+/* -- 1. the difference: two panels -- */
+.acsa-vs { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2.2vw, 26px); max-width: 1000px; margin: 0 auto; align-items: stretch; }
+.acsa-pan { display: flex; flex-direction: column; border-radius: var(--r); padding: clamp(20px, 2.4vw, 30px); }
+.acsa-pan__head { display: flex; align-items: center; gap: 10px; font: 700 12.5px/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; }
+.acsa-dot { width: 8px; height: 8px; border-radius: 50%; background: #5d5a55; }
+.acsa-dot--on { background: var(--accent); box-shadow: 0 0 0 4px rgba(47,91,255,0.18); }
+.acsa-pan__body { flex: 1; margin-top: 18px; }
+.acsa-pan__foot { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; padding-top: 18px; }
+.acsa-pan__foot--one { grid-template-columns: 1fr; }
+.acsa-pan__k { font: 700 11px/1.2 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; }
+.acsa-pan__v { margin-top: 8px; font: 800 clamp(30px, 3.1vw, 40px)/1 var(--emph); font-stretch: 125%; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.acsa-pan__v small { font-size: 0.5em; letter-spacing: 0; }
+.acsa-pan--them { background: #17191E; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06); color: #8E8A83; }
+.acsa-pan--them .acsa-pan__foot { border-top: 1px solid rgba(255,255,255,0.07); }
+.acsa-pan--them .acsa-pan__k { color: #6F6B65; }
+.acsa-pan--them .acsa-pan__v { color: #7C7872; }
+.acsa-feed { list-style: none; padding: 0; display: grid; gap: 10px; align-content: start; }
+.acsa-feed li { display: flex; align-items: center; gap: 12px; padding: 11px 14px 11px 11px; border-radius: 14px; background: rgba(255,255,255,0.035); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05); font: 600 clamp(15px, 1.4vw, 17px)/1.2 var(--sans); color: #B3AFA8; }
+.acsa-ic { flex: none; width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: rgba(255,255,255,0.06); }
+.acsa-ic svg { width: 18px; height: 18px; stroke: #8E8A83; }
+.acsa-feed em { margin-left: auto; font: 700 11px/1 var(--sans); font-style: normal; letter-spacing: 0.1em; text-transform: uppercase; color: #6F6B65; }
+.acsa-pan--me { padding: clamp(20px, 2.4vw, 30px); }
+.acsa-pan--me .acsa-pan__head { color: var(--accent); }
+.acsa-pan--me .acsa-pan__foot { border-top: 1px solid rgba(20,22,27,0.09); }
+.acsa-pan--me .acsa-pan__k { color: #8B877F; }
+.acsa-pathw { position: relative; }
+.acsa-pathw::before, .acsa-path__fill { content: ""; position: absolute; left: 17px; top: 18px; bottom: 18px; width: 2px; border-radius: 2px; background: #DDD8CF; }
+.acsa-path__fill { background: var(--accent); transform-origin: top; }
+.wf-js:not(.wf-reduce) .acsa-path__fill { transform: scaleY(0); }
+.acsa-pathw { display: flex; flex-direction: column; }
+.acsa-path { flex: 1; list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(12px, 1.5vw, 16px); align-content: space-between; position: relative; }
+.acsa-path li { display: flex; align-items: center; gap: 16px; font: 700 clamp(17px, 1.7vw, 21px)/1.2 var(--sans); letter-spacing: -0.02em; color: #14161B; transition: color .45s ease; }
+.acsa-path__n { flex: none; width: 36px; height: 36px; border-radius: 12px; display: grid; place-items: center; background: var(--accent); color: #fff; font: 800 16px/1 var(--emph); font-stretch: 125%; transition: background-color .45s ease, color .45s ease, transform .6s cubic-bezier(.34,1.45,.64,1); }
+.wf-js:not(.wf-reduce) .acsa-path li:not(.is-lit) { color: #B8B3AB; }
+.wf-js:not(.wf-reduce) .acsa-path li:not(.is-lit) .acsa-path__n { background: #E6E2DA; color: #A29D95; transform: scale(0.86); }
+
+/* -- 2. the new job: two role cards merge into one -- */
+.acsa-merge { max-width: 840px; margin: 0 auto; }
+.acsa-roles { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(12px, 2vw, 24px); }
+.acsa-role { position: relative; border-radius: var(--r); padding: clamp(16px, 2vw, 24px); border: 1.5px dashed transparent; transition: border-color .7s ease; }
+.acsa-role::before { content: ""; position: absolute; inset: -1.5px; border-radius: inherit; background: linear-gradient(160deg, #2A2E37 0%, #1F2229 50%, #181A20 100%); box-shadow: var(--shadow-sm), inset 0 0 0 1px rgba(255,255,255,0.06); transition: opacity .7s ease; }
+.acsa-role > * { position: relative; }
+.acsa-role__k, .acsa-new__k { font: 700 11.5px/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); transition: color .7s ease; }
+.acsa-role__t { margin-top: 8px; font: 700 clamp(19px, 2vw, 24px)/1.1 var(--sans); letter-spacing: -0.02em; color: #F2EFE8; transition: color .7s ease; }
+.acsa-role.is-spent { border-color: rgba(255,255,255,0.16); }
+.acsa-role.is-spent::before { opacity: 0; }
+.acsa-role.is-spent .acsa-role__t { color: #67635D; }
+.acsa-role.is-spent .acsa-role__k { color: #55524D; }
+.acsa-slots { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.acsa-tk { display: inline-flex; align-items: center; padding: 8px 13px; border-radius: 999px; border: 1.5px solid transparent; background: rgba(255,255,255,0.09); color: #E4E0D9; font: 600 clamp(13.5px, 1.3vw, 15px)/1.25 var(--sans); transition: color .35s ease, background-color .35s ease, border-color .35s ease; }
+.acsa-tk.is-gone { transition: border-color .35s ease; color: transparent; background: transparent; border-color: rgba(255,255,255,0.14); border-style: dashed; }
+.acsa-join { display: block; width: 100%; height: 56px; overflow: visible; }
+.acsa-join path { fill: none; stroke: rgba(255,255,255,0.2); stroke-width: 2; vector-effect: non-scaling-stroke; stroke-dasharray: 1; }
+.wf-js:not(.wf-reduce) .acsa-join path { stroke-dashoffset: 1; }
+.acsa-new { position: relative; max-width: 580px; margin: 0 auto; border-radius: var(--r); padding: clamp(20px, 2.6vw, 30px); text-align: center; border: 1.5px dashed rgba(255,255,255,0.18); }
+.acsa-new::before { content: ""; position: absolute; inset: -1.5px; border-radius: inherit; background: linear-gradient(160deg, #FFFFFF 0%, #F3F0EA 60%, #E6E2DA 100%); box-shadow: var(--shadow), 0 0 0 2px var(--accent); transition: opacity .7s ease; }
+.acsa-new > * { position: relative; }
+.acsa-new__k { color: #8B877F; }
+.acsa-new__t { margin-top: 8px; font: 800 clamp(24px, 2.8vw, 34px)/1.05 var(--emph); font-stretch: 125%; letter-spacing: -0.01em; color: #14161B; transition: color .7s ease; }
+.acsa-slots--new { justify-content: center; margin-top: 16px; }
+.acsa-slots--new .acsa-tk { background: #E3E8FB; color: var(--accent); }
+.acsa-new__res { margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(20,22,27,0.1); font: 600 clamp(16px, 1.5vw, 18px)/1.35 var(--sans); color: #44464D; }
+.acsa-new__res b { display: block; font: 800 clamp(30px, 3.4vw, 42px)/1 var(--emph); font-stretch: 125%; letter-spacing: -0.01em; color: var(--accent); margin-bottom: 6px; }
+.wf-js:not(.wf-reduce) .acsa-new:not(.is-lit)::before { opacity: 0; }
+.wf-js:not(.wf-reduce) .acsa-new:not(.is-lit) .acsa-new__t { color: #67635D; }
+.wf-js:not(.wf-reduce) .acsa-slots--new .acsa-tk:not(.is-in) { opacity: 0; }
+.wf-js:not(.wf-reduce) .acsa-new__res { opacity: 0; }
+
+/* -- 3. the system: four live-looking step screens + the graduate card -- */
+.acsa-sys { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 2vw, 22px); max-width: 1000px; margin: 0 auto; }
+.acsa-step { padding: clamp(18px, 2.2vw, 26px); }
+.acsa-step__h { display: flex; align-items: flex-start; gap: 14px; }
+.acsa-step__n { flex: none; width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: var(--accent); color: #fff; font: 800 15px/1 var(--emph); font-stretch: 125%; }
+.acsa-step__t { font: 700 clamp(17px, 1.6vw, 20px)/1.3 var(--sans); letter-spacing: -0.015em; color: #F2EFE8; padding-top: 4px; text-wrap: balance; }
+.acsa-scr { position: relative; margin-top: 18px; height: 214px; border-radius: 16px; background: #111317; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06); padding: 14px 16px; overflow: hidden; }
+.acsa-scr__bar { display: flex; justify-content: space-between; gap: 10px; font: 700 11px/1 var(--sans); letter-spacing: 0.1em; text-transform: uppercase; color: #7C7872; }
+/* 3.1 business list */
+.acsa-biz { list-style: none; margin: 10px 0 0; padding: 0; -webkit-mask-image: linear-gradient(#000 72%, transparent); mask-image: linear-gradient(#000 72%, transparent); }
+.acsa-biz li { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.05); font: 600 15px/1.2 var(--sans); color: #E4E0D9; }
+.acsa-biz__a { flex: none; width: 24px; height: 24px; border-radius: 7px; display: grid; place-items: center; background: rgba(255,255,255,0.08); font: 700 11px/1 var(--sans); color: #A29D95; }
+.acsa-live { margin-left: auto; display: inline-flex; align-items: center; gap: 7px; font: 600 12.5px/1 var(--sans); color: #A29D95; white-space: nowrap; }
+.acsa-live i { width: 8px; height: 8px; border-radius: 50%; background: var(--good); }
+/* 3.2 message typing */
+.acsa-msg { margin-top: 12px; position: relative; max-width: 92%; padding: 13px 16px; border-radius: 18px; border-bottom-left-radius: 6px; background: var(--accent); color: #fff; font: 500 clamp(14.5px, 1.3vw, 15.5px)/1.45 var(--sans); }
+.acsa-msg__live { position: absolute; left: 16px; right: 16px; top: 13px; }
+.acsa-queue { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 6px; }
+.acsa-queue li { display: flex; align-items: center; gap: 10px; font: 600 14px/1.2 var(--sans); color: #C9C5BE; }
+.acsa-queue em { margin-left: auto; font: 700 10.5px/1 var(--sans); font-style: normal; letter-spacing: 0.1em; text-transform: uppercase; color: #7C7872; white-space: nowrap; }
+.acsa-msg__caret { display: inline-block; width: 2px; height: 1.05em; margin-left: 1px; vertical-align: -0.15em; background: #fff; }
+.wf-js:not(.wf-reduce) .acsa-msg__ghost { visibility: hidden; }
+.wf-reduce .acsa-msg__live { display: none; }
+/* 3.3 ad grid */
+.acsa-ads { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 320px; margin: 12px auto 0; }
+.acsa-ad { display: flex; flex-direction: column; gap: 5px; height: 76px; padding: 5px; border-radius: 8px; background: #1D2026; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.07); }
+.acsa-ad__img { position: relative; flex: 1; border-radius: 5px; background: linear-gradient(160deg, #3A3E49, #272A31); overflow: hidden; }
+.acsa-ad__img::after { content: ""; position: absolute; left: 50%; top: 55%; width: 44%; aspect-ratio: 1; border-radius: 50%; background: rgba(255,255,255,0.14); transform: translate(-50%, -50%); }
+.acsa-ad:nth-child(3n+2) .acsa-ad__img::after { border-radius: 4px; width: 56%; aspect-ratio: 1.4; }
+.acsa-ad:nth-child(3n) .acsa-ad__img::after { width: 70%; height: 18%; aspect-ratio: auto; border-radius: 3px; top: 40%; }
+.acsa-ad__l { height: 4px; border-radius: 2px; background: rgba(255,255,255,0.16); width: 80%; }
+.acsa-ad__cta { height: 7px; border-radius: 3px; background: var(--accent); width: 52%; }
+/* 3.4 campaign tree + money */
+.acsa-tree { display: block; width: 100%; height: 108px; margin-top: 8px; }
+.acsa-tree .ln { fill: none; stroke: rgba(255,255,255,0.2); stroke-width: 1.5; stroke-dasharray: 1; }
+.wf-js:not(.wf-reduce) .acsa-tree .ln { stroke-dashoffset: 1; }
+.acsa-tree rect { fill: #1D2026; stroke: rgba(255,255,255,0.14); stroke-width: 1; }
+.acsa-tree .top { stroke: var(--accent); stroke-width: 1.5; }
+.acsa-tree .ad { fill: #2A2E37; }
+.acsa-tree text { fill: #E4E0D9; font: 600 10.5px var(--sans); text-anchor: middle; }
+.acsa-money { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 8px; }
+.acsa-money__v { font: 800 26px/1 var(--emph); font-stretch: 125%; color: #F2EFE8; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.acsa-money__v.wf-a { color: var(--accent-soft); }
+.acsa-money__k { display: block; margin-top: 5px; font: 700 10.5px/1 var(--sans); letter-spacing: 0.1em; text-transform: uppercase; color: #7C7872; text-align: center; }
+.acsa-money svg { width: 22px; height: 22px; stroke: #7C7872; flex: none; }
+/* the graduate card: the strongest thing in the section */
+.acsa-grad { max-width: 1000px; margin: clamp(22px, 3vw, 34px) auto 0; display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(22px, 3.4vw, 44px); align-items: center; padding: clamp(24px, 3.4vw, 44px); }
+.wf-negative .acsa-grad { box-shadow: var(--shadow), 0 0 0 2px var(--accent), 0 24px 70px rgba(47,91,255,0.28); }
+.acsa-grad__h { margin: 16px 0 0; font: 600 clamp(28px, 3.3vw, 44px)/1.06 var(--sans); letter-spacing: -0.035em; color: #14161B; }
+.acsa-grad__h em { font-family: var(--emph); font-style: normal; font-weight: 800; font-stretch: 125%; letter-spacing: -0.01em; color: var(--accent); }
+.acsa-grad p { margin: 14px 0 0; font-size: clamp(16px, 1.4vw, 18px); color: #44464D; }
+.acsa-grad p.acsa-grad__big { font-weight: 700; color: #14161B; }
+.acsa-grad .wf-btn { margin-top: 22px; }
+.acsa-acct { border-radius: 18px; padding: 16px; background: linear-gradient(160deg, #2A2E37 0%, #1F2229 50%, #181A20 100%); box-shadow: var(--shadow-sm); color: #F2EFE8; }
+.acsa-acct__bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; font: 700 11px/1 var(--sans); letter-spacing: 0.1em; text-transform: uppercase; color: #8E8A83; }
+.acsa-acct__bar b { font-weight: 700; color: #F2EFE8; letter-spacing: 0.1em; }
+.acsa-acct__spend { margin-top: 12px; font: 800 30px/1 var(--emph); font-stretch: 125%; }
+.acsa-acct__spend span { display: block; margin-top: 6px; font: 600 12.5px/1 var(--sans); color: #8E8A83; letter-spacing: 0; }
+.acsa-acct ul { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; }
+.acsa-acct li { display: flex; align-items: center; gap: 12px; padding: 9px 10px; border-radius: 12px; background: rgba(255,255,255,0.05); font: 600 14.5px/1.2 var(--sans); color: #C9C5BE; }
+.acsa-acct li .acsa-ad { flex: none; width: 34px; height: 42px; padding: 3px; gap: 3px; }
+.acsa-acct li .acsa-ad__l { height: 3px; }
+.acsa-acct li .acsa-ad__cta { height: 4px; }
+.acsa-acct li em { margin-left: auto; font: 700 11px/1 var(--sans); font-style: normal; letter-spacing: 0.08em; text-transform: uppercase; color: #8E8A83; white-space: nowrap; }
+.acsa-acct li.is-you { background: rgba(47,91,255,0.16); box-shadow: inset 0 0 0 1.5px var(--accent); color: #fff; }
+.acsa-acct li.is-you em { color: var(--accent-soft); }
+.acsa-value { text-align: center; margin: clamp(34px, 4.4vw, 56px) auto 0; max-width: 24em; font: 600 clamp(24px, 2.8vw, 36px)/1.15 var(--sans); letter-spacing: -0.03em; color: var(--ink); }
+.acsa-value em { font-family: var(--emph); font-style: normal; font-weight: 800; font-stretch: 125%; letter-spacing: -0.01em; color: var(--accent-page); white-space: nowrap; }
+
+@media (max-width: 759px) {
+  .acsa-vs, .acsa-sys, .acsa-grad { grid-template-columns: 1fr; }
+  .acsa-grad .wf-btn { width: 100%; }
+}
+@media (max-width: 480px) {
+  .acsa-roles { gap: 10px; }
+  .acsa-role { padding: 14px 12px; }
+  .acsa-tk { padding: 7px 10px; font-size: 13px; }
+  .acsa-join { height: 40px; }
+  .acsa-scr { padding: 12px 13px; height: 228px; }
+}
+</style>
+</head>
+<body class="wf-negative"><!-- remove wf-negative to go back to the light paper version -->
+<div class="wf-paper" aria-hidden="true"><div class="wf-paper__grid"></div><div class="wf-paper__light"></div><div class="wf-paper__grain"></div></div>
+
+<div class="acsa-top"><span class="acsa-mark">AI Creative <b>Strategist</b> Accelerator</span></div>
+
+<main>
+
+<!-- 1. HERO. Order is LOCKED on every screen size: chip, headline, subhead, THEN the video (Quinten 09.23). -->
+<section class="wf-section wf-hero-sec">
+  <div class="wf-wrap wf-center wf-hero">
+    <span class="wf-chip"><span class="wf-chip__dot"></span>Copywriters &amp; media buyers</span>
+    <h1 class="wf-h1 acsa-h1" data-kinetic="0.06" data-delay="0.1">
+      How I Went From $0 to <em class="wf-a">$30k/mo</em> in 90 Days By Becoming an AI Creative Strategist
+    </h1>
+    <p class="wf-lede" data-pop="0.9" data-delay="0.8" style="margin-top: 18px;">The exact system, built for copywriters and media buyers.</p>
+
+    <!-- the VSL: custom player, footage untouched, every control on the paper under it -->
+    <div class="acsa-hero-player">
+      <div class="wf-player" data-player>
+        <div class="wf-panel wf-player__screen">
+          <video preload="metadata" poster="/accelerator/assets/poster-v3.jpg" playsinline disablepictureinpicture controlslist="nodownload noplaybackrate"
+                 data-src-hd="/accelerator/assets/vsl-v3-1080.mp4" data-src-sd="/accelerator/assets/vsl-v3-720.mp4"></video>
+          <button class="acsa-unmute" type="button" hidden aria-label="Your video is playing. Click to unmute and start from the beginning.">
+            <span class="acsa-unmute__box">
+              <span class="acsa-unmute__top">Your video is playing</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="#fff"/><path d="m16 9.5 5 5M21 9.5l-5 5"/></svg>
+              <span class="acsa-unmute__bot">Click to unmute</span>
+            </span>
+          </button>
+        </div>
+        <div class="wf-player__bar">
+          <button class="wf-player__play" aria-label="Play">
+            <svg class="i-play" width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13l11-6.5z"/></svg>
+            <svg class="i-pause" width="20" height="20" viewBox="0 0 24 24" fill="#fff"><rect x="6.5" y="5" width="4" height="14" rx="1.2"/><rect x="13.5" y="5" width="4" height="14" rx="1.2"/></svg>
+          </button>
+          <div class="wf-player__mid">
+            <div class="wf-player__title" data-resume="Pick up where you left off">Watch the free training</div>
+            <div class="wf-player__track" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div class="wf-player__buf"></div><div class="wf-player__fill"></div><div class="wf-player__knob"></div>
+            </div>
+          </div>
+          <span class="wf-player__time">0:00 / 4:48</span>
+          <button class="wf-player__icon" data-mute aria-label="Mute">
+            <svg class="i-sound" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>
+            <svg class="i-muted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="m16 9.5 5 5M21 9.5l-5 5"/></svg>
+          </button>
+          <button class="wf-player__icon" data-fullscreen aria-label="Full screen">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="acsa-cta" data-stagger="0.08" data-delay="0.2">
+      <p class="acsa-note" data-pop style="font-weight: 600; color: var(--ink); font-size: 17px;">Watch the full training above, then apply.</p>
+      <a class="wf-btn" data-apply href="/accelerator/apply/" data-pop>Apply now
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <p class="acsa-note" data-pop>Takes about 10 minutes. If it's a fit, you'll book a call with me directly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 2. THE DIFFERENCE (UMP). Device: two panels. Everyone else = a pile of AI output with the money stuck at zero (grey).
+     What I teach = the five steps to the money, lighting up in order (the one accent). -->
+<section class="wf-section" id="difference">
+  <div class="wf-wrap">
+    <div class="acsa-head wf-center">
+      <span class="wf-chip wf-chip--paper" data-pop>The difference</span>
+      <h2 class="wf-h2" data-kinetic>Most people teach you how to use AI. I teach you how to <em class="wf-a">make money</em> with it.</h2>
+      <p class="wf-lede" data-pop="0.9" data-delay="0.5">Making cool stuff with AI does not pay you. Finding clients, winning them, and actually making them money does.</p>
+    </div>
+    <div class="acsa-vs">
+      <div class="acsa-pan acsa-pan--them" data-acsa="feed">
+        <div class="acsa-pan__head"><span class="acsa-dot"></span>What everyone teaches</div>
+        <ul class="acsa-feed acsa-pan__body">
+          <li data-acsa-in><span class="acsa-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="m20.5 16-5-5-8.5 8.5"/></svg></span>AI image<em>Done</em></li>
+          <li data-acsa-in><span class="acsa-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="M10 9.5v5l4.5-2.5z"/></svg></span>AI video<em>Done</em></li>
+          <li data-acsa-in><span class="acsa-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3.5" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v2.5"/></svg></span>AI voice clone<em>Done</em></li>
+          <li data-acsa-in><span class="acsa-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5h11v17l-5.5-4-5.5 4z"/></svg></span>50 prompts<em>Saved</em></li>
+          <li data-acsa-in><span class="acsa-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M10.5 9v6l4.5-3z"/></svg></span>New tool tutorial<em>Watched</em></li>
+        </ul>
+        <div class="acsa-pan__foot">
+          <div><div class="acsa-pan__k">Clients</div><div class="acsa-pan__v">0</div></div>
+          <div><div class="acsa-pan__k">Revenue</div><div class="acsa-pan__v">$0</div></div>
+        </div>
+      </div>
+      <div class="wf-card acsa-pan acsa-pan--me" data-acsa="path">
+        <div class="acsa-pan__head"><span class="acsa-dot acsa-dot--on"></span>What I teach</div>
+        <div class="acsa-pathw acsa-pan__body">
+          <i class="acsa-path__fill"></i>
+          <ol class="acsa-path">
+            <li><span class="acsa-path__n">1</span>Find the client</li>
+            <li><span class="acsa-path__n">2</span>Win the client</li>
+            <li><span class="acsa-path__n">3</span>Make them money</li>
+            <li><span class="acsa-path__n">4</span>Keep them</li>
+            <li><span class="acsa-path__n">5</span>Do it again</li>
+          </ol>
+        </div>
+        <div class="acsa-pan__foot acsa-pan__foot--one">
+          <div><div class="acsa-pan__k">Retainer, per client</div><div class="acsa-pan__v wf-a"><span data-acsa-to="2">$2k</span> to <span data-acsa-to="10">$10k</span><small>/mo</small></div></div>
+        </div>
+      </div>
+    </div>
+    <p class="acsa-kicker" data-pop="0.9">That's the part everyone skips.</p>
+  </div>
+</section>
+
+<!-- 3. THE NEW JOB. Device: the task chips leave the two old role cards and settle into ONE card. -->
+<section class="wf-section" id="new-job">
+  <div class="wf-wrap">
+    <div class="acsa-head wf-center">
+      <span class="wf-chip wf-chip--paper" data-pop>The new job</span>
+      <h2 class="wf-h2" data-kinetic>Businesses don't want to hire two people anymore. They want <em class="wf-a">one person</em> who does both.</h2>
+      <p class="wf-lede" data-pop="0.9" data-delay="0.6">Copywriting and media buying used to be two jobs. With AI, one person can do both.</p>
+    </div>
+    <div class="acsa-merge" data-acsa="merge">
+      <div class="acsa-roles">
+        <div class="acsa-role">
+          <div class="acsa-role__k">Person 1</div>
+          <div class="acsa-role__t">Copywriter</div>
+          <div class="acsa-slots"><span class="acsa-tk">Research the angle</span><span class="acsa-tk">Write the copy</span></div>
+        </div>
+        <div class="acsa-role">
+          <div class="acsa-role__k">Person 2</div>
+          <div class="acsa-role__t">Media buyer</div>
+          <div class="acsa-slots"><span class="acsa-tk">Build the creative</span><span class="acsa-tk">Structure the campaign</span><span class="acsa-tk">Run it</span></div>
+        </div>
+      </div>
+      <svg class="acsa-join" viewBox="0 0 800 56" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M200 0 C200 34 400 22 400 56"/><path pathLength="1" d="M600 0 C600 34 400 22 400 56"/></svg>
+      <div class="acsa-new">
+        <div class="acsa-new__k">One person</div>
+        <div class="acsa-new__t">AI Creative Strategist</div>
+        <div class="acsa-slots acsa-slots--new"><span class="acsa-tk">Research the angle</span><span class="acsa-tk">Write the copy</span><span class="acsa-tk">Build the creative</span><span class="acsa-tk">Structure the campaign</span><span class="acsa-tk">Run it</span></div>
+        <div class="acsa-new__res"><b>$2k to $10k</b>a month, per client.</div>
+      </div>
+    </div>
+    <p class="acsa-kicker" data-pop="0.9">Businesses <span class="wf-a">cannot find</span> this person.</p>
+  </div>
+</section>
+
+<!-- 4. THE SYSTEM (UMS tease). Four live-looking screens that SHOW each step, never HOW. Then the no-brainer card. -->
+<section class="wf-section" id="system">
+  <div class="wf-wrap">
+    <div class="acsa-head wf-center">
+      <span class="wf-chip wf-chip--paper" data-pop>The system</span>
+      <h2 class="wf-h2" data-kinetic>Here's the system you'll use to <em class="wf-a">get clients</em> and keep them.</h2>
+      <p class="wf-lede" data-pop="0.9" data-delay="0.5">Here is what each step does. How to run each one is what I teach inside the program.</p>
+    </div>
+    <div class="acsa-sys">
+      <div class="wf-card wf-card--light acsa-step" data-acsa="find">
+        <div class="acsa-step__h"><span class="acsa-step__n">1</span><div class="acsa-step__t">AI finds every business in your niche already running ads.</div></div>
+        <div class="acsa-scr">
+          <div class="acsa-scr__bar"><span>Niche: med spas</span><span>Ads</span></div>
+          <ul class="acsa-biz">
+            <li data-acsa-in><span class="acsa-biz__a">G</span>Glow Med Spa<span class="acsa-live" data-acsa-in><i></i>Running ads</span></li>
+            <li data-acsa-in><span class="acsa-biz__a">L</span>Luxe Aesthetics<span class="acsa-live" data-acsa-in><i></i>Running ads</span></li>
+            <li data-acsa-in><span class="acsa-biz__a">R</span>Radiance Skin Studio<span class="acsa-live" data-acsa-in><i></i>Running ads</span></li>
+            <li data-acsa-in><span class="acsa-biz__a">F</span>The Facial Bar<span class="acsa-live" data-acsa-in><i></i>Running ads</span></li>
+            <li data-acsa-in><span class="acsa-biz__a">P</span>Pure Laser Clinic<span class="acsa-live" data-acsa-in><i></i>Running ads</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="wf-card wf-card--light acsa-step" data-acsa="write">
+        <div class="acsa-step__h"><span class="acsa-step__n">2</span><div class="acsa-step__t">AI writes a custom message for each one.</div></div>
+        <div class="acsa-scr">
+          <div class="acsa-scr__bar"><span>To: Glow Med Spa</span><span>New message</span></div>
+          <div class="acsa-msg"><span class="acsa-msg__ghost">Hey Sarah, saw your med spa ads for the fall facial special. I made two new versions of your best one. Want me to send them over?</span><span class="acsa-msg__live" aria-hidden="true"></span></div>
+          <ul class="acsa-queue">
+            <li data-acsa-in><span class="acsa-biz__a">L</span>Luxe Aesthetics<em>Message ready</em></li>
+            <li data-acsa-in><span class="acsa-biz__a">R</span>Radiance Skin Studio<em>Message ready</em></li>
+          </ul>
+        </div>
+      </div>
+      <div class="wf-card wf-card--light acsa-step" data-acsa="build">
+        <div class="acsa-step__h"><span class="acsa-step__n">3</span><div class="acsa-step__t">AI builds the creatives.</div></div>
+        <div class="acsa-scr">
+          <div class="acsa-scr__bar"><span>Glow Med Spa: new ads</span><span>8</span></div>
+          <div class="acsa-ads">
+            <div class="acsa-ad" data-acsa-in><div class="acsa-ad__img"></div><div class="acsa-ad__l"></div><div class="acsa-ad__cta"></div></div>
+            <div class="acsa-ad" data-acsa-in><div class="acsa-ad__img"></div><div class="acsa-ad__l"></div><div class="acsa-ad__cta"></div></div>
+            <div class="acsa-ad" data-acsa-in><div class="acsa-ad__img"></div><div class="acsa-ad__l"></div><div class="acsa-ad__cta"></div></div>
+            <div class="acsa-ad" data-acsa-in><div class="acsa-ad__img"></div><div class="acsa-ad__l"></div><div class="acsa-ad__cta"></div></div>
+            <div class="acsa-ad" data-acsa-in><div class="acsa-ad__img"></div><div class="acsa-ad__l"></div><div class="acsa-ad__cta"></div></div>
+            <div class="acsa-ad" data-acsa-in><div class="acsa-ad__img"></div><div class="acsa-ad__l"></div><div class="acsa-ad__cta"></div></div>
+            <div class="acsa-ad" data-acsa-in><div class="acsa-ad__img"></div><div class="acsa-ad__l"></div><div class="acsa-ad__cta"></div></div>
+            <div class="acsa-ad" data-acsa-in><div class="acsa-ad__img"></div><div class="acsa-ad__l"></div><div class="acsa-ad__cta"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="wf-card wf-card--light acsa-step" data-acsa="run">
+        <div class="acsa-step__h"><span class="acsa-step__n">4</span><div class="acsa-step__t">A proven structure runs the ads.</div></div>
+        <div class="acsa-scr">
+          <svg class="acsa-tree" viewBox="0 0 300 108" aria-hidden="true">
+            <path class="ln" pathLength="1" d="M150 26V36H50V46"/><path class="ln" pathLength="1" d="M150 26V46"/><path class="ln" pathLength="1" d="M150 26V36H250V46"/>
+            <path class="ln" pathLength="1" d="M50 68V76H31V84M50 76H69V84"/><path class="ln" pathLength="1" d="M150 68V76H131V84M150 76H169V84"/><path class="ln" pathLength="1" d="M250 68V76H231V84M250 76H269V84"/>
+            <g data-acsa-in><rect class="top" x="100" y="2" width="100" height="24" rx="7"/><text x="150" y="18">Campaign</text></g>
+            <g data-acsa-in><rect x="14" y="46" width="72" height="22" rx="6"/><text x="50" y="61">Ad set</text></g>
+            <g data-acsa-in><rect x="114" y="46" width="72" height="22" rx="6"/><text x="150" y="61">Ad set</text></g>
+            <g data-acsa-in><rect x="214" y="46" width="72" height="22" rx="6"/><text x="250" y="61">Ad set</text></g>
+            <g data-acsa-in><rect class="ad" x="19" y="84" width="24" height="20" rx="4"/><rect class="ad" x="57" y="84" width="24" height="20" rx="4"/><rect class="ad" x="119" y="84" width="24" height="20" rx="4"/><rect class="ad" x="157" y="84" width="24" height="20" rx="4"/><rect class="ad" x="219" y="84" width="24" height="20" rx="4"/><rect class="ad" x="257" y="84" width="24" height="20" rx="4"/></g>
+          </svg>
+          <div class="acsa-money">
+            <div><span class="acsa-money__v" data-acsa-to="50">$50k</span><span class="acsa-money__k">In ads</span></div>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            <div><span class="acsa-money__v wf-a" data-acsa-to="150">$150k</span><span class="acsa-money__k">Back in one week</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- the no-brainer -->
+    <div class="wf-card acsa-grad" data-acsa="grad">
+      <div>
+        <span class="wf-chip wf-chip--accent">When you graduate</span>
+        <h3 class="acsa-grad__h">When you finish, you can test your ads on my <em>real client accounts.</em></h3>
+        <p>If you need it, you can submit creatives to be tested on my real client accounts. That's the proof you need to show prospective clients that you know what you're talking about.</p>
+        <p class="acsa-grad__big">Nobody else offers this because nobody else has real accounts to let you work on.</p>
+        <a class="wf-btn" data-apply href="/accelerator/apply/">Apply now
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="acsa-acct" aria-hidden="true">
+        <div class="acsa-acct__bar"><span>Client ad account</span><b>Live</b></div>
+        <ul>
+          <li><span class="acsa-ad"><span class="acsa-ad__img"></span><span class="acsa-ad__l"></span><span class="acsa-ad__cta"></span></span>Current ad<em>Active</em></li>
+          <li><span class="acsa-ad"><span class="acsa-ad__img"></span><span class="acsa-ad__l"></span><span class="acsa-ad__cta"></span></span>Current ad<em>Active</em></li>
+          <li><span class="acsa-ad"><span class="acsa-ad__img"></span><span class="acsa-ad__l"></span><span class="acsa-ad__cta"></span></span>Current ad<em>Active</em></li>
+          <li class="is-you" data-acsa-in><span class="acsa-ad"><span class="acsa-ad__img"></span><span class="acsa-ad__l"></span><span class="acsa-ad__cta"></span></span>Your creative<em>In test</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="acsa-value">People pay you for your value. <em>So become valuable.</em></p>
+  </div>
+</section>
+
+<!-- 2. PROOF = FACELESS. Device: four counters. -->
+<section class="wf-section">
+  <div class="wf-wrap">
+    <div class="wf-center" style="margin-bottom: clamp(20px, 3vw, 32px);">
+      <span class="wf-chip wf-chip--paper" data-pop>The results</span>
+      <h2 class="wf-h2" data-kinetic style="margin-top: 16px;">I'm not teaching something I read about. <em class="wf-a">I do this every day.</em></h2>
+    </div>
+    <div class="acsa-stats" data-stagger="0.09">
+      <div class="wf-card" data-pop>
+        <div class="wf-card__label">My income in 90 days</div>
+        <div class="wf-stat__num wf-a" style="margin-top: 12px;" data-count="30" data-prefix="$" data-suffix="k/mo" data-delay="0.2">$30k/mo</div>
+        <div class="wf-stat__cap">from $0</div>
+      </div>
+      <div class="wf-card" data-pop>
+        <div class="wf-card__label">My brother in 30 days</div>
+        <div class="wf-stat__num" style="margin-top: 12px;" data-count="3500" data-prefix="$" data-suffix="/mo" data-delay="0.3">$3,500/mo</div>
+        <div class="wf-stat__cap">from zero experience</div>
+      </div>
+      <div class="wf-card wf-card--light" data-pop>
+        <div class="wf-card__label">Ad spend managed</div>
+        <div class="wf-stat__num" style="margin-top: 12px;">$1M+/mo</div>
+        <div class="wf-stat__cap">for clients</div>
+      </div>
+      <div class="wf-card wf-card--light" data-pop>
+        <div class="wf-card__label">A client's best day</div>
+        <div class="wf-stat__num" style="margin-top: 12px;" data-count="70" data-prefix="$" data-suffix="k" data-delay="0.5">$70k</div>
+        <div class="wf-stat__cap">in a single day</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. APPLY = back on his face. One button to the apply page (/accelerator/apply/), which holds the application form. -->
+<section class="wf-section" id="apply" style="padding-bottom: clamp(48px, 6.5vw, 80px);">
+  <div class="wf-wrap">
+    <div class="acsa-close wf-center">
+      <div>
+        <h2 class="wf-h2" data-kinetic>Apply for the <em class="wf-a">program</em></h2>
+        <p class="wf-lede" data-pop="0.9" data-delay="0.4" style="margin-top: 14px;">Fill out the short application. I just want to know where you're at and whether this is a fit.</p>
+        <div class="acsa-cta">
+          <div data-click style="position: relative; display: inline-block; width: 100%; text-align: inherit;">
+            <a class="wf-btn" data-apply href="/accelerator/apply/" data-pop data-delay="0.2">Apply now
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <svg class="wf-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 2.5 19 13l-6.2.8 3.4 6.6-2.7 1.3-3.3-6.7L5 19.5z" fill="#fff" stroke="#14161B" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          </div>
+          <p class="acsa-note">Takes about 10 minutes. If it's a fit, you'll book a call with me directly.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="wf-foot"><div class="wf-wrap">&copy; 2026 AI Creative Strategist Accelerator. All rights reserved.</div></footer>
+
+<script>
+/* Every load starts fresh (Quinten 09.23): forget where the viewer stopped BEFORE the player reads it, so a refresh
+   always shows the muted preview with "Click to unmute" instead of "Pick up where you left off".
+   Coming back with the Back button also reloads, for the same fresh start. */
+try { Object.keys(localStorage).filter((k) => k.indexOf('wf-vsl:') === 0).forEach((k) => localStorage.removeItem(k)); } catch (e) {}
+window.addEventListener('pageshow', (e) => { if (e.persisted) location.reload(); });
+</script>
+<script>
+/* ==========================================================================
+   White Flow - landing page motion engine (no dependencies)
+   The web port of kit.tsx: Pop, Kinetic, Count, strike, Drift, depth of field.
+   Every element enters ONCE when it scrolls into view. Nothing loops, pulses
+   or breathes. prefers-reduced-motion shows the final state with no motion.
+   Hooks (HTML attributes):
+     data-pop[="0.6"]           pop in: scale from->1 on the kit spring, blur 14px clears, opacity 0.16s
+       data-delay="0.2"         extra delay in seconds
+       data-rot="-4"            starting rotation that settles to 0
+     data-stagger="0.06"        container: its [data-pop] children enter one after another
+     data-kinetic[="0.08"]      headline: every word pops in on its own beat (seconds per word)
+     data-count="61"            count up, ease-out-expo. data-from, data-dur, data-prefix, data-suffix, data-delay
+     data-strike-group          container: every .wf-strike inside is struck through in turn
+     data-draw                  svg: every path.line draws on
+     data-dof                   .wf-steps: the step nearest the middle of the screen is in focus
+     data-chat                  container: typing dots, then each bubble, in order
+     data-seats="7"             container of .wf-seat: seats appear, then N fill with the accent
+     data-click                 container with .wf-btn + .wf-cursor: cursor glides in and clicks once
+     data-drift[="0.035"]       slow one-way camera push while the element scrolls through
+     data-player                custom VSL player (see the player block below and styles/web/white-flow.md)
+   Add ?static to the URL to see every section in its final state (QC, thumbnails).
+   ========================================================================== */
+(() => {
+  const root = document.documentElement;
+  // ?static = the final state with no motion (QC screenshots, thumbnails). Same path as reduced motion.
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || /[?&]static\b/.test(location.search);
+  root.classList.add('wf-js');
+  if (reduce) root.classList.add('wf-reduce');
+
+  /* ---- the kit spring (Remotion spring physics), turned into a CSS linear() easing ---- */
+  function spring({damping = 13, stiffness = 150, mass = 0.7} = {}) {
+    const dt = 1 / 240; let x = 0, v = 0, t = 0; const pts = [];
+    while (t < 3) {
+      const a = (-stiffness * (x - 1) - damping * v) / mass;
+      v += a * dt; x += v * dt; t += dt; pts.push([t, x]);
+      if (t > 0.2 && Math.abs(1 - x) < 0.0015 && Math.abs(v) < 0.02) break;
+    }
+    const dur = t, step = Math.max(1, Math.floor(pts.length / 48));
+    const stops = ['0'];
+    for (let i = step; i < pts.length - 1; i += step) stops.push(`${pts[i][1].toFixed(4)} ${((pts[i][0] / dur) * 100).toFixed(2)}%`);
+    stops.push('1');
+    return {dur: dur * 1000, easing: `linear(${stops.join(', ')})`};
+  }
+  const hasLinear = CSS.supports('animation-timing-function', 'linear(0, 1)');
+  const POP = spring();                                     // kit usePop: damping 13, stiffness 150, mass 0.7
+  const WORD = spring({damping: 16, stiffness: 190});       // kit Kinetic words
+  const ez = (s) => (hasLinear ? s.easing : 'cubic-bezier(.34,1.45,.64,1)');
+  const EASE = 'cubic-bezier(.22,1,.36,1)';                 // kit ease
+  const outExpo = (p) => (p >= 1 ? 1 : 1 - Math.pow(2, -10 * p));
+
+  /* ---- once-only in-view trigger ---- */
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) if (e.isIntersecting) { io.unobserve(e.target); (e.target.__wfRun || []).forEach((fn) => fn()); }
+  }, {threshold: 0.22, rootMargin: '0px 0px -6% 0px'});
+  // one element can carry several behaviours (e.g. a card that pops AND strikes its list): run them all
+  const onView = (el, fn) => { if (reduce) return; (el.__wfRun = el.__wfRun || []).push(fn); io.observe(el); };
+  const num = (v, d) => (v === undefined || v === '' ? d : parseFloat(v));
+
+  /* ---- Pop ---- */
+  function pop(el, delay = 0) {
+    const from = num(el.dataset.pop, 0.6), rot = num(el.dataset.rot, 0);
+    delay = (delay + num(el.dataset.delay, 0)) * 1000;
+    el.animate([{scale: from, rotate: `${rot}deg`}, {scale: 1, rotate: '0deg'}], {duration: POP.dur, easing: ez(POP), delay, fill: 'both'});
+    el.animate([{opacity: 0}, {opacity: 1}], {duration: 160, delay, fill: 'both'});
+    el.animate([{filter: 'blur(14px)'}, {filter: 'blur(0px)'}], {duration: 240, easing: EASE, delay, fill: 'both'});
+  }
+  const groups = new Map();
+  document.querySelectorAll('[data-pop]').forEach((el) => {
+    const g = el.parentElement.closest('[data-stagger]') || el;
+    if (!groups.has(g)) groups.set(g, []);
+    groups.get(g).push(el);
+  });
+  groups.forEach((els, g) => {
+    const gap = g.dataset.stagger !== undefined ? num(g.dataset.stagger, 0.06) : 0;
+    const base = g.dataset.stagger !== undefined ? num(g.dataset.delay, 0) : 0;
+    onView(g, () => els.forEach((el, i) => pop(el, base + i * gap)));
+  });
+
+  /* ---- Kinetic headline: wrap every word, keep <em>/<span> styling ---- */
+  document.querySelectorAll('[data-kinetic]').forEach((el) => {
+    const wrap = (node) => {
+      [...node.childNodes].forEach((n) => {
+        if (n.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach((part) => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.append(part); return; }
+            const s = document.createElement('span'); s.className = 'wf-w'; s.textContent = part; frag.append(s);
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1 && !n.classList.contains('wf-w')) wrap(n);
+      });
+    };
+    wrap(el);
+    const per = num(el.dataset.kinetic, 0.08), base = num(el.dataset.delay, 0);
+    onView(el, () => el.querySelectorAll('.wf-w').forEach((w, i) => {
+      const delay = (base + i * per) * 1000;
+      w.style.transformOrigin = 'left bottom';
+      w.animate([{translate: '0 0.45em', scale: 0.82}, {translate: '0 0', scale: 1}], {duration: WORD.dur, easing: ez(WORD), delay, fill: 'both'});
+      w.animate([{opacity: 0}, {opacity: 1}], {duration: 140, delay, fill: 'both'});
+      w.animate([{filter: 'blur(10px)'}, {filter: 'blur(0px)'}], {duration: 220, easing: EASE, delay, fill: 'both'});
+    }));
+  });
+
+  /* ---- Count ---- */
+  const fmt = (el, v) => `${el.dataset.prefix || ''}${Math.round(v).toLocaleString('en-US')}${el.dataset.suffix || ''}`;
+  document.querySelectorAll('[data-count]').forEach((el) => {
+    const to = num(el.dataset.count, 0), from = num(el.dataset.from, 0), dur = num(el.dataset.dur, 1.4) * 1000;
+    if (reduce) { el.textContent = fmt(el, to); return; }
+    el.textContent = fmt(el, from);
+    onView(el, () => setTimeout(() => {
+      const t0 = performance.now();
+      const tick = (now) => {
+        const p = Math.min(1, (now - t0) / dur);
+        el.textContent = fmt(el, from + (to - from) * outExpo(p));
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }, num(el.dataset.delay, 0) * 1000));
+  });
+
+  /* ---- Strike-through list ---- */
+  document.querySelectorAll('[data-strike-group]').forEach((g) => {
+    const items = g.querySelectorAll('.wf-strike');
+    if (reduce) { items.forEach((s) => s.classList.add('is-struck')); return; }
+    const base = num(g.dataset.delay, 0.7), gap = num(g.dataset.strikeGroup, 0.35);
+    onView(g, () => items.forEach((s, i) => setTimeout(() => s.classList.add('is-struck'), (base + i * gap) * 1000)));
+  });
+
+  /* ---- Line graph draw-on ---- */
+  document.querySelectorAll('svg[data-draw]').forEach((svg) => {
+    const lines = svg.querySelectorAll('path.line');
+    if (reduce) { svg.classList.add('is-drawn'); return; }
+    lines.forEach((p) => { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; });
+    onView(svg, () => {
+      svg.classList.add('is-drawn');
+      lines.forEach((p) => p.animate([{strokeDashoffset: p.getTotalLength()}, {strokeDashoffset: 0}], {duration: 1400, easing: EASE, delay: num(svg.dataset.delay, 0.2) * 1000, fill: 'forwards'}));
+    });
+  });
+
+  /* ---- Depth of field on steps ---- */
+  document.querySelectorAll('[data-dof]').forEach((box) => {
+    const steps = [...box.querySelectorAll('.wf-step')];
+    if (reduce || steps.length < 2) return;
+    let live = false;
+    const update = () => {
+      const r = box.getBoundingClientRect(), vh = innerHeight;
+      const inView = r.top < vh * 0.75 && r.bottom > vh * 0.25;
+      box.classList.toggle('is-dof', live && inView);
+      if (!live || !inView) return;
+      const mid = vh * 0.5; let best = steps[0], d = Infinity;
+      steps.forEach((s) => { const b = s.getBoundingClientRect(); const dd = Math.abs(b.top + b.height / 2 - mid); if (dd < d) { d = dd; best = s; } });
+      steps.forEach((s) => s.classList.toggle('is-focus', s === best));
+    };
+    onView(box, () => setTimeout(() => { live = true; update(); }, 900));
+    addEventListener('scroll', update, {passive: true});
+  });
+
+  /* ---- Chat: typing dots, then each bubble ---- */
+  document.querySelectorAll('[data-chat]').forEach((chat) => {
+    const bubbles = [...chat.querySelectorAll('.wf-bubble')];
+    const typing = chat.querySelector('.wf-typing');
+    if (reduce) { typing && typing.remove(); return; }
+    bubbles.forEach((b) => (b.style.display = 'none'));
+    if (typing) typing.style.display = 'none';
+    onView(chat, async () => {
+      const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+      await wait(300);
+      for (const b of bubbles) {
+        if (b.classList.contains('wf-bubble--in') && typing) {
+          chat.append(typing); typing.style.display = ''; typing.dataset.pop = '0.7'; pop(typing); await wait(1000); typing.style.display = 'none';
+        } else await wait(450);
+        chat.append(b); b.style.display = ''; b.dataset.pop = b.dataset.pop || '0.7'; pop(b); await wait(500);
+      }
+    });
+  });
+
+  /* ---- Seats ---- */
+  document.querySelectorAll('[data-seats]').forEach((box) => {
+    const seats = [...box.querySelectorAll('.wf-seat')], taken = num(box.dataset.seats, 0);
+    if (reduce) { seats.slice(0, taken).forEach((s) => s.classList.add('is-taken')); return; }
+    onView(box, () => {
+      seats.forEach((s, i) => { s.dataset.pop = '0.5'; pop(s, 0.1 + i * 0.05); });
+      seats.slice(0, taken).forEach((s, i) => setTimeout(() => s.classList.add('is-taken'), (0.8 + i * 0.12) * 1000));
+    });
+  });
+
+  /* ---- Cursor click on the CTA (kit "CTA button with cursor click") ---- */
+  document.querySelectorAll('[data-click]').forEach((box) => {
+    const btn = box.querySelector('.wf-btn'), cur = box.querySelector('.wf-cursor');
+    if (!btn || !cur || reduce) return;
+    onView(box, () => {
+      const b = btn.getBoundingClientRect(), o = box.getBoundingClientRect();
+      const x = b.left - o.left + b.width * 0.62, y = b.top - o.top + b.height * 0.55;
+      cur.style.left = `${x}px`; cur.style.top = `${y}px`;
+      cur.animate([{translate: '170px 120px', opacity: 0}, {translate: '0 0', opacity: 1}], {duration: 900, easing: EASE, delay: 500, fill: 'forwards'});
+      setTimeout(() => {
+        cur.animate([{scale: 1}, {scale: 0.82}, {scale: 1}], {duration: 260, easing: EASE, transformOrigin: 'top left'});
+        btn.classList.add('is-pressed');
+        setTimeout(() => btn.classList.remove('is-pressed'), 160);
+        const ring = document.createElement('span');
+        Object.assign(ring.style, {position: 'absolute', left: `${x}px`, top: `${y}px`, width: '14px', height: '14px', margin: '-7px 0 0 -7px', borderRadius: '50%', border: '2px solid var(--accent)', pointerEvents: 'none'});
+        box.append(ring);
+        ring.animate([{scale: 1, opacity: 0.9}, {scale: 6, opacity: 0}], {duration: 600, easing: EASE, fill: 'forwards'}).onfinish = () => ring.remove();
+        cur.animate([{opacity: 1}, {opacity: 0}], {duration: 400, delay: 900, fill: 'forwards'});
+      }, 1500);
+    });
+  });
+
+  /* ---- Paper grid + drift: tied to scroll, one way, never idle wobble ---- */
+  const grid = document.querySelector('.wf-paper__grid');
+  const drifts = [...document.querySelectorAll('[data-drift]')];
+  if (!reduce) {
+    let queued = false;
+    const frame = () => {
+      queued = false;
+      const y = scrollY;
+      if (grid) grid.style.transform = `translate(${(y * 0.02) % 60}px, ${-(y * 0.08) % 60}px)`;
+      drifts.forEach((el) => {
+        const r = el.getBoundingClientRect(), vh = innerHeight;
+        const p = Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height)));
+        el.style.scale = 1 + p * num(el.dataset.drift, 0.035);
+      });
+    };
+    addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(frame); } }, {passive: true});
+    frame();
+  }
+
+  /* ---- Custom VSL player ([data-player]): controls on the paper under the footage, never over the face ----
+     <video data-src-hd="hd.mp4" data-src-sd="sd.mp4" poster="poster.jpg"> ; phones and data-saver get the SD file.
+     Remembers where each viewer stopped (per video, this browser only). */
+  document.querySelectorAll('[data-player]').forEach((pl) => {
+    const v = pl.querySelector('video'), screen = pl.querySelector('.wf-player__screen');
+    const play = pl.querySelector('.wf-player__play'), track = pl.querySelector('.wf-player__track');
+    const fill = pl.querySelector('.wf-player__fill'), buf = pl.querySelector('.wf-player__buf'), knob = pl.querySelector('.wf-player__knob');
+    const time = pl.querySelector('.wf-player__time'), mute = pl.querySelector('[data-mute]'), fs = pl.querySelector('[data-fullscreen]');
+    const title = pl.querySelector('.wf-player__title');
+    const sd = innerWidth < 700 || (navigator.connection && navigator.connection.saveData);
+    v.src = (sd && v.dataset.srcSd) || v.dataset.srcHd || v.dataset.srcSd || v.src;
+    v.playsInline = true; v.controls = false;
+    const key = 'wf-vsl:' + v.src.split('?')[0];
+    const mmss = (s) => { s = Math.max(0, Math.floor(s || 0)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
+    const paint = () => {
+      const d = v.duration || 0, p = d ? v.currentTime / d : 0;
+      fill.style.width = `${p * 100}%`; knob.style.left = `${p * 100}%`;
+      if (time) time.textContent = `${mmss(v.currentTime)} / ${mmss(d)}`;
+      track.setAttribute('aria-valuenow', Math.round(p * 100));
+      try { if (v.buffered.length && d) buf.style.width = `${(v.buffered.end(v.buffered.length - 1) / d) * 100}%`; } catch (e) {}
+    };
+    const toggle = () => (v.paused ? v.play() : v.pause());
+    let saved = 0;
+    try { saved = parseFloat(localStorage.getItem(key)) || 0; } catch (e) {}
+    v.addEventListener('loadedmetadata', () => { if (saved > 5 && saved < v.duration - 10) { v.currentTime = saved; if (title && title.dataset.resume) title.textContent = title.dataset.resume; } paint(); });
+    v.addEventListener('play', () => { pl.classList.add('is-playing'); play.setAttribute('aria-label', 'Pause'); tick(); });
+    v.addEventListener('pause', () => { pl.classList.remove('is-playing'); play.setAttribute('aria-label', 'Play'); });
+    v.addEventListener('ended', () => { try { localStorage.removeItem(key); } catch (e) {} });
+    v.addEventListener('timeupdate', () => { try { if (v.currentTime > 5) localStorage.setItem(key, v.currentTime.toFixed(1)); } catch (e) {} });
+    v.addEventListener('progress', paint);
+    v.addEventListener('volumechange', () => pl.classList.toggle('is-muted', v.muted));
+    v.addEventListener('contextmenu', (e) => e.preventDefault());
+    const tick = () => { paint(); if (!v.paused) requestAnimationFrame(tick); };
+    play.addEventListener('click', toggle);
+    screen.addEventListener('click', toggle);
+    if (mute) mute.addEventListener('click', () => { v.muted = !v.muted; });
+    if (fs) fs.addEventListener('click', () => {
+      if (document.fullscreenElement) return document.exitFullscreen();
+      if (v.requestFullscreen) v.requestFullscreen(); else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+    });
+    document.addEventListener('fullscreenchange', () => { v.controls = document.fullscreenElement === v; });
+    const seekTo = (x) => { const r = track.getBoundingClientRect(); const p = Math.min(1, Math.max(0, (x - r.left) / r.width)); if (v.duration) { v.currentTime = p * v.duration; paint(); } };
+    track.addEventListener('pointerdown', (e) => {
+      try { track.setPointerCapture(e.pointerId); } catch (err) {} seekTo(e.clientX);
+      const move = (ev) => seekTo(ev.clientX);
+      const up = () => { track.removeEventListener('pointermove', move); track.removeEventListener('pointerup', up); };
+      track.addEventListener('pointermove', move); track.addEventListener('pointerup', up);
+    });
+    track.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') v.currentTime = Math.min(v.duration || 0, v.currentTime + 5);
+      else if (e.key === 'ArrowLeft') v.currentTime = Math.max(0, v.currentTime - 5);
+      else if (e.key === ' ' || e.key === 'Enter') toggle(); else return;
+      e.preventDefault(); paint();
+    });
+  });
+
+  /* ---- VSL play control (sits on the paper, never over the face) ---- */
+  document.querySelectorAll('[data-play]').forEach((btn) => {
+    const v = document.querySelector(btn.dataset.play);
+    if (!v || v.tagName !== 'VIDEO') return;
+    btn.addEventListener('click', () => { v.controls = true; v.muted = false; v.play(); });
+  });
+})();
+
+</script>
+<script>
+/* Motion for the three sections under the hero (the difference, the new job, the system).
+   Every device plays ONCE when it scrolls into view, then holds still. Nothing loops. Reduced motion, ?static,
+   or an old browser: the finished picture with no motion. Nothing in here may break the page. */
+(() => {
+  try {
+    const R = document.documentElement.classList.contains('wf-reduce') || !('IntersectionObserver' in window) || !Element.prototype.animate;
+    if (R) document.documentElement.classList.add('wf-reduce');
+    const EASE = 'cubic-bezier(.22,1,.36,1)', GLIDE = 'cubic-bezier(.62,0,.24,1)';
+    const $$ = (s, r) => [...(r || document).querySelectorAll(s)];
+    const $ = (k) => document.querySelector(`[data-acsa="${k}"]`);
+    const later = (ms, fn) => setTimeout(fn, ms);
+    const once = (el, fn, th) => {
+      if (!el) return;
+      if (R) { try { fn(true); } catch (e) {} return; }
+      const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { io.disconnect(); fn(false); } }),
+        {threshold: th || 0.35, rootMargin: '0px 0px -8% 0px'});
+      io.observe(el);
+    };
+    const rise = (el, delay, from) => {
+      el.animate([{opacity: 0, transform: from || 'translateY(10px) scale(0.96)', filter: 'blur(8px)'}, {opacity: 1, transform: 'none', filter: 'blur(0px)'}],
+        {duration: 620, delay: delay || 0, easing: EASE, fill: 'both'});
+    };
+    const outExpo = (p) => (p >= 1 ? 1 : 1 - Math.pow(2, -10 * p));
+    const count = (el, suffix, dur) => {   // $0k up to data-acsa-to, ease-out-expo, then holds
+      const to = parseFloat(el.dataset.acsaTo), t0 = performance.now();
+      const tick = (now) => { const p = Math.min(1, (now - t0) / dur); el.textContent = '$' + Math.round(to * outExpo(p)) + suffix; if (p < 1) requestAnimationFrame(tick); };
+      el.textContent = '$0' + suffix; requestAnimationFrame(tick);
+    };
+
+    /* 1. the difference: the grey feed piles up (money stays at zero), the path lights up step by step */
+    once($('feed'), (now) => { if (!now) $$('[data-acsa-in]', $('feed')).forEach((li, i) => rise(li, 150 + i * 360)); });
+    once($('path'), (now) => {
+      const box = $('path'), steps = $$('.acsa-path li', box), fill = box.querySelector('.acsa-path__fill'), money = $$('[data-acsa-to]', box);
+      if (now) { steps.forEach((s) => s.classList.add('is-lit')); return; }
+      const gap = 480, start = 350;
+      steps.forEach((s, i) => later(start + i * gap, () => s.classList.add('is-lit')));
+      fill.animate([{transform: 'scaleY(0)'}, {transform: 'scaleY(1)'}], {duration: (steps.length - 1) * gap, delay: start, easing: 'linear', fill: 'both'});
+      money.forEach((m) => { m.textContent = '$0k'; });
+      later(start + (steps.length - 1) * gap + 200, () => money.forEach((m) => count(m, 'k', 1300)));
+    });
+
+    /* 2. the new job: the chips leave the two old cards and settle into one card, the old cards fade to outlines */
+    once($('merge'), (now) => {
+      const box = $('merge'), olds = $$('.acsa-role .acsa-tk', box), news = $$('.acsa-new .acsa-tk', box), roles = $$('.acsa-role', box);
+      const card = box.querySelector('.acsa-new'), res = box.querySelector('.acsa-new__res');
+      if (now) { olds.forEach((o) => o.classList.add('is-gone')); roles.forEach((r) => r.classList.add('is-spent')); card.classList.add('is-lit'); news.forEach((n) => n.classList.add('is-in')); return; }
+      $$('.acsa-join path', box).forEach((p, i) => p.animate([{strokeDashoffset: 1}, {strokeDashoffset: 0}], {duration: 700, delay: 250 + i * 80, easing: EASE, fill: 'both'}));
+      const t0 = 700, gap = 150, fly = 1050;
+      news.forEach((n, i) => later(t0 + i * gap, () => {
+        const o = olds[i], a = o.getBoundingClientRect(), b = n.getBoundingClientRect();
+        o.classList.add('is-gone'); n.classList.add('is-in');
+        n.animate([{transform: `translate(${a.left - b.left}px, ${a.top - b.top}px)`, backgroundColor: '#2B2E36', color: '#E4E0D9'},
+          {transform: 'none', backgroundColor: '#E3E8FB', color: '#2F5BFF'}], {duration: fly, easing: GLIDE, fill: 'both'});
+      }));
+      later(t0 + 250, () => roles.forEach((r) => r.classList.add('is-spent')));
+      later(t0 + fly * 0.7, () => card.classList.add('is-lit'));
+      later(t0 + (news.length - 1) * gap + fly + 150, () => rise(res, 0, 'translateY(8px)'));
+    }, 0.4);
+
+    /* 3. the system: four screens, each shows its step */
+    once($('find'), (now) => {
+      if (now) return;
+      $$('.acsa-biz li', $('find')).forEach((li, i) => { rise(li, 200 + i * 260, 'translateY(8px)'); rise(li.querySelector('.acsa-live'), 200 + i * 260 + 380, 'scale(0.8)'); });
+    });
+    once($('write'), (now) => {
+      const box = $('write'), ghost = box.querySelector('.acsa-msg__ghost'), live = box.querySelector('.acsa-msg__live'), msg = box.querySelector('.acsa-msg');
+      if (now) return;
+      const text = ghost.textContent, caret = document.createElement('span'); caret.className = 'acsa-msg__caret';
+      const node = document.createTextNode(''); live.append(node, caret);
+      rise(msg, 150, 'translateY(8px) scale(0.97)');
+      const per = 24, t0 = performance.now() + 600;
+      const tick = (t) => {
+        const n = Math.max(0, Math.min(text.length, Math.floor((t - t0) / per)));
+        node.textContent = text.slice(0, n);
+        if (n < text.length) requestAnimationFrame(tick);
+        else { later(250, () => caret.remove()); $$('.acsa-queue li', box).forEach((li, i) => rise(li, 350 + i * 300, 'translateY(8px)')); }
+      };
+      requestAnimationFrame(tick);
+    });
+    once($('build'), (now) => { if (!now) $$('.acsa-ad', $('build')).forEach((ad, i) => rise(ad, 200 + i * 140, 'translateY(10px) scale(0.85)')); });
+    once($('run'), (now) => {
+      if (now) return;
+      const box = $('run');
+      $$('g[data-acsa-in]', box).forEach((g, i) => { g.style.transformBox = 'fill-box'; g.style.transformOrigin = 'center'; rise(g, 150 + i * 170, 'scale(0.85)'); });
+      $$('.acsa-tree .ln', box).forEach((p, i) => p.animate([{strokeDashoffset: 1}, {strokeDashoffset: 0}], {duration: 600, delay: (i < 3 ? 300 : 800) + (i % 3) * 90, easing: EASE, fill: 'both'}));
+      const money = $$('[data-acsa-to]', box);
+      money.forEach((m) => { m.textContent = '$0k'; });
+      later(1400, () => count(money[0], 'k', 1100));
+      later(1900, () => count(money[1], 'k', 1400));
+    });
+    once($('grad'), (now) => { if (!now) $$('[data-acsa-in]', $('grad')).forEach((li) => rise(li, 700, 'translateX(-22px)')); }, 0.3);
+  } catch (e) {   // never leave anything hidden if something above throws
+    document.documentElement.classList.add('wf-reduce');
+  }
+})();
+</script>
+<script>
+/* Tracking for this page. site.js (in <head>) owns the pixel, the visitor id and the first-touch ad data.
+   Here: the apply links, the ApplyClick event, and the VSL events. Nothing in here may break the page. */
+(() => {
+  const track = (n, p) => { try { if (window.acsaTrack) window.acsaTrack(n, p); } catch (e) {} };
+
+  /* Apply buttons go to apply/ and carry the first-touch ad data along as a query string. */
+  let q = '';
+  try { q = new URLSearchParams((window.acsaIds && window.acsaIds().first_touch) || {}).toString(); } catch (e) {}
+  if (!q && !window.acsaIds) q = location.search.replace(/^\?/, '');   // site.js blocked: pass the raw params on
+  /* A/B split: the apply page's site.js normally reads the variant from this browser's storage. v= on the link is the
+     backup for browsers that block storage, so the Lead still carries the version this visitor saw. */
+  try {
+    if (window.acsaVariant) { const p = new URLSearchParams(q); p.set('v', window.acsaVariant); q = p.toString(); }
+  } catch (e) {}
+  document.querySelectorAll('[data-apply]').forEach((a) => {
+    a.href = 'apply/' + (q ? '?' + q : '');
+    a.addEventListener('click', () => track('ApplyClick', { content_name: 'ACSA Application' }));   // beacon survives the navigation
+  });
+
+  /* MUTED AUTOPLAY. Every page load: the VSL starts playing muted with the "Click to unmute" box on top.
+     Clicking anywhere on the video (or the mute button) restarts it from 0:00 with sound. If the browser blocks
+     autoplay (phone low power mode), the page simply shows the normal play button. */
+  const vid = document.querySelector('[data-player] video');
+  const un = document.querySelector('.acsa-unmute');
+  let preview = false;
+  if (vid && un) {
+    const key = 'wf-vsl:' + (vid.getAttribute('src') ? vid.src.split('?')[0] : '');
+    const stopPreview = () => { preview = false; un.hidden = true; };
+    const unmute = (e) => {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      stopPreview();
+      vid.currentTime = 0;
+      vid.muted = false;
+      const p = vid.play(); if (p && p.catch) p.catch(() => {});
+    };
+    let touched = false;   // the visitor pressed play/unmute themselves: never start a preview after that
+    const startPreview = () => {
+      if (touched || preview || !vid.paused || vid.currentTime > 0.5) return;
+      vid.muted = true;
+      const p = vid.play();
+      if (p && p.then) p.then(() => { if (vid.muted && !touched) { preview = true; un.hidden = false; } }).catch(() => { vid.muted = false; });
+    };
+    {
+      startPreview();
+      // opened in a background tab: browsers hold autoplay until the tab is shown, so try again then
+      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') startPreview(); });
+    }
+    document.querySelectorAll('.wf-player__play, [data-mute]').forEach((b) => b.addEventListener('pointerdown', () => { if (!preview) touched = true; }));
+    un.addEventListener('click', unmute);
+    vid.addEventListener('volumechange', () => { if (preview && !vid.muted) unmute(); });   // the bar's mute button
+    vid.addEventListener('pause', () => { if (preview) { stopPreview(); vid.muted = false; vid.currentTime = 0; } });   // paused the preview: back to a normal player at 0:00
+    vid.addEventListener('timeupdate', () => { if (preview) { try { localStorage.removeItem(key); } catch (e) {} } });   // the silent preview never becomes a "resume" point
+  }
+
+  /* VSL events. ViewContent on the first play WITH SOUND of this page load (the muted preview does not count).
+     VSL25/50/75/100 count seconds ACTUALLY WATCHED (not where the playhead sits), so skipping ahead or the
+     player resuming a returning viewer mid-video never counts. Credit is kept in this browser. */
+  const v = document.querySelector('[data-player] video');
+  if (!v) return;
+  const W = 'acsa-vsl-watched', F = 'acsa-vsl-fired', NAME = 'ACSA VSL';
+  let watched = 0, fired = [];
+  try { watched = parseFloat(localStorage.getItem(W)) || 0; } catch (e) {}
+  try { fired = JSON.parse(localStorage.getItem(F) || '[]'); if (!Array.isArray(fired)) fired = []; } catch (e) { fired = []; }
+  let viewed = false, last = null;
+  const check = () => {
+    const d = v.duration;
+    if (!d || !isFinite(d)) return;
+    if (watched > d) watched = d;
+    const p = watched / d;
+    [25, 50, 75, 100].forEach((n) => {
+      const hit = n === 100 ? p >= 0.97 : p >= n / 100;
+      if (hit && fired.indexOf(n) === -1) {
+        fired.push(n);
+        try { localStorage.setItem(F, JSON.stringify(fired)); } catch (e) {}
+        track('VSL' + n, { percent: n, content_name: NAME });
+      }
+    });
+  };
+  const heard = () => !v.muted && !preview;
+  v.addEventListener('play', () => {
+    last = v.currentTime;
+    if (!viewed && heard()) { viewed = true; track('ViewContent', { content_name: NAME }); }
+  });
+  v.addEventListener('volumechange', () => {   // unmuting after the preview counts as the real start
+    if (!viewed && heard() && !v.paused) { viewed = true; track('ViewContent', { content_name: NAME }); }
+  });
+  v.addEventListener('seeking', () => { last = null; });
+  v.addEventListener('seeked', () => { last = v.currentTime; });
+  v.addEventListener('timeupdate', () => {
+    const t = v.currentTime;
+    if (!v.paused && !v.seeking && last !== null && heard()) {
+      const delta = t - last;
+      if (delta > 0 && delta < 1.5) {
+        watched += delta;
+        try { localStorage.setItem(W, watched.toFixed(1)); } catch (e) {}
+        check();
+      }
+    }
+    last = t;
+  });
+  v.addEventListener('ended', check);
+})();
+</script>
+</body>
+</html>
