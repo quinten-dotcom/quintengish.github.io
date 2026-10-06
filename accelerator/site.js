@@ -111,6 +111,21 @@ const ACSA = {
     window.fbq('init', ACSA.PIXEL, am);
   } catch (e) {}
 
+  /* ---- A/B SPLIT (10.05.2026): which version of /accelerator/ this visitor saw ("a" full page, "b" VSL only).
+     The landing page picks it in <head> and sets <html data-variant>. The apply and thank-you pages read it back:
+     the apply link's v=, then this tab's forced preview (?v=), then this browser's saved pick. No pick, no tag.
+     Every event (pixel custom data AND the server copy's custom_data) carries it as "variant". ---- */
+  const VARIANT = (() => {
+    const ok = (x) => { x = String(x || '').toLowerCase(); return x === 'a' || x === 'b' ? x : ''; };
+    let v = '';
+    try { v = ok(document.documentElement.getAttribute('data-variant')); } catch (e) {}
+    if (!v) try { v = ok(new URLSearchParams(location.search).get('v')); } catch (e) {}
+    if (!v) try { v = ok(sessionStorage.getItem('acsa-variant-force')); } catch (e) {}
+    if (!v) try { v = ok(localStorage.getItem('acsa-variant')); } catch (e) {}
+    return v;
+  })();
+  if (VARIANT) window.acsaVariant = VARIANT;
+
   const ids = () => ({ vid, fbp: getCookie('_fbp'), fbc: getCookie('_fbc'), first_touch: { ...firstTouch } });
   const serverOn = !!ACSA.ENDPOINT && ACSA.ENDPOINT.indexOf('PROJECT_REF') === -1;
 
@@ -119,7 +134,8 @@ const ACSA = {
     let eventId = '';
     try {
       eventId = (opts && opts.eventId) || uuid();
-      params = params && typeof params === 'object' ? params : {};
+      params = params && typeof params === 'object' ? { ...params } : {};
+      if (VARIANT && params.variant === undefined) params.variant = VARIANT;
       try {
         if (window.fbq) {
           if (STANDARD.indexOf(name) >= 0) window.fbq('track', name, params, { eventID: eventId });

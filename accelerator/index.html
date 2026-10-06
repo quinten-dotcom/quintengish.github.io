@@ -2,15 +2,37 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>
+/* A/B SPLIT (10.05.2026). Runs before first paint, before site.js.
+   a = the full page. b = "VSL only": the hero (chip, headline, subhead, VSL, Apply) and nothing under it.
+   First visit picks a or b 50/50 and keeps it in this browser (localStorage "acsa-variant").
+   ?v=a or ?v=b forces one for this tab only (preview), without touching the saved pick.
+   Sets <html data-variant>; the CSS below hides the sections for b; site.js tags every event with it. */
+(function () {
+  var d = document.documentElement, V = '';
+  var ok = function (x) { x = String(x || '').toLowerCase(); return x === 'a' || x === 'b' ? x : ''; };
+  try { var m = location.search.match(/[?&]v=([^&#]*)/); if (m && ok(m[1])) { V = ok(m[1]); try { sessionStorage.setItem('acsa-variant-force', V); } catch (e) {} } } catch (e) {}
+  if (!V) try { V = ok(sessionStorage.getItem('acsa-variant-force')); } catch (e) {}
+  if (!V) {
+    try { V = ok(localStorage.getItem('acsa-variant')); } catch (e) {}
+    if (!V) {
+      V = Math.random() < 0.5 ? 'a' : 'b';
+      try { localStorage.setItem('acsa-variant', V); } catch (e) {}
+    }
+  }
+  d.setAttribute('data-variant', V);
+  window.acsaVariant = V;
+})();
+</script>
 <script src="site.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#111317">
-<title>How Copywriters &amp; Media Buyers Are Hitting $10k/Mo With AI in 2026</title>
-<meta name="description" content="The exact system that took me from $0 to $30k/mo in 90 days and my brother from zero experience to $3,500/mo in 30 days.">
+<title>How I Went From $0 to $30k/mo in 90 Days By Becoming an AI Creative Strategist</title>
+<meta name="description" content="The exact system, built for copywriters and media buyers.">
 <link rel="canonical" href="https://www.quintengish.com/accelerator/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.quintengish.com/accelerator/">
-<meta property="og:title" content="How Copywriters &amp; Media Buyers Are Hitting $10k/Mo With AI in 2026">
+<meta property="og:title" content="How I Went From $0 to $30k/mo in 90 Days By Becoming an AI Creative Strategist">
 <meta property="og:description" content="Watch the free training, then apply. 6 weeks of live coaching.">
 <meta property="og:image" content="https://www.quintengish.com/accelerator/assets/poster-v3.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -431,6 +453,9 @@ img, video, svg { display: block; max-width: 100%; }
   .acsa-stats .wf-card__label { grid-column: 2; grid-row: 1; align-self: end; }
   .acsa-stats .wf-stat__cap { grid-column: 2; grid-row: 2; align-self: start; margin-top: 5px; }
 }
+/* A/B SPLIT, version b = VSL only: everything under the hero is gone (sections, footer). Nothing else changes. */
+html[data-variant="b"] main > section:not(.wf-hero-sec),
+html[data-variant="b"] .wf-foot { display: none !important; }
 /* the wide heavy emphasis face */
 .wf-h1 em, .wf-h2 em, .wf-stat__num { font-stretch: 125%; }
 .wf-h1 em, .wf-h2 em { white-space: nowrap; }
@@ -626,9 +651,9 @@ main .wf-h2 { font-size: clamp(27px, 3.3vw, 44px); line-height: 1.12; letter-spa
   <div class="wf-wrap wf-center wf-hero">
     <span class="wf-chip"><span class="wf-chip__dot"></span>Copywriters &amp; media buyers</span>
     <h1 class="wf-h1 acsa-h1" data-kinetic="0.06" data-delay="0.1">
-      How Copywriters &amp; Media Buyers Are Hitting <em class="wf-a">$10k/Mo</em> With AI in 2026
+      How I Went From $0 to <em class="wf-a">$30k/mo</em> in 90 Days By Becoming an AI Creative Strategist
     </h1>
-    <p class="wf-lede" data-pop="0.9" data-delay="0.8" style="margin-top: 18px;">The exact system that took me from $0 to $30k/mo in 90 days and my brother from zero experience to $3,500/mo in 30 days.</p>
+    <p class="wf-lede" data-pop="0.9" data-delay="0.8" style="margin-top: 18px;">The exact system, built for copywriters and media buyers.</p>
 
     <!-- the VSL: custom player, footage untouched, every control on the paper under it -->
     <div class="acsa-hero-player">
@@ -1313,6 +1338,11 @@ window.addEventListener('pageshow', (e) => { if (e.persisted) location.reload();
   let q = '';
   try { q = new URLSearchParams((window.acsaIds && window.acsaIds().first_touch) || {}).toString(); } catch (e) {}
   if (!q && !window.acsaIds) q = location.search.replace(/^\?/, '');   // site.js blocked: pass the raw params on
+  /* A/B split: the apply page's site.js normally reads the variant from this browser's storage. v= on the link is the
+     backup for browsers that block storage, so the Lead still carries the version this visitor saw. */
+  try {
+    if (window.acsaVariant) { const p = new URLSearchParams(q); p.set('v', window.acsaVariant); q = p.toString(); }
+  } catch (e) {}
   document.querySelectorAll('[data-apply]').forEach((a) => {
     a.href = 'apply/' + (q ? '?' + q : '');
     a.addEventListener('click', () => track('ApplyClick', { content_name: 'ACSA Application' }));   // beacon survives the navigation
