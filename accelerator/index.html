@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <script>
-/* A/B SPLIT (10.05.2026). Runs before first paint, before site.js.
+/* A/B SPLIT (10.05.2026, ENDED 10.09.2026: 100% b). Runs before first paint, before site.js.
    a = the full page. b = "VSL only": the hero (chip, headline, subhead, VSL, Apply) and nothing under it.
    First visit picks a or b 50/50 and keeps it in this browser (localStorage "acsa-variant").
    ?v=a or ?v=b forces one for this tab only (preview), without touching the saved pick.
@@ -13,12 +13,10 @@
   var ok = function (x) { x = String(x || '').toLowerCase(); return x === 'a' || x === 'b' ? x : ''; };
   try { var m = location.search.match(/[?&]v=([^&#]*)/); if (m && ok(m[1])) { V = ok(m[1]); try { sessionStorage.setItem('acsa-variant-force', V); } catch (e) {} } } catch (e) {}
   if (!V) try { V = ok(sessionStorage.getItem('acsa-variant-force')); } catch (e) {}
+  /* 10.09.2026: split ended, B won. Every visitor gets b, and a saved 'a' pick is overwritten so the apply page tags b too. */
   if (!V) {
-    try { V = ok(localStorage.getItem('acsa-variant')); } catch (e) {}
-    if (!V) {
-      V = Math.random() < 0.5 ? 'a' : 'b';
-      try { localStorage.setItem('acsa-variant', V); } catch (e) {}
-    }
+    V = 'b';
+    try { localStorage.setItem('acsa-variant', V); } catch (e) {}
   }
   d.setAttribute('data-variant', V);
   window.acsaVariant = V;
