@@ -11,6 +11,9 @@ const ACSA = {
 };
 
 (() => {
+  /* B vs C split (10.09.2026): /accelerator/ sets window.acsaRedirect in <head> when this visitor is on "c" and is
+     being sent to /accelerator/c/. That page load must not track anything (C tracks its own PageView). */
+  if (window.acsaRedirect) return;
   const STANDARD = ['PageView', 'ViewContent', 'Lead'];
   const FT_KEY = 'acsa-first-touch';
   const FT_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid',
@@ -111,12 +114,13 @@ const ACSA = {
     window.fbq('init', ACSA.PIXEL, am);
   } catch (e) {}
 
-  /* ---- A/B SPLIT (10.05.2026): which version of /accelerator/ this visitor saw ("a" full page, "b" VSL only).
+  /* ---- A/B SPLIT (10.05.2026): which version of /accelerator/ this visitor saw ("a" full page, "b" VSL only,
+     "c" = the /accelerator/c/ page, added 10.09.2026 for the B vs C split).
      The landing page picks it in <head> and sets <html data-variant>. The apply and thank-you pages read it back:
      the apply link's v=, then this tab's forced preview (?v=), then this browser's saved pick. No pick, no tag.
      Every event (pixel custom data AND the server copy's custom_data) carries it as "variant". ---- */
   const VARIANT = (() => {
-    const ok = (x) => { x = String(x || '').toLowerCase(); return x === 'a' || x === 'b' ? x : ''; };
+    const ok = (x) => { x = String(x || '').toLowerCase(); return x === 'a' || x === 'b' || x === 'c' ? x : ''; };
     let v = '';
     try { v = ok(document.documentElement.getAttribute('data-variant')); } catch (e) {}
     if (!v) try { v = ok(new URLSearchParams(location.search).get('v')); } catch (e) {}

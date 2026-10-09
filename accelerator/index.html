@@ -3,20 +3,43 @@
 <head>
 <meta charset="utf-8">
 <script>
-/* A/B SPLIT (10.05.2026, ENDED 10.09.2026: 100% b). Runs before first paint, before site.js.
-   a = the full page. b = "VSL only": the hero (chip, headline, subhead, VSL, Apply) and nothing under it.
-   First visit picks a or b 50/50 and keeps it in this browser (localStorage "acsa-variant").
-   ?v=a or ?v=b forces one for this tab only (preview), without touching the saved pick.
-   Sets <html data-variant>; the CSS below hides the sections for b; site.js tags every event with it. */
+/* B vs C SPLIT (started 10.09.2026). Runs before first paint, before site.js.
+   b = this page, "VSL only": the hero (chip, headline, subhead, VSL, Apply) and nothing under it.
+   c = the page at /accelerator/c/ (approved 10.09.2026).
+   First visit picks b or c 50/50 and keeps it in this browser (localStorage "acsa-variant-bc", a fresh key, so
+   everyone is randomized again). The pick is also written to "acsa-variant", which the apply and thank-you pages read.
+   "c" visitors are sent to c/ right here, with every query param (utm_*, fbclid, ad ids) and the hash kept. This page
+   then tracks nothing for them (window.acsaRedirect makes site.js and the scripts below stand down) and stays hidden.
+   ?v=a, ?v=b or ?v=c previews one for this tab only (sessionStorage), without touching the saved pick.
+   Storage blocked: still picks at random, still works. Old a/b split (10.05 to 10.09): see git history.
+   ROLLBACK to 100% b: set PICK below to 'b' (or revert the commit). */
 (function () {
-  var d = document.documentElement, V = '';
-  var ok = function (x) { x = String(x || '').toLowerCase(); return x === 'a' || x === 'b' ? x : ''; };
+  var d = document.documentElement, V = '', forced = false, KEY = 'acsa-variant-bc', PICK = '';
+  var ok = function (x) { x = String(x || '').toLowerCase(); return x === 'a' || x === 'b' || x === 'c' ? x : ''; };
   try { var m = location.search.match(/[?&]v=([^&#]*)/); if (m && ok(m[1])) { V = ok(m[1]); try { sessionStorage.setItem('acsa-variant-force', V); } catch (e) {} } } catch (e) {}
   if (!V) try { V = ok(sessionStorage.getItem('acsa-variant-force')); } catch (e) {}
-  /* 10.09.2026: split ended, B won. Every visitor gets b, and a saved 'a' pick is overwritten so the apply page tags b too. */
+  if (V) forced = true;
   if (!V) {
-    V = 'b';
+    V = PICK;
+    if (!V) {
+      try { V = localStorage.getItem(KEY); } catch (e) { V = ''; }
+      if (V !== 'b' && V !== 'c') {
+        V = Math.random() < 0.5 ? 'b' : 'c';
+        try { localStorage.setItem(KEY, V); } catch (e) {}
+      }
+    }
     try { localStorage.setItem('acsa-variant', V); } catch (e) {}
+  }
+  if (V === 'c') {
+    try {
+      var q = location.search;
+      if (forced && !/[?&]v=c(&|$)/i.test(q)) q += (q ? '&' : '?') + 'v=c';   // previews stay marked as previews on c/
+      window.acsaRedirect = true;
+      d.style.visibility = 'hidden';   // b never flashes while c/ loads
+      location.replace('c/' + q + location.hash);
+    } catch (e) {
+      window.acsaRedirect = false; d.style.visibility = ''; V = 'b';   // could not redirect: show b, tagged b
+    }
   }
   d.setAttribute('data-variant', V);
   window.acsaVariant = V;
@@ -1175,6 +1198,7 @@ window.addEventListener('pageshow', (e) => { if (e.persisted) location.reload();
      <video data-src-hd="hd.mp4" data-src-sd="sd.mp4" poster="poster.jpg"> ; phones and data-saver get the SD file.
      Remembers where each viewer stopped (per video, this browser only). */
   document.querySelectorAll('[data-player]').forEach((pl) => {
+    if (window.acsaRedirect) return;   // B vs C split: on the way to c/, do not start loading the video here
     const v = pl.querySelector('video'), screen = pl.querySelector('.wf-player__screen');
     const play = pl.querySelector('.wf-player__play'), track = pl.querySelector('.wf-player__track');
     const fill = pl.querySelector('.wf-player__fill'), buf = pl.querySelector('.wf-player__buf'), knob = pl.querySelector('.wf-player__knob');
@@ -1337,6 +1361,7 @@ window.addEventListener('pageshow', (e) => { if (e.persisted) location.reload();
 /* Tracking for this page. site.js (in <head>) owns the pixel, the visitor id and the first-touch ad data.
    Here: the apply links, the ApplyClick event, and the VSL events. Nothing in here may break the page. */
 (() => {
+  if (window.acsaRedirect) return;   // B vs C split: this visitor is on c and is being sent to c/
   const track = (n, p) => { try { if (window.acsaTrack) window.acsaTrack(n, p); } catch (e) {} };
 
   /* Apply buttons go to apply/ and carry the first-touch ad data along as a query string. */

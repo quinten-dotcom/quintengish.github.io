@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en" data-variant="c">
+<head>
+<meta charset="utf-8">
+<script>
+/* VARIANT C, live in the B vs C split (started 10.09.2026). /accelerator/ picks b or c 50/50 in its <head> and sends
+   "c" visitors here with every query param kept. This page is always "c": every event the shared ../site.js sends is
+   tagged variant "c". The pick is also saved as "acsa-variant" (unless this tab is a ?v= preview), so a Schedule on
+   /thank-you/ after a C application is tagged "c", the same way B's is tagged "b". */
+(function () {
+  document.documentElement.setAttribute('data-variant', 'c'); window.acsaVariant = 'c';
+  var forced = ''; try { forced = sessionStorage.getItem('acsa-variant-force') || ''; } catch (e) {}
+  if (!forced) try { localStorage.setItem('acsa-variant', 'c'); } catch (e) {}
+})();
+</script>
+<script src="../site.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#ffffff">
+<title>How I Scaled to $30K/Month as an AI Creative Strategist Without Being an AI Savant</title>
+<meta name="description" content="Watch the free 5-minute breakdown, then apply to see if you're a fit for the system.">
+<link rel="icon" href="data:,">
+<link rel="preload" as="image" href="thumb.jpg?v=opt1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400..900;1,400..900&family=Inter:wght@400..800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://form.typeform.com"><link rel="preconnect" href="https://embed.typeform.com">
+<link rel="stylesheet" href="https://embed.typeform.com/next/css/widget.css">
+<style>
+/* Variant C v2 (10.09.2026): colors, type, sizes and spacing measured off the reference page (see measure.json). */
+:root {
+  --bg: #ffffff;
+  --line: #e5ebf5;
+  --line-strong: #d3deef;
+  --blue: #2563eb;
+  --blue-deep: #1d4ed8;
+  --blue-bright: #3b82f6;
+  --ink: #0a1020;
+  --ink-muted: #5a6b85;
+  --ink-dim: #8a97ac;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --display: "Archivo", "Inter", sans-serif;
+}
+* , *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); overflow-x: hidden; }
+p, h1, h2 { margin: 0; padding: 0; }
+img, svg, iframe, video { display: block; max-width: 100%; }
+button { font: inherit; }
+
+/* the page block: white page, one centered block with the soft blue glow at the top */
+.c-root { display: block; position: relative; width: calc(100% - 20px); max-width: 1150px; margin: 40px auto 40px; padding: 0;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(1100px 560px at 50% -8%, #ebf3ff 0%, rgba(235, 243, 255, 0) 62%),
+    radial-gradient(760px 420px at 100% 0%, rgba(235, 243, 255, 0.7) 0%, rgba(235, 243, 255, 0) 70%);
+  color: var(--ink); font-size: 16px; line-height: 1.6; text-align: center; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+.c-inner { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+/* 1. two-part pill */
+.c-topbar { display: flex; justify-content: center; padding: clamp(22px, 4vw, 36px) 20px 0; }
+.c-pill { display: inline-flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 16px; margin: 0; padding: 12px 26px;
+  border: 1px solid var(--line-strong); border-radius: 999px; background: rgba(255, 255, 255, 0.86); box-shadow: 0 10px 26px -18px rgba(15, 35, 75, 0.35);
+  font-size: 11.5px; font-weight: 700; line-height: 1.5; letter-spacing: 0.14em; text-transform: uppercase; text-align: center; color: var(--ink-dim); }
+.c-pill__lead { color: var(--blue); }
+.c-pill__rule { width: 1px; height: 14px; background: var(--line-strong); }
+.c-pill__tail { font-weight: 500; color: var(--ink-dim); }
+.c-pill__tail strong { color: var(--ink); font-weight: 800; }
+
+/* hero */
+.c-hero { display: flex; flex-direction: column; align-items: center; text-align: center; padding: clamp(48px, 7vw, 86px) 0 clamp(56px, 7vw, 88px); }
+.c-eyebrow { margin: 0 0 clamp(20px, 3vw, 28px); color: var(--blue); font-family: var(--sans); font-size: clamp(10.5px, 1.5vw, 12.5px); font-weight: 800;
+  letter-spacing: 0.2em; text-transform: uppercase; text-wrap: balance; }
+.c-title { margin: 0; max-width: 900px; font-family: var(--display); font-weight: 900; font-size: clamp(34px, 6.4vw, 72px); line-height: 1.02;
+  letter-spacing: -0.025em; color: var(--ink); }
+.c-mark { padding: 0 0.06em; background-image: linear-gradient(180deg, transparent 70%, rgba(37, 99, 235, 0.2) 70%);
+  -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.c-sub { margin: clamp(22px, 3vw, 28px) 0 0; max-width: 600px; color: var(--ink-muted); font-size: clamp(15px, 2vw, 18px); font-weight: 400; line-height: 1.55; }
+
+/* video: poster + one play button, our own MP4 underneath */
+.c-video { width: 100%; max-width: 880px; margin: clamp(36px, 5vw, 54px) auto 0; }
+.c-video__inner { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: #0b1220;
+  box-shadow: 0 34px 70px -34px rgba(12, 26, 55, 0.45), 0 8px 22px -14px rgba(12, 26, 55, 0.22); }
+.c-video__inner video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #0b1220; cursor: pointer; }
+.c-poster { position: absolute; inset: 0; z-index: 2; display: block; width: 100%; height: 100%; margin: 0; padding: 0; border: 0; background: #0b1220;
+  cursor: pointer; -webkit-appearance: none; appearance: none; -webkit-tap-highlight-color: transparent; }
+.c-poster[hidden] { display: none; }
+.c-poster img { width: 100%; height: 100%; object-fit: cover; border-radius: 0; }
+.c-poster__scrim { position: absolute; inset: 0; background: rgba(10, 18, 34, 0.08); transition: background 0.25s var(--ease); }
+.c-poster:hover .c-poster__scrim, .c-poster:focus-visible .c-poster__scrim { background: rgba(10, 18, 34, 0.22); }
+.c-poster__play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: grid; place-items: center; width: clamp(64px, 9vw, 86px);
+  aspect-ratio: 1; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 9px rgba(255, 255, 255, 0.55), 0 18px 34px -10px rgba(20, 45, 95, 0.55);
+  transition: transform 0.22s var(--ease), background 0.22s var(--ease); }
+.c-poster__play svg { width: 40%; height: 40%; fill: #ffffff; transform: translateX(6%); }
+.c-poster:hover .c-poster__play { transform: translate(-50%, -50%) scale(1.07); background: var(--blue-bright); }
+.c-poster:focus-visible { outline: 3px solid var(--blue-bright); outline-offset: 4px; }
+
+/* player bar: only shows once the video has started (pause, seek, mute, full screen) */
+.c-bar { display: flex; align-items: center; gap: 12px; margin-top: 14px; padding: 8px 14px 8px 8px; border: 1px solid var(--line); border-radius: 999px;
+  background: #fff; box-shadow: 0 10px 26px -18px rgba(15, 35, 75, 0.35); }
+.c-bar[hidden] { display: none; }
+.c-bar__play { flex: none; width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer; display: grid; place-items: center;
+  background: linear-gradient(180deg, var(--blue-bright) 0%, var(--blue) 52%, var(--blue-deep) 100%); box-shadow: 0 1px 0 rgba(255,255,255,0.35) inset; }
+.c-bar__play .i-pause, .is-playing .c-bar__play .i-play { display: none; }
+.is-playing .c-bar__play .i-pause { display: block; }
+.c-bar__track { position: relative; flex: 1; min-width: 0; height: 22px; cursor: pointer; touch-action: none; }
+.c-bar__track::before { content: ""; position: absolute; left: 0; right: 0; top: 9px; height: 4px; border-radius: 4px; background: var(--line); }
+.c-bar__buf, .c-bar__fill { position: absolute; left: 0; top: 9px; height: 4px; border-radius: 4px; width: 0; }
+.c-bar__buf { background: var(--line-strong); }
+.c-bar__fill { background: var(--blue); }
+.c-bar__knob { position: absolute; top: 4px; left: 0; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 3px var(--blue), 0 2px 6px rgba(12,26,55,0.25); }
+.c-bar__track:focus-visible { outline: 2px solid var(--blue-bright); outline-offset: 4px; border-radius: 6px; }
+.c-bar__time { flex: none; font: 500 13px/1 var(--sans); font-variant-numeric: tabular-nums; color: var(--ink-dim); }
+.c-bar__icon { flex: none; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line-strong); cursor: pointer; display: grid; place-items: center; background: #fff; color: var(--ink-muted); }
+.c-bar__icon:hover { border-color: var(--blue); color: var(--blue-deep); background: #eff6ff; }
+.c-video .i-muted, .c-video.is-muted .i-sound { display: none; }
+.c-video.is-muted .i-muted { display: block; }
+
+/* call to action */
+.c-cta { display: flex; flex-direction: column; align-items: center; margin-top: clamp(36px, 5vw, 52px); }
+.c-btn { display: inline-flex; align-items: center; justify-content: center; gap: 14px; min-height: 68px; padding: 0 clamp(34px, 6vw, 60px); border: 0; border-radius: 999px;
+  background: linear-gradient(180deg, var(--blue-bright) 0%, var(--blue) 52%, var(--blue-deep) 100%); color: #ffffff; font-family: var(--display);
+  font-size: clamp(17px, 2.4vw, 21px); font-weight: 800; letter-spacing: 0.01em; line-height: 1.2; text-decoration: none; white-space: nowrap; cursor: pointer;
+  -webkit-appearance: none; appearance: none;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.35) inset, 0 18px 38px -16px rgba(37, 99, 235, 0.7), 0 4px 12px -6px rgba(12, 26, 55, 0.3);
+  transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease), filter 0.22s var(--ease); }
+.c-btn svg { width: 22px; height: 22px; flex: none; stroke: currentColor; transition: transform 0.22s var(--ease); }
+.c-btn:hover, .c-btn:focus-visible { transform: translateY(-3px); filter: brightness(1.05);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 26px 50px -18px rgba(37, 99, 235, 0.8), 0 6px 16px -8px rgba(12, 26, 55, 0.32); }
+.c-btn:hover svg { transform: translateX(4px); }
+.c-btn:active { transform: translateY(-1px); }
+.c-btn:focus-visible { outline: 3px solid rgba(37, 99, 235, 0.45); outline-offset: 4px; }
+.c-micro { margin: 18px 0 0; color: var(--ink-dim); font-size: 13px; letter-spacing: 0.01em; }
+
+/* footer */
+.c-footer { max-width: 720px; margin: 0 auto; padding: clamp(34px, 5vw, 52px) 24px clamp(40px, 6vw, 60px); border-top: 1px solid var(--line); text-align: center; }
+.c-footer p { margin: 0 0 10px; color: var(--ink-dim); font-size: 12px; line-height: 1.65; }
+.c-footer p.c-footer__muted { margin-bottom: 0; color: #a8b3c5; }
+
+/* soft rise-in on load */
+.c-reveal { opacity: 0; transform: translateY(16px); animation: c-reveal-in 0.8s var(--ease) forwards; }
+.c-reveal--1 { animation-delay: 0.04s; } .c-reveal--2 { animation-delay: 0.12s; } .c-reveal--3 { animation-delay: 0.2s; } .c-reveal--4 { animation-delay: 0.3s; }
+@keyframes c-reveal-in { to { opacity: 1; transform: none; } }
+
+/* application popup */
+.c-modal { position: fixed; z-index: 2147483000; inset: 0; display: flex; align-items: center; justify-content: center; padding: 20px;
+  visibility: hidden; opacity: 0; pointer-events: none; transition: opacity 0.22s var(--ease), visibility 0.22s var(--ease); }
+.c-modal.is-open { visibility: visible; opacity: 1; pointer-events: auto; }
+.c-modal__backdrop { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; border: 0; cursor: pointer;
+  background: rgba(10, 16, 32, 0.7); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); }
+.c-modal__dialog { position: relative; z-index: 1; display: flex; flex-direction: column; width: min(100%, 820px); max-height: min(760px, calc(100vh - 40px));
+  overflow: hidden; border: 1px solid var(--line-strong); border-radius: 20px; background: #ffffff; box-shadow: 0 28px 80px -24px rgba(4, 12, 28, 0.65);
+  transform: translateY(12px) scale(0.985); transition: transform 0.22s var(--ease); }
+.c-modal.is-open .c-modal__dialog { transform: none; }
+.c-modal__header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 20px; border-bottom: 1px solid var(--line); text-align: left; }
+.c-modal__title { margin: 0; color: var(--ink); font-family: var(--display); font-size: clamp(19px, 3vw, 24px); font-weight: 800; line-height: 1.2; }
+.c-modal__close { display: inline-grid; flex: none; width: 38px; height: 38px; place-items: center; padding: 0; border: 1px solid var(--line-strong); border-radius: 50%;
+  background: #ffffff; color: var(--ink-muted); cursor: pointer; font-size: 25px; line-height: 1;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease); }
+.c-modal__close:hover, .c-modal__close:focus-visible { border-color: var(--blue); background: #eff6ff; color: var(--blue-deep); }
+.c-modal__close:focus-visible { outline: 3px solid rgba(37, 99, 235, 0.35); outline-offset: 3px; }
+.c-modal__body { position: relative; overflow: auto; padding: 4px; -webkit-overflow-scrolling: touch; }
+.c-form { position: relative; width: 100%; height: 600px; height: min(600px, calc(100dvh - 40px - 77px - 10px)); min-height: 380px; }
+#c-form { position: relative; z-index: 1; }
+#c-form, #c-form > div, #c-form iframe { width: 100%; height: 100%; }
+.c-modal__msg { position: absolute; inset: 0; z-index: 0; display: flex; align-items: center; justify-content: center; padding: 24px; text-align: center;
+  font-size: 15px; font-weight: 600; color: var(--ink-dim); }
+.c-modal__msg[hidden] { display: none; }
+.c-modal__msg a { color: var(--blue); }
+html.c-lock, html.c-lock body { overflow: hidden; }
+
+/* responsive (same break points as the reference) */
+@media (max-width: 860px) {
+  .c-pill { font-size: 10.5px; padding: 11px 20px; gap: 10px; }
+  .c-pill__rule { display: none; }
+  .c-pill__lead, .c-pill__tail { display: block; width: 100%; }
+  .c-title { font-size: clamp(32px, 9vw, 50px); line-height: 1.05; }
+  .c-btn { width: 100%; max-width: 420px; }
+  .c-bar__time { display: none; }
+}
+@media (max-width: 420px) {
+  .c-title { font-size: clamp(29px, 10vw, 40px); }
+  .c-btn { min-height: 62px; gap: 10px; }
+  .c-micro { font-size: 12px; }
+  .c-bar [data-mute] { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .c-reveal { opacity: 1; transform: none; animation: none !important; }
+  .c-btn, .c-poster__play, .c-modal, .c-modal__dialog { transition: none; }
+}
+</style>
+</head>
+<body>
+<main class="c-root" aria-labelledby="c-title">
+
+  <!-- 1. who it is for + the one proof line (his own number only, never a member result) -->
+  <div class="c-topbar">
+    <p class="c-pill" data-c="pill">
+      <span class="c-pill__lead">For Copywriters / Media Buyers Only</span>
+      <span class="c-pill__rule" aria-hidden="true"></span>
+      <span class="c-pill__tail"><strong>$1M+/month</strong> in ad spend managed using this system</span>
+    </p>
+  </div>
+
+  <div class="c-inner">
+    <div class="c-hero">
+
+      <p class="c-eyebrow c-reveal c-reveal--1" data-c="eyebrow">The BRAND NEW way to get clients with&nbsp;AI</p>
+
+      <!-- ===== HEADLINE: the one place to change it. Keep the money phrase inside <span class="c-mark">. Also update <title> above. ===== -->
+      <h1 class="c-title c-reveal c-reveal--2" id="c-title" data-c="headline">How I Scaled to <span class="c-mark">$30K/Month</span> as an AI Creative Strategist Without Being an AI Savant</h1>
+
+      <p class="c-sub c-reveal c-reveal--3" data-c="sub">Watch the free 5-minute breakdown below, then apply to see if you're a fit for the system.</p>
+
+      <!-- the VSL: click to play, starts at 0:00 with sound -->
+      <div class="c-video c-reveal c-reveal--4" data-c="video">
+        <div class="c-video__inner">
+          <video preload="none" playsinline disablepictureinpicture controlslist="nodownload noplaybackrate"
+                 data-src-hd="../assets/vsl-v3-1080.mp4" data-src-sd="../assets/vsl-v3-720.mp4"></video>
+          <button class="c-poster" type="button" aria-label="Play the video with sound">
+            <img src="thumb.jpg?v=opt1" alt="" width="1920" height="1080" fetchpriority="high">
+            <span class="c-poster__scrim" aria-hidden="true"></span>
+            <span class="c-poster__play" aria-hidden="true">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86A1 1 0 0 0 8 5.14Z"/></svg>
+            </span>
+          </button>
+        </div>
+        <div class="c-bar" hidden>
+          <button class="c-bar__play" type="button" aria-label="Pause">
+            <svg class="i-play" width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86A1 1 0 0 0 8 5.14Z"/></svg>
+            <svg class="i-pause" width="16" height="16" viewBox="0 0 24 24" fill="#fff"><rect x="6.5" y="5" width="4" height="14" rx="1.2"/><rect x="13.5" y="5" width="4" height="14" rx="1.2"/></svg>
+          </button>
+          <div class="c-bar__track" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="c-bar__buf"></div><div class="c-bar__fill"></div><div class="c-bar__knob"></div>
+          </div>
+          <span class="c-bar__time">0:00 / 4:49</span>
+          <button class="c-bar__icon" type="button" data-mute aria-label="Mute">
+            <svg class="i-sound" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>
+            <svg class="i-muted" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="m16 9.5 5 5M21 9.5l-5 5"/></svg>
+          </button>
+          <button class="c-bar__icon" type="button" data-fullscreen aria-label="Full screen">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- apply (opens the application in a popup on this page) + note -->
+      <div class="c-cta c-reveal c-reveal--4">
+        <a class="c-btn" data-apply data-c="apply" href="../apply/?v=c" role="button" aria-haspopup="dialog" aria-controls="c-modal">
+          <span>Apply To Work With Me</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        <p class="c-micro" data-c="note">Takes 5 minutes &middot; Only for copywriters and media buyers already doing the work</p>
+      </div>
+
+    </div>
+
+    <footer class="c-footer" data-c="footer">
+      <p>Not affiliated with, endorsed by, or sponsored by Meta.</p>
+      <p>Results vary and depend on your own effort, market and offer. Nothing here is a guarantee of income.</p>
+      <p class="c-footer__muted">&copy; 2026 United Motion, LLC. All rights reserved.</p>
+    </footer>
+  </div>
+</main>
+
+<!-- the application popup -->
+<div class="c-modal" id="c-modal" role="dialog" aria-modal="true" aria-labelledby="c-modal-title" aria-hidden="true">
+  <button class="c-modal__backdrop" type="button" data-close aria-label="Close the application" tabindex="-1"></button>
+  <div class="c-modal__dialog" role="document">
+    <div class="c-modal__header">
+      <h2 class="c-modal__title" id="c-modal-title">Apply To Work With Me</h2>
+      <button class="c-modal__close" type="button" data-close aria-label="Close the application">&times;</button>
+    </div>
+    <div class="c-modal__body">
+      <div class="c-form">
+        <p class="c-modal__msg" id="c-form-loading">Loading the application...</p><!-- sits under the form, so it shows until the form paints -->
+        <p class="c-modal__msg" id="c-form-fallback" hidden>The form did not load.&nbsp;<a id="c-form-fallback-link" href="https://form.typeform.com/to/flFSQBWR" target="_top">Open the application here</a>.</p>
+        <div id="c-form" aria-label="Application form"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://embed.typeform.com/next/embed.js" defer></script>
+<script>
+/* Variant C page logic. site.js (in <head>) owns the pixel, the visitor id and the first-touch ad data.
+   Here: the click-to-play VSL, the VSL events, and the application popup. Nothing in here may break the page. */
+(() => {
+  const track = (n, p, o) => { try { if (window.acsaTrack) return window.acsaTrack(n, p, o); } catch (e) {} return ''; };
+
+  /* ===================== VIDEO: click to play, from 0:00, with sound ===================== */
+  const box = document.querySelector('.c-video');
+  const v = box && box.querySelector('video');
+  if (v) {
+    const cover = box.querySelector('.c-poster'), bar = box.querySelector('.c-bar');
+    const play = bar.querySelector('.c-bar__play'), trackEl = bar.querySelector('.c-bar__track');
+    const fill = bar.querySelector('.c-bar__fill'), buf = bar.querySelector('.c-bar__buf'), knob = bar.querySelector('.c-bar__knob');
+    const time = bar.querySelector('.c-bar__time'), mute = bar.querySelector('[data-mute]'), fs = bar.querySelector('[data-fullscreen]');
+    const sd = innerWidth < 700 || (navigator.connection && navigator.connection.saveData);
+    const SRC = (sd && v.dataset.srcSd) || v.dataset.srcHd || v.dataset.srcSd;
+    v.playsInline = true; v.controls = false;
+    const mmss = (s) => { s = Math.max(0, Math.floor(s || 0)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
+    const paint = () => {
+      const d = v.duration || 0, p = d ? v.currentTime / d : 0;
+      fill.style.width = `${p * 100}%`; knob.style.left = `${p * 100}%`;
+      if (time) time.textContent = `${mmss(v.currentTime)} / ${d ? mmss(d) : '4:49'}`;
+      trackEl.setAttribute('aria-valuenow', Math.round(p * 100));
+      try { if (v.buffered.length && d) buf.style.width = `${(v.buffered.end(v.buffered.length - 1) / d) * 100}%`; } catch (e) {}
+    };
+    const tick = () => { paint(); if (!v.paused) requestAnimationFrame(tick); };
+    let started = false;
+    const start = () => {
+      if (!started) {
+        started = true;
+        if (!v.getAttribute('src')) { v.src = SRC; }
+        cover.hidden = true; bar.hidden = false;
+      }
+      try { v.currentTime = 0; } catch (e) {}
+      v.muted = false;
+      const p = v.play(); if (p && p.catch) p.catch(() => {});
+    };
+    cover.addEventListener('click', start);
+    const toggle = () => { if (!started) return start(); v.paused ? v.play() : v.pause(); };
+    play.addEventListener('click', toggle);
+    v.addEventListener('click', toggle);
+    v.addEventListener('play', () => { box.classList.add('is-playing'); play.setAttribute('aria-label', 'Pause'); tick(); });
+    v.addEventListener('pause', () => { box.classList.remove('is-playing'); play.setAttribute('aria-label', 'Play'); });
+    v.addEventListener('loadedmetadata', paint);
+    v.addEventListener('progress', paint);
+    v.addEventListener('volumechange', () => box.classList.toggle('is-muted', v.muted));
+    v.addEventListener('contextmenu', (e) => e.preventDefault());
+    if (mute) mute.addEventListener('click', () => { v.muted = !v.muted; });
+    if (fs) fs.addEventListener('click', () => {
+      if (document.fullscreenElement) return document.exitFullscreen();
+      if (v.requestFullscreen) v.requestFullscreen(); else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+    });
+    document.addEventListener('fullscreenchange', () => { v.controls = document.fullscreenElement === v; });
+    const seekTo = (x) => { const r = trackEl.getBoundingClientRect(); const p = Math.min(1, Math.max(0, (x - r.left) / r.width)); if (v.duration) { v.currentTime = p * v.duration; paint(); } };
+    trackEl.addEventListener('pointerdown', (e) => {
+      try { trackEl.setPointerCapture(e.pointerId); } catch (err) {} seekTo(e.clientX);
+      const move = (ev) => seekTo(ev.clientX);
+      const up = () => { trackEl.removeEventListener('pointermove', move); trackEl.removeEventListener('pointerup', up); };
+      trackEl.addEventListener('pointermove', move); trackEl.addEventListener('pointerup', up);
+    });
+    trackEl.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') v.currentTime = Math.min(v.duration || 0, v.currentTime + 5);
+      else if (e.key === 'ArrowLeft') v.currentTime = Math.max(0, v.currentTime - 5);
+      else if (e.key === ' ' || e.key === 'Enter') toggle(); else return;
+      e.preventDefault(); paint();
+    });
+
+    /* VSL events, same rules as the live page: ViewContent on the first play WITH SOUND of this page load.
+       VSL25/50/75/100 count seconds ACTUALLY WATCHED (skipping ahead never counts). Credit is kept in this browser. */
+    const W = 'acsa-vsl-watched', F = 'acsa-vsl-fired', NAME = 'ACSA VSL';
+    let watched = 0, fired = [];
+    try { watched = parseFloat(localStorage.getItem(W)) || 0; } catch (e) {}
+    try { fired = JSON.parse(localStorage.getItem(F) || '[]'); if (!Array.isArray(fired)) fired = []; } catch (e) { fired = []; }
+    let viewed = false, last = null;
+    const check = () => {
+      const d = v.duration;
+      if (!d || !isFinite(d)) return;
+      if (watched > d) watched = d;
+      const p = watched / d;
+      [25, 50, 75, 100].forEach((n) => {
+        const hit = n === 100 ? p >= 0.97 : p >= n / 100;
+        if (hit && fired.indexOf(n) === -1) {
+          fired.push(n);
+          try { localStorage.setItem(F, JSON.stringify(fired)); } catch (e) {}
+          track('VSL' + n, { percent: n, content_name: NAME });
+        }
+      });
+    };
+    v.addEventListener('play', () => {
+      last = v.currentTime;
+      if (!viewed && !v.muted) { viewed = true; track('ViewContent', { content_name: NAME }); }
+    });
+    v.addEventListener('volumechange', () => { if (!viewed && !v.muted && !v.paused) { viewed = true; track('ViewContent', { content_name: NAME }); } });
+    v.addEventListener('seeking', () => { last = null; });
+    v.addEventListener('seeked', () => { last = v.currentTime; });
+    v.addEventListener('timeupdate', () => {
+      const t = v.currentTime;
+      if (!v.paused && !v.seeking && last !== null && !v.muted) {
+        const delta = t - last;
+        if (delta > 0 && delta < 1.5) {
+          watched += delta;
+          try { localStorage.setItem(W, watched.toFixed(1)); } catch (e) {}
+          check();
+        }
+      }
+      last = t;
+    });
+    v.addEventListener('ended', check);
+  }
+
+  /* ===================== APPLICATION POPUP (Typeform flFSQBWR, inline) =====================
+     Same hidden fields as apply/index.html: the first-touch ad data (UTMs, fbclid, ad ids, placement, site) plus
+     eid (the Lead event id), vid, fbc, fbp. Same redirectTarget '_top', so the form's own endings still send a
+     qualified applicant to Calendly and a not-fit one to /thank-you-b/, exactly like the apply page. */
+  const FORM = 'flFSQBWR';
+  const KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid',
+    'ad_id', 'adset_id', 'campaign_id', 'placement', 'site'];
+  const modal = document.getElementById('c-modal');
+  const host = document.getElementById('c-form');
+  const loading = document.getElementById('c-form-loading');
+  const fallbackEl = document.getElementById('c-form-fallback');
+  let eid = '';
+  try { eid = crypto.randomUUID(); } catch (e) { eid = 'lead' + Date.now().toString(36) + Math.random().toString(36).slice(2); }
+
+  const hiddenFields = () => {
+    let ids = { first_touch: {} };
+    try { if (window.acsaIds) ids = window.acsaIds(); } catch (e) {}
+    const touch = { ...(ids.first_touch || {}) };
+    if (!window.acsaIds) {   // site.js blocked: fall back to the raw URL params
+      const q = new URLSearchParams(location.search);
+      KEYS.forEach((k) => { if (q.get(k)) touch[k] = q.get(k); });
+    }
+    const hidden = {};
+    KEYS.forEach((k) => { if (touch[k]) hidden[k] = String(touch[k]); });
+    [['eid', eid], ['vid', ids.vid], ['fbc', ids.fbc], ['fbp', ids.fbp]].forEach(([k, val]) => { if (val) hidden[k] = String(val); });
+    return hidden;
+  };
+
+  /* the plain link still works with no JS (or if the popup is skipped): it goes to ../apply/ with the ad data and v=c,
+     like the live B page */
+  const applyBtn = document.querySelector('[data-apply]');
+  try {
+    let q = new URLSearchParams((window.acsaIds && window.acsaIds().first_touch) || {});
+    if (!window.acsaIds) q = new URLSearchParams(location.search);   // site.js blocked: pass the raw params on, like B
+    if (window.acsaVariant) q.set('v', window.acsaVariant);
+    q = q.toString();
+    applyBtn.href = '../apply/' + (q ? '?' + q : '');
+  } catch (e) {}
+
+  let built = false, lastFocus = null;
+  const isOpen = () => modal.classList.contains('is-open');
+  const showFallback = (hidden) => {
+    loading.hidden = true; host.hidden = true;
+    document.getElementById('c-form-fallback-link').href = 'https://form.typeform.com/to/' + FORM + '#' + new URLSearchParams(hidden).toString();
+    fallbackEl.hidden = false;
+  };
+  const build = (tries) => {
+    if (built) return;
+    const hidden = hiddenFields();
+    if (!window.tf || !window.tf.createWidget) {
+      if ((tries || 0) < 40) return setTimeout(() => build((tries || 0) + 1), 150);   // embed.js still loading (up to 6s)
+      return showFallback(hidden);
+    }
+    try {
+      built = true;
+      window.tf.createWidget(FORM, {
+        container: host,
+        hidden,
+        inlineOnMobile: true,
+        redirectTarget: '_top',
+        autoFocus: false,   // focus stays on the page so Escape closes the popup (a key pressed inside the form's iframe never reaches this page)
+        onSubmit: () => { track('Lead', { content_name: 'ACSA Application' }, { eventId: eid }); },
+      });
+    } catch (e) { built = false; showFallback(hidden); }
+  };
+
+  const open = (e) => {
+    if (e) e.preventDefault();
+    if (isOpen()) return;
+    lastFocus = document.activeElement;
+    modal.classList.add('is-open'); modal.setAttribute('aria-hidden', 'false');
+    document.documentElement.classList.add('c-lock');
+    track('ApplyClick', { content_name: 'ACSA Application' });
+    try { if (v && !v.paused) v.pause(); } catch (err) {}
+    build(0);
+    setTimeout(() => { try { modal.querySelector('.c-modal__close').focus(); } catch (err) {} }, 30);
+  };
+  const close = () => {
+    if (!isOpen()) return;
+    modal.classList.remove('is-open'); modal.setAttribute('aria-hidden', 'true');
+    document.documentElement.classList.remove('c-lock');
+    try { if (lastFocus) lastFocus.focus(); } catch (err) {}
+  };
+  applyBtn.addEventListener('click', open);
+  modal.querySelectorAll('[data-close]').forEach((el) => el.addEventListener('click', close));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isOpen()) close(); });
+  /* keep Tab inside the popup */
+  modal.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab') return;
+    const f = [...modal.querySelectorAll('.c-modal__dialog button, .c-modal__dialog a[href], .c-modal__dialog iframe')].filter((x) => x.offsetParent !== null);
+    if (!f.length) return;
+    const first = f[0], lastEl = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); lastEl.focus(); }
+    else if (!e.shiftKey && document.activeElement === lastEl) { e.preventDefault(); first.focus(); }
+  });
+})();
+</script>
+</body>
+</html>
