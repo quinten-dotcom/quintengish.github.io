@@ -14,7 +14,7 @@
    Storage blocked: still picks at random, still works. Old a/b split (10.05 to 10.09): see git history.
    ROLLBACK to 100% b: set PICK below to 'b' (or revert the commit). */
 (function () {
-  var d = document.documentElement, V = '', forced = false, KEY = 'acsa-variant-bc', PICK = 'b';   // 10.09.2026: split PAUSED again, C being revised to say AI Creative Strategist + ICA clearly; needs Jeremy AI yes
+  var d = document.documentElement, V = '', forced = false, KEY = 'acsa-variant-bc', PICK = '';   // 10.09.2026: split RESUMED (2nd restart) with the Jeremy-approved H1 "How I Make $30K/Month as an AI Creative Strategist"
   var ok = function (x) { x = String(x || '').toLowerCase(); return x === 'a' || x === 'b' || x === 'c' ? x : ''; };
   try { var m = location.search.match(/[?&]v=([^&#]*)/); if (m && ok(m[1])) { V = ok(m[1]); try { sessionStorage.setItem('acsa-variant-force', V); } catch (e) {} } } catch (e) {}
   if (!V) try { V = ok(sessionStorage.getItem('acsa-variant-force')); } catch (e) {}
