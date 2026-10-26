@@ -1,0 +1,4035 @@
+{
+  "meta": {
+    "data_through": "2026-07-02",
+    "pulled_at": "2026-07-03T21:49:03Z",
+    "month_days": 31,
+    "month_day_of": 2,
+    "meta_ads_status": "blocked_approval",
+    "ads_source": "creatives_tabs_true",
+    "alerts": [
+      {
+        "level": "critical",
+        "offer": "CJ Challenge",
+        "text": "Cost per purchase is running away: $244 over 30 days, $349 over 3 days, $654 month to date. The batch is fatiguing, kill the losers in the per-ad table."
+      },
+      {
+        "level": "critical",
+        "offer": "CJ Challenge",
+        "text": "32 purchases in 30 days but 0 calls booked from them. The purchase-to-call step is broken or untracked. Every dollar of front-end spend is stranded until this works."
+      },
+      {
+        "level": "serious",
+        "offer": "True Success Academy",
+        "text": "0 sales on $6,289 lifetime spend, 4 booked calls total. The leak is after the webinar, not in the ads."
+      },
+      {
+        "level": "warning",
+        "offer": "CJ Grader",
+        "text": "CPL roughly doubled: $132 over 7 days vs $82 over 30, about 1 lead a day since Jun 28."
+      },
+      {
+        "level": "warning",
+        "offer": "Elysium Jet",
+        "text": "Show rate slipped to 37% over 7 days vs 45% over 30. Booked calls are not showing up."
+      },
+      {
+        "level": "warning",
+        "offer": "Accounts",
+        "text": "Meta disabled 5 ad accounts for unusual activity, including the old ELYSIUM JET account."
+      },
+      {
+        "level": "info",
+        "offer": "Board",
+        "text": "Per-ad numbers below are TRUE data straight from the Creatives tabs (CRM and EverWebinar attribution), not Meta-reported."
+      }
+    ]
+  },
+  "windows": [
+    "3d",
+    "7d",
+    "14d",
+    "30d",
+    "mtd"
+  ],
+  "window_days": {
+    "3d": 3,
+    "7d": 7,
+    "14d": 14,
+    "30d": 30,
+    "mtd": 2
+  },
+  "offers": [
+    {
+      "id": "challenge",
+      "name": "CJ Challenge",
+      "eyebrow": "Low-ticket front end, GHL paid-attributed truth",
+      "sheet_url": "https://docs.google.com/spreadsheets/d/1wf_Ow5IFhSxOa1_EqXpeJuzT-RItA352xs9iE9gWh_s",
+      "maturity_days": 3,
+      "lag_note": "Purchases land fast, but the high-ticket backend (calls, sales) lags weeks. Judge front end on cost per purchase.",
+      "flag": "0 calls booked from 32 purchases in 30 days. The purchase-to-call step is broken or untracked.",
+      "primary": "cpa",
+      "hero_options": [
+        "cpa",
+        "roas",
+        "purchases",
+        "revenue",
+        "spend"
+      ],
+      "spark_metric": "purchases",
+      "spark_label": "True purchases per day",
+      "ads_kpi": {
+        "label": "Purchases",
+        "target_key": "cpa"
+      },
+      "metrics": {
+        "spend": {
+          "label": "Spend",
+          "unit": "$",
+          "sum": true,
+          "vals": [
+            3492.91,
+            6572.57,
+            7808.17,
+            7808.17,
+            2616.24
+          ]
+        },
+        "cpm": {
+          "label": "CPM",
+          "unit": "$",
+          "vals": [
+            32.41138371,
+            42.4409159,
+            44.64490123,
+            44.64490123,
+            27.94740047
+          ]
+        },
+        "ctr": {
+          "label": "CTR",
+          "unit": "%",
+          "lower": false,
+          "vals": [
+            1.933783683,
+            2.082472363,
+            2.18988536,
+            2.18988536,
+            1.9249463219999998
+          ]
+        },
+        "purchases": {
+          "label": "True purchases",
+          "unit": "",
+          "sum": true,
+          "lower": false,
+          "vals": [
+            10.0,
+            26.0,
+            32.0,
+            32.0,
+            4.0
+          ]
+        },
+        "cpa": {
+          "label": "Cost per purchase",
+          "unit": "$",
+          "target": 200,
+          "bench": "Average order is about $198, so target near breakeven on the front end.",
+          "vals": [
+            349.291,
+            252.7911538,
+            244.0053125,
+            244.0053125,
+            654.06
+          ]
+        },
+        "revenue": {
+          "label": "True revenue (paid-attributed)",
+          "unit": "$",
+          "sum": true,
+          "lower": false,
+          "vals": [
+            1733.0,
+            5146.0,
+            6364.0,
+            6364.0,
+            724.0
+          ]
+        },
+        "roas": {
+          "label": "Front-end true ROAS",
+          "unit": "x",
+          "lower": false,
+          "target": 1,
+          "bench": "1.0x means the challenge pays for its own ads. Profit comes from the backend calls.",
+          "vals": [
+            0.4961479111,
+            0.7829509613,
+            0.8150437298,
+            0.8150437298,
+            0.2767330214
+          ]
+        },
+        "calls": {
+          "label": "Calls booked",
+          "unit": "",
+          "sum": true,
+          "lower": false,
+          "vals": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "cash": {
+          "label": "Cash collected (backend)",
+          "unit": "$",
+          "sum": true,
+          "lower": false,
+          "vals": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "allPurch": {
+          "label": "All purchases (GHL, incl. organic)",
+          "unit": "",
+          "sum": true,
+          "lower": false,
+          "vals": [
+            21.0,
+            42.0,
+            53.0,
+            53.0,
+            12.0
+          ]
+        },
+        "allRev": {
+          "label": "All revenue (GHL, incl. organic)",
+          "unit": "$",
+          "sum": true,
+          "lower": false,
+          "vals": [
+            2669.0,
+            6729.0,
+            8350.0,
+            8350.0,
+            1348.0
+          ]
+        }
+      },
+      "funnel": [
+        "cpm",
+        "ctr",
+        "cpa",
+        "roas",
+        "calls"
+      ],
+      "read": "This is where most Channel Junkies money goes and it needs attention. Cost per purchase jumped from $244 over 30 days to $654 month to date, so July's spend is buying half the customers June's did. The bigger problem is the backend: 32 purchases and 0 booked calls means the high-ticket step this funnel exists for is not happening. Kill the fatigued ads in the table below, and fix or instrument the purchase-to-call flow before scaling anything."
+    },
+    {
+      "id": "elysium",
+      "name": "Elysium Jet Academy",
+      "eyebrow": "Call funnel, CRM + Stripe/Whop truth",
+      "sheet_url": "https://docs.google.com/spreadsheets/d/1M5WUUwzqBtCue97W4CgK7Vs2sQmQOKf59LXFJ2Wk3nY",
+      "maturity_days": 14,
+      "lag_note": "Sales lag booked calls by up to 14 days. Short windows are judged on cost per booked call and show rate.",
+      "flag": null,
+      "primary": "roas",
+      "hero_options": [
+        "roas",
+        "costSale",
+        "costAppt",
+        "revenue",
+        "spend"
+      ],
+      "spark_metric": "revenue",
+      "spark_label": "True revenue per day",
+      "ads_kpi": {
+        "label": "Calls booked",
+        "target_key": "costAppt"
+      },
+      "metrics": {
+        "spend": {
+          "label": "Spend",
+          "unit": "$",
+          "sum": true,
+          "vals": [
+            2319.74,
+            5591.25,
+            10014.55,
+            21566.78,
+            1463.12
+          ]
+        },
+        "cpm": {
+          "label": "CPM",
+          "unit": "$",
+          "vals": [
+            35.33657288,
+            34.60681459,
+            32.9107705,
+            29.21136501,
+            34.42797308
+          ]
+        },
+        "ctr": {
+          "label": "CTR",
+          "unit": "%",
+          "lower": false,
+          "vals": [
+            4.201258245,
+            4.2348280879999995,
+            4.580767284,
+            4.864140777,
+            4.322556356
+          ]
+        },
+        "costApp": {
+          "label": "Cost per application",
+          "unit": "$",
+          "target": 20,
+          "bench": "House target. 30d average is under $14.",
+          "vals": [
+            16.56957143,
+            15.15243902,
+            14.92481371,
+            13.61539141,
+            15.08371134
+          ]
+        },
+        "costAppt": {
+          "label": "Cost per booked call",
+          "unit": "$",
+          "target": 40,
+          "bench": "$33 average appointment, $40-60 per qualified call is the industry target.",
+          "vals": [
+            32.67239437,
+            30.22297297,
+            30.814,
+            30.50463932,
+            27.09481481
+          ]
+        },
+        "showRate": {
+          "label": "Call show rate",
+          "unit": "%",
+          "lower": false,
+          "target": 50,
+          "bench": "70% is strong, 40-50% is industry default.",
+          "vals": [
+            43.66197183,
+            37.2972973,
+            45.53846154,
+            45.40311174,
+            31.48148148
+          ]
+        },
+        "sales": {
+          "label": "Sales",
+          "unit": "",
+          "sum": true,
+          "lower": false,
+          "vals": [
+            4.0,
+            9.0,
+            15.0,
+            22.0,
+            4.0
+          ]
+        },
+        "costSale": {
+          "label": "Cost per sale",
+          "unit": "$",
+          "target": 800,
+          "bench": "Close rate 10-25% of calls taken is the healthy band.",
+          "vals": [
+            579.935,
+            621.25,
+            667.6366667,
+            980.3081818,
+            365.78
+          ]
+        },
+        "revenue": {
+          "label": "True revenue",
+          "unit": "$",
+          "sum": true,
+          "lower": false,
+          "vals": [
+            14970.0,
+            24290.0,
+            48195.0,
+            82780.0,
+            12970.0
+          ]
+        },
+        "roas": {
+          "label": "True ROAS",
+          "unit": "x",
+          "lower": false,
+          "target": 3,
+          "bench": "House floor for scaling.",
+          "vals": [
+            6.453309423,
+            4.34428795,
+            4.812497816,
+            3.838310587,
+            8.864618076
+          ]
+        }
+      },
+      "funnel": [
+        "cpm",
+        "ctr",
+        "costApp",
+        "costAppt",
+        "showRate",
+        "costSale",
+        "roas"
+      ],
+      "read": "The winner. 6.45x true ROAS over 3 days, 3.84x over 30 on $21.6k spend. The scale rule allows about a 20% raise every 3-4 days while 7d ROAS holds above target. Fix the show-rate slide in parallel, every point of show rate is free revenue at this volume."
+    },
+    {
+      "id": "tsa",
+      "name": "True Success Academy",
+      "eyebrow": "Webinar, EverWebinar + GHL truth",
+      "sheet_url": "https://docs.google.com/spreadsheets/d/1PFwD4BjSxp2MjJBjJKdFkXJWzVjU_B273IUbED7Qss8",
+      "maturity_days": 7,
+      "lag_note": "Sales lag registrations by about 7 days. Short windows are judged on leads, stay-to-end, and booked calls.",
+      "flag": null,
+      "primary": "costCall",
+      "hero_options": [
+        "costCall",
+        "cpl",
+        "costStay",
+        "spend"
+      ],
+      "spark_metric": "leads",
+      "spark_label": "Webinar leads per day",
+      "ads_kpi": {
+        "label": "Stay-to-end",
+        "target_key": "costStay"
+      },
+      "metrics": {
+        "spend": {
+          "label": "Spend",
+          "unit": "$",
+          "sum": true,
+          "vals": [
+            1242.92,
+            2387.39,
+            3637.52,
+            5948.29,
+            788.37
+          ]
+        },
+        "cpm": {
+          "label": "CPM",
+          "unit": "$",
+          "vals": [
+            121.3907608,
+            121.7497068,
+            130.2976681,
+            128.3092819,
+            117.7198746
+          ]
+        },
+        "ctr": {
+          "label": "CTR",
+          "unit": "%",
+          "lower": false,
+          "vals": [
+            4.4144936029999995,
+            4.385741241,
+            4.842927249,
+            4.903039324,
+            4.345229207
+          ]
+        },
+        "leads": {
+          "label": "Leads",
+          "unit": "",
+          "sum": true,
+          "lower": false,
+          "vals": [
+            58.0,
+            93.0,
+            131.0,
+            198.0,
+            38.0
+          ]
+        },
+        "cpl": {
+          "label": "Cost per lead",
+          "unit": "$",
+          "target": 25,
+          "bench": "Webinar registrants average around $72. Under $30 is strong.",
+          "vals": [
+            21.42965517,
+            25.67086022,
+            27.76732824,
+            30.04186869,
+            20.74657895
+          ]
+        },
+        "showRate": {
+          "label": "Webinar show rate",
+          "unit": "%",
+          "lower": false,
+          "target": 50,
+          "bench": "35-45% typical, 50%+ is top tier.",
+          "vals": [
+            53.44827586,
+            54.838709679999994,
+            52.67175573,
+            56.06060606,
+            44.736842110000005
+          ]
+        },
+        "stayed": {
+          "label": "Stayed to end",
+          "unit": "",
+          "sum": true,
+          "lower": false,
+          "vals": [
+            21.0,
+            29.0,
+            36.0,
+            50.0,
+            10.0
+          ]
+        },
+        "costStay": {
+          "label": "Cost per stay-to-end",
+          "unit": "$",
+          "target": 80,
+          "bench": "House target until sales data exists.",
+          "vals": [
+            59.18666667,
+            82.3237931,
+            101.0422222,
+            118.9658,
+            78.837
+          ]
+        },
+        "costCall": {
+          "label": "Cost per booked call",
+          "unit": "$",
+          "target": 400,
+          "bench": "$40-60 per qualified call is the industry target. High-ticket webinar funnels run higher.",
+          "vals": [
+            621.46,
+            1193.695,
+            1212.506667,
+            1487.0725,
+            788.37
+          ]
+        },
+        "calls": {
+          "label": "Calls booked",
+          "unit": "",
+          "sum": true,
+          "lower": false,
+          "vals": [
+            2.0,
+            2.0,
+            3.0,
+            4.0,
+            1.0
+          ]
+        },
+        "sales": {
+          "label": "Sales",
+          "unit": "",
+          "sum": true,
+          "lower": false,
+          "vals": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "funnel": [
+        "cpm",
+        "ctr",
+        "cpl",
+        "showRate",
+        "costStay",
+        "costCall",
+        "sales"
+      ],
+      "read": "Front of funnel improved a lot this week: CPL near $20 and stay-to-end 68% over 3 days. But lifetime it is $6,289 spent, 4 calls, 0 sales. The webinar-to-call step is the bottleneck. Do not scale spend until that converts, better ads just burn faster."
+    },
+    {
+      "id": "grader",
+      "name": "CJ Grader",
+      "eyebrow": "Lead gen, GHL truth",
+      "sheet_url": "https://docs.google.com/spreadsheets/d/1wf_Ow5IFhSxOa1_EqXpeJuzT-RItA352xs9iE9gWh_s",
+      "maturity_days": 3,
+      "lag_note": "Purchases lag leads by about 3 days. Short windows are judged on cost per lead.",
+      "flag": "No true purchase column is flowing on this tab, so Grader can only be judged on leads for now.",
+      "primary": "cpl",
+      "hero_options": [
+        "cpl",
+        "spend",
+        "leads"
+      ],
+      "spark_metric": "leads",
+      "spark_label": "Leads per day",
+      "ads_kpi": {
+        "label": "Leads",
+        "target_key": "cpl"
+      },
+      "metrics": {
+        "spend": {
+          "label": "Spend",
+          "unit": "$",
+          "sum": true,
+          "vals": [
+            609.75,
+            1454.92,
+            2452.31,
+            5257.92,
+            407.05
+          ]
+        },
+        "cpm": {
+          "label": "CPM",
+          "unit": "$",
+          "vals": [
+            77.26178409,
+            73.95516698,
+            75.42088267,
+            68.57232286,
+            76.16953593
+          ]
+        },
+        "ctr": {
+          "label": "CTR",
+          "unit": "%",
+          "lower": false,
+          "vals": [
+            2.394830208,
+            2.231484776,
+            2.186683069,
+            2.374897296,
+            2.50748503
+          ]
+        },
+        "cpc": {
+          "label": "CPC",
+          "unit": "$",
+          "vals": [
+            3.226190476,
+            3.314168565,
+            3.449099859,
+            2.88738056,
+            3.037686567
+          ]
+        },
+        "leads": {
+          "label": "Leads",
+          "unit": "",
+          "sum": true,
+          "lower": false,
+          "vals": [
+            4.0,
+            11.0,
+            22.0,
+            64.0,
+            3.0
+          ]
+        },
+        "cpl": {
+          "label": "Cost per lead",
+          "unit": "$",
+          "target": 100,
+          "bench": "Industry lead-form CPL runs $27-38. High-ticket runs higher.",
+          "vals": [
+            152.4375,
+            132.2654545,
+            111.4686364,
+            82.155,
+            135.6833333
+          ]
+        },
+        "revMeta": {
+          "label": "Revenue (Meta says)",
+          "unit": "$",
+          "sum": true,
+          "lower": false,
+          "metaTag": true,
+          "vals": [
+            0.0,
+            0.0,
+            690.82,
+            690.82,
+            0.0
+          ]
+        }
+      },
+      "funnel": [
+        "cpm",
+        "ctr",
+        "cpc",
+        "cpl"
+      ],
+      "read": "CPL roughly doubled in the last week and lead volume fell to about 1 a day since Jun 28. Likely creative fatigue or a losing new batch. Kill the dead ads in the table below and refresh creative."
+    }
+  ],
+  "daily": {
+    "challenge": {
+      "spend": [
+        177.2,
+        169.72,
+        89.14,
+        116.38,
+        195.32,
+        156.56,
+        331.28,
+        539.03,
+        725.24,
+        856.9499999999999,
+        958.44,
+        876.67,
+        1057.97,
+        1558.27
+      ],
+      "purchases": [
+        0,
+        2.0,
+        1.0,
+        2.0,
+        0,
+        0,
+        1.0,
+        2.0,
+        7.0,
+        3.0,
+        4.0,
+        6.0,
+        1.0,
+        3.0
+      ],
+      "dates": [
+        "6/19",
+        "6/20",
+        "6/21",
+        "6/22",
+        "6/23",
+        "6/24",
+        "6/25",
+        "6/26",
+        "6/27",
+        "6/28",
+        "6/29",
+        "6/30",
+        "7/1",
+        "7/2"
+      ]
+    },
+    "elysium": {
+      "spend": [
+        318.86,
+        467.79,
+        422.47,
+        549.82,
+        620.4,
+        621.78,
+        794.82,
+        944.84,
+        895.56,
+        888.9,
+        749.51,
+        732.05,
+        640.19,
+        681.92,
+        1317.31,
+        906.01,
+        393.64,
+        192.85,
+        874.38,
+        853.71,
+        660.88,
+        705.09,
+        742.75,
+        763.67,
+        753.04,
+        946.44,
+        808.36,
+        856.62,
+        768.68,
+        694.44
+      ],
+      "revenue": [
+        3990.0,
+        0,
+        7315.0,
+        0,
+        0,
+        3990.0,
+        0,
+        0,
+        0,
+        12970.0,
+        1000.0,
+        0,
+        1330.0,
+        0,
+        3990.0,
+        0,
+        0,
+        2000.0,
+        0,
+        4445.0,
+        7980.0,
+        8980.0,
+        500.0,
+        1000.0,
+        2000.0,
+        1330.0,
+        4990.0,
+        2000.0,
+        7980.0,
+        4990.0
+      ],
+      "sales": [
+        0,
+        1.0,
+        1.0,
+        0,
+        0,
+        1.0,
+        1.0,
+        0,
+        0,
+        2.0,
+        0,
+        0,
+        0,
+        0,
+        1.0,
+        0,
+        0,
+        1.0,
+        0,
+        2.0,
+        1.0,
+        2.0,
+        0,
+        1.0,
+        1.0,
+        0,
+        3.0,
+        0,
+        4.0,
+        0
+      ],
+      "dates": [
+        "6/3",
+        "6/4",
+        "6/5",
+        "6/6",
+        "6/7",
+        "6/8",
+        "6/9",
+        "6/10",
+        "6/11",
+        "6/12",
+        "6/13",
+        "6/14",
+        "6/15",
+        "6/16",
+        "6/17",
+        "6/18",
+        "6/19",
+        "6/20",
+        "6/21",
+        "6/22",
+        "6/23",
+        "6/24",
+        "6/25",
+        "6/26",
+        "6/27",
+        "6/28",
+        "6/29",
+        "6/30",
+        "7/1",
+        "7/2"
+      ]
+    },
+    "tsa": {
+      "spend": [
+        97.06,
+        108.64,
+        87.13,
+        78.72,
+        126.73,
+        135.02,
+        152.26,
+        173.47,
+        138.59,
+        130.32,
+        105.47,
+        206.15,
+        209.53,
+        171.79,
+        165.17,
+        224.72,
+        191.05,
+        143.08,
+        272.24,
+        266.42,
+        251.31,
+        80.8,
+        45.23,
+        339.95,
+        232.97,
+        325.15,
+        246.4,
+        454.55,
+        453.44,
+        334.93
+      ],
+      "leads": [
+        1.0,
+        4.0,
+        4.0,
+        0,
+        2.0,
+        1.0,
+        4.0,
+        3.0,
+        3.0,
+        6.0,
+        5.0,
+        8.0,
+        6.0,
+        7.0,
+        4.0,
+        9.0,
+        9.0,
+        7.0,
+        8.0,
+        5.0,
+        6.0,
+        2.0,
+        1.0,
+        7.0,
+        10.0,
+        13.0,
+        5.0,
+        20.0,
+        21.0,
+        17.0
+      ],
+      "dates": [
+        "6/3",
+        "6/4",
+        "6/5",
+        "6/6",
+        "6/7",
+        "6/8",
+        "6/9",
+        "6/10",
+        "6/11",
+        "6/12",
+        "6/13",
+        "6/14",
+        "6/15",
+        "6/16",
+        "6/17",
+        "6/18",
+        "6/19",
+        "6/20",
+        "6/21",
+        "6/22",
+        "6/23",
+        "6/24",
+        "6/25",
+        "6/26",
+        "6/27",
+        "6/28",
+        "6/29",
+        "6/30",
+        "7/1",
+        "7/2"
+      ]
+    },
+    "grader": {
+      "spend": [
+        183.29,
+        62.09,
+        70.43,
+        161.08,
+        219.46,
+        185.67,
+        268.83,
+        223.35,
+        146.05,
+        155.3,
+        141.75,
+        208.31,
+        170.87,
+        183.68,
+        168.86,
+        256.59,
+        182.64,
+        161.83,
+        155.53,
+        110.57,
+        98.22,
+        115.76,
+        172.84,
+        168.79000000000002,
+        251.71,
+        218.10000000000002,
+        206.57,
+        202.7,
+        200.38,
+        206.67
+      ],
+      "leads": [
+        0,
+        2.0,
+        0,
+        2.0,
+        5.0,
+        4.0,
+        5.0,
+        5.0,
+        2.0,
+        2.0,
+        4.0,
+        6.0,
+        2.0,
+        3.0,
+        0,
+        0,
+        1.0,
+        3.0,
+        1.0,
+        0,
+        0,
+        2.0,
+        4.0,
+        1.0,
+        5.0,
+        0,
+        1.0,
+        1.0,
+        1.0,
+        2.0
+      ],
+      "dates": [
+        "6/3",
+        "6/4",
+        "6/5",
+        "6/6",
+        "6/7",
+        "6/8",
+        "6/9",
+        "6/10",
+        "6/11",
+        "6/12",
+        "6/13",
+        "6/14",
+        "6/15",
+        "6/16",
+        "6/17",
+        "6/18",
+        "6/19",
+        "6/20",
+        "6/21",
+        "6/22",
+        "6/23",
+        "6/24",
+        "6/25",
+        "6/26",
+        "6/27",
+        "6/28",
+        "6/29",
+        "6/30",
+        "7/1",
+        "7/2"
+      ]
+    },
+    "dates": [
+      "6/3",
+      "6/4",
+      "6/5",
+      "6/6",
+      "6/7",
+      "6/8",
+      "6/9",
+      "6/10",
+      "6/11",
+      "6/12",
+      "6/13",
+      "6/14",
+      "6/15",
+      "6/16",
+      "6/17",
+      "6/18",
+      "6/19",
+      "6/20",
+      "6/21",
+      "6/22",
+      "6/23",
+      "6/24",
+      "6/25",
+      "6/26",
+      "6/27",
+      "6/28",
+      "6/29",
+      "6/30",
+      "7/1",
+      "7/2"
+    ]
+  },
+  "ads": {
+    "challenge": [
+      {
+        "name": "Batch134.v1",
+        "active": true,
+        "spend": {
+          "3d": 1117.56,
+          "7d": 1442.13,
+          "30d": 1442.13
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 2.0,
+          "30d": 2.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": 721.07,
+          "30d": 721.07
+        }
+      },
+      {
+        "name": "Batch108.v4",
+        "active": true,
+        "spend": {
+          "3d": 706.11,
+          "7d": 1197.53,
+          "30d": 1552.68
+        },
+        "kpi": {
+          "3d": 5.0,
+          "7d": 8.0,
+          "30d": 12.0
+        },
+        "cpa": {
+          "3d": 141.22,
+          "7d": 149.69,
+          "30d": 129.39
+        }
+      },
+      {
+        "name": "Batch101.v3",
+        "active": true,
+        "spend": {
+          "3d": 154.16,
+          "7d": 710.61,
+          "30d": 763.93
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 1.0,
+          "30d": 1.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": 710.61,
+          "30d": 763.93
+        }
+      },
+      {
+        "name": "Batch102.v5",
+        "active": true,
+        "spend": {
+          "3d": 220.87,
+          "7d": 663.27,
+          "30d": 779.16
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 2.0,
+          "30d": 2.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": 331.64,
+          "30d": 389.58
+        }
+      },
+      {
+        "name": "Batch135.v3",
+        "active": true,
+        "spend": {
+          "3d": 259.97,
+          "7d": 623.99,
+          "30d": 623.99
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch133.v3",
+        "active": true,
+        "spend": {
+          "3d": 145.26,
+          "7d": 500.87,
+          "30d": 519.23
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch122.v2",
+        "active": true,
+        "spend": {
+          "3d": 238.02,
+          "7d": 488.71,
+          "30d": 488.71
+        },
+        "kpi": {
+          "3d": 1.0,
+          "7d": 2.0,
+          "30d": 2.0
+        },
+        "cpa": {
+          "3d": 238.02,
+          "7d": 244.36,
+          "30d": 244.36
+        }
+      },
+      {
+        "name": "Batch136.v3",
+        "active": true,
+        "spend": {
+          "3d": 187.75,
+          "7d": 187.75,
+          "30d": 187.75
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch133.v2",
+        "active": true,
+        "spend": {
+          "3d": 45.83,
+          "7d": 96.56,
+          "30d": 111.7
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch136.v2",
+        "active": true,
+        "spend": {
+          "3d": 84.41,
+          "7d": 84.41,
+          "30d": 84.41
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch136.v4",
+        "active": true,
+        "spend": {
+          "3d": 72.62,
+          "7d": 72.62,
+          "30d": 72.62
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch133.v4",
+        "active": true,
+        "spend": {
+          "3d": 37.41,
+          "7d": 72.56,
+          "30d": 94.04
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch133.v1",
+        "active": true,
+        "spend": {
+          "3d": 43.77,
+          "7d": 65.74,
+          "30d": 103.35
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch122.v1.v1",
+        "active": true,
+        "spend": {
+          "3d": 23.74,
+          "7d": 43.81,
+          "30d": 43.81
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch135.v2",
+        "active": true,
+        "spend": {
+          "3d": 20.66,
+          "7d": 43.8,
+          "30d": 52.96
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch122.v1.v2",
+        "active": true,
+        "spend": {
+          "3d": 7.65,
+          "7d": 36.02,
+          "30d": 36.02
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch122.v3",
+        "active": true,
+        "spend": {
+          "3d": 11.61,
+          "7d": 35.06,
+          "30d": 35.06
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch136.v1",
+        "active": true,
+        "spend": {
+          "3d": 30.89,
+          "7d": 30.89,
+          "30d": 30.89
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch135.v1",
+        "active": true,
+        "spend": {
+          "3d": 5.85,
+          "7d": 29.78,
+          "30d": 73.73
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 1.0,
+          "30d": 1.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": 29.78,
+          "30d": 73.73
+        }
+      },
+      {
+        "name": "Batch101.v4",
+        "active": true,
+        "spend": {
+          "3d": 6.1,
+          "7d": 27.78,
+          "30d": 50.75
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch108.v3",
+        "active": true,
+        "spend": {
+          "3d": 8.67,
+          "7d": 19.81,
+          "30d": 45.17
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch101.v1",
+        "active": true,
+        "spend": {
+          "3d": 6.67,
+          "7d": 19.72,
+          "30d": 34.39
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 1.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 34.39
+        }
+      },
+      {
+        "name": "Batch102.v3",
+        "active": true,
+        "spend": {
+          "3d": 16.11,
+          "7d": 18.18,
+          "30d": 26.15
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch102.v4",
+        "active": true,
+        "spend": {
+          "3d": 11.18,
+          "7d": 16.01,
+          "30d": 35.34
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch102.v1",
+        "active": true,
+        "spend": {
+          "3d": 10.04,
+          "7d": 14.0,
+          "30d": 19.48
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch108.v6",
+        "active": true,
+        "spend": {
+          "3d": 11.76,
+          "7d": 12.04,
+          "30d": 50.56
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch102.v2",
+        "active": true,
+        "spend": {
+          "3d": 6.63,
+          "7d": 9.36,
+          "30d": 42.07
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch101.v2",
+        "active": true,
+        "spend": {
+          "3d": 0.75,
+          "7d": 7.62,
+          "30d": 187.84
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch108.v5",
+        "active": true,
+        "spend": {
+          "3d": 1.05,
+          "7d": 1.79,
+          "30d": 6.54
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch108.v1",
+        "active": true,
+        "spend": {
+          "3d": 0.23,
+          "7d": 0.83,
+          "30d": 5.8
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch108.v2",
+        "active": true,
+        "spend": {
+          "3d": 0.13,
+          "7d": 0.55,
+          "30d": 6.62
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch101.v5",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": 0.22,
+          "30d": 5.88
+        },
+        "kpi": {
+          "3d": null,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch113.v2",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 39.2
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch113.v1",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 24.6
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch113.v3",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 22.44
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch131.v4",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 18.62
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch131.v1",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 16.62
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch131.v5",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 16.27
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch117.v5",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 10.87
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch113.v4",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 9.41
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch114.v1",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 7.67
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch131.v2",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 7.28
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch117.v4",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 6.61
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch117.v3",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 6.51
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch114.v2",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 5.01
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch131.v3",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 2.75
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch114.v3",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 2.14
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      }
+    ],
+    "elysium": [
+      {
+        "name": "B104.V2",
+        "active": true,
+        "spend": {
+          "3d": 509.21,
+          "7d": 1577.58,
+          "30d": 3337.28
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 3.0,
+          "30d": 22.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": 525.86,
+          "30d": 151.69
+        }
+      },
+      {
+        "name": "B108.V1",
+        "active": true,
+        "spend": {
+          "3d": 100.05,
+          "7d": 739.67,
+          "30d": 1753.42
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "B107.V1",
+        "active": true,
+        "spend": {
+          "3d": 435.88,
+          "7d": 581.57,
+          "30d": 716.49
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 6.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 119.42
+        }
+      },
+      {
+        "name": "B104.V7",
+        "active": true,
+        "spend": {
+          "3d": 112.56,
+          "7d": 373.91,
+          "30d": 859.81
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "tst01.05.19.2026_Carousel_simple",
+        "active": true,
+        "spend": {
+          "3d": 91.11,
+          "7d": 300.86,
+          "30d": 561.62
+        },
+        "kpi": {
+          "3d": 3.0,
+          "7d": 8.0,
+          "30d": 21.0
+        },
+        "cpa": {
+          "3d": 30.37,
+          "7d": 37.61,
+          "30d": 26.74
+        }
+      },
+      {
+        "name": "$static 1 - C02 (Short form)",
+        "active": true,
+        "spend": {
+          "3d": 86.22,
+          "7d": 265.28,
+          "30d": 482.46
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "static 1 - Copy",
+        "active": true,
+        "spend": {
+          "3d": 71.15,
+          "7d": 258.13,
+          "30d": 840.93
+        },
+        "kpi": {
+          "3d": 6.0,
+          "7d": 16.0,
+          "30d": 36.0
+        },
+        "cpa": {
+          "3d": 11.86,
+          "7d": 16.13,
+          "30d": 23.36
+        }
+      },
+      {
+        "name": "Batch104.v5",
+        "active": true,
+        "spend": {
+          "3d": 165.51,
+          "7d": 165.51,
+          "30d": 165.51
+        },
+        "kpi": {
+          "3d": 3.0,
+          "7d": 3.0,
+          "30d": 3.0
+        },
+        "cpa": {
+          "3d": 55.17,
+          "7d": 55.17,
+          "30d": 55.17
+        }
+      },
+      {
+        "name": "Batch104.v1.v2",
+        "active": true,
+        "spend": {
+          "3d": 159.57,
+          "7d": 159.57,
+          "30d": 159.57
+        },
+        "kpi": {
+          "3d": 7.0,
+          "7d": 7.0,
+          "30d": 7.0
+        },
+        "cpa": {
+          "3d": 22.8,
+          "7d": 22.8,
+          "30d": 22.8
+        }
+      },
+      {
+        "name": "Batch104.v2",
+        "active": true,
+        "spend": {
+          "3d": 146.96,
+          "7d": 146.96,
+          "30d": 146.96
+        },
+        "kpi": {
+          "3d": 1.0,
+          "7d": 1.0,
+          "30d": 1.0
+        },
+        "cpa": {
+          "3d": 146.96,
+          "7d": 146.96,
+          "30d": 146.96
+        }
+      },
+      {
+        "name": "B108.V2",
+        "active": true,
+        "spend": {
+          "3d": 96.8,
+          "7d": 114.2,
+          "30d": 329.57
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch105.v1",
+        "active": true,
+        "spend": {
+          "3d": 94.3,
+          "7d": 94.3,
+          "30d": 94.3
+        },
+        "kpi": {
+          "3d": 1.0,
+          "7d": 1.0,
+          "30d": 1.0
+        },
+        "cpa": {
+          "3d": 94.3,
+          "7d": 94.3,
+          "30d": 94.3
+        }
+      },
+      {
+        "name": "B108.V3",
+        "active": true,
+        "spend": {
+          "3d": 26.01,
+          "7d": 70.47,
+          "30d": 397.4
+        },
+        "kpi": {
+          "3d": 1.0,
+          "7d": 1.0,
+          "30d": 10.0
+        },
+        "cpa": {
+          "3d": 26.01,
+          "7d": 70.47,
+          "30d": 39.74
+        }
+      },
+      {
+        "name": "static meme 4 - Copy",
+        "active": true,
+        "spend": {
+          "3d": 40.21,
+          "7d": 65.74,
+          "30d": 100.07
+        },
+        "kpi": {
+          "3d": 2.0,
+          "7d": 2.0,
+          "30d": 5.0
+        },
+        "cpa": {
+          "3d": 20.11,
+          "7d": 32.87,
+          "30d": 20.01
+        }
+      },
+      {
+        "name": "Batch105.v3",
+        "active": true,
+        "spend": {
+          "3d": 58.24,
+          "7d": 58.24,
+          "30d": 58.24
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "static 1 - C01 (longform)",
+        "active": true,
+        "spend": {
+          "3d": 7.95,
+          "7d": 47.39,
+          "30d": 81.12
+        },
+        "kpi": {
+          "3d": 2.0,
+          "7d": 3.0,
+          "30d": 5.0
+        },
+        "cpa": {
+          "3d": 3.98,
+          "7d": 15.8,
+          "30d": 16.22
+        }
+      },
+      {
+        "name": "Batch104.v3.v1",
+        "active": true,
+        "spend": {
+          "3d": 39.06,
+          "7d": 39.06,
+          "30d": 39.06
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "tst06.05.19.2026_FBPost - Copy 2",
+        "active": true,
+        "spend": {
+          "3d": 1.27,
+          "7d": 38.04,
+          "30d": 1050.62
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 2.0,
+          "30d": 34.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": 19.02,
+          "30d": 30.9
+        }
+      },
+      {
+        "name": "Batch104.v3.v6",
+        "active": true,
+        "spend": {
+          "3d": 30.61,
+          "7d": 30.61,
+          "30d": 30.61
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "tst02.05.19.2026_Talking_from_plane - 122201424512560336 - Copy",
+        "active": true,
+        "spend": {
+          "3d": 2.14,
+          "7d": 25.79,
+          "30d": 162.69
+        },
+        "kpi": {
+          "3d": 1.0,
+          "7d": 1.0,
+          "30d": 4.0
+        },
+        "cpa": {
+          "3d": 2.14,
+          "7d": 25.79,
+          "30d": 40.67
+        }
+      },
+      {
+        "name": "Batch104.v3.v5",
+        "active": true,
+        "spend": {
+          "3d": 17.26,
+          "7d": 17.26,
+          "30d": 17.26
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch105.v2",
+        "active": true,
+        "spend": {
+          "3d": 14.31,
+          "7d": 14.31,
+          "30d": 14.31
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "tst01.05.15.2026 - Dude in hoodie - 122201424536560336 - Copy",
+        "active": true,
+        "spend": {
+          "3d": 0.37,
+          "7d": 7.41,
+          "30d": 148.54
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 2.0,
+          "30d": 5.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": 3.71,
+          "30d": 29.71
+        }
+      },
+      {
+        "name": "Batch104.v3.v2",
+        "active": true,
+        "spend": {
+          "3d": 6.56,
+          "7d": 6.56,
+          "30d": 6.56
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "$tst02.05.19.2026_Talking_from_plane",
+        "active": true,
+        "spend": {
+          "3d": 1.54,
+          "7d": 4.3,
+          "30d": 34.57
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch104.v3.v3",
+        "active": true,
+        "spend": {
+          "3d": 3.0,
+          "7d": 3.0,
+          "30d": 3.0
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "B108.V4",
+        "active": true,
+        "spend": {
+          "3d": 0.57,
+          "7d": 1.22,
+          "30d": 12.68
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "B104.V5",
+        "active": true,
+        "spend": {
+          "3d": 0.35,
+          "7d": 0.61,
+          "30d": 3.12
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "B104.V6",
+        "active": true,
+        "spend": {
+          "3d": 0.21,
+          "7d": 0.29,
+          "30d": 10.69
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "tst01.05.19.2026_Carousel_simple - 122201424428560336",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": 145.23,
+          "30d": 1521.85
+        },
+        "kpi": {
+          "3d": null,
+          "7d": 0.0,
+          "30d": 40.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 38.05
+        }
+      },
+      {
+        "name": "static 1",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": 95.69,
+          "30d": 5108.86
+        },
+        "kpi": {
+          "3d": 18.0,
+          "7d": 40.0,
+          "30d": 251.0
+        },
+        "cpa": {
+          "3d": 0.0,
+          "7d": 2.39,
+          "30d": 20.35
+        }
+      },
+      {
+        "name": "static meme 4",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": 95.54,
+          "30d": 151.85
+        },
+        "kpi": {
+          "3d": 3.0,
+          "7d": 3.0,
+          "30d": 5.0
+        },
+        "cpa": {
+          "3d": 0.0,
+          "7d": 31.85,
+          "30d": 30.37
+        }
+      },
+      {
+        "name": "tst02.05.19.2026_Talking_from_plane - 122201424512560336",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": 38.66,
+          "30d": 318.44
+        },
+        "kpi": {
+          "3d": null,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "tst01 - StaticStyle - 120243728491940618 - Copy",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": 5.94,
+          "30d": 14.4
+        },
+        "kpi": {
+          "3d": null,
+          "7d": 0.0,
+          "30d": 1.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 14.4
+        }
+      },
+      {
+        "name": "B104.V4",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": 0.99,
+          "30d": 17.79
+        },
+        "kpi": {
+          "3d": null,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "tst11 - StaticStyle - 122202286154560336 - Copy",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": 0.92,
+          "30d": 15.95
+        },
+        "kpi": {
+          "3d": null,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "B104.V3",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": 0.14,
+          "30d": 2.12
+        },
+        "kpi": {
+          "3d": null,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "tst06.05.19.2026_FBPost - Copy",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 1403.97
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 57.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 24.63
+        }
+      },
+      {
+        "name": "4reasons.Carousel.8",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 448.42
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 13.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 34.49
+        }
+      },
+      {
+        "name": "tst02 - StaticStyle",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 224.94
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 6.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 37.49
+        }
+      },
+      {
+        "name": "tst07 - StaticStyle",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 198.49
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 5.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 39.7
+        }
+      },
+      {
+        "name": "tst11 - StaticStyle",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 164.34
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 5.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 32.87
+        }
+      },
+      {
+        "name": "B106.V1",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 114.98
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "tst04 - StaticStyle",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 109.37
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "tst02.05.15.2026 - Fast talking",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 37.85
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "tst01 - StaticStyle",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 21.19
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 1.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 21.19
+        }
+      },
+      {
+        "name": "tst09 - StaticStyle",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 20.22
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "tst01.05.15.2026 - Dude in hoodie - 122201424536560336",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 13.49
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "tst12 - StaticStyle",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 12.94
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "tst10 - StaticStyle",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 8.87
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "B104.V1",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 7.15
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "tst05 - StaticStyle",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 2.53
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "tst03 - StaticStyle",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 1.95
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "tst06 - StaticStyle",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 1.92
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "B105.V2",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 1.88
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "B106.V3",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 1.08
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      }
+    ],
+    "tsa": [
+      {
+        "name": "Carousel.1",
+        "active": true,
+        "spend": {
+          "3d": 196.06,
+          "7d": 757.18,
+          "30d": 1487.76
+        },
+        "kpi": {
+          "3d": 2.0,
+          "7d": 7.0,
+          "30d": 10.0
+        },
+        "cpa": {
+          "3d": 98.03,
+          "7d": 108.17,
+          "30d": 148.78
+        }
+      },
+      {
+        "name": "Batch105.v2.v1",
+        "active": true,
+        "spend": {
+          "3d": 483.09,
+          "7d": 483.09,
+          "30d": 483.09
+        },
+        "kpi": {
+          "3d": 13.0,
+          "7d": 13.0,
+          "30d": 13.0
+        },
+        "cpa": {
+          "3d": 37.16,
+          "7d": 37.16,
+          "30d": 37.16
+        }
+      },
+      {
+        "name": "AD08",
+        "active": true,
+        "spend": {
+          "3d": 55.45,
+          "7d": 247.92,
+          "30d": 802.66
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 1.0,
+          "30d": 2.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": 247.92,
+          "30d": 401.33
+        }
+      },
+      {
+        "name": "Batch105.v2.v3",
+        "active": true,
+        "spend": {
+          "3d": 143.24,
+          "7d": 143.24,
+          "30d": 143.24
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch104.v2",
+        "active": true,
+        "spend": {
+          "3d": 122.16,
+          "7d": 122.16,
+          "30d": 122.16
+        },
+        "kpi": {
+          "3d": 2.0,
+          "7d": 2.0,
+          "30d": 2.0
+        },
+        "cpa": {
+          "3d": 61.08,
+          "7d": 61.08,
+          "30d": 61.08
+        }
+      },
+      {
+        "name": "Batch104.v8",
+        "active": true,
+        "spend": {
+          "3d": 114.77,
+          "7d": 114.77,
+          "30d": 114.77
+        },
+        "kpi": {
+          "3d": 2.0,
+          "7d": 2.0,
+          "30d": 2.0
+        },
+        "cpa": {
+          "3d": 57.39,
+          "7d": 57.39,
+          "30d": 57.39
+        }
+      },
+      {
+        "name": "Batch104.v7",
+        "active": true,
+        "spend": {
+          "3d": 29.56,
+          "7d": 29.56,
+          "30d": 29.56
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch104.v1",
+        "active": true,
+        "spend": {
+          "3d": 24.32,
+          "7d": 24.32,
+          "30d": 24.32
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch104.v5.v2(2)",
+        "active": true,
+        "spend": {
+          "3d": 23.69,
+          "7d": 23.69,
+          "30d": 23.69
+        },
+        "kpi": {
+          "3d": 1.0,
+          "7d": 1.0,
+          "30d": 1.0
+        },
+        "cpa": {
+          "3d": 23.69,
+          "7d": 23.69,
+          "30d": 23.69
+        }
+      },
+      {
+        "name": "Batch104.v6",
+        "active": true,
+        "spend": {
+          "3d": 21.78,
+          "7d": 21.78,
+          "30d": 21.78
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch104.v3",
+        "active": true,
+        "spend": {
+          "3d": 17.64,
+          "7d": 17.64,
+          "30d": 17.64
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch104.v5",
+        "active": true,
+        "spend": {
+          "3d": 6.52,
+          "7d": 6.52,
+          "30d": 6.52
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch104.v4",
+        "active": true,
+        "spend": {
+          "3d": 4.79,
+          "7d": 4.79,
+          "30d": 4.79
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Carousel.4",
+        "active": true,
+        "spend": {
+          "3d": 0.03,
+          "7d": 3.17,
+          "30d": 12.79
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Carousel.3",
+        "active": true,
+        "spend": {
+          "3d": 0.64,
+          "7d": 0.74,
+          "30d": 30.82
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Carousel.2",
+        "active": true,
+        "spend": {
+          "3d": 0.04,
+          "7d": 0.06,
+          "30d": 7.06
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "B103.V3",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": 270.02,
+          "30d": 297.65
+        },
+        "kpi": {
+          "3d": null,
+          "7d": 2.0,
+          "30d": 2.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": 135.01,
+          "30d": 148.83
+        }
+      },
+      {
+        "name": "B103.V2",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": 97.66,
+          "30d": 1008.17
+        },
+        "kpi": {
+          "3d": null,
+          "7d": 0.0,
+          "30d": 5.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 201.63
+        }
+      },
+      {
+        "name": "B103.V1",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": 16.23,
+          "30d": 21.4
+        },
+        "kpi": {
+          "3d": null,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "B103.V4",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": 3.79,
+          "30d": 54.68
+        },
+        "kpi": {
+          "3d": null,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Old WINNER - 819380664488109",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 916.69
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 7.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 130.96
+        }
+      },
+      {
+        "name": "StaticRam",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 287.05
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 2.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 143.53
+        }
+      },
+      {
+        "name": "This is for consultants making money...",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 14.07
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Nobody wants coaching",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 8.58
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Same system that generated $100k",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 6.72
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Meme",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 1.57
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      }
+    ],
+    "grader": [
+      {
+        "name": "Batch100.v2 | Jackson",
+        "active": true,
+        "spend": {
+          "3d": 283.77,
+          "7d": 825.77,
+          "30d": 2127.62
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 6.0,
+          "30d": 30.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": 137.63,
+          "30d": 70.92
+        }
+      },
+      {
+        "name": "Batch100.v5.v1 | Jackson",
+        "active": true,
+        "spend": {
+          "3d": 199.92,
+          "7d": 295.44,
+          "30d": 295.44
+        },
+        "kpi": {
+          "3d": 3.0,
+          "7d": 4.0,
+          "30d": 4.0
+        },
+        "cpa": {
+          "3d": 66.64,
+          "7d": 73.86,
+          "30d": 73.86
+        }
+      },
+      {
+        "name": "Batch100.v5.v2 | Jackson",
+        "active": true,
+        "spend": {
+          "3d": 108.64,
+          "7d": 121.54,
+          "30d": 121.54
+        },
+        "kpi": {
+          "3d": 1.0,
+          "7d": 1.0,
+          "30d": 1.0
+        },
+        "cpa": {
+          "3d": 108.64,
+          "7d": 121.54,
+          "30d": 121.54
+        }
+      },
+      {
+        "name": "$I04.05.29.26.Static.AlxMzi",
+        "active": true,
+        "spend": {
+          "3d": 3.4,
+          "7d": 17.78,
+          "30d": 167.43
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 2.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 83.71
+        }
+      },
+      {
+        "name": "$V03.05.26.26",
+        "active": true,
+        "spend": {
+          "3d": 6.37,
+          "7d": 8.5,
+          "30d": 39.42
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 1.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 39.42
+        }
+      },
+      {
+        "name": "$V02.05.26.26",
+        "active": true,
+        "spend": {
+          "3d": 4.58,
+          "7d": 4.82,
+          "30d": 36.5
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "$tst06.05.25.26-Static",
+        "active": true,
+        "spend": {
+          "3d": 0.63,
+          "7d": 3.73,
+          "30d": 45.57
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 1.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 45.57
+        }
+      },
+      {
+        "name": "Batch100.v4 | Jackson",
+        "active": true,
+        "spend": {
+          "3d": 1.18,
+          "7d": 1.77,
+          "30d": 339.29
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 10.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 33.93
+        }
+      },
+      {
+        "name": "Batch100.v1 | Jackson",
+        "active": true,
+        "spend": {
+          "3d": 1.31,
+          "7d": 1.66,
+          "30d": 140.45
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 3.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 46.82
+        }
+      },
+      {
+        "name": "Batch100.v3 | Jackson",
+        "active": true,
+        "spend": {
+          "3d": 0.02,
+          "7d": 0.52,
+          "30d": 11.95
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch100.v6 | Jackson",
+        "active": true,
+        "spend": {
+          "3d": 0.05,
+          "7d": 0.12,
+          "30d": 2.33
+        },
+        "kpi": {
+          "3d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch100.v5.v3 | Jackson",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": 174.23,
+          "30d": 174.23
+        },
+        "kpi": {
+          "3d": null,
+          "7d": 0.0,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch100.v4.3",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 498.26
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 5.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 99.65
+        }
+      },
+      {
+        "name": "Batch100.v4.5",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 297.35
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 1.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 297.35
+        }
+      },
+      {
+        "name": "StaticWriting",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 278.95
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 1.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 278.95
+        }
+      },
+      {
+        "name": "Batch97.v2",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 178.52
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 1.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 178.52
+        }
+      },
+      {
+        "name": "Batch100.v4.2",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 70.17
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 1.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 70.17
+        }
+      },
+      {
+        "name": "Batch101.v4",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 51.93
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 1.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 51.93
+        }
+      },
+      {
+        "name": "Batch101.v3",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 38.72
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch100.v4.4",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 30.94
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch97.v1",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 19.46
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "Batch101.v2",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 10.67
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "v01",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 9.27
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 1.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": 9.27
+        }
+      },
+      {
+        "name": "Batch101.v1",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 6.44
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      },
+      {
+        "name": "I01.05.29.26.Static.AlxMzi",
+        "active": false,
+        "spend": {
+          "3d": null,
+          "7d": null,
+          "30d": 5.87
+        },
+        "kpi": {
+          "3d": null,
+          "7d": null,
+          "30d": 0.0
+        },
+        "cpa": {
+          "3d": null,
+          "7d": null,
+          "30d": null
+        }
+      }
+    ]
+  }
+}
