@@ -1,8 +1,5 @@
 /* ACSA tracking - Meta pixel in the browser, mirrored to our server (Conversions API).
-   Served at /accelerator/site.js.
-   Loaded in <head> by /accelerator/, /accelerator/apply/, /accelerator/c/, /thank-you/, and /thank-you-b/.
-   The personal offer (/, /book/, /book/thank-you/) loads this same file so bookings hit the same pixel and
-   /collect endpoint. Those pages do not use the ACSA variant or the ACSA first-touch record.
+   Served at /accelerator/site.js and loaded in <head> by /accelerator/ and /accelerator/apply/.
 
    ==== THE TWO VALUES TO FILL ====
    PIXEL    = the Meta pixel / dataset id.
@@ -20,10 +17,7 @@ const ACSA = {
   /* Schedule is a standard Meta event. It has to be in this list or the browser pixel sends it with
      trackCustom, and Meta files the booking as a custom event instead of Schedule. */
   const STANDARD = ['PageView', 'ViewContent', 'Lead', 'Schedule'];
-  /* Personal pages share this file. Keep their first-touch record on its own key so a visit to / or /book/
-     cannot overwrite the Accelerator campaign that apply/ and /thank-you/ read back. */
-  const onAcsa = /^\/(accelerator|thank-you|thank-you-b)(\/|$)/.test(location.pathname);
-  const FT_KEY = onAcsa ? 'acsa-first-touch' : 'qg-first-touch';
+  const FT_KEY = 'acsa-first-touch';
   const FT_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid',
     'ad_id', 'adset_id', 'campaign_id', 'placement', 'site'];
   const DAY = 86400;
@@ -126,10 +120,8 @@ const ACSA = {
      "c" = the /accelerator/c/ page, added 10.09.2026 for the B vs C split).
      The landing page picks it in <head> and sets <html data-variant>. The apply and thank-you pages read it back:
      the apply link's v=, then this tab's forced preview (?v=), then this browser's saved pick. No pick, no tag.
-     Every Accelerator event (pixel custom data AND the server copy's custom_data) carries it as "variant".
-     Personal-offer pages are not in the split, so they never send variant. ---- */
+     Every event (pixel custom data AND the server copy's custom_data) carries it as "variant". ---- */
   const VARIANT = (() => {
-    if (!onAcsa) return '';
     const ok = (x) => { x = String(x || '').toLowerCase(); return x === 'a' || x === 'b' || x === 'c' ? x : ''; };
     let v = '';
     try { v = ok(document.documentElement.getAttribute('data-variant')); } catch (e) {}

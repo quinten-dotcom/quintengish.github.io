@@ -25,7 +25,7 @@
   window.acsaBooking = { id: g('invitee_uuid'), start: g('event_start_time') };
   if (g('invitee_email') || fn) window.acsaUser = { em: g('invitee_email'), fn, ln, ph: phone };
   if (location.search) { try { history.replaceState(null, '', location.pathname); } catch (e) {} }
-  document.write('<script src="/accelerator/site.js"><\/script>');
+  document.write('<script src="/book/site.js"><\/script>');
 })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
