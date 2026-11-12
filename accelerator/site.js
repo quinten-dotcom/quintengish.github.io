@@ -14,7 +14,9 @@ const ACSA = {
   /* B vs C split (10.09.2026): /accelerator/ sets window.acsaRedirect in <head> when this visitor is on "c" and is
      being sent to /accelerator/c/. That page load must not track anything (C tracks its own PageView). */
   if (window.acsaRedirect) return;
-  const STANDARD = ['PageView', 'ViewContent', 'Lead'];
+  /* Schedule is a standard Meta event. It has to be in this list or the browser pixel sends it with
+     trackCustom, and Meta files the booking as a custom event instead of Schedule. */
+  const STANDARD = ['PageView', 'ViewContent', 'Lead', 'Schedule'];
   const FT_KEY = 'acsa-first-touch';
   const FT_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid',
     'ad_id', 'adset_id', 'campaign_id', 'placement', 'site'];
