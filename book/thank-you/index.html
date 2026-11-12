@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>You're booked | Quinten Gish</title>
+<script>
+/* Calendly sends the booker here with their details in the URL (same fields as /thank-you/).
+   Read them, then wipe the URL BEFORE the pixel loads, so no email or name ever ends up in a page
+   address sent to Meta. An inline embed lands inside the widget iframe; hand that off to the top
+   window first so this page is the one that loads the pixel, once. */
+(() => {
+  try {
+    if (window.top !== window.self) {
+      window.top.location.replace(location.href);
+      return;
+    }
+  } catch (e) {}
+  const q = new URLSearchParams(location.search);
+  const g = (k) => (q.get(k) || '').trim();
+  let fn = g('invitee_first_name'), ln = g('invitee_last_name');
+  if (!fn && !ln && g('invitee_full_name')) { const p = g('invitee_full_name').split(/\s+/); fn = p.shift() || ''; ln = p.join(' '); }
+  const phone = [g('text_reminder_number'), g('answer_1'), g('answer_2')].find((v) => v.replace(/\D/g, '').length >= 10) || '';
+  window.acsaBooking = { id: g('invitee_uuid'), start: g('event_start_time') };
+  if (g('invitee_email') || fn) window.acsaUser = { em: g('invitee_email'), fn, ln, ph: phone };
+  if (location.search) { try { history.replaceState(null, '', location.pathname); } catch (e) {} }
+  document.write('<script src="/accelerator/site.js"><\/script>');
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;background:#fff;color:#2f2f2f;font-family:"Raleway",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  body{display:flex;flex-direction:column;min-height:100vh}
+  .topbar{background:#211b17;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:22px 28px;font-weight:500;letter-spacing:.02em}
+  .topbar a{color:#fff;text-decoration:none}
+  .topbar .back{font-size:14px;opacity:.8}.topbar .back:hover{opacity:1}
+  main{flex:1;width:100%;max-width:720px;margin:0 auto;padding:clamp(36px,6vw,72px) 22px 64px}
+  .eyebrow{margin:0;color:#17af84;font-weight:800;text-transform:uppercase;font-size:15px;letter-spacing:.06em}
+  h1{margin:12px 0 0;font-weight:800;font-size:clamp(28px,4vw,42px);line-height:1.15;text-transform:uppercase}
+  #when{margin:22px 0 0;font-weight:700;font-size:18px;line-height:1.4}
+  #when[hidden]{display:none}
+  .note{margin:18px 0 0;font-weight:500;font-size:17px;line-height:1.55}
+  .btn{display:inline-flex;align-items:center;justify-content:center;margin-top:28px;min-height:54px;padding:13px 35px;border-radius:15px;background:#17af84;color:#fff;font-weight:700;font-size:18px;text-decoration:none}
+  .btn:hover{background:#0a7a5b}
+  .footer{background:#211b17;color:#fff;text-align:center;padding:22px 16px 26px;font-size:13px;font-weight:500}
+  @media(max-width:760px){.btn{width:100%}}
+</style>
+</head>
+<body>
+  <header class="topbar"><a href="/">Quinten Gish</a><a class="back" href="/">Back to site</a></header>
+  <main>
+    <p class="eyebrow">Paid ads strategy call</p>
+    <h1>You're booked.</h1>
+    <p id="when" hidden></p>
+    <p class="note">Check your email for the calendar invite from Calendly and accept it so the call is saved. Your meeting link is in that email.</p>
+    <a class="btn" href="/">Back to site</a>
+  </main>
+  <footer class="footer">&copy; 2026 Quinten Gish</footer>
+<script>
+/* The call time, in the visitor's own time zone. */
+(() => {
+  const b = window.acsaBooking || {};
+  const t = b.start ? new Date(b.start) : null;
+  if (!t || isNaN(t)) return;
+  const el = document.getElementById('when');
+  el.textContent = 'Your call: ' + t.toLocaleString([], { weekday: 'long', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+  el.hidden = false;
+})();
+/* Schedule fires ONLY here, and only for a real Calendly booking (it carries an invitee id). The event id is the
+   Calendly booking id, prefixed the same way as an Accelerator booking, so Meta counts this booking once.
+   content_name keeps it apart from an ACSA Call. A refresh of this page does not fire it again. */
+(() => {
+  const b = window.acsaBooking || {};
+  if (!b.id || !window.acsaTrack) return;
+  const key = 'qg-sched-' + b.id;
+  try { if (localStorage.getItem(key)) return; localStorage.setItem(key, '1'); } catch (e) {}
+  window.acsaTrack('Schedule', { content_name: 'Paid Ads Strategy Call' }, { eventId: 'schedule_' + b.id });
+})();
+</script>
+</body>
+</html>
