@@ -69,15 +69,13 @@
   el.textContent = 'Your call: ' + t.toLocaleString([], { weekday: 'long', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit' });
   el.hidden = false;
 })();
-/* Schedule fires ONLY here, and only for a real Calendly booking (it carries an invitee id). The event id is the
-   Calendly booking id, prefixed the same way as an Accelerator booking, so Meta counts this booking once.
-   content_name keeps it apart from an ACSA Call. A refresh of this page does not fire it again. */
+/* Schedule also fires from /book/site.js when Calendly posts event_scheduled (the embed does not redirect).
+   Same localStorage key and event id (schedule_<invitee uuid>), so landing here after that does not double-fire.
+   A refresh of this page does not fire it again. content_name keeps it apart from an ACSA Call. */
 (() => {
   const b = window.acsaBooking || {};
-  if (!b.id || !window.acsaTrack) return;
-  const key = 'qg-sched-' + b.id;
-  try { if (localStorage.getItem(key)) return; localStorage.setItem(key, '1'); } catch (e) {}
-  window.acsaTrack('Schedule', { content_name: 'Paid Ads Strategy Call' }, { eventId: 'schedule_' + b.id });
+  if (!b.id || !window.qgTrackSchedule) return;
+  window.qgTrackSchedule(b.id);
 })();
 </script>
 </body>

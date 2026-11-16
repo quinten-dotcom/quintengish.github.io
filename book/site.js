@@ -1,5 +1,7 @@
 /* Personal-offer tracking - Meta pixel in the browser, mirrored to our server (Conversions API).
    Served at /book/site.js and loaded by /, /book/, and /book/thank-you/.
+   A Calendly event_scheduled message also fires Schedule here, so a booking in the embed
+   does not depend on Calendly's confirmation-page redirect.
    This is a separate pixel and endpoint from the Accelerator. Do not point these pages at
    /accelerator/site.js.
 
@@ -163,6 +165,50 @@ const QG = {
   /* Same names the thank-you page already calls. This file never sends an Accelerator variant. */
   window.acsaTrack = track;
   window.acsaIds = ids;
+
+  /* Shared with /book/thank-you/. Returns true if this tab just fired Schedule (false if already fired). */
+  const SCHED_PREFIX = 'qg-sched-';
+  const trackSchedule = (id) => {
+    if (!id || !/^[A-Za-z0-9-]{8,80}$/.test(id)) return false;
+    const key = SCHED_PREFIX + id;
+    try { if (localStorage.getItem(key)) return false; localStorage.setItem(key, '1'); } catch (e) {}
+    track('Schedule', { content_name: 'Paid Ads Strategy Call' }, { eventId: 'schedule_' + id });
+    return true;
+  };
+  window.qgTrackSchedule = trackSchedule;
+
+  /* Calendly's inline embed does not leave the page, so this does not depend on a Calendly redirect.
+     Origin must be calendly.com. The invitee uuid comes from payload.invitee.uri. */
+  const calendlyOrigin = (origin) => {
+    try { return /^https:\/\/([a-z0-9-]+\.)*calendly\.com$/i.test(String(origin || '')); } catch (e) { return false; }
+  };
+  const inviteeUuidFromUri = (uri) => {
+    try {
+      const s = String(uri || '').trim();
+      const m = s.match(/\/invitees\/([A-Za-z0-9-]+)\/?$/i);
+      if (m) return m[1];
+      if (/^[A-Za-z0-9-]{8,80}$/.test(s)) return s;
+      return '';
+    } catch (e) { return ''; }
+  };
+  window.addEventListener('message', (e) => {
+    try {
+      if (!calendlyOrigin(e.origin)) return;
+      let data = e.data;
+      if (typeof data === 'string') {
+        try { data = JSON.parse(data); } catch (err) { return; }
+      }
+      if (!data || data.event !== 'calendly.event_scheduled') return;
+      const payload = data.payload || {};
+      const invitee = payload.invitee || {};
+      const id = inviteeUuidFromUri(invitee.uri);
+      if (!id) return;
+      trackSchedule(id);
+      if (!/\/book\/thank-you\/?$/.test(location.pathname)) {
+        setTimeout(() => location.assign('/book/thank-you/?invitee_uuid=' + encodeURIComponent(id)), 400);
+      }
+    } catch (err) {}
+  });
 
   track('PageView');
 })();
