@@ -184,6 +184,14 @@ html.cm-lock,html.cm-lock body{overflow:hidden}
     if(t.closest('[data-close]'))close();
   });
   document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+  /* Safety: never leave the page locked. If the popup is not open, the scroll lock must be off.
+     Covers Back/forward restores (bfcache), tab switches, and any missed close. */
+  function heal(){if(!cm.classList.contains('is-open'))document.documentElement.classList.remove('cm-lock')}
+  addEventListener('pageshow',function(){close()});
+  addEventListener('pagehide',heal);
+  addEventListener('popstate',close);
+  document.addEventListener('visibilitychange',heal);
+  document.addEventListener('touchstart',heal,{passive:true});
 })();
 </script>
 </body></html>
