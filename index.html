@@ -81,6 +81,81 @@ html.cm-lock,html.cm-lock body{overflow:hidden}
     var q=main.play();if(q&&q.catch)q.catch(function(){main.muted=false});
     main.focus({preventScroll:true});
   });
+
+  /* VSL watch tracking (same method as /accelerator/, plus more). Sends to the Meta pixel + server mirror
+     through window.acsaTrack from /book/site.js. Nothing in here may break the page.
+     - ViewContent: first play WITH SOUND (the silent preview is a separate video and never counts).
+     - VSL10/25/50/75/90/100: percent of the video ACTUALLY WATCHED (skipping ahead does not count).
+     - VSL3s/10s/30s/60s/120s/180s: seconds ACTUALLY WATCHED, for hook and early drop-off.
+     - VSLExit: once per page load, when the visitor leaves or hides the tab. Carries the exact second they
+       stopped at (position), total seconds watched, and the video length.
+     - BookClick: a click on any /book/ button, with how much of the VSL they had watched by then.
+     Every event carries seconds_watched, position and duration. Each milestone fires once per browser. */
+  (function(){
+    var NAME='QG VSL',W='qg-vsl-watched',F='qg-vsl-fired';
+    var PCTS=[10,25,50,75,90,100],SECS=[3,10,30,60,120,180];
+    var track=function(n,p){try{if(window.acsaTrack)window.acsaTrack(n,p)}catch(e){}};
+    var watched=0,fired=[],viewed=false,last=null,exited=false;
+    try{watched=parseFloat(localStorage.getItem(W))||0}catch(e){}
+    try{fired=JSON.parse(localStorage.getItem(F)||'[]');if(!Array.isArray(fired))fired=[]}catch(e){fired=[]}
+    function base(extra){
+      var d=main.duration,o={content_name:NAME,seconds_watched:Math.round(watched),
+        position:Math.round(main.currentTime||0),duration:(d&&isFinite(d))?Math.round(d):0};
+      for(var k in extra)o[k]=extra[k];
+      return o;
+    }
+    function fire(key,name,extra){
+      if(fired.indexOf(key)!==-1)return;
+      fired.push(key);
+      try{localStorage.setItem(F,JSON.stringify(fired))}catch(e){}
+      track(name,base(extra));
+    }
+    function check(){
+      var d=main.duration;if(!d||!isFinite(d))return;
+      if(watched>d)watched=d;
+      var p=watched/d;
+      PCTS.forEach(function(n){
+        var hit=n===100?p>=0.97:p>=n/100;
+        if(hit)fire(n,'VSL'+n,{percent:n});
+      });
+      SECS.forEach(function(s){
+        if(watched>=s&&s<d)fire('s'+s,'VSL'+s+'s',{seconds:s});
+      });
+    }
+    function leave(){
+      if(exited||!viewed)return;
+      exited=true;
+      var d=main.duration||0;
+      track('VSLExit',base({percent_watched:d?Math.round(Math.min(watched,d)/d*100):0,ended:!!main.ended}));
+    }
+    main.addEventListener('play',function(){
+      last=main.currentTime;
+      if(!viewed&&!main.muted){viewed=true;track('ViewContent',base({}))}
+    });
+    main.addEventListener('seeking',function(){last=null});
+    main.addEventListener('seeked',function(){last=main.currentTime});
+    main.addEventListener('timeupdate',function(){
+      var t=main.currentTime;
+      if(!main.paused&&!main.seeking&&last!==null&&!main.muted){
+        var delta=t-last;
+        if(delta>0&&delta<1.5){
+          watched+=delta;
+          try{localStorage.setItem(W,watched.toFixed(1))}catch(e){}
+          check();
+        }
+      }
+      last=t;
+    });
+    main.addEventListener('ended',function(){check();leave()});
+    addEventListener('pagehide',leave);
+    document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')leave()});
+    document.addEventListener('click',function(e){
+      try{
+        var a=e.target&&e.target.closest&&e.target.closest('a[href*="/book"]');
+        if(a)track('BookClick',base({vsl_viewed:viewed}));
+      }catch(err){}
+    },true);
+  })();
 })();
 </script>
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
