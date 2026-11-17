@@ -87,6 +87,17 @@ const QG = {
     setCookie('_fbp', `fb.1.${Date.now()}.${rand}`, 90, true);
   }
 
+  /* ---- MUTE MODE: open any page once with ?qg_mute=1 and this browser sends NOTHING to Meta (no pixel, no server
+     events) until you open ?qg_mute=0. Stays on across tabs and visits. Use it for AI testing and your own clicks. ---- */
+  const MUTE = (() => {
+    try {
+      const m = new URLSearchParams(location.search).get('qg_mute');
+      if (m === '1') localStorage.setItem('qg_mute', '1');
+      if (m === '0') localStorage.removeItem('qg_mute');
+      return localStorage.getItem('qg_mute') === '1';
+    } catch (e) { return false; }
+  })();
+
   /* ---- TEST MODE: open any page once with ?qg_test=TEST12345 (the code from Events Manager > Test events).
      For the rest of that browser tab: the browser pixel stays OFF and every server event goes to Test events only. ---- */
   const TEST = (() => {
@@ -98,7 +109,7 @@ const QG = {
   })();
 
   /* ---- Meta pixel base code ---- */
-  if (!TEST) try {
+  if (!TEST && !MUTE) try {
     /* eslint-disable */
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -123,6 +134,7 @@ const QG = {
   /* ---- one call fires the browser pixel AND the server mirror with the same event id ---- */
   const track = (name, params = {}, opts = {}) => {
     let eventId = '';
+    if (MUTE) return '';
     try {
       eventId = (opts && opts.eventId) || uuid();
       params = params && typeof params === 'object' ? { ...params } : {};
