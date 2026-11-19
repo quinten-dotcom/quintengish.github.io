@@ -2,8 +2,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#2f2f2f;--green:#0c8c69;--green-2:#42b99f;--green-text:#0f7d5d;--char:#2b2b2b;--grey:#ececec;--tint:#e7f6f1;--sans:"Raleway",Helvetica,Arial,sans-serif}
-*,*::before,*::after{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
-body{margin:0;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:400;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+*,*::before,*::after{box-sizing:border-box}html{-webkit-text-size-adjust:100%;overflow-x:clip}
+body{margin:0;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:400;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
 p,h1,h2,h3{margin:0;padding:0}img,svg{display:block;max-width:100%}
 .wrap{width:100%;max-width:1320px;margin:0 auto;padding:0 28px}.center{text-align:center}
 .topbar{background:var(--char);color:#fff;text-align:center;padding:26px 16px;font-size:clamp(15px,2vw,18px);font-weight:500;letter-spacing:.02em}
@@ -29,13 +29,15 @@ p,h1,h2,h3{margin:0;padding:0}img,svg{display:block;max-width:100%}
 @media(max-width:760px){.cols{grid-template-columns:1fr}}
 .cm{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .15s}
 .cm.is-open{opacity:1;pointer-events:auto}
+.cm:not(.is-open){transform:translateX(-120vw);visibility:hidden}
 .cm__bg{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;border:0;background:rgba(20,20,20,.72);cursor:pointer}
-.cm__dlg{position:relative;width:min(100%,1020px);height:min(780px,calc(100dvh - 40px));background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 30px 80px -20px rgba(0,0,0,.6)}
-.cm__cal{position:absolute;inset:0;width:100%;height:100%}.cm__cal .calendly-inline-widget,.cm__cal iframe{width:100%!important;height:100%!important;min-width:0!important}
-.cm__msg{position:absolute;inset:0;display:grid;place-items:center;color:#666;font-weight:600;font-size:15px}.cm__msg[hidden]{display:none}
+.cm__dlg{position:relative;width:min(100%,1020px);height:min(780px,calc(100dvh - 40px));background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 30px 80px -20px rgba(0,0,0,.6);display:flex;flex-direction:column}
+.cm__scroll{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.cm__cal{position:relative;width:100%;height:760px}.cm__cal .calendly-inline-widget,.cm__cal iframe{width:100%!important;height:100%!important;min-width:320px!important;display:block}
+.cm__msg{position:absolute;inset:0;z-index:2;display:grid;place-items:center;color:#666;font-weight:600;font-size:15px;background:#fff}.cm__msg[hidden]{display:none}
 .cm__x{position:absolute;top:10px;right:12px;z-index:3;width:38px;height:38px;border:0;border-radius:50%;background:rgba(255,255,255,.92);color:#2b2b2b;font-size:26px;line-height:1;cursor:pointer;box-shadow:0 1px 6px rgba(0,0,0,.25)}
-html.cm-lock,html.cm-lock body{overflow:hidden}
-@media(max-width:700px){.cm{padding:0}.cm__dlg{width:100%;height:100dvh;border-radius:0}}
+html.cm-lock body{position:fixed;left:0;right:0;width:100%}
+@media(max-width:700px){.cm.is-open{padding:0}.cm.is-open .cm__dlg{width:100%;height:100dvh;max-height:100dvh;border-radius:0}}
 @media(max-width:760px){.hero{padding-block:26px 40px}.eyebrow{font-size:15px}.hero .sub{margin-top:24px;font-size:16.5px;line-height:1.55}.hero .btn{margin-top:24px}.hero .video{margin-top:22px}.close{padding-inline:28px}.close .btn{width:100%;max-width:440px}.cm__x{width:44px;height:44px;top:8px;right:8px;font-size:28px}.footer{padding-bottom:calc(26px + env(safe-area-inset-bottom))}}
 
 /* DMM inner-circle exact specs: breakpoint 992, green #17af84, ink #2f2f2f, dark #211b17 */
@@ -55,7 +57,7 @@ html.cm-lock,html.cm-lock body{overflow:hidden}
   <div class="cm__dlg" role="dialog" aria-modal="true" aria-label="Book a call">
     <button class="cm__x" type="button" data-close aria-label="Close">&times;</button>
     <p class="cm__msg" id="cm-msg">Loading the calendar...</p>
-    <div id="cm-cal" class="cm__cal"></div>
+    <div class="cm__scroll" id="cm-scroll"><div id="cm-cal" class="cm__cal"></div></div>
   </div>
 </div>
 <script>
@@ -167,6 +169,18 @@ html.cm-lock,html.cm-lock body{overflow:hidden}
   ['utmSource','utmMedium','utmCampaign','utmContent','utmTerm'].forEach(function(k){var v=q.get(k.replace(/[A-Z]/g,function(c){return '_'+c.toLowerCase()}));if(v)utm[k]=v});
   if(location.search){document.querySelectorAll('a[href="/book/"]').forEach(function(a){a.href='/book/'+location.search})}
   var cm=document.getElementById('cm'),host=document.getElementById('cm-cal'),msg=document.getElementById('cm-msg'),ready=false,started=false;
+  function calendlyOrigin(origin){try{return /^https:\/\/([a-z0-9-]+\.)*calendly\.com$/i.test(String(origin||''))}catch(e){return false}}
+  /* Calendly tells us how tall the booking step actually is. Size the embed to that
+     and scroll the dialog, so time slots are not trapped inside a clipped iframe. */
+  window.addEventListener('message',function(e){
+    if(!calendlyOrigin(e.origin))return;
+    var data=e.data;
+    if(typeof data==='string'){try{data=JSON.parse(data)}catch(err){return}}
+    if(!data||data.event!=='calendly.page_height'||!data.payload)return;
+    var n=parseInt(data.payload.height,10);
+    if(!n||n<480)return;
+    host.style.height=n+'px';
+  });
   function build(){
     if(started||!window.Calendly||!Calendly.initInlineWidget)return;started=true;
     Calendly.initInlineWidget({url:CAL,parentElement:host,utm:utm});
@@ -176,17 +190,31 @@ html.cm-lock,html.cm-lock body{overflow:hidden}
   }
   function warm(){var t=setInterval(function(){if(window.Calendly){clearInterval(t);build()}},200);setTimeout(function(){clearInterval(t)},15000)}
   if(document.readyState==='complete')setTimeout(warm,300);else addEventListener('load',function(){setTimeout(warm,300)});
-  function open(){cm.classList.add('is-open');cm.removeAttribute('inert');cm.setAttribute('aria-hidden','false');document.documentElement.classList.add('cm-lock');build()}
-  function close(){cm.classList.remove('is-open');cm.setAttribute('inert','');cm.setAttribute('aria-hidden','true');document.documentElement.classList.remove('cm-lock')}
+  function lock(){
+    if(document.documentElement.classList.contains('cm-lock'))return;
+    document.body.style.top='-'+(window.scrollY||0)+'px';
+    document.documentElement.classList.add('cm-lock');
+  }
+  function unlock(){
+    var top=document.body.style.top;
+    document.documentElement.classList.remove('cm-lock');
+    document.body.style.top='';
+    if(top){var y=parseInt(top,10);if(y)window.scrollTo(0,-y)}
+  }
+  function open(){cm.classList.add('is-open');cm.removeAttribute('inert');cm.setAttribute('aria-hidden','false');lock();build()}
+  function close(){cm.classList.remove('is-open');cm.setAttribute('inert','');cm.setAttribute('aria-hidden','true');unlock()}
   document.addEventListener('click',function(e){
     var t=e.target;if(!t.closest)return;
-    if(t.closest('a.btn')){e.preventDefault();open();return}
+    if(t.closest('a.btn')){
+      if(!window.Calendly||!Calendly.initInlineWidget)return;
+      e.preventDefault();open();return;
+    }
     if(t.closest('[data-close]'))close();
   });
   document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
   /* Safety: never leave the page locked. If the popup is not open, the scroll lock must be off.
      Covers Back/forward restores (bfcache), tab switches, and any missed close. */
-  function heal(){if(!cm.classList.contains('is-open'))document.documentElement.classList.remove('cm-lock')}
+  function heal(){if(!cm.classList.contains('is-open'))unlock()}
   addEventListener('pageshow',function(){close()});
   addEventListener('pagehide',heal);
   addEventListener('popstate',close);
