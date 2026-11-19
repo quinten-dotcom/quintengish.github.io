@@ -41,6 +41,20 @@
         });
       }
       if (window.Calendly) go(); else window.addEventListener('load', go);
+      /* Size the embed to Calendly's real step height so the page scrolls through
+         every time slot. A fixed iframe traps that scroll inside the widget. */
+      window.addEventListener('message', function (e) {
+        try {
+          if (!/^https:\/\/([a-z0-9-]+\.)*calendly\.com$/i.test(String(e.origin || ''))) return;
+          var data = e.data;
+          if (typeof data === 'string') { try { data = JSON.parse(data); } catch (err) { return; } }
+          if (!data || data.event !== 'calendly.page_height' || !data.payload) return;
+          var n = parseInt(data.payload.height, 10);
+          if (!n || n < 480) return;
+          var el = document.getElementById('cal');
+          if (el) el.style.height = n + 'px';
+        } catch (err) {}
+      });
     })();
   </script>
 </body>
